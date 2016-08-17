@@ -78,7 +78,6 @@ fullEstimate = function(exprData, # expression data
                          names(estimates$estimates),'.png'),
                   pAdjMethod = pAdjMethod,
                   comparisons = comparisons)
-    return(invisible())
 }
 
 
