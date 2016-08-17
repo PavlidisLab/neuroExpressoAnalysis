@@ -1,0 +1,24 @@
+Package: markerGenesManuscript
+Type: Package
+Title: Marker genes of brain cell types and their use in analysis of whole
+    tissue data
+Version: 1.0
+Depends:
+    ogbox,
+    viridis,
+    corpcor,
+    geneSynonym,
+    homologene,
+    reshape2,
+    ggplot2,
+    devtools
+Suggests:
+    testthat
+Enhances: 
+Date: 2016-08-08
+Author: Ogan Mancarci
+Maintainer: Ogan Mancarci <ogan.mancarci@gmail.com>
+Description: Bah
+License: GPL-2
+LazyData: true
+RoxygenNote: 5.0.1
