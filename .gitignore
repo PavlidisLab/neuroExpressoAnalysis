@@ -5,7 +5,7 @@
 # Session Data files
 .RData
 
-.RProj
+.Rproj
 # Example code in package build process
 *-Ex.R
 
