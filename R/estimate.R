@@ -94,7 +94,7 @@ fullEstimate = function(exprData, # expression data
 #' @export
 plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
                          pAdjMethod = p.adjust.methods,
-                         correction = c('columnar', 'all'),
+                         correction = c('all','columnar'),
                          comparisons = 'all', # if p value correction should happen in per plot or for the entire list of ps
                          sigTreshold = 0.05){
     toCreate = unique(dirname(plotNames))
