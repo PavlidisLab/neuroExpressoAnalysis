@@ -5,10 +5,10 @@ Title: Marker genes of brain cell types and their use in analysis of whole
 Version: 1.0
 Depends:
     ogbox,
+    homologene,
     viridis,
     corpcor,
     geneSynonym,
-    homologene,
     reshape2,
     ggplot2,
     devtools

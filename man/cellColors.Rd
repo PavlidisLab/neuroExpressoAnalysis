@@ -8,7 +8,7 @@ cellColors()
 }
 \value{
 A named vector. Due to existance of different naming schemes, 
-same cell type can be referred to multiple times.
+same cell type can be referred to multiple times under different names.
 }
 \description{
 Return default colors for the cell types
