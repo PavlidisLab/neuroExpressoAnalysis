@@ -224,7 +224,7 @@ cellTypeEstimate = function(exprData,
     # if seeking consensus, check group based rotations
     if(seekConsensus){
         groupRotations = groupRotations(exprData, genes,
-                                        geneColName, groups, outDir=NA,
+                                        geneColName, groups, outDir=NULL,
                                         geneTransform = geneTransform,
                                         synonymTaxID = synonymTaxID)
     }
@@ -349,7 +349,8 @@ cellTypeEstimate = function(exprData,
     return(output)
 }
 
-# calculates rotations based on each group
+#' Calculates rotations based on each group
+#' Calculates rotations based on each group
 #' @param exprData 
 #' @param exprData data.frame. Expression data. First collumns of the expression data should include gene names in the 
 #' same format as the ones specified in the marker gene lists. Any other non-expression related fields must not be of
@@ -357,7 +358,11 @@ cellTypeEstimate = function(exprData,
 #' @param genes a named list containing marker gene lists of each cell type
 #' @param geneColName character. name of the column containing the gene names in the expression file
 #' @param groups a vector stating which groups each sample belongs to
-#' @param outDir if provided 
+#' @param outDir if provided group rotations will be saved there
+#' @param geneTransform a function that will be applied to the gene list. the default behavior is to change mouse genes 
+#' to human genes. set to NULL to keep the genes as they are
+#' @param synonymTaxID Taxonomy identifier of the source of cell type markers. If provided, synonyms of the genes will 
+#' be added as markers, not recommended since unrelated genes can share names
 #' @export
 groupRotations = function(exprData, genes,geneColName, groups, outDir,
                           geneTransform = function(x){mouse2human(x)$humanGene},
