@@ -10,16 +10,14 @@
 #' @param geneColName character. name of the column containing the gene names in the expression file
 #' @param groups a vector stating which groups each sample belongs to
 #' @param outDir output directory for plots and tables
-#' @param seekConsensus logical. whether or not genes that switch loading signs in between groups should be 
-#' removed from the estimation
+#' @param seekConsensus logical. If TRUE any gene with negative loadings in any of the groups individually will be
+#' removed. Use if there is a high likelihood of gene regulation between the groups.
 #' @param groupRotations logical. should the outputs include loadings calculated for individual genes
 #' @param outlierSampleRemove logical. should the outlier samples be removed from the final output
 #' @param removeNegatives logical. should the genes with negative loadings be removed from the estimation. Setting 
 #' seekConsensus to TRUE makes this irrelevant.
 #' @param geneTransform a function that will be applied to the gene list. the default behavior is to change mouse genes 
 #' to human genes. set to NULL to keep the genes as they are
-#' @param controlBased character. a group name included in the groups variable. if provided, loadings will be calculated
-#' only by genes this group. 
 #' @param comparisons a 2 x n character matrix, just 'all' or NULL. Names of groups to compare when calculating p values
 #' For each column the two groups indicated in the rows will be compared by wilcox.test.
 #' @param pAdjMethod character. which method to use when adjusting p values for multiple testing correction
@@ -36,7 +34,6 @@ fullEstimate = function(exprData, # expression data
                         outlierSampleRemove=TRUE, # if T outliers in each sample is removed
                         removeNegatives = TRUE,
                         geneTransform = function(x){mouse2human(x)$humanGene}, # function to use when translating gene names
-                        controlBased = NULL, # name of the control group as seen in groups if the operation is controll based
                         comparisons = 'all',
                         pAdjMethod = p.adjust.methods, # method for multiple testing correction. defaults to holm
                         PC = 1, # which PC to use. mostly you want this to be 1
@@ -47,7 +44,6 @@ fullEstimate = function(exprData, # expression data
                                  geneColName=geneColName,
                                  outlierSampleRemove=outlierSampleRemove,
                                  groups=groups,
-                                 controlBased= controlBased,
                                  tableOut = paste0(outDir,'/',names(genes),' rotTable.tsv'),
                                  indivGenePlot= paste0(outDir,'/',names(genes),' indivExp','.png'),
                                  seekConsensus = seekConsensus,
@@ -85,17 +81,21 @@ fullEstimate = function(exprData, # expression data
 
 
 
-#' Quickly plot cell type profile estimates
+#' Plot cell type profile estimates
 #' @description A convenience function to plot the estimates 
 #' @param estimates. a named list of cell type estimates. $estimates part of the cellTypeEstimate function's output.
+#' @param groups A names list of groups $groups part pf the cellTypeEstimate function's output
+#' @param plotNames a vector of strings. full address of the plots
+#' @param sigTest function to be used in calculation of p values for comparisons
 #' @param pAdjMethod character. which method to use when adjusting p values for multiple testing correction
-#' @correction 
+#' @param comparisons a 2 by n matrix that includes group name pairs, indicating which groups should be compared when 
+#' calculating the p values. or "all" which will make comparison between all available groups by setting it to
+#' combn(groups,2)
 #' @export
 plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
                          pAdjMethod = p.adjust.methods,
-                         correction = c('all','columnar'),
-                         comparisons = 'all', # if p value correction should happen in per plot or for the entire list of ps
-                         sigTreshold = 0.05){
+                         comparisons = 'all' # if p value correction should happen in per plot or for the entire list of ps
+                         ){
     toCreate = unique(dirname(plotNames))
     sapply(toCreate,dir.create,showWarnings = F,recursive=T)
     
@@ -125,15 +125,7 @@ plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
         }
         
         # p value adjustment
-        if (correction[1] == 'columnar'){
-            for (i in 1:ncol(pList)){
-                pList[,i] = p.adjust(pList[,i], pAdjMethod)
-            }
-        }
-        
-        if (correction[1]=='all'){
-            pList = matrix(p.adjust(cbind(pList,pList)),nrow = len(estimates))
-        }
+        pList = matrix(p.adjust(pList,pAdjMethod),nrow = len(estimates))
     }
     
     
@@ -178,23 +170,43 @@ plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
 }
 
 
-
 # estimates relative abundances of cell types based on the PC1s of gene expressions accross samples
 # controlBased is the name of the control group in 'groups'. if given, PC calculations will be
 # done on controls and rotations found will be applied to other samples.
 # groups variable should be provided if the plot is groupBased and/or if
 # controlBased is set to a name of a group
+#' Calculate cell type profile estimations 
+#' @description Primary function for cell type profile estimations.
+#' @param exprData data.frame. Expression data. First collumns of the expression data should include gene names in the 
+#' same format as the ones specified in the marker gene lists. Any other non-expression related fields must not be of
+#' type 'double'
+#' @param genes a named list containing marker gene lists of each cell type
+#' @param geneColName character. name of the column containing the gene names in the expression file
+#' @param outlierSampleRemove logical. should the outlier samples be removed from the final output
+#' @param synonymTaxID Taxonomy identifier of the source of cell type markers. If provided, synonyms of the genes will 
+#' be added as markers, not recommended since unrelated genes can share names
+#' @param geneTransform a function that will be applied to the gene list. the default behavior is to change mouse genes 
+#' to human genes. set to NULL to keep the genes as they are
+#' @param groups a vector stating which groups each sample belongs to
+#' @param tableOut character, filename. If provided outputs loadings of individual genes and variance explained by
+#' principal components
+#' @param indivGenePlot a character vector. If provided, plots expression of marker genes in individual groups per
+#' marker gene list. Is not guaranteed to look pretty.
+#' @param seekConsensus logical. If TRUE any gene with negative loadings in any of the groups individually will be
+#' removed. Use if there is a high likelihood of gene regulation between the groups.
+#' @param removeNegatives logical. should the genes with negative loadings be removed from the estimation. Setting 
+#' seekConsensus to TRUE makes this irrelevant. As all negatives will be removed at that step
+#' @param plotType if indivGenePlot is provided, type of plot to be saved. groupBased separates expression between groups
+#' cummulative plots a single value
+#' @param PC which principal component to use. For debugging purposes. Recommended value is always 1
+#' @export
 cellTypeEstimate = function(exprData,
                             genes,
                             geneColName = 'Gene.Symbol',
-                            # implement soon #46
-                            #rotTreshold = NA,
-                            #validateRotation=NA,
-                            outlierSampleRemove = T,
+                            outlierSampleRemove = F,
                             synonymTaxID = NULL, # do you want to add synonyms? no you don't. don't touch this
                             geneTransform = function(x){mouse2human(x)$humanGene},
                             groups, # a vector designating the groups. must be defined.
-                            controlBased = NULL,
                             tableOut = NULL,
                             indivGenePlot = NULL, # where should it plot individual gene expression plots.
                             seekConsensus = F, # seeking concensus accross groups
@@ -279,33 +291,21 @@ cellTypeEstimate = function(exprData,
             ggsave(filename = indivGenePlot[i], width=8,height=8)
         }
         
-        # get rotations based on preferences
-        if (is.null(controlBased)){
-            pca = prcomp(t(relevantExpr), scale = T)
-            pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
-        } else{
-            pca = prcomp(t(relevantExpr[groups %in% controlBased]), scale = T)
-            pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
-        }
-        
+        # get rotations
+        pca = prcomp(t(relevantExpr), scale = T)
+        pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
+
         # do not allow negative rotated genes
-        print(debug)
         if(removeNegatives){
             while(any(pca$rotation[,PC]<0)){
                 relevantExpr = relevantExpr[pca$rotation[,PC]>0,]
-                if (is.null(controlBased)){
-                    pca = prcomp(t(relevantExpr), scale = T)
-                    pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
-                } else{
-                    pca = prcomp(t(relevantExpr[groups %in% controlBased]), scale = T)
-                    pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
-                }
+                pca = prcomp(t(relevantExpr), scale = T)
+                pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
             }
         }
         
         
-        # get the final rotations, make sure everything is positive
-        #pca$rotation = pca$rotation * ((sum(pca$rotation[,PC])<0)*(-2)+1)
+        # get the final rotations
         rotations[[i]] = pca$rotation
         
         # output the rotation tables
@@ -350,6 +350,15 @@ cellTypeEstimate = function(exprData,
 }
 
 # calculates rotations based on each group
+#' @param exprData 
+#' @param exprData data.frame. Expression data. First collumns of the expression data should include gene names in the 
+#' same format as the ones specified in the marker gene lists. Any other non-expression related fields must not be of
+#' type 'double'
+#' @param genes a named list containing marker gene lists of each cell type
+#' @param geneColName character. name of the column containing the gene names in the expression file
+#' @param groups a vector stating which groups each sample belongs to
+#' @param outDir if provided 
+#' @export
 groupRotations = function(exprData, genes,geneColName, groups, outDir,
                           geneTransform = function(x){mouse2human(x)$humanGene},
                           synonymTaxID = NULL)
@@ -387,7 +396,7 @@ groupRotations = function(exprData, genes,geneColName, groups, outDir,
         rotations = as.data.frame(rotations)
         names(rotations) = unique(groups)
         allRotations[[i]] = rotations
-        if (!is.na(outDir)){
+        if (!is.null(outDir)){
             write.table(rotations[order(apply(rotations,1,sum),decreasing=T),],
                         file = paste0(outDir,'/',names(genes)[i], ' groupRots'), quote=F,sep = '\t')
         }
