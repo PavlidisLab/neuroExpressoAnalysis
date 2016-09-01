@@ -29,7 +29,7 @@ readMouseCel = function(GSMs,mouseDir='data-raw/cel',gemmaDir = 'data-raw/GemmaA
     if('GPL339' %in% platforms){
         aned = gemmaAnnot(newNormalized, paste0(gemmaDir,'/','GPL339'))
     } else{
-        aned = gemmaAnnot(newNormalized, , paste0(gemmaDir,'/','GPL1261'))
+        aned = gemmaAnnot(newNormalized, paste0(gemmaDir,'/','GPL1261'))
     }
     aned = aned[!aned$Gene.Symbol == '',]
     
