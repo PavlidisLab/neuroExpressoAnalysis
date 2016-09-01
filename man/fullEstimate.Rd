@@ -50,4 +50,7 @@ Calculates cell type profiles in whole tissue datasets using marker genes provid
 the calculation based on experimental groups if needed. This is only useful for quickly plotting profile estimations
 of data with discrete experimental groups
 }
+\seealso{
+\code{\link{cellTypeEstimate}}
+}
 

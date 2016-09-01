@@ -1,5 +1,3 @@
-
-
 #' Full cell type profile estimation pipeline with plot outputs.
 #' @description Calculates cell type profiles in whole tissue datasets using marker genes provided. Fine tunes the 
 #' the calculation based on experimental groups if needed. This is only useful for quickly plotting profile estimations
@@ -23,6 +21,7 @@
 #' @param pAdjMethod character. which method to use when adjusting p values for multiple testing correction
 #' @param PC integer. which principal component to use when calculating cell type profile.
 #' @param estimateFile name of the file that contains the final profile estimations
+#' @seealso \code{\link{cellTypeEstimate}}
 #' @export
 fullEstimate = function(exprData, # expression data
                         genes, # a list of gene lists containing marker genes for cell types
@@ -50,8 +49,8 @@ fullEstimate = function(exprData, # expression data
                                  removeNegatives = removeNegatives,
                                  PC = PC,
                                  geneTransform = geneTransform)
-    estimates$estimates = trimNAs(estimates$estimates)
-    estimates$groups = trimNAs(estimates$groups)
+    estimates$estimates = ogbox::trimNAs(estimates$estimates)
+    estimates$groups = ogbox::trimNAs(estimates$groups)
     
     
     if (!is.null(estimateFile) & !outlierSampleRemove){
@@ -142,28 +141,28 @@ plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
             sigText = paste0(sigText,': ',sprintf('%.5f',pList[i,]),collapse = '\n')
         }
         
-        lePlot = ggplot(frame,aes(x=group, y = PC1)) +
-            geom_violin( color="#C4C4C4", fill="#C4C4C4") +
-            geom_boxplot(width=0.1,fill = 'lightblue') +
-            geom_point(size = 3) +
-            ggtitle(names(estimates)[i]) +
+        lePlot = ggplot2::ggplot(frame,aes(x=group, y = PC1)) +
+            ggplot2::geom_violin( color="#C4C4C4", fill="#C4C4C4") +
+            ggplot2::geom_boxplot(width=0.1,fill = 'lightblue') +
+            ggplot2::geom_point(size = 3) +
+            ggplot2::ggtitle(names(estimates)[i]) +
             #scale_y_continuous(limits=c(windowDown, windowUp),
-            scale_y_continuous(limits=c(-.05, 1.05),
+            ggplot2::scale_y_continuous(limits=c(-.05, 1.05),
                                name="Relative estimate of cell type amounts") +
-            theme_bw() +
-            theme(axis.text.x  = element_text(size=25, angle=90),
+            ggplot2::theme_bw() +
+            ggplot2::theme(axis.text.x  = element_text(size=25, angle=90),
                   axis.title.y = element_text(vjust=0.5, size=25),
                   axis.title.x = element_text(vjust=0.5, size=0) ,
                   title = element_text(vjust=0.5, size=25),
                   axis.text.y = element_text(size = 13))
         if (!is.null(comparisons)){
             lePlot = lePlot +   # annotate('text', x = 0.1 , y = windowUp ,
-                annotate('text', x = 0.1 , y = 1.05 ,
+                ggplot2::annotate('text', x = 0.1 , y = 1.05 ,
                          label = sigText ,
                          hjust = 0, vjust=1, size = 4.5)
         }
         (lePlot)
-        ggsave(plotNames[i],width=8,height=8)
+        ggplot2::ggsave(plotNames[i],width=8,height=8)
         
     }
     
@@ -238,7 +237,7 @@ cellTypeEstimate = function(exprData,
         }
         # add gene synonyms to the list as well. you don't want to do this with gemma annotations
         if (!is.null(synonymTaxID)){
-            genes[[i]] == unlist(geneSynonym(genes=genes[[i]],tax=synonymTaxID))
+            genes[[i]] == unlist(geneSynonym::geneSynonym(genes=genes[[i]],tax=synonymTaxID))
         }
         
         
@@ -278,17 +277,17 @@ cellTypeEstimate = function(exprData,
                        indivGenes$group =''
                    })
             
-            p = ggplot(indivGenes,aes(y = expression, x = group )) +
-                facet_wrap('gene') +
-                geom_boxplot(fill = 'lightblue')+ geom_point() +
-                theme(axis.text.x  = element_text( size=20,angle=90),
+            p = ggplot2::ggplot(indivGenes,aes(y = expression, x = group )) +
+                ggplot2::facet_wrap('gene') +
+                ggplot2::geom_boxplot(fill = 'lightblue')+ geom_point() +
+                ggplot2::theme(axis.text.x  = element_text( size=20,angle=90),
                       axis.title.y = element_text(vjust=0.5, size=20),
                       axis.title.x = element_text(vjust=0.5, size=0) ,
                       title = element_text(vjust=0.5, size=20))+
-                scale_x_discrete(name = '')+
-                scale_y_discrete(name = 'log2 Expression')
+                ggplot2::scale_x_discrete(name = '')+
+                ggplot2::scale_y_discrete(name = 'log2 Expression')
             (p)
-            ggsave(filename = indivGenePlot[i], width=8,height=8)
+            ggplot2::ggsave(filename = indivGenePlot[i], width=8,height=8)
         }
         
         # get rotations
