@@ -1,6 +1,28 @@
-
+#' Write candidate marker genes to a file
+#' 
+#' Writes candidate marker genes to a file along with other required information (fold change and silhouette coefficient)
+#' Selects candidates based on fold change to the median expression of other samples and a minimum expression in the
+#' cell type
+#' 
+#' @param design data.frame. Metadata for the samples.
+#' @param expression data.frame. Expression data for the samples. Gene names should be included as a column. Any other non expression
+#' data not be of type \code{double}
+#' @param outLoc Directory to save the candidate genes
+#' @param groupNames column of the \code{design} with cell type names. If multiple columns are provided, selection will
+#' be performed for each independently
+#' @param regionNames column of the \code{design} with region names. Multiple regions can be listed separated by commas
+#' @param PMID column of the \code{design} with pubmed identifiers. This is required to identify the samples coming
+#' from the same study
+#' @param rotate double. percentage of samples to be removed. 0.33 is used for the study
+#' @param cores Number of cores to use for paralellization
+#' @param debug Nothing to see here
+#' @param sampleName column of the \code{design} with sample names matching the column names of the \code{expression} data
+#' @param replicates column of the \code{design} that groups replicates
+#' @param foldChangeThresh minimum fold change required for selection
+#' @param minimumExpression minimum level of expression for a marker gene in its cell type
+#' @param regionHiearchy hiearchy of regions.
 #' @export
-geneSelect = function(design,
+markerCandidates = function(design,
                       expression,
                       outLoc,
                       groupNames,

@@ -106,6 +106,11 @@ if (skipNorm == F){
                outFile = 'data-raw/Mouse_Cell_Type_Data/n_expressoSamples2.tsv')
     
     praise("${EXCLAMATION}! ${Adverb} ${created}")
+    
+    system('gzip -f data-raw/Mouse_Cell_Type_Data/rmaExp.csv')
+    system('gzip -f data-raw/Mouse_Cell_Type_Data/qnormExp.csv')
+    system('gzip -f data-raw/Mouse_Cell_Type_Data/rmaExp2.csv')
+    system('gzip -f data-raw/Mouse_Cell_Type_Data/qnormExp2.csv')
 }
 
 # now load the data and place it in the package
