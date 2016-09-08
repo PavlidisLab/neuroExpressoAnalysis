@@ -40,6 +40,7 @@ cellColors = function(){
                  Hypocretinergic = 'cadetblue',
                  Dopaminergic = 'gray0',
                  Th_positive_LC = 'blueviolet',
+                 Noradrenergic = 'blueviolet',
                  GabaVIPReln = 'firebrick4',
                  'VIPReln (G30)' = 'firebrick4',
                  GabaRelnCalb = 'firebrick3',
