@@ -213,7 +213,11 @@ cellTypeEstimate = function(exprData,
                             plotType = c('groupBased','cummulative'), # group based plot requires groups
                             PC = 1){
     if (!is.null(indivGenePlot[1])){
-        toCreate = unique(c(dirname(indivGenePlot), dirname(tableOut)))
+        toCreate = unique(dirname(indivGenePlot))
+        sapply(toCreate,dir.create,showWarnings = F,recursive=T)
+    }
+    if (!is.null(tableOut[1])){
+        toCreate = unique(dirname(tableOut))
         sapply(toCreate,dir.create,showWarnings = F,recursive=T)
     }
     # if a single vector is inputted, fix that
