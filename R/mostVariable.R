@@ -1,10 +1,19 @@
 # this version merges cell types into a single sample then looks for a variable.
 # specific to our cell type data. not ideal but oh well...
 #' @export
-mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design='data/meltedDesign.tsv'){
+mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design){
+    if (is.character(whichFile)){
+        allDataPre = ogbox::read.exp(whichFile)
+    } else{
+        allDataPre = whichFile
+    }
     
-    allDataPre = ogbox::read.exp(whichFile)
-    design = read.design(design)
+    if (is.character(design)){
+        design = ogbox::read.design(design)
+    } else{
+        design = design
+    }
+
     
     list[,exprData]= sepExpr(allDataPre)
     
