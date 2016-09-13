@@ -65,20 +65,28 @@ MoranpValsMedial = moranMedialEstimation$estimates %>% sapply(function(x){
 
 
 # dopaminergic estimations plot ------------
+geneCounts = c(LesnickEstimations$rotations$Dopaminergic %>% nrow,
+               moranLateralEstimations$rotations$Dopaminergic %>% nrow,
+               moranMedialEstimation$rotations$Dopaminergic %>% nrow)
+
+LesnickName = paste0('Lesnick GSE7621\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranLateralName = paste0('Moran Lateral\nGSE7621 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranMediallName = paste0('Moran Medial\nGSE7621 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+
 frame1 = data.frame(parkinsons = setNames(c('PD','control'), c(T,F))[LesnickParkinsonsMeta$parkinson %>% as.character],
                     sex = setNames(c('F','M'), c(T,F))[LesnickParkinsonsMeta$female %>% as.character],
                     estimate = scale01(LesnickEstimations$estimates$Dopaminergic),
-                    name = 'Lesnick\nGSE7621')
+                    name = LesnickName)
 
 frame2 = data.frame(parkinsons = MoranDes[MoranDes$Region %in% 'Lateral substantia nigra',]$Disease,
                     sex = MoranDes[MoranDes$Region %in% 'Lateral substantia nigra',]$Sex,
                     estimate = scale01(moranLateralEstimations$estimates$Dopaminergic),
-                    name = 'Moran\nGSE8397 lateral')
+                    name = MoranLateralName)
 
 frame3 = data.frame(parkinsons = MoranDes[MoranDes$Region %in% 'Medial substantia nigra',]$Disease,
                     sex = MoranDes[MoranDes$Region %in% 'Medial substantia nigra',]$Sex,
                     estimate = scale01(moranMedialEstimation$estimates$Dopaminergic),
-                    name = 'Moran\nGSE8397 medial')
+                    name = MoranMediallName)
 
 pVals = c(LesnickpVals['Dopaminergic'],
           MoranpValsLateral['Dopaminergic'],
@@ -86,9 +94,9 @@ pVals = c(LesnickpVals['Dopaminergic'],
 signifFrame = data.frame(markers = pVals,
                          x = 1.5,
                          y = 1.0,
-                         name = c('Lesnick\nGSE7621',
-                                  'Moran\nGSE8397 lateral',
-                                  'Moran\nGSE8397 medial'))
+                         name = c(LesnickName,
+                                  MoranLateralName,
+                                  MoranMediallName))
 
 masterFrame = rbind(frame1,frame2,frame3)
 
@@ -100,7 +108,7 @@ pEstimate = masterFrame %>%  ggplot(aes( y = estimate, x = parkinsons)) +
     geom_boxplot(width=0.2,fill = 'lightblue') + 
     # geom_point()+
     theme(axis.text.x = element_text(angle=45, hjust = 1),
-          strip.text.x = element_text(size = 14)) +
+          strip.text.x = element_text(size = 13)) +
     coord_cartesian(ylim = c(-0.10, 1.10)) +
     geom_text(data=signifFrame , aes(x = x, y=y, label = markers),size=10)+
     xlab('') +
