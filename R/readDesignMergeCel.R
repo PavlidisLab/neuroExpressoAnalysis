@@ -129,7 +129,7 @@ meltDesign = function(desFile, gsm = 'samples',
     
     design = read.table(desFile,quote='',header=T,sep='\t')
     design = design[(design[,normalize]),]
-    gsms = regmatches(design[, 1], gregexpr(celRegex, design[, 1],perl=T))
+    gsms = regmatches(design[, gsm], gregexpr(celRegex, design[, gsm],perl=T))
     if (any(lapply(gsms,len)==0)){
         print('No cel names could be captured from the following rows')
         print((1:len(gsms))[lapply(gsms,len)==0])

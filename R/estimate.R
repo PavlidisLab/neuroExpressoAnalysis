@@ -30,7 +30,7 @@ fullEstimate = function(exprData, # expression data
                         outDir, # output directory for plots and tables
                         seekConsensus=FALSE, # for trimming genes that behave differently in different groups
                         groupRotations=FALSE, # output rotations of individiual genes
-                        outlierSampleRemove=TRUE, # if T outliers in each sample is removed
+                        outlierSampleRemove=FALSE, # if T outliers in each sample is removed
                         removeNegatives = TRUE,
                         geneTransform = function(x){mouse2human(x)$humanGene}, # function to use when translating gene names
                         comparisons = 'all',
@@ -202,14 +202,14 @@ plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
 cellTypeEstimate = function(exprData,
                             genes,
                             geneColName = 'Gene.Symbol',
-                            outlierSampleRemove = F,
+                            outlierSampleRemove = FALSE,
                             synonymTaxID = NULL, # do you want to add synonyms? no you don't. don't touch this
                             geneTransform = function(x){mouse2human(x)$humanGene},
                             groups, # a vector designating the groups. must be defined.
                             tableOut = NULL,
                             indivGenePlot = NULL, # where should it plot individual gene expression plots.
                             seekConsensus = F, # seeking concensus accross groups
-                            removeNegatives = T,
+                            removeNegatives = TRUE,
                             plotType = c('groupBased','cummulative'), # group based plot requires groups
                             PC = 1){
     if (!is.null(indivGenePlot[1])){

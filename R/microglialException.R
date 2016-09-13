@@ -24,8 +24,9 @@ microglialException = function(restDir=NULL, genelist = NULL ,updateList = F, co
     if (!is.null(restDir)){
         fileNames = list.files(restDir, recursive =T )
         fileNames = fileNames[grepl('Microglia$',fileNames)]
-        #for(i in fileNames){
-        foreach (i = fileNames) %dopar% {
+        for(i in fileNames){
+        #foreach (i = fileNames) %dopar% {
+            browser()
             micro = read.table(paste0(restDir,'/',i))
             microAll = micro[!toupper(micro$V1) %in% effectedGenes,]
             write.table(microAll, quote = F, row.names = F, col.names = F, paste0(restDir,'/',i))

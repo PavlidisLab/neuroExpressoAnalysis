@@ -24,7 +24,10 @@ Depends:
     stringr(>= 1.1.0),
     preprocessCore (>= 1.28.0),
     memoise (>= 1.0.0),
-    lazyeval (>= 0.2.0)
+    lazyeval (>= 0.2.0),
+    gplots (>= 3.0.1),
+    scales (>= 0.4.0),
+    cowplot (>= 0.6.0)
 Suggests:
     testthat,
     knitr,
