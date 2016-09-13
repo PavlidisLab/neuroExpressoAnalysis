@@ -3,6 +3,7 @@ library(ogbox)
 library(limma)
 library(dplyr)
 library(magrittr)
+library(cowplot)
 devtools::load_all()
 
 
@@ -70,8 +71,8 @@ geneCounts = c(LesnickEstimations$rotations$Dopaminergic %>% nrow,
                moranMedialEstimation$rotations$Dopaminergic %>% nrow)
 
 LesnickName = paste0('Lesnick GSE7621\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
-MoranLateralName = paste0('Moran Lateral\nGSE7621 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
-MoranMediallName = paste0('Moran Medial\nGSE7621 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranLateralName = paste0('Moran Lateral\nGGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranMediallName = paste0('Moran Medial\nGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
 
 frame1 = data.frame(parkinsons = setNames(c('PD','control'), c(T,F))[LesnickParkinsonsMeta$parkinson %>% as.character],
                     sex = setNames(c('F','M'), c(T,F))[LesnickParkinsonsMeta$female %>% as.character],
@@ -183,22 +184,19 @@ moranPaperGene = data.frame(disease = MoranDes$Disease,
                                 t(expDatMoran[rownames(expDatMoran) %in% paperGenes,]) %>% 
                                 prcomp(.scale=TRUE) %$% x[,1],
                             estimation = moranEstimations$estimates$Dopaminergic)
-# plot moran
-moranPaperGene %>% ggplot(aes(
-    ))
 
 # overall moran
 cor(moranPaperGene$paperGenePC,
     moranPaperGene$estimation, 
     method = 'spearman')
 # control moran
-cor(moranPaperGene$paperGenePC[moranPaperGene$disease=='control'],
-    moranPaperGene$estimation[moranPaperGene$disease=='control'],
-    method='spearman')
+moranControlCor = cor(moranPaperGene$paperGenePC[moranPaperGene$disease=='control'],
+                      moranPaperGene$estimation[moranPaperGene$disease=='control'],
+                      method='spearman') %>% abs
 # PD moran
-cor(moranPaperGene$paperGenePC[moranPaperGene$disease=='PD'],
-    moranPaperGene$estimation[moranPaperGene$disease=='PD'],
-    method='spearman')
+moranPDCor = cor(moranPaperGene$paperGenePC[moranPaperGene$disease=='PD'],
+                 moranPaperGene$estimation[moranPaperGene$disease=='PD'],
+                 method='spearman') %>% abs
 
 
 # lesnick PC and estimation
@@ -212,99 +210,50 @@ cor(lesnickPaperGene$paperGenePC,
     lesnickPaperGene$estimation, 
     method = 'spearman')
 # control lesnick
-cor(lesnickPaperGene$paperGenePC[lesnickPaperGene$disease==FALSE],
-    lesnickPaperGene$estimation[lesnickPaperGene$disease==FALSE],
-    method='spearman')
+lesnickControlCor = cor(lesnickPaperGene$paperGenePC[lesnickPaperGene$disease==FALSE],
+                        lesnickPaperGene$estimation[lesnickPaperGene$disease==FALSE],
+                        method='spearman') %>% abs
 # PD lesnick
-cor(lesnickPaperGene$paperGenePC[lesnickPaperGene$disease==TRUE],
-    lesnickPaperGene$estimation[lesnickPaperGene$disease==TRUE],
-    method='spearman')
+lesnickPDCor = cor(lesnickPaperGene$paperGenePC[lesnickPaperGene$disease==TRUE],
+                   lesnickPaperGene$estimation[lesnickPaperGene$disease==TRUE],
+                   method='spearman') %>% abs
 
+# plot's of correlations to gene PC --------------
 
-# mean corelation of positive genes moran
-t(expDatMoran[rn(expDatMoran) %in% paperGenes,
-              MoranDes$Disease %in% 'PD']) %>%
-    cor(moranEstimations$estimates$Dopaminergic[MoranDes$Disease %in% 'PD'],
-        method='spearman') %>% 
-    as.vector %>% {.[.>0]} %>%
-    mean
-t(expDatMoran[rn(expDatMoran) %in% paperGenes,
-              MoranDes$Disease %in% 'control']) %>%
-    cor(moranEstimations$estimates$Dopaminergic[MoranDes$Disease %in% 'control'], 
-        method='spearman') %>% 
-    as.vector %>% {.[.>0]} %>%
-    mean
+lesnickPaperGene$disease %<>% ogbox::replaceElement(c('TRUE'='PD','FALSE' = 'control')) %$% newVector
+moranPaperGene$paperGenePC = -moranPaperGene$paperGenePC 
+masterFrame = rbind(
+    data.frame(moranPaperGene,source = 'Moran (GSE8397)'),
+    data.frame(lesnickPaperGene, source = 'Lesnick (GSE7621)'))
 
-# mean corelation of positive genes lesnick
-t(expDatLesnick[rn(expDatLesnick) %in% paperGenes,
-                LesnickParkinsonsMeta$parkinson %in% TRUE]) %>%
-    cor(LesnickEstimations$estimates$Dopaminergic[LesnickParkinsonsMeta$parkinson %in% TRUE],
-        method='spearman') %>% 
-    as.vector %>% {.[.>0]} %>% mean
+annotation = data.frame(source = c('Moran (GSE8397)',
+                                   'Lesnick (GSE7621)'),
+                        label = c(paste0('Spearman\'s ρ:\n',
+                                       'controls: ',format(lesnickControlCor,digits = 3),'\n',
+                                       'PD: ', format(moranPDCor,digits=3)),
+                                  paste0('Spearman\'s ρ:\n',
+                                         'controls: ',format(moranControlCor,digits = 3),'\n',
+                                         'PD: ', format(lesnickPDCor,digits=3))))
 
-t(expDatLesnick[rn(expDatLesnick) %in% paperGenes,
-                LesnickParkinsonsMeta$parkinson %in% FALSE]) %>%
-    cor(LesnickEstimations$estimates$Dopaminergic[LesnickParkinsonsMeta$parkinson %in% FALSE],
-        method='spearman') %>% 
-    as.vector %>% {.[.>0]} %>% mean
+genePCestimationPlot = masterFrame %>% ggplot(aes(x =estimation , y = paperGenePC, color = disease)) + 
+    facet_grid(~source) +
+    theme_cowplot(17) +
+    theme(strip.background = element_blank(),
+          strip.text = element_text(size = 17))+
+    geom_point(size=3) + 
+    stat_smooth(method=lm, se=FALSE) + 
+    scale_color_viridis(discrete=TRUE) +
+    xlab('Dopaminergic MGP estimation') +
+    ylab('PC1 of PD signature gene expression') + 
+    geom_text(data = annotation,
+              aes(label = label,
+                  y = min(masterFrame$paperGenePC),
+                  x = max(masterFrame$estimation)),
+              color = 'black',
+              vjust= 0,
+              hjust= 1,
+              size = 5)
 
-
-t(expDatMoran[rownames(expDatMoran) %in% paperGenes,MoranDes$Disease %in% 'PD']) %>%
-    cor(moranEstimations$estimates$Dopaminergic[MoranDes$Disease %in% 'PD'], method='spearman') %>% 
-    as.vector %>% {.[.<0]} %>% mean
-t(expDatMoran[rownames(expDatMoran) %in% paperGenes,MoranDes$Disease %in% 'control']) %>%
-    cor(moranEstimations$estimates$Dopaminergic[MoranDes$Disease %in% 'control'], method='spearman') %>% 
-    as.vector %>% {.[.<0]} %>% mean
-
-
-# expression of positive genes in dopaminergic samples
-posGenes = t(expDatMoran[rn(expDatMoran) %in% paperGenes,MoranDes$Disease %in% 'control']) %>%
-    cor(moranEstimations$estimates$Dopaminergic[MoranDes$Disease %in% 'control'], method='spearman') %>% 
-    as.vector %>% 
-{rn(expDatMoran)[rn(expDatMoran) %in% paperGenes][. > 0]}
-
-negGenes =  t(expDatMoran[rn(expDatMoran) %in% paperGenes,MoranDes$Disease %in% 'control']) %>%
-    cor(moranEstimations$estimates$Dopaminergic[MoranDes$Disease %in% 'control'], method='spearman') %>% 
-    as.vector %>% 
-{rn(expDatMoran)[rn(expDatMoran) %in% paperGenes][. < 0]}
-
-list[n_exprGenes,n_expr] = n_expressoExpr %>% sepExpr
-
-n_expr[n_exprGenes$Gene.Symbol %in% (posGenes %>% human2mouse %$% mouseGene),
-       n_expressoStudies$PyramidalDeep %in% 'Dopaminergic'] %>% apply(1,mean)
-
-n_expr[n_exprGenes$Gene.Symbol %in% (negGenes %>% human2mouse %$% mouseGene),
-       n_expressoStudies$PyramidalDeep %in% 'Dopaminergic'] %>% apply(1,mean)
-
-
-
-
-t(expDatMoran[rownames(expDatMoran) %in% rn(MoranDif),]) %>% prcomp(.scale=TRUE) %$% x[,1] %>% 
-    plot(moranEstimations$estimates$Dopaminergic,col= toColor(MoranDes$Disease,c('PD' = 'red', 'control' = 'black'))$cols)
-
-cor(t(expDatMoran[rownames(expDatMoran) %in% rn(MoranDif),]) %>% prcomp(.scale=TRUE) %$% x[,1],
-    moranEstimations$estimates$Dopaminergic, method = 'spearman')
-
-t(expDatMoran[rownames(expDatMoran) %in% rn(MoranDif),]) %>%
-    cor(moranEstimations$estimates$Dopaminergic) %>% as.vector %>% plot
-
-
-
-t(expDatLesnick[rownames(expDatLesnick) %in% paperGenes,]) %>% prcomp(.scale=TRUE) %$% x[,1] %>% 
-    plot(LesnickEstimations$estimates$Dopaminergic,col= toColor(MoranDes$Disease,c('PD' = 'red', 'control' = 'black'))$cols)
-
-cor(t(expDatLesnick[rownames(expDatLesnick) %in% paperGenes,]) %>% prcomp(.scale=TRUE) %$% x[,1],
-    LesnickEstimations$estimates$Dopaminergic, method = 'spearman')
-
-t(expDatLesnick[rownames(expDatLesnick) %in% paperGenes,]) %>%
-    cor(LesnickEstimations$estimates$Dopaminergic) %>% as.vector %>% plot
-
-
-t(expDatLesnick[rownames(expDatLesnick) %in% rn(LesnickDif),]) %>% prcomp(.scale=TRUE) %$% x[,1] %>% 
-    plot(LesnickEstimations$estimates$Dopaminergic,col= toColor(MoranDes$Disease,c('PD' = 'red', 'control' = 'black'))$cols)
-
-cor(t(expDatLesnick[rownames(expDatLesnick) %in% rn(LesnickDif),]) %>% prcomp(.scale=TRUE) %$% x[,1],
-    LesnickEstimations$estimates$Dopaminergic, method = 'spearman')
-
-t(expDatLesnick[rownames(expDatLesnick) %in% rn(LesnickDif),]) %>%
-    cor(LesnickEstimations$estimates$Dopaminergic) %>% as.vector %>% plot
+ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/genePCestimation.png',
+       plot= genePCestimationPlot,
+       width=7,height=4.3,units='in')
