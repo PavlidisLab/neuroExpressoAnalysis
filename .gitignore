@@ -40,10 +40,21 @@ data-raw/StanleyData
 data-raw/TasicMouse
 data-raw/TrabzuniRegions
 data-raw/ZeiselMouse
+data-raw/Mouse_Cell_Type_Data/qnormExp.csv
+data-raw/Mouse_Cell_Type_Data/qnormExp.csv.gz
+data-raw/Mouse_Cell_Type_Data/qnormExp2.csv
+data-raw/Mouse_Cell_Type_Data/qnormExp2.csv.gz
+data-raw/Mouse_Cell_Type_Data/rmaExp.csv
+data-raw/Mouse_Cell_Type_Data/rmaExp.csv.gz
+data-raw/Mouse_Cell_Type_Data/rmaExp2.csv
+data-raw/Mouse_Cell_Type_Data/rmaExp2.csv.gz
+
+
 *Backup
 *backup
 
 # analysis exceptions
+analysis/04.MarkerGeneProfiles/cortex_white
 analysis/02.SingleCellCoexpression/Darmanis
 analysis/02.SingleCellCoexpression/Tasic
 analysis/02.SingleCellCoexpression/Zeisel
