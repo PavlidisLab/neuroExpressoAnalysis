@@ -3,7 +3,7 @@
 #' @export
 quantileNorm = function(whichFile,outFile=NULL){
     if (is.character(whichFile)){
-        allDataPre = read.csv(whichFile, header = T)
+        allDataPre = ogbox::read.exp(whichFile)
     } else{
         allDataPre = whichFile
     }
