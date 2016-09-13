@@ -1,0 +1,11 @@
+V1	p value	Gene Count	p value	Gene Count	p value	Gene Count
+Astrocyte	p<0.001	169	p<0.001	167	p<0.001	164
+Microglia	p<0.001	159	p<0.001	156	p<0.001	145
+Oligodendrocyte	p<0.001	50	p<0.001	49	p<0.001	50
+FS Basket (G42)	0.006	6	p<0.001	6	0.004	6
+Martinotti (GIN)	0.031	4	p<0.001	4	0.33	4
+VIPReln (G30)	p<0.001	11	p<0.001	11	p<0.001	10
+Pyramidal CrtThalamic	p<0.001	6	p<0.001	6	0.276	6
+Pyramidal Glt25d2	0.185	6	0.005	6	0.446	6
+Pyramidal S100a10	p<0.001	44	p<0.001	43	p<0.001	40
+Pyramidal Thy1	0.015	3	0.002	3	0.413	3
