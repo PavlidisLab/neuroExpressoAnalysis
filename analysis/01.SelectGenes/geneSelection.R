@@ -109,11 +109,11 @@ if(end == 500){
     print('waiting complete')
     rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                  rotSelOut='analysis/01.SelectGenes/RotSel',
-                 cores = 16)
+                 cores = 16,foldChange = 0)
     if(secondChip){
         rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                      rotSelOut='analysis/01.SelectGenes/RotSel2',
-                     cores = 16)
+                     cores = 16, foldChange = 0)
     }
     
     
@@ -151,13 +151,20 @@ if(end == 500){
         }
     }
     
-    microglialException('analysis/01.SelectGenes/FinalGenes/',cores=16)
+    microglialException('analysis/01.SelectGenes/FinalGenes1/',cores=8)
     if (secondChip){
-        microglialException('analysis/01.SelectGenes/FinalGenes2/',cores=16)
+        microglialException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
     }
     
     # after everything is done save the genes to the package
     mouseMarkerGenes = pickMarkersAll('analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    devtools::use_data(mouseMarkerGenes)
+    # Lpl is manually removed from the list as it is known to be expressed in adipocytes yet are not present
+    # in our dataset
+    mouseMarkerGenes %<>% lapply(function(x){
+        x %>% lapply(function(y){
+            y[!y %in% c('Lpl')]
+        })
+    })
+    devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
     
 }
