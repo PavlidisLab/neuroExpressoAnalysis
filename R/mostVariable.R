@@ -42,8 +42,10 @@ mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design){
     # add the multiple matching probesets back
     allDataPre = rbind(allDataPre,allDataMulti)
     allDataPre = allDataPre[!allDataPre$Gene.Symbol=='',]
-    
-    write.csv(allDataPre, file = outFile, row.names=FALSE)
+    if(!is.null(outFile)){
+        write.csv(allDataPre, file = outFile, row.names=FALSE)
+    }
+    invisible(allDataPre)
 }
 
 # this function is a generic function that looks for the most variable probeset
