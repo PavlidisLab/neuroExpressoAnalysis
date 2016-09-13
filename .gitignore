@@ -29,6 +29,7 @@ inst/doc
 analysis/01.SelectGenes/Rotation
 analysis/01.SelectGenes/RotSel
 
+# raw data exceptions
 data-raw/cel
 data-raw/ChenCortex
 data-raw/DarmanisHuman
@@ -40,3 +41,10 @@ data-raw/TasicMouse
 data-raw/TrabzuniRegions
 data-raw/ZeiselMouse
 *Backup
+*backup
+
+# analysis exceptions
+analysis/02.SingleCellCoexpression/Darmanis
+analysis/02.SingleCellCoexpression/Tasic
+analysis/02.SingleCellCoexpression/Zeisel
+analysis/03.WholeTissueCoexpression/pValues
