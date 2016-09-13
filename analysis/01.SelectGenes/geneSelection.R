@@ -119,10 +119,10 @@ if(end == 500){
     
     # upon calculation of selection percentages in permutations, create a directory that houses genes
     # that are selected in more than 95% of the permutations
-    allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/Relax/'))
+    allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
     if (secondChip){
         allGenes = list(genes1 = allGenes[[1]],
-                        genes2 = pickMarkersAll('analysis/01.SelectGenes/RotSel/Relax/'))
+                        genes2 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
     }
     
     for (n in 1:len(allGenes)){
@@ -150,11 +150,24 @@ if(end == 500){
             }
         }
     }
+    # number of genes removed from microglia is needed in the paper
+    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
+    allMicroglia = genes %>% lapply(function(x){
+        x['Microglia']
+    }) %>% unlist %>% unique %>% len
+    print(paste0('Microglia used to have ', allMicroglia, ' genes'))
     
     microglialException('analysis/01.SelectGenes/FinalGenes1/',cores=8)
     if (secondChip){
         microglialException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
     }
+    
+    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
+    allMicroglia = genes %>% lapply(function(x){
+        x['Microglia']
+    }) %>% unlist %>% unique %>% len
+    print(paste0('Microglia now have ', allMicroglia, ' genes'))
+    
     
     # after everything is done save the genes to the package
     mouseMarkerGenes = pickMarkersAll('analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/')

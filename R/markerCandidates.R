@@ -241,11 +241,12 @@ markerCandidates = function(design,
         groupAverages = t(groupAverages)
         
         # creation of output directories ----
-        dir.create(paste0(outLoc ,'/Marker/' , names(nameGroups)[i] , '/'), showWarnings = F,recursive = T)
-        dir.create(paste0(outLoc , '/Relax/' , names(nameGroups)[i] , '/'), showWarnings = F, recursive =T)
+       # dir.create(paste0(outLoc ,'/Marker/' , names(nameGroups)[i] , '/'), showWarnings = F,recursive = T)
+       # dir.create(paste0(outLoc , '/Relax/' , names(nameGroups)[i] , '/'), showWarnings = F, recursive =T)
+       dir.create(paste0(outLoc  , names(nameGroups)[i] , '/'), showWarnings = F, recursive =T)
         if (!is.null(rotate)){
             write.table(removed,
-                        file = paste0(outLoc,'/Relax/',names(nameGroups)[i] , '/removed'),
+                        file = paste0(outLoc,names(nameGroups)[i] , '/removed'),
                         col.names=F)
         }
         
@@ -255,15 +256,15 @@ markerCandidates = function(design,
             #if (names(realGroups)[j]=='GabaOxtr'){
             #  print('loyloy')  
             #}
-            fileName = paste0(outLoc  , '/Relax/', names(nameGroups)[i], '/',  names(realGroups)[j])
-            fileName2 = paste0(outLoc , '/Marker/' , names(nameGroups)[i] , '/' , names(realGroups)[j])
+            fileName = paste0(outLoc , names(nameGroups)[i], '/',  names(realGroups)[j])
+           # fileName2 = paste0(outLoc , '/Marker/' , names(nameGroups)[i] , '/' , names(realGroups)[j])
             
             # find markers. larger than 10 fold change to every other group
-            isMarker = apply(groupAverages,2,function(x){
-                all(x[-j] + log(10, base=2) < x[j])
-            })  
-            
-            fMarker = data.frame(geneData$Gene.Symbol[isMarker], groupAverages[j,isMarker], apply(groupAverages[-j,isMarker,drop=F],2,max), apply(groupAverages[-j,isMarker,drop=F],2,min))
+#             isMarker = apply(groupAverages,2,function(x){
+#                 all(x[-j] + log(10, base=2) < x[j])
+#             })  
+#             
+#             fMarker = data.frame(geneData$Gene.Symbol[isMarker], groupAverages[j,isMarker], apply(groupAverages[-j,isMarker,drop=F],2,max), apply(groupAverages[-j,isMarker,drop=F],2,min))
             fChange = foldChange(groupAverages[j, ], groupAverages[-j,,drop=F] ,foldChangeThresh)
             fChangePrint = data.frame(geneNames = geneData$Gene.Symbol[fChange$index], geneFoldChange= fChange$foldChange )
             fChangePrint = fChangePrint[order(fChangePrint$geneFoldChange, decreasing=T) ,]
@@ -293,7 +294,7 @@ markerCandidates = function(design,
             print(fileName)
             # print(nameGroups[[i]])
             write.table(fChangePrint, quote = F, row.names = F, col.names = F, fileName)
-            write.table(fMarker, quote = F, row.names = F, col.names = F, fileName2)
+           # write.table(fMarker, quote = F, row.names = F, col.names = F, fileName2)
             
         }# end of for around groupAverages
         
