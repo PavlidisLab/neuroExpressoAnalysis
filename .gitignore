@@ -26,3 +26,17 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 inst/doc
+analysis/01.SelectGenes/Rotation
+analysis/01.SelectGenes/RotSel
+
+data-raw/cel
+data-raw/ChenCortex
+data-raw/DarmanisHuman
+data-raw/GemmaAnnots
+data-raw/LesnickParkinsons
+data-raw/MoranParkinsons
+data-raw/StanleyData
+data-raw/TasicMouse
+data-raw/TrabzuniRegions
+data-raw/ZeiselMouse
+*Backup
