@@ -89,7 +89,7 @@ p  = frame %>%
     theme(axis.text.x = element_text(angle=45, hjust = 1),
           strip.text.x = element_text(size = 14)) +
     geom_text(data=signifFrame , aes(x = x, y=y, label = markers),size=10) + 
-    coord_cartesian(ylim = c(-0.03, 1.10))  + xlab('') + ylab('Cell type profile estimation')
+    coord_cartesian(ylim = c(-0.03, 1.10))  + xlab('') + ylab('MGP estimation')
 
 dir.create('analysis//04.MarkerGeneProfiles/publishPlot', showWarnings=FALSE)
 
