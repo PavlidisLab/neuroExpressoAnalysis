@@ -1,0 +1,8 @@
+Cell Types	Trabzuni Dataset	Trabzuni genecount	Chen Dataset	Chen genecount	Stanley - AltarA	AltarA genecount	Stanley - Bahn	Bahn genecount	Stanley - Dobrin	Dobrin genecount	Stanley - Kato	Kato genecount
+FS Basket (G42)	0.437	5	0.612	5	0.764	4	0.223	4	0.538	4	0.005	3
+Martinotti (GIN)	0.302	3	0.617	3	genes<2	1	genes<2	1	0.125	2	genes<2	1
+VIPReln (G30)	p<0.001	8	p<0.001	8	0.442	7	0.11	8	p<0.001	10	0.108	7
+Pyramidal CrtThalamic	0.533	6	0.876	3	0.617	6	0.764	5	0.789	5	0.617	6
+Pyramidal Glt25d2	0.8	5	0.626	5	genes<2	1	genes<2	1	0.526	4	genes<2	1
+Pyramidal S100a10	p<0.001	36	p<0.001	28	p<0.001	24	p<0.001	22	p<0.001	29	p<0.001	20
+Pyramidal Thy1	0.199	2	0.086	2	genes<2	1	genes<2	1	0.302	3	genes<2	1
