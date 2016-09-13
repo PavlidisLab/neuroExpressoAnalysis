@@ -241,27 +241,27 @@ v2_th52LC	63	NA	v2_th118LC,v2_th34LC,v2_th52LC	Neuron	Monoamine	Noradrenergic	No
 GSM880683	64	GSE36068	GSM880683,GSM880684,GSM880685	Neuron	Monoamine	Serotonergic	Serotonergic	Serotonergic Neurons	63	Brainstem	GPL1261	Dougherty et al 2013	23407934	TRUE	TRUE	
 GSM880684	64	GSE36068	GSM880683,GSM880684,GSM880685	Neuron	Monoamine	Serotonergic	Serotonergic	Serotonergic Neurons	63	Brainstem	GPL1261	Dougherty et al 2013	23407934	TRUE	TRUE	
 GSM880685	64	GSE36068	GSM880683,GSM880684,GSM880685	Neuron	Monoamine	Serotonergic	Serotonergic	Serotonergic Neurons	63	Brainstem	GPL1261	Dougherty et al 2013	23407934	TRUE	TRUE	
-GSM63033	65	GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	PyramidalCorticoThalam	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63034	65	GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	PyramidalCorticoThalam	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63035	65	GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	PyramidalCorticoThalam	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM874480	66	GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal_Glt_25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
-GSM874481	66	GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal_Glt_25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
-GSM874482	66	GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal_Glt_25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
-GSM874416	67	GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal_S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
-GSM874418	67	GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal_S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
-GSM874420	67	GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal_S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
-GSM63045	68	GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63046	68	GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63047	68	GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63036	69	GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63037	69	GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63038	69	GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63042	70	GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63043	70	GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63044	70	GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63039	71	GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63040	71	GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
-GSM63041	71	GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal_Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63033	65	GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	Pyramidal CrtThalamic	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63034	65	GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	Pyramidal CrtThalamic	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63035	65	GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	Pyramidal CrtThalamic	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM874480	66	GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
+GSM874481	66	GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
+GSM874482	66	GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
+GSM874416	67	GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
+GSM874418	67	GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
+GSM874420	67	GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
+GSM63045	68	GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63046	68	GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63047	68	GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63036	69	GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63037	69	GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63038	69	GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63042	70	GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63043	70	GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63044	70	GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63039	71	GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63040	71	GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
+GSM63041	71	GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Sugino et al., 2006	16369481	TRUE	FALSE	
 GSM37088	72	GSE2039	GSM37088,GSM37089	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P14	14	Cortex	GPL339	Arlotta et al., 2005	15664173	TRUE	FALSE	
 GSM37089	72	GSE2039	GSM37088,GSM37089	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P14	14	Cortex	GPL339	Arlotta et al., 2005	15664173	TRUE	FALSE	
 GSM37084	73	GSE2039	GSM37084,GSM37085	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P3	3	Cortex	GPL339	Arlotta et al., 2005	15664173	TRUE	FALSE	
@@ -340,12 +340,12 @@ GSM909418	98	GSE37055	GSM909416,GSM909417,GSM909418	Neuron	NA	NA	NA	Purkinje Cel
 GSM909452	99	GSE37055	GSM909452,GSM909453,GSM909454	Neuron	NA	NA	NA	Stellate Basket Cells	56	Cerebellum	GPL1261	Paul et al 2012	22754500	TRUE	TRUE	Purkinje cells contamination
 GSM909453	99	GSE37055	GSM909452,GSM909453,GSM909454	Neuron	NA	NA	NA	Stellate Basket Cells	56	Cerebellum	GPL1261	Paul et al 2012	22754500	TRUE	TRUE	Purkinje cells contamination
 GSM909454	99	GSE37055	GSM909452,GSM909453,GSM909454	Neuron	NA	NA	NA	Stellate Basket Cells	56	Cerebellum	GPL1261	Paul et al 2012	22754500	TRUE	TRUE	Purkinje cells contamination
-Y+MCx_1	100	NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
-Y+MCx_2	100	NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
-Y+MCx_3	100	NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
-Y+SSCx_1	101	NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
-Y+SSCx_2	101	NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
-Y+SSCx_3	101	NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
+Y.MCx_1	100	NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
+Y.MCx_2	100	NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
+Y.MCx_3	100	NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
+Y.SSCx_1	101	NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
+Y.SSCx_2	101	NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
+Y.SSCx_3	101	NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	Rossner et al., 2006	17005859	TRUE	FALSE	Astrocyte contamination
 GSM874512	102	GSE35761	GSM874512,GSM874514,GSM874516	Neuron	NA	NA	NA	S100a10 pyramidal VEH Treated	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
 GSM874514	102	GSE35761	GSM874512,GSM874514,GSM874516	Neuron	NA	NA	NA	S100a10 pyramidal VEH Treated	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
 GSM874516	102	GSE35761	GSM874512,GSM874514,GSM874516	Neuron	NA	NA	NA	S100a10 pyramidal VEH Treated	60	Cortex	GPL1261	Schmidt et al 2012	22632977	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
@@ -358,7 +358,7 @@ GSM1698219	104	GSE69340	GSM1698217,GSM1698218,GSM1698219	Neuron	NA	NA	NA	Ntf3 py
 GSM1698225	105	GSE69340	GSM1698225,GSM1698226,GSM1698227	Neuron	NA	NA	NA	Ntsr1 pyramidal	63	Cortex	GPL1261	Shrestha et al. 2015	26371510	TRUE	TRUE	
 GSM1698226	105	GSE69340	GSM1698225,GSM1698226,GSM1698227	Neuron	NA	NA	NA	Ntsr1 pyramidal	63	Cortex	GPL1261	Shrestha et al. 2015	26371510	TRUE	TRUE	
 GSM1698227	105	GSE69340	GSM1698225,GSM1698226,GSM1698227	Neuron	NA	NA	NA	Ntsr1 pyramidal	63	Cortex	GPL1261	Shrestha et al. 2015	26371510	TRUE	TRUE	
-v2_yrt2-wt	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
-v2_yrt2-wt1	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
-v2_yrt3-wt	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
-v2_yrt6-wt	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
+v2_yrt2.wt	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
+v2_yrt2.wt1	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
+v2_yrt3.wt	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
+v2_yrt6.wt	106	NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Unpublished	NA	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
