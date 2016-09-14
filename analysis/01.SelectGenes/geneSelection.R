@@ -30,7 +30,7 @@ if (start == 1){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = 'analysis//01.SelectGenes/Quick',
-                     groupNames = 'PyramidalDeep',
+                     groupNames = c('PyramidalDeep','AstroDivide'),
                      regionNames = 'Region',
                      cores=16,
                      regionHierarchy = regionHierarchy
@@ -44,7 +44,7 @@ if (start == 1){
                          expression =
                              ogbox::read.exp('data-raw/Mouse_Cell_Type_Data/n_expressoExpr2.csv'),
                          outLoc = 'analysis//01.SelectGenes/Quick2',
-                         groupNames = 'PyramidalDeep',
+                         groupNames = c('PyramidalDeep','AstroDivide'),
                          regionNames = 'Region',
                          cores=16,
                          regionHierarchy = regionHierarchy
@@ -61,7 +61,7 @@ for (i in start:end){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = paste0('analysis//01.SelectGenes/Rotation/',i),
-                     groupNames = 'PyramidalDeep',
+                     groupNames = c('PyramidalDeep','AstroDivide'),
                      regionNames = 'Region',
                      rotate=0.33,
                      regionHierarchy = regionHierarchy,
@@ -82,7 +82,7 @@ if(secondChip){
                          expression = 
                              ogbox::read.exp('data-raw/Mouse_Cell_Type_Data/n_expressoExpr2.csv'),
                          outLoc = paste0('analysis//01.SelectGenes/Rotation2/',i),
-                         groupNames = 'PyramidalDeep',
+                         groupNames = c('PyramidalDeep','AstroDivide'),
                          regionNames = 'Region',
                          rotate=0.33,
                          cores=16,
