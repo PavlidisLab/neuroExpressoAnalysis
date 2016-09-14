@@ -243,10 +243,10 @@ markerCandidates = function(design,
         # creation of output directories ----
        # dir.create(paste0(outLoc ,'/Marker/' , names(nameGroups)[i] , '/'), showWarnings = F,recursive = T)
        # dir.create(paste0(outLoc , '/Relax/' , names(nameGroups)[i] , '/'), showWarnings = F, recursive =T)
-       dir.create(paste0(outLoc  , names(nameGroups)[i] , '/'), showWarnings = F, recursive =T)
+       dir.create(paste0(outLoc ,'/' , names(nameGroups)[i] , '/'), showWarnings = F, recursive =T)
         if (!is.null(rotate)){
             write.table(removed,
-                        file = paste0(outLoc,names(nameGroups)[i] , '/removed'),
+                        file = paste0(outLoc,'/',names(nameGroups)[i] , '/removed'),
                         col.names=F)
         }
         
@@ -256,7 +256,7 @@ markerCandidates = function(design,
             #if (names(realGroups)[j]=='GabaOxtr'){
             #  print('loyloy')  
             #}
-            fileName = paste0(outLoc , names(nameGroups)[i], '/',  names(realGroups)[j])
+            fileName = paste0(outLoc ,'/', names(nameGroups)[i], '/',  names(realGroups)[j])
            # fileName2 = paste0(outLoc , '/Marker/' , names(nameGroups)[i] , '/' , names(realGroups)[j])
             
             # find markers. larger than 10 fold change to every other group
