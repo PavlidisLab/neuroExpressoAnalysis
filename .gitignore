@@ -26,8 +26,8 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 inst/doc
-analysis/01.SelectGenes/Rotation
-analysis/01.SelectGenes/RotSel
+
+
 
 # raw data exceptions
 data-raw/cel
@@ -50,12 +50,22 @@ data-raw/Mouse_Cell_Type_Data/rmaExp2.csv
 data-raw/Mouse_Cell_Type_Data/rmaExp2.csv.gz
 
 
-*Backup
-*backup
+
 
 # analysis exceptions
+analysis/01.SelectGenes/Rotation
+analysis/01.SelectGenes/RotSel
 analysis/04.MarkerGeneProfiles/cortex_white
 analysis/02.SingleCellCoexpression/Darmanis
 analysis/02.SingleCellCoexpression/Tasic
 analysis/02.SingleCellCoexpression/Zeisel
 analysis/03.WholeTissueCoexpression/pValues
+
+*Backup
+*backup
+*DentateGranule_resize
+*DentateGranule_doubleMerged
+Purkinje_doubleMerged
+Purkinje_resize
+analysis/05.ISHValidation/DentateGranule
+analysis/05.ISHValidation/Purkinje
