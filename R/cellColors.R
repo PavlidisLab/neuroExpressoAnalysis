@@ -32,6 +32,7 @@ cellColors = function(){
                  Microglia_deactivation = 'cornsilk2',
                  # Gaba = 'firebrick4',
                  Astrocyte = 'darkgoldenrod1',
+                 AstrocyteReactive = 'darkgoldenrod2',
                  GabaPV = 'firebrick2',
                  'FS Basket (G42)' = 'firebrick2',
                  Stem = 'blue' ,
