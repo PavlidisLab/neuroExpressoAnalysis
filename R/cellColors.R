@@ -53,9 +53,13 @@ cellColors = function(){
                  GabaVIPReln = 'firebrick4',
                  GabaReln = 'firebrick',
                  Pyramidal_Thy1 = 'turquoise',
+                 "Pyramidal Thy1" = 'turquoise'
                  PyramidalCorticoThalam = 'blue',
+                 'Pyramidal CrtThalamic' = 'blue',
                  Pyramidal_Glt_25d2 = 'blue4',
+                 "Pyramidal Glt25d2" = 'blue4',
                  Pyramidal_S100a10 ='deepskyblue3',
+                 "Pyramidal S100a10" =  'deepskyblue3',
                  Glia = viridis(2)[1],
                  Neuron = viridis(2)[2]
                  
