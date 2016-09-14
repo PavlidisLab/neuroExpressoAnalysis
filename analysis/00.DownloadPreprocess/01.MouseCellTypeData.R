@@ -39,7 +39,7 @@ if (download){
     # download all GSMs
     GPL1261 %>% sapply(function(x){
         ogbox::gsmDown(gsm=x,
-                       outfile=paste0('data-raw/cel/GPL339/',x,'.cel'))
+                       outfile=paste0('data-raw/cel/GPL1261/',x,'.cel'))
     })
     
     # before normalization, download probe to gene annotations from gemma
