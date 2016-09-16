@@ -2,6 +2,7 @@ library(limma)
 library(data.table)
 library(stringr)
 library(sva)
+library(oligoClasses)
 devtools::load_all()
 
 # trabzuni dataset ----------------------
@@ -17,6 +18,24 @@ softData = softParser('data-raw/TrabzuniRegions/GSE60862_family.soft')
 
 list[softData,expression]  = softParser('data-raw/TrabzuniRegions/GSE60862_family.soft',expression=TRUE)
 
+expTable = sapply(expression, function(x){
+    x$VALUE
+})
+tableGenes = gemmaGeneMatch(probesets=expression[[1]]$ID_REF,chipFile='data-raw/GemmaAnnots/GPL5175')
+expTable = data.frame(Gene.Symbol = tableGenes, expTable)
+expTable = expTable[!is.na(expTable$Gene.Symbol),]
+expTable = expTable[expTable$Gene.Symbol!='',]
+expTable %<>% mostVariable(treshold=0)
+
+rowMean = expTable[,-1] %>% apply(1,mean)
+medExp = expTable[,-1] %>% unlist %>% median
+
+expTable = expTable[rowMean>medExp,]
+###
+write.csv(expTable, paste0('data-raw/TrabzuniRegions/GSE60862_expression.csv'), row.names = F, quote = F)
+
+
+###
 softData = softData[,c('!Sample_characteristics_ch1 = age at death (in years)', 
                        '!Sample_characteristics_ch1 = ancestry',
                        '!Sample_characteristics_ch1 = brain bank',
@@ -49,8 +68,6 @@ colnames(softData) = c('deatAge',
 
 
 # download cel files
-write.design(softData,file='data-raw/TrabzuniRegions/GSE60862_meta')
-# softData = read.design('data/GSE60862_meta')
 dir.create('data/cel/GPL5175')
 sapply(softData$GSM,function(x){
     xNow<<-x
@@ -59,15 +76,15 @@ sapply(softData$GSM,function(x){
 
 # attach scandates
 softData$scanDate = sapply(softData$GSM, function(x){
-    celfileDate(paste0('/home/omancarci/masterOfCellTypes/cel/GPL5175/',x, '.cel.gz'))
+    celfileDate(paste0('data-raw/cel/GPL5175/',x, '.cel.gz'))
 })
 write.design(softData,file='data-raw/TrabzuniRegions/GSE60862_meta.tsv')
 
-softFile = read.design('data-raw/TrabzuniRegions/GSE60862_meta.tsv')
-softFile = softFile[ !is.na(softFile$pH) 
-                     & !softFile$deathCause=='Cancer',]
+# softFile = read.design('data-raw/TrabzuniRegions/GSE60862_meta.tsv')
+# softFile = softFile[ !is.na(softFile$pH) 
+#                      & !softFile$deathCause=='Cancer',]
 
-readHumanCel(softFile$GSM,'data-raw/TrabzuniRegions/GSE60862_expression.csv',humanDir='data/cel//GPL5175')
+#readHumanCel(softFile$GSM,'data-raw/TrabzuniRegions/GSE60862_expression.csv',humanDir='data/cel//GPL5175')
 
 # outlier detection for trabzuni dataset --------------
 
@@ -150,10 +167,10 @@ rownames(exprData) = geneData$Gene.Symbol
 #softFile = softFile[str_extract(softFile$scanDate,'....-..-..') %in% names(table(str_extract(softFile$scanDate,'....-..-..')))[table(str_extract(softFile$scanDate,'....-..-..'))>1],]
 set.seed(1)
 exprData = ComBat(exprData,batch = kmeans(as.Date(str_extract(softFile$scanDate,'....-..-..')),centers=4)$cluster, mod = model.matrix(~brainRegion,softFile))
-rowmax = exprData %>% apply(1,max)
+rowMean = exprData %>% apply(1,mean)
 medExp = median(unlist(exprData))
 
-exprData = exprData[rowmax>medExp,]
+exprData = exprData[rowMean>medExp,]
 
 write.csv(exprData, file = 'data-raw/TrabzuniRegions/GSE60862_expression_postProcess.csv',quote=F)
 write.design(softFile, file = 'data-raw/TrabzuniRegions/GSE60862_meta_postProcess.tsv')
@@ -161,7 +178,7 @@ write.design(softFile, file = 'data-raw/TrabzuniRegions/GSE60862_meta_postProces
 trabzuniRegionsExp = exprData
 trabzuniRegionsMeta = softFile
 devtools::use_data(trabzuniRegionsExp,
-                   trabzuniRegionsMeta)
+                   trabzuniRegionsMeta, overwrite=TRUE)
 
 # stanley data is taken from Lilah -----------------
 load('data-raw/StanleyData/StanleyData.RData')
@@ -170,12 +187,15 @@ ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noPar
 stanleyOut = function(stanleyStud){
     stud = stanleyStud$aned_good
     meta = stanleyStud$Metadata
-    list[stanleyGenes,stanleyStud] = stud %>%
-        mostVariable(.,genes='GeneSymbol',treshold=.[,-1] %>% unlist %>% median) %>% 
+    list[stanleyGenes,stanleyStud] = 
+        stud %>% 
+        mostVariable(.,genes='GeneSymbol') %>% 
         sepExpr
     
     rownames(stanleyStud) = stanleyGenes$GeneSymbol
-    
+    medExp = median(unlist(stanleyStud))
+    rowMean = exprData %>% apply(1,mean)
+    stanleyStud = stanleyStud[rowMean>medExp,]
     return(list(stanleyStud,meta))
     
 }
@@ -233,7 +253,11 @@ tableGenes = gemmaGeneMatch(probesets=expression[[1]]$ID_REF,chipFile='data-raw/
 
 expTable = data.frame(Gene.Symbol = tableGenes, expTable)
 expTable %<>% filter(Gene.Symbol != '')
-expTable %<>% mostVariable(treshold=expTable[,-1] %>% unlist %>% median)
+expTable %<>% mostVariable(treshold=0)
+
+rowMean = expTable[,-1] %>% apply(1,mean)
+medExp = expTable[,-1] %>% unlist %>% median
+expTable = expTable[rowMean>medExp,]
 
 write.csv(expTable, paste0('data-raw/ChenCortex/','GSE71620_exp.csv'), row.names = F, quote = F)
 
