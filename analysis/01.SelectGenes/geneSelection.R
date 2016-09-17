@@ -30,11 +30,12 @@ if (start == 1){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = 'analysis//01.SelectGenes/Quick',
-                     groupNames = c('PyramidalDeep','AstroDivide'),
+                     groupNames = c('PyramidalDeep'),
+                     #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
                      cores=16,
                      regionHierarchy = regionHierarchy
-    )
+                     )
     
     # quickly select genes exlusively for the samples from GPL1261. These genes are not used in the study and are not
     # readily available in the package
@@ -44,7 +45,8 @@ if (start == 1){
                          expression =
                              ogbox::read.exp('data-raw/Mouse_Cell_Type_Data/n_expressoExpr2.csv'),
                          outLoc = 'analysis//01.SelectGenes/Quick2',
-                         groupNames = c('PyramidalDeep','AstroDivide'),
+                         groupNames = c('PyramidalDeep'),
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          cores=16,
                          regionHierarchy = regionHierarchy
@@ -61,7 +63,8 @@ for (i in start:end){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = paste0('analysis//01.SelectGenes/Rotation/',i),
-                     groupNames = c('PyramidalDeep','AstroDivide'),
+                     groupNames = c('PyramidalDeep'),
+                     #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
                      rotate=0.33,
                      regionHierarchy = regionHierarchy,
@@ -82,7 +85,8 @@ if(secondChip){
                          expression = 
                              ogbox::read.exp('data-raw/Mouse_Cell_Type_Data/n_expressoExpr2.csv'),
                          outLoc = paste0('analysis//01.SelectGenes/Rotation2/',i),
-                         groupNames = c('PyramidalDeep','AstroDivide'),
+                         groupNames = c('PyramidalDeep'),
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          rotate=0.33,
                          cores=16,
@@ -109,11 +113,11 @@ if(end == 500){
     print('waiting complete')
     rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                  rotSelOut='analysis/01.SelectGenes/RotSel',
-                 cores = 16,foldChange = 0)
+                 cores = 16,foldChange = 1)
     if(secondChip){
         rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                      rotSelOut='analysis/01.SelectGenes/RotSel2',
-                     cores = 16, foldChange = 0)
+                     cores = 16, foldChange = 1)
     }
     
     
@@ -150,6 +154,8 @@ if(end == 500){
             }
         }
     }
+    # here we do some wrangling of the gene list to deatl with astrocytes and microglia
+    
     # number of genes removed from microglia is needed in the paper
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     allMicroglia = genes %>% lapply(function(x){
@@ -157,20 +163,53 @@ if(end == 500){
     }) %>% unlist %>% unique %>% len
     print(paste0('Microglia used to have ', allMicroglia, ' genes'))
     
+    # remove activated microglia genes
     microglialException('analysis/01.SelectGenes/FinalGenes1/',cores=8)
     if (secondChip){
         microglialException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
     }
-    
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     allMicroglia = genes %>% lapply(function(x){
         x['Microglia']
     }) %>% unlist %>% unique %>% len
     print(paste0('Microglia now have ', allMicroglia, ' genes'))
     
-    
+#     allGenes = list(genes1 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/AstroDivide/'))
+#     AstroInactive = list(genes1 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/AstroInactiveAlone//'))
+#     AstroReactive = list(genes1 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/AstroReactiveAlone///'))
+#     if (secondChip){
+#         allGenes = list(genes1 = allGenes[[1]],
+#                         genes2 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple2/AstroDivide/'))
+#         AstroInactive = list(genes1 = AstroInactive[[1]],
+#                         genes2 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple2/AstroInactiveAlone//'))
+#         AstroReactive = list(genes1 = AstroReactive[[1]],
+#                            genes2 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple2/AstroReactiveAlone//'))
+#     }
+#     for (i in 1:len(allGenes)){
+#         genes = allGenes[[i]]
+#         astroInac= AstroInactive[[i]]
+#         astroReact = AstroReactive[[i]]
+#         # add astrocytes as a group on their own
+#         # otherGenes = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/PyramidalDeep/')
+#         # make sure everythings' going ok
+#         assertthat::assert_that(all(names(astroReact) ==names(genes)))
+#         assertthat::assert_that(all(names(astroInac) ==names(genes)))
+#         
+#         genes = lapply(1:len(genes), function(j){
+#             if(!'Astrocyte' %in% names(genes[[j]])){
+#                 return(genes[[j]])
+#             }
+#             genes[[j]]$AstrocyteInactive = genes[[j]]$Astrocyte
+#             genes[[j]]$Astrocyte = intersect(astroInac[[j]]$Astrocyte,
+#                                              astroReact[[j]]$AstrocyteReactive)
+#             return(genes[[j]])
+#         })
+#         names(genes) = names(astroReact)
+#         allGenes[[i]] = genes 
+#     }
     # after everything is done save the genes to the package
-    mouseMarkerGenes = pickMarkersAll('analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/')
+    mouseMarkerGenes = genes
+    #mouseMarkerGenes = pickMarkersAll('analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/')
     # Lpl is manually removed from the list as it is known to be expressed in adipocytes yet are not present
     # in our dataset
     mouseMarkerGenes %<>% lapply(function(x){

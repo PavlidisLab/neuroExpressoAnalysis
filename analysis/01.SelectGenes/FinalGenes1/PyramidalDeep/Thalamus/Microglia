@@ -12,7 +12,6 @@ Apobec1
 Arrb2
 AW112010
 B2m
-BC028528
 Bcl2a1a|Bcl2a1d|Bcl2a1b
 C1qc
 C3ar1
@@ -45,9 +44,10 @@ Cyba
 Cysltr1
 D17H6S56E-5
 Dapp1
-Dnajb1
 Dock2
+Dusp6
 Ebi3
+Egr1
 Emp3
 Entpd1
 Erap1
@@ -65,7 +65,6 @@ Gmip
 Golm1
 Gpsm3
 Grn
-Gstm5
 Gusb
 H2-Ab1
 H2-D1|H2-K1
@@ -96,7 +95,6 @@ Il7r
 Irf5
 Irgm2
 Itgb2
-Junb
 Klf2
 Klf6
 Lag3
@@ -119,10 +117,12 @@ Naip2
 Naip5
 Nckap1l
 Nrros
+Pag1
 Pald1
 Pdgfb
 Pf4
 Phxr1
+Phxr4
 Phyhd1
 Pik3cd
 Pla2g15
@@ -144,8 +144,10 @@ Rcsd1
 Rel
 Rgs1
 Rnase4
+Rrbp1
 Sash3
 Serinc3
+Sh3tc1
 Siglecf
 Sipa1
 Skap2
@@ -174,6 +176,7 @@ Tyrobp
 Ugt1a1|Ugt1a10|Ugt1a7c|Ugt1a9|Ugt1a5|Ugt1a6b|Ugt1a2|Ugt1a6a
 Ugt1a6b|Ugt1a10|Ugt1a5|Ugt1a9|Ugt1a7c|Ugt1a1|Ugt1a2|Ugt1a6a
 Ugt1a6b|Ugt1a6a|Ugt1a1|Ugt1a10|Ugt1a5|Ugt1a7c|Ugt1a9|Ugt1a2
+Wsb1
 Xlr4b|Xlr4c|Xlr4a
 Zfa-ps|Zfx
 Zfhx3

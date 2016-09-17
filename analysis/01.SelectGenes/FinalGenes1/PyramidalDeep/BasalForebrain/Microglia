@@ -1,5 +1,6 @@
 1700017B05Rik
 Abhd15
+Adamts1
 Adap2
 Adgre1
 AF251705
@@ -28,7 +29,6 @@ Cd68
 Ceacam1|Ceacam2
 Ceacam2|Ceacam1
 Cfh
-Cfl2
 Chil3
 Chil3|Chil4
 Clec4a2|Clec4b1
@@ -36,7 +36,9 @@ Clec5a
 Clic1
 Col6a3
 Coro1a
+Creg1
 Crybb1
+Ctsc
 Ctsh
 Ctss
 Ctsz
@@ -50,6 +52,7 @@ Ebi3
 Ehd4
 Emp3
 Entpd1
+Erap1
 F11r
 Fcgr1
 Fcrl1
@@ -61,12 +64,13 @@ Gcnt1
 Ggta1
 Gmfg
 Gmip
+Gns
 Golm1
 Gpsm3
 Grn
-Gstm5
 Gusb
 H2-Ab1
+H2-D1|H2-K1
 H2-DMb2|H2-DMb1
 H2-K1
 H2-L|H2-D1
@@ -95,11 +99,11 @@ Il7r
 Irf5
 Irgm2
 Itgb2
-Junb
 Klf2
 Klf6
 Lag3
 Lcp1
+Lgals3
 Lgals9
 Lilrb4|Gp49a
 Ltc4s
@@ -118,10 +122,12 @@ Naip2
 Naip5
 Nckap1l
 Nrros
+Pag1
 Pald1
 Pdgfb
 Pf4
 Phxr1
+Phxr4
 Phyhd1
 Pik3cd
 Pla2g15
@@ -134,6 +140,7 @@ Prkab1
 Pros1
 Ptbp3
 Ptgr1
+Ptgs1
 Ptprc
 Ptprj
 Rassf5
@@ -144,6 +151,7 @@ Rgs1
 Rnase4
 Sash3
 Serinc3
+Sh3tc1
 Siglecf
 Sipa1
 Skap2
@@ -172,6 +180,7 @@ Tyrobp
 Ugt1a1|Ugt1a10|Ugt1a7c|Ugt1a9|Ugt1a5|Ugt1a6b|Ugt1a2|Ugt1a6a
 Ugt1a6b|Ugt1a10|Ugt1a5|Ugt1a9|Ugt1a7c|Ugt1a1|Ugt1a2|Ugt1a6a
 Ugt1a6b|Ugt1a6a|Ugt1a1|Ugt1a10|Ugt1a5|Ugt1a7c|Ugt1a9|Ugt1a2
+Wsb1
 Xlr4b|Xlr4c|Xlr4a
 Zfa-ps|Zfx
 Zfhx3
