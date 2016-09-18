@@ -1,5 +1,5 @@
 #' @export
-readOligoCel = function(GSMs, gemmAnnot,fileOut=NULL, celdir){
+readOligoCel = function(GSMs, gemmaAnnot,fileOut=NULL, celdir){
     cels = oligoClasses::list.celfiles(celdir,listGzipped=T)
     whichCels = sapply(GSMs, function(x){which(grepl(x,cels))})
     sampleCels = cels[whichCels]
