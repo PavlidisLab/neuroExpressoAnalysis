@@ -2,7 +2,7 @@ library(XLconnect)
 
 #lymphoma dataset ----------
 dir.create('data-raw/wholeBloodDatasets',showWarnings=FALSE)
-getGemmaAnnot('GPL570','data/GemmaAnnots/GPL570',annotType='noParents')
+getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL570',annotType='noParents')
 gseDown(GSE='GSE65135',regex='lymph',outDir='data-raw/cel/GPL570')
 cels =celFiles('data-raw/cel/GPL570',full.names=T) 
 cels = cels[grep(regexMerge(gsmFind('GSE65135', 'lymph')), cels)]
@@ -10,7 +10,9 @@ affy = ReadAffy(filenames = cels)
 norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL570')
 names(annotated) = gsub('[.]cel','',names(annotated))
-annotated = mostVariable(allDataPre=annotated,threshold=0)
+annotated = mostVariable(allDataPre=annotated,
+                         threshold=annotated %>% sepExpr %>% .[[2]] %>% unlist %>% median,
+                         threshFun=median)
 
 LYMPHexpr = annotated
 
