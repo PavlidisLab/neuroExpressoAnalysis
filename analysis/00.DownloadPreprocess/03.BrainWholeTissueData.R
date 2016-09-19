@@ -268,12 +268,9 @@ expTable = readOligoCel(softData$GSM,
 expTable %<>% filter(Gene.Symbol != '')
 expTable %<>% filter(!is.na(Gene.Symbol))
 
-rowMean = expTable[,-1] %>% apply(1,mean)
-medExp = expTable[,-1] %>% unlist %>% median
-expTable = expTable[rowMean>medExp,]
 
-
-expTable %<>% mostVariable(threshold=0)
+expTable %<>% mostVariable(threshold=expTable %>% sepExpr %>% .[[2]] %>% unlist %>% median,
+                           threshFun=median)
 
 
 write.csv(expTable, 'data-raw/ChenCortex/GSE71620_exp.csv', row.names = F)
