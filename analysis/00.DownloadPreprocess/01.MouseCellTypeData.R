@@ -125,11 +125,10 @@ devtools::use_data(n_expressoSamples,overwrite=TRUE)
 cellOrder = n_expressoSamples %>%
     arrange(MajorType,Neurotransmitter,PyramidalDeep) %>% 
     filter(!is.na(PyramidalDeep)) %>% .$PyramidalDeep %>% unique
+cellOrder = c(cellOrder[1],'AstrocyteReactive','AstrocyteInactive', cellOrder[2:len(cellOrder)])
 devtools::use_data(cellOrder,overwrite=TRUE)
 
-publishableNameDictionary = rbind(n_expressoSamples %>% filter(!is.na(PyramidalDeep)) %>%  select(PyramidalDeep, ShinyNames) %>% unique,
-                                  c('AstrocyteReactive','AstrocyteReactive'),
-                                  c('AstrocyteInactive','AstrocyteInactive')) %>% {.[-2,]}
+publishableNameDictionary = n_expressoSamples %>% filter(!is.na(PyramidalDeep)) %>%  select(PyramidalDeep, ShinyNames) %>% unique
 devtools::use_data(publishableNameDictionary,overwrite=TRUE)
 
 
