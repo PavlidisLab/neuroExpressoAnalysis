@@ -34,9 +34,10 @@ cels = paste0('data-raw/cel/GPL570/', softData$GSM, '.cel')
 
 affy = ReadAffy(filenames = cels)
 
-norm = rma(affy)
+norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL570')
-annotated = mostVariable(annotated,threshold = 0)
+medExp = annotated %>% sepExpr %>% {.[[2]]} %>% unlist %>% median
+annotated = mostVariable(annotated,threshold = medExp, threshFun= median)
 write.csv(annotated, 'data-raw/LesnickParkinsons/GSE7621_parkinsonsExp.csv', row.names = F)
 
 
@@ -103,7 +104,9 @@ names(bExp) = bName
 bExp = bExp[, match(aName,bName)]
 allGenes = rbind(aGene,bGene)
 allExp = rbind(aExp,bExp)
-expTable = cbind(allGenes,allExp) %>% mostVariable(threshold=0)
+medExp = allExp %>% unlist %>% median
+expTable = cbind(allGenes,allExp) %>% mostVariable(threshold=medExp,
+                                                   threshFun=median)
 write.csv(expTable, paste0('data-raw/MoranParkinsons/','GSE8397','_exp.csv'), row.names = F)
 softData %>%
     filter(Platform=='GPL96') %>%
