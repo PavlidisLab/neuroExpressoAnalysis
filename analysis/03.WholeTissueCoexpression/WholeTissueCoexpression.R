@@ -43,10 +43,6 @@ allGenes = lapply(allGenes,lapply,function(x){
 })
 
 
-
-
-# allGenes = unlist(allGenes,recursive=F)
-
 # handcrafting gene sets
 geneSets = list(all = allGenes[[1]][c('Astrocyte', 'Microglia','Oligo')],
                 #all = allGenes[[1]],
@@ -72,6 +68,11 @@ ps = lapply(1:len(sets), function(i){
     # subset the human expression data to take in only samples from specific regions  
     setExpr =  expression[,sets[[i]]]
     rownames(setExpr) = rownames(expression)
+    
+    medExp = setExpr %>% unlist %>% mean
+    rowMean = setExpr %>% apply(1,max)
+    setExpr = setExpr[rowMean>medExp,]
+    
     genes = geneSets[[i]]
     genes %<>% lapply(function(geneSub){geneSub = geneSub[geneSub %in% rn(setExpr)]})
     #expression[genes$GabaPV,] %>%t %>% cor
