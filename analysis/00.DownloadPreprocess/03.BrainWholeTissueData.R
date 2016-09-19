@@ -4,6 +4,7 @@ library(stringr)
 library(sva)
 library(oligoClasses)
 library(magrittr)
+library(ogbox)
 devtools::load_all()
 
 # trabzuni dataset ----------------------
@@ -129,26 +130,34 @@ write.table(unlist(outliers),'data-raw/TrabzuniRegions/outliers', row.names=F,co
 humanExp = read.exp('data-raw/TrabzuniRegions//GSE60862_expression.csv')
 humanExp = humanExp[!is.na(humanExp$Gene.Symbol),]
 humanExp = humanExp[humanExp$Gene.Symbol!='',]
-humanExp %<>% mostVariable(threshold=0)
+# check expression in all brain regions individually
 
 list[geneData,exprData] = sepExpr(humanExp)
 colnames(exprData) = gsub('\\.cel\\.gz','',colnames(exprData))
-
-# get rid of file extensions
-# colnames(exprData) = str_extract(string=colnames(exprData), pattern='GSM.*?(?=\\.)')
 
 
 softFile = read.design('data-raw/TrabzuniRegions/GSE60862_meta.tsv')
 softFile = softFile[match(colnames(exprData) ,softFile$GSM),]
 
+medExp = exprData %>%
+    unlist %>% median
+rowMedians = exprData %>% 
+    apply(1, function(x){
+        regions =  softFile$brainRegion %>% unique
+        sapply(regions, function(y){
+            x[softFile$brainRegion %in% y] %>% median
+        })
+    }) %>% apply(2, max)
+
+humanExp = 
+    cbind(geneData, exprData)[rowMedians > medExp,] %>% 
+    mostVariable(threshold=0)
+list[geneData,exprData] = sepExpr(humanExp)
+
 # remove outliers detected in the previous step
 outliers = unlist(read.table('data-raw/TrabzuniRegions/outliers'))
 softFile = softFile[!softFile$GSM %in% outliers,]
 exprData = exprData[,!colnames(exprData) %in% outliers,]
-
-# remove white matter from the mix
-# exprData = exprData[,!softFile$brainRegion %in% 'white matter',with=F]
-# softFile = softFile[!softFile$brainRegion %in% 'white matter',]
 
 exprData = as.data.frame(exprData)
 rownames(exprData) = geneData$Gene.Symbol
@@ -177,15 +186,14 @@ ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noPar
 stanleyOut = function(stanleyStud){
     stud = stanleyStud$aned_good
     meta = stanleyStud$Metadata
-    list[stanleyGenes,stanleyStud] = 
-        stud %>% 
-        mostVariable(.,genes='GeneSymbol',threshold=0) %>% 
-        sepExpr
     
+    list[stanleyGenes,stanleyStud] = stud %>% sepExpr
+    medExp = median(unlist(stanleyStud))
+    rowMedian = stanleyStud %>% apply(1,median)
+    
+    list[stanleyGenes,stanleyStud] = cbind(stanleyGenes,stanleyStud) %>% 
+        mostVariable(.,genes='GeneSymbol',threshold=0) %>% sepExpr
     rownames(stanleyStud) = stanleyGenes$GeneSymbol
-    #medExp = median(unlist(stanleyStud))
-    #rowMean = exprData %>% apply(1,mean)
-    #stanleyStud = stanleyStud[rowMean>medExp,]
     return(list(stanleyStud,meta))   
 }
 
@@ -259,11 +267,14 @@ expTable = readOligoCel(softData$GSM,
 
 expTable %<>% filter(Gene.Symbol != '')
 expTable %<>% filter(!is.na(Gene.Symbol))
+
+rowMean = expTable[,-1] %>% apply(1,mean)
+medExp = expTable[,-1] %>% unlist %>% median
+expTable = expTable[rowMean>medExp,]
+
+
 expTable %<>% mostVariable(threshold=0)
 
-#rowMean = expTable[,-1] %>% apply(1,mean)
-#medExp = expTable[,-1] %>% unlist %>% median
-#expTable = expTable[rowMean>medExp,]
 
 write.csv(expTable, 'data-raw/ChenCortex/GSE71620_exp.csv', row.names = F)
 chenExpr = read.exp('data-raw/ChenCortex/GSE71620_exp.csv',sep=',')
