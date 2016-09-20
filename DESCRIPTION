@@ -27,7 +27,10 @@ Depends:
     lazyeval (>= 0.2.0),
     gplots (>= 3.0.1),
     scales (>= 0.4.0),
-    cowplot (>= 0.6.0)
+    cowplot (>= 0.6.0),
+    grid (>= 3.1.2),
+    gtable(>= 0.2.0),
+    grDevices(>= 3.1.2)
 Suggests:
     testthat,
     knitr,
