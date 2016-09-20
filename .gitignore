@@ -60,7 +60,13 @@ analysis/02.SingleCellCoexpression/Darmanis
 analysis/02.SingleCellCoexpression/Tasic
 analysis/02.SingleCellCoexpression/Zeisel
 analysis/03.WholeTissueCoexpression/pValues
+analysis/06.BloodGeneProfiles/HumanMarkers/Rotation
+analysis/06.BloodGeneProfiles/HumanMarkers/RotSel
+analysis/06.BloodGeneProfiles/MouseMarkers/Rotation
+analysis/06.BloodGeneProfiles/MouseMarkers/RotSel
 
+
+*progress
 *Backup
 *backup
 *DentateGranule_resize
