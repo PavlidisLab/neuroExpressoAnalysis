@@ -30,7 +30,8 @@ Depends:
     cowplot (>= 0.6.0),
     grid (>= 3.1.2),
     gtable(>= 0.2.0),
-    grDevices(>= 3.1.2)
+    grDevices(>= 3.1.2),
+    limma (>= 3.22.7)
 Suggests:
     testthat,
     knitr,
