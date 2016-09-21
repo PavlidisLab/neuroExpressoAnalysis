@@ -35,7 +35,8 @@ markerCandidates = function(design,
                       replicates = 'originalIndex',
                       foldChangeThresh = 10,
                       minimumExpression = 8,
-                      regionHierarchy = NULL){
+                      regionHierarchy = NULL,
+                      geneID = 'Gene.Symbol'){
     # source('R/regionHierarchy.R')
     # so that I wont fry my laptop
     if (detectCores()<cores){ 
@@ -266,7 +267,7 @@ markerCandidates = function(design,
 #             
 #             fMarker = data.frame(geneData$Gene.Symbol[isMarker], groupAverages[j,isMarker], apply(groupAverages[-j,isMarker,drop=F],2,max), apply(groupAverages[-j,isMarker,drop=F],2,min))
             fChange = foldChange(groupAverages[j, ], groupAverages[-j,,drop=F] ,foldChangeThresh)
-            fChangePrint = data.frame(geneNames = geneData$Gene.Symbol[fChange$index], geneFoldChange= fChange$foldChange )
+            fChangePrint = data.frame(geneNames = geneData[[geneID]][fChange$index], geneFoldChange= fChange$foldChange )
             fChangePrint = fChangePrint[order(fChangePrint$geneFoldChange, decreasing=T) ,]
             
             #silhouette. selects group members based on the original data matrix
@@ -281,7 +282,7 @@ markerCandidates = function(design,
                     # if(fChangePrint$geneNames[t] == 'Lmo7'){
                     #     print('gaaaaa')
                     # }
-                    silo[t] = giveSilhouette(which(geneData$Gene.Symbol == fChangePrint$geneNames[t]),
+                    silo[t] = giveSilhouette(which(geneData[[geneID]] == fChangePrint$geneNames[t]),
                                              groupInfo1,
                                              groupInfo2)
                 }
