@@ -1,5 +1,5 @@
 #' @export
-astrocyteException = function(restDir=NULL, genelist = NULL, cores = 1){
+reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
     if (detectCores()<cores){ 
         cores = detectCores()
         print('max cores exceeded')
