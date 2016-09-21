@@ -1,5 +1,5 @@
 #' @export
-microglialException = function(restDir=NULL, genelist = NULL ,updateList = F, cores = 1){
+microglialException = function(restDir=NULL, genelist = NULL, cores = 1){
     if (detectCores()<cores){ 
         cores = detectCores()
         print('max cores exceeded')
@@ -24,8 +24,8 @@ microglialException = function(restDir=NULL, genelist = NULL ,updateList = F, co
     if (!is.null(restDir)){
         fileNames = list.files(restDir, recursive =T )
         fileNames = fileNames[grepl('Microglia$',fileNames)]
-        for(i in fileNames){
-        #foreach (i = fileNames) %dopar% {
+        #for(i in fileNames){
+        foreach (i = fileNames) %dopar% {
             micro = read.table(paste0(restDir,'/',i))
             microAll = micro[!toupper(micro$V1) %in% effectedGenes,]
             write.table(microAll, quote = F, row.names = F, col.names = F, paste0(restDir,'/',i))
