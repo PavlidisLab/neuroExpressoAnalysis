@@ -6,7 +6,6 @@ reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
         print(paste('set core no to',cores))
     }
     registerDoMC(cores)
-    
     frm = data.frame(reactive = c(F,F,F,T,T,T))
     mm = model.matrix(~ reactive,frm)
     fit <- lmFit(astrocytesReactive, mm)
@@ -26,6 +25,13 @@ reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
         fileNames = fileNames[!grepl('Astrocyte$',fileNames)]
         #for(i in fileNames){
         foreach (i = fileNames) %dopar% {
+            markerGenes = tryCatch({read.table(paste0(restDir,'/',i))},
+                                   error = function(e){
+                                       NULL
+                                   })
+            if(is.null(markerGenes)){
+                return()
+            }
             markerGenes = read.table(paste0(restDir,'/',i))
             markerGenesLeft = markerGenes[!toupper(markerGenes$V1) %in% reactAstro,]
             write.table(markerGenesLeft, quote = F, row.names = F, col.names = F, paste0(restDir,'/',i))
