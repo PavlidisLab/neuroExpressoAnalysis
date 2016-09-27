@@ -6,19 +6,8 @@ reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
         print(paste('set core no to',cores))
     }
     registerDoMC(cores)
-    frm = data.frame(reactive = c(F,F,F,T,T,T))
-    mm = model.matrix(~ reactive,frm)
-    fit <- lmFit(astrocytesReactive, mm)
-    fit <- eBayes(fit)
-    reactAstro = topTable(fit, coef=colnames(fit$design)[2],
-                          #lfc = log(1,base=2),
-                          number = Inf, 
-                          p.value = 0.05
-    )
     
-    reactAstro$Gene.Symbol = rownames(reactAstro)
-    reactAstro %<>% filter(logFC>log(5,base=2))
-    reactAstro = reactAstro$Gene.Symbol
+    reactAstro = ischemiaGenes
     
     if (!is.null(restDir)){
         fileNames = list.files(restDir, recursive =T )
