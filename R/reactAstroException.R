@@ -8,7 +8,6 @@ reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
     registerDoMC(cores)
     
     reactAstro = ischemiaGenes
-    
     if (!is.null(restDir)){
         fileNames = list.files(restDir, recursive =T )
         fileNames = fileNames[!grepl('Astrocyte$',fileNames)]
@@ -21,8 +20,7 @@ reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
             if(is.null(markerGenes)){
                 return()
             }
-            markerGenes = read.table(paste0(restDir,'/',i))
-            markerGenesLeft = markerGenes[!toupper(markerGenes$V1) %in% reactAstro,]
+            markerGenesLeft = markerGenes[!markerGenes$V1 %in% reactAstro,]
             write.table(markerGenesLeft, quote = F, row.names = F, col.names = F, paste0(restDir,'/',i))
         }
     }

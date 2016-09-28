@@ -1,7 +1,7 @@
 library(ogbox)
 library(magrittr)
 library(affy)
-library(stingr)
+library(stringr)
 devtools::load_all()
 
 
@@ -40,6 +40,8 @@ dir.create('data-raw/ischemicAstros',showWarnings=FALSE)
 write.csv(astrocytesIschemic,'data-raw/ischemicAstros/ischemicAstros.csv',quote=F)
 devtools::use_data(astrocytesIschemic,overwrite=TRUE)   
 
+
+# get the differentially expressed genes between groups -------
 groups = cn(astrocytesIschemic) %>% str_extract(pattern=regexMerge(c('MCAO','LPS', 'saline','sham')))
 
 # no lps as we don't really care about it here
@@ -51,7 +53,7 @@ difGenes = lapply(1:ncol(comparisons), function(i){
     mm = model.matrix(~ model,as.df(model))
     fit <- lmFit(data, mm)
     fit <- eBayes(fit)
-    difGenes = topTable(fit, coef=colnames(fit$design)[2],lfc=log(1,base=2),
+    difGenes = topTable(fit, coef=colnames(fit$design)[2],lfc=log(2,base=2),
                           #lfc = log(1,base=2),
                           number = Inf, 
                           p.value = 0.05)
@@ -70,7 +72,7 @@ grid.draw(venn)
 
 
 # look at the genes that are differentially expressed between sham surgery and MCAO
-ischemiaGenes = difGenes$`MCAO sham`
+ischemiaGenes = c(difGenes$`MCAO sham`)
 devtools::use_data(ischemiaGenes,overwrite=TRUE)
 
 

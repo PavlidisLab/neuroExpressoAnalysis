@@ -10,6 +10,7 @@
 # the default output location is data-raw. Other directories will be created if not already
 # existing
 devtools::load_all()
+#library(markerGenesManuscript)
 
 if(length(commandArgs(trailingOnly=TRUE))==0){
     start = 1
@@ -34,8 +35,7 @@ if (start == 1){
                      #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
                      cores=16,
-                     regionHierarchy = regionHierarchy
-                     )
+                     regionHierarchy = regionHierarchy)
     
     # quickly select genes exlusively for the samples from GPL1261. These genes are not used in the study and are not
     # readily available in the package
@@ -49,8 +49,7 @@ if (start == 1){
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          cores=16,
-                         regionHierarchy = regionHierarchy
-        )
+                         regionHierarchy = regionHierarchy)
     }
 }
 
@@ -68,8 +67,7 @@ for (i in start:end){
                      regionNames = 'Region',
                      rotate=0.33,
                      regionHierarchy = regionHierarchy,
-                     cores=16
-    )
+                     cores=16)
     
 }
 cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
@@ -90,8 +88,7 @@ if(secondChip){
                          regionNames = 'Region',
                          rotate=0.33,
                          cores=16,
-                         regionHierarchy = regionHierarchy
-        )
+                         regionHierarchy = regionHierarchy)
     }
     cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation2/progress',append=TRUE)
     
@@ -121,13 +118,14 @@ if(end == 500){
     }
     
     
-    # upon calculation of selection percentages in permutations, create a directory that houses genes
+    # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     # that are selected in more than 95% of the permutations
     allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
     if (secondChip){
         allGenes = list(genes1 = allGenes[[1]],
                         genes2 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
     }
+    
     
     for (n in 1:len(allGenes)){
         genes = allGenes[[n]]
@@ -174,49 +172,30 @@ if(end == 500){
     }) %>% unlist %>% unique %>% len
     print(paste0('Microglia now have ', allMicroglia, ' genes'))
     
-#     allGenes = list(genes1 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/AstroDivide/'))
-#     AstroInactive = list(genes1 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/AstroInactiveAlone//'))
-#     AstroReactive = list(genes1 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/AstroReactiveAlone///'))
-#     if (secondChip){
-#         allGenes = list(genes1 = allGenes[[1]],
-#                         genes2 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple2/AstroDivide/'))
-#         AstroInactive = list(genes1 = AstroInactive[[1]],
-#                         genes2 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple2/AstroInactiveAlone//'))
-#         AstroReactive = list(genes1 = AstroReactive[[1]],
-#                            genes2 = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple2/AstroReactiveAlone//'))
-#     }
-#     for (i in 1:len(allGenes)){
-#         genes = allGenes[[i]]
-#         astroInac= AstroInactive[[i]]
-#         astroReact = AstroReactive[[i]]
-#         # add astrocytes as a group on their own
-#         # otherGenes = pickMarkersAll('analysis//01.SelectGenes/RotSelSimple1/PyramidalDeep/')
-#         # make sure everythings' going ok
-#         assertthat::assert_that(all(names(astroReact) ==names(genes)))
-#         assertthat::assert_that(all(names(astroInac) ==names(genes)))
-#         
-#         genes = lapply(1:len(genes), function(j){
-#             if(!'Astrocyte' %in% names(genes[[j]])){
-#                 return(genes[[j]])
-#             }
-#             genes[[j]]$AstrocyteInactive = genes[[j]]$Astrocyte
-#             genes[[j]]$Astrocyte = intersect(astroInac[[j]]$Astrocyte,
-#                                              astroReact[[j]]$AstrocyteReactive)
-#             return(genes[[j]])
-#         })
-#         names(genes) = names(astroReact)
-#         allGenes[[i]] = genes 
-#     }
-    # after everything is done save the genes to the package
-    mouseMarkerGenes = genes
-    #mouseMarkerGenes = pickMarkersAll('analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/')
+  
+    
+    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
+
+    print(paste('Before removing astrocyte markers, we had', genes %>% unlist  %>% len, 'genes'))
+    reactAstroException('analysis/01.SelectGenes/FinalGenes1/',cores=8)
+    if (secondChip){
+        reactAstroException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
+    }
+    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
+    print(paste('Now we have', genes %>% unlist %>% len, 'genes'))
+    
     # Lpl is manually removed from the list as it is known to be expressed in adipocytes yet are not present
     # in our dataset
-    mouseMarkerGenes %<>% lapply(function(x){
-        x %>% lapply(function(y){
-            y[!y %in% c('Lpl')]
-        })
-    })
+    banGenes('analysis/01.SelectGenes/FinalGenes1/',bannedGenes='Lpl',cores=8)
+    if (secondChip){
+        banGenes('analysis/01.SelectGenes/FinalGenes2/',bannedGenes = 'Lpl',cores=8)
+    }
+    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
+    
+    
+    mouseMarkerGenes = genes
+    
+    
     devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
     
 }
