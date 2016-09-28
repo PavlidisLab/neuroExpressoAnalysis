@@ -7,7 +7,8 @@
 markerCandidates(design, expression, outLoc, groupNames, regionNames = NULL,
   PMID = "PMID", rotate = NULL, cores = 4, debug = NULL,
   sampleName = "sampleName", replicates = "originalIndex",
-  foldChangeThresh = 10, minimumExpression = 8, regionHierarchy = NULL)
+  foldChangeThresh = 10, minimumExpression = 8, regionHierarchy = NULL,
+  geneID = "Gene.Symbol")
 }
 \arguments{
 \item{design}{data.frame. Metadata for the samples.}

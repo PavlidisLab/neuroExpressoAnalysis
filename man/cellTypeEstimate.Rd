@@ -5,10 +5,11 @@
 \title{Calculate cell type profile estimations}
 \usage{
 cellTypeEstimate(exprData, genes, geneColName = "Gene.Symbol",
-  outlierSampleRemove = F, synonymTaxID = NULL,
+  outlierSampleRemove = FALSE, synonymTaxID = NULL,
   geneTransform = function(x) {     mouse2human(x)$humanGene }, groups,
   tableOut = NULL, indivGenePlot = NULL, seekConsensus = F,
-  removeNegatives = T, plotType = c("groupBased", "cummulative"), PC = 1)
+  removeNegatives = TRUE, plotType = c("groupBased", "cummulative"),
+  PC = 1)
 }
 \arguments{
 \item{exprData}{data.frame. Expression data. First collumns of the expression data should include gene names in the 
