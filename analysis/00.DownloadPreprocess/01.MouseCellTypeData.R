@@ -108,15 +108,16 @@ if (skipNorm==F){
     
     praise("${EXCLAMATION}! ${Adverb} ${created}")
     
-    system('gzip -f data-raw/Mouse_Cell_Type_Data/rmaExp.csv')
-    system('gzip -f data-raw/Mouse_Cell_Type_Data/qnormExp.csv')
-    system('gzip -f data-raw/Mouse_Cell_Type_Data/rmaExp2.csv')
-    system('gzip -f data-raw/Mouse_Cell_Type_Data/qnormExp2.csv')
+    #system('gzip -f data-raw/Mouse_Cell_Type_Data/rmaExp.csv')
+    #system('gzip -f data-raw/Mouse_Cell_Type_Data/qnormExp.csv')
+    #system('gzip -f data-raw/Mouse_Cell_Type_Data/rmaExp2.csv')
+    #system('gzip -f data-raw/Mouse_Cell_Type_Data/qnormExp2.csv')
 }
 
 # now load the data and place it in the package
 n_expressoExpr = ogbox::read.exp('data-raw//Mouse_Cell_Type_Data//n_expressoExpr.csv')
 n_expressoSamples =  ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_expressoSamples.tsv')
+
 
 devtools::use_data(n_expressoExpr,overwrite=TRUE)
 devtools::use_data(n_expressoSamples,overwrite=TRUE)

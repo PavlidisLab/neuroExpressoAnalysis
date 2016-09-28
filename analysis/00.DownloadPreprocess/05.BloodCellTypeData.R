@@ -3,6 +3,7 @@ library(XLConnect)
 devtools::load_all()
 
 # human blood------
+dir.create('data-raw/GemmaAnnots')
 ogbox::getGemmaAnnot(chipName='GPL96', chipFile='data-raw/GemmaAnnots/GPL96',annotType='noParents')
 dir.create('data-raw/HumanBloodCellTypeData', showWarnings=FALSE)
 
@@ -67,6 +68,11 @@ names(annotated) = gsub('[.]CEL','',names(annotated))
 #write.csv(annotated, 'data-raw/HumanBloodCellTypeData/bloodCellsExp.csv', row.names = F)
 annotated = quantileNorm(annotated)
 
+#humanBloodCellsExpALLPROBES = annotated
+#devtools::use_data(humanBloodCellsExpALLPROBES,overwrite=TRUE)
+
+dir.create('data-raw/HumanBloodCellTypeData/',showWarnings=FALSE)
+
 humanBloodCellsExp= mostVariableCT(annotated,
                               'data-raw/HumanBloodCellTypeData/humanBloodCellsExp.csv',
                               cellTypeColumn = 'lm22',
@@ -127,6 +133,10 @@ annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL1261')
 names(annotated) = gsub('[.]cel','',names(annotated))
 #write.csv(annotated, 'data-raw/HumanBloodCellTypeData/bloodCellsExp.csv', row.names = F)
 annotated = quantileNorm(annotated)
+
+#mouseBloodCellsExpALLPROBES = annotated 
+#devtools::use_data(mouseBloodCellsExpALLPROBES,overwrite=TRUE)
+
 
 mouseBloodCellsExp = mostVariableCT(annotated,
                                    'data-raw/MouseBloodCellTypeData/mouseBloodCellsExp.csv',
