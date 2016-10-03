@@ -42,5 +42,5 @@ cors = lapply(1:len(geneLists), function(i){
 })
 
 dir.create('analysis//06.BloodGeneProfiles/publishTable',showWarnings=FALSE)
-
+cors[[2]] = cors[[2]][,-1,drop=FALSE]
 write.table(cors, 'analysis//06.BloodGeneProfiles/publishTable/LYMPHLM11.tsv',sep='\t', quote= FALSE,row.names=TRUE)

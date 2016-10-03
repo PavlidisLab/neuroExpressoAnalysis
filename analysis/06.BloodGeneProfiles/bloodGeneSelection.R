@@ -98,4 +98,9 @@ if(end == 500){
     humanBloodMarkers = allGenes$HumanMarkers
     devtools::use_data(mouseBloodMarkers, overwrite=TRUE)
     devtools::use_data(humanBloodMarkers, overwrite=TRUE)
+    
+    commonGenesLm11= intersect(mouseBloodMarkers$lm11 %>% unlist %>% mouse2human %$% humanGene,
+                               humanBloodMarkers$lm11 %>% unlist)
+    commonGenesLm22= intersect(mouseBloodMarkers$lm22 %>% unlist %>% mouse2human %$% humanGene,
+                               humanBloodMarkers$lm22 %>% unlist)
 }
