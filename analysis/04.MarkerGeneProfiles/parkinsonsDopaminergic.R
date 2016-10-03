@@ -71,7 +71,7 @@ geneCounts = c(LesnickEstimations$rotations$Dopaminergic %>% nrow,
                moranMedialEstimation$rotations$Dopaminergic %>% nrow)
 
 LesnickName = paste0('Lesnick GSE7621\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
-MoranLateralName = paste0('Moran Lateral\nGGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranLateralName = paste0('Moran Lateral\nGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
 MoranMediallName = paste0('Moran Medial\nGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
 
 frame1 = data.frame(parkinsons = setNames(c('PD','control'), c(T,F))[LesnickParkinsonsMeta$parkinson %>% as.character],
@@ -113,7 +113,7 @@ pEstimate = masterFrame %>%  ggplot(aes( y = estimate, x = parkinsons)) +
     coord_cartesian(ylim = c(-0.10, 1.10)) +
     geom_text(data=signifFrame , aes(x = x, y=y, label = markers),size=10)+
     xlab('') +
-    ylab('Cell type profile estimation')
+    ylab('Dopaminergic MGP estimation')
 
 ggsave(plot=pEstimate,
        filename='analysis//04.MarkerGeneProfiles/publishPlot/dopaminergicEstimation.png',width=7,height=4.5,units='in')
