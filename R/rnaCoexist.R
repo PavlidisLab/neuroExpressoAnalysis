@@ -164,56 +164,7 @@ rnaCoexist = function(rnaExp, # matrix of expressio values with row names = gene
     print('yay tables')
     if (!is.null(plotOut)){
         dir.create(plotOut, recursive = T, showWarnings=F)
-        
-        #         for (x in 1:len(simuProbs)){
-        # 
-        #             print(x)
-        #             if (is.na(simuProbs[[x]][1])){
-        #                 return(NULL)
-        #             }
-        #             png(paste0(plotOut,'/', names(simuProbs)[x],'.png'))
-        #             plot(density(simuProbs[[x]]), main= names(simuProbs)[x],
-        #                  xlim=c(min(min(density(simuProbs[[x]])$x),  realProbs[x]),
-        #                         max(max(density(simuProbs[[x]])$x), realProbs[x])),
-        #                  xlab='',cex.axis = 1.3, cex.main = 1.5, cex.lab = 1.5)
-        #             abline(v=realProbs[x],col='red', lwd = 3)
-        #             mtext(paste0('P = ',ps[x]))
-        #             dev.off()
-        #         }
-        # print('yay density plots')
-        
-        # density plots all together ----------
-        #         singificanceRange = simuProbs %>% 
-        #             #lapply(emp.hpd) %>% 
-        #             lapply(quantile, probs = c(0.05,0.95)) %>%
-        #             as.data.frame %>% 
-        #             t %>% as.data.frame
-        #         
-        #         names(singificanceRange) =c('min','max')
-        #         singificanceRange['CellType'] = rownames(singificanceRange)
-        #         singificanceRange['RealProbs'] = realProbs
-        #         
-        #         indivPlots = singificanceRange %>% mutate(pVal = ps, simuProbs = simuProbs) %>% group_by(CellType) %>% 
-        #             do(plots = 
-        #                    {
-        #                        simuVect = .$simuProbs %>% unlist(recursive=T)
-        #                        simuProbs = data.frame(value = simuVect, variable = .$CellType)
-        #                        p = ggplot(data = .[names(.)[-len(names(.))]], aes(x = CellType, y = RealProbs)) + 
-        #                            geom_ogboxvio(data=simuProbs, mapping = aes(x = variable, y= value)) +     
-        #                            # geom_segment(aes(x = CellType, y = min, xend=CellType, yend = max)) + 
-        #                            scale_x_discrete(name="") + scale_y_continuous(name = 'Median correlation') + 
-        #                            theme(axis.title.y = element_text(size=12),
-        #                                  axis.text.x  = element_text(size=14)) +
-        #                            geom_point(size = 5, color = muted('red')) + 
-        #                            geom_segment(size = 2,x = 0.9,xend=1.1, color = muted('red'), aes(y = RealProbs,yend= RealProbs)) + 
-        #                            geom_text(x = 1.11, size = 6,hjust=0, aes(y = RealProbs), label = paste0('p: ', sprintf("%.3f",.$pVal)))
-        #                        switch_axis_position(p,axis='x')
-        #                    }
-        #                )
-        #         
-        #         plot = plot_grid(plotlist=indivPlots$plots, ncol = 3)
-        #         save_plot(paste0(plotOut,'/allProbs.png'),plot, base_height = 10, base_aspect_ratio=1.2)
-        #         
+       
         # heatmaps of existance --------------
         
         for (i in 1:len(genes)){

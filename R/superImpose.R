@@ -114,6 +114,8 @@ superImpose = function(genes, expression, CIBERSORTpred, geneSymbol, outDir,PC=1
     rownames(correlations) = names(estimates$estimates)
     #correlations[[1]] %<>% as.double
     #correlations[[2]] %<>% as.double
-    
+    correlations = data.frame(correlations, 
+                              "n genes" = estimates$rotations %>% sapply(nrow),
+                              check.names=FALSE)
     return(correlations)
 }
