@@ -176,22 +176,31 @@ if(end == 500){
     
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
 
-    print(paste('Before removing astrocyte markers, we had', genes %>% unlist  %>% len, 'genes'))
-    reactAstroException('analysis/01.SelectGenes/FinalGenes1/',cores=8)
+    allS100 = genes %>% lapply(function(x){
+        x['Pyramidal_S100a10']
+    }) %>% unlist %>% unique %>% len
+    print(paste0('S100a10 pyramdials used to have ', allS100, ' genes'))
+    
+    s100a10exception('analysis/01.SelectGenes/FinalGenes1/',cores=8)
     if (secondChip){
-        reactAstroException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
+        s100a10exception('analysis/01.SelectGenes/FinalGenes2/',cores=8)
     }
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    print(paste('Now we have', genes %>% unlist %>% len, 'genes'))
+    allS100 = genes %>% lapply(function(x){
+        x['Pyramidal_S100a10']
+    }) %>% unlist %>% unique %>% len
+    print(paste0('S100a10 pyramdials now have ', allS100, ' genes'))
     
     # Lpl is manually removed from the list as it is known to be expressed in adipocytes yet are not present
     # in our dataset
-    banGenes('analysis/01.SelectGenes/FinalGenes1/',bannedGenes='Lpl',cores=8)
+    bannedGenes = c('Lpl','S100a10')
+    banGenes('analysis/01.SelectGenes/FinalGenes1/',bannedGenes= bannedGenes,cores=8)
     if (secondChip){
-        banGenes('analysis/01.SelectGenes/FinalGenes2/',bannedGenes = 'Lpl',cores=8)
+        banGenes('analysis/01.SelectGenes/FinalGenes2/',bannedGenes = bannedGenes,cores=8)
     }
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     
+    assertthat::validate_that(!bannedGenes %in% unlist(genes))
     
     mouseMarkerGenes = genes
     
