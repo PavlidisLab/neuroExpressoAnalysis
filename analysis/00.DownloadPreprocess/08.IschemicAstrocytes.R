@@ -2,6 +2,8 @@ library(ogbox)
 library(magrittr)
 library(affy)
 library(stringr)
+library(VennDiagram)
+
 devtools::load_all()
 
 
@@ -42,10 +44,12 @@ devtools::use_data(astrocytesIschemic,overwrite=TRUE)
 
 
 # get the differentially expressed genes between groups -------
-groups = cn(astrocytesIschemic) %>% str_extract(pattern=regexMerge(c('MCAO','LPS', 'saline','sham')))
+groups = cn(astrocytesIschemic) %>% str_extract(pattern=paste0('[0-9].*?',regexMerge(c('MCAO','LPS', 'saline','sham'))))
 
 # no lps as we don't really care about it here
-comparisons = combn(c('MCAO', 'saline','sham'),2)
+comparisons = data.frame(day1 = c('1 day after sham','1 day after MCAO'),
+                         day3 = c('3 days after sham','3 days after MCAO'),
+                         day7 = c('7 days after sham', '7 days after MCAO'))
 
 difGenes = lapply(1:ncol(comparisons), function(i){
     model = groups[groups %in% comparisons[,i]]
@@ -53,10 +57,11 @@ difGenes = lapply(1:ncol(comparisons), function(i){
     mm = model.matrix(~ model,as.df(model))
     fit <- lmFit(data, mm)
     fit <- eBayes(fit)
-    difGenes = topTable(fit, coef=colnames(fit$design)[2],lfc=log(2,base=2),
+    difGenes = topTable(fit, coef=colnames(fit$design)[2],#lfc=log(2,base=2),
                           #lfc = log(1,base=2),
-                          number = Inf, 
-                          p.value = 0.05)
+                          number = Inf)
+    difGenes
+    difGenes = difGenes[difGenes$logFC<0 & difGenes$P.Value<0.05,]
     rn(difGenes)    
 })
 
@@ -65,14 +70,11 @@ names(difGenes) = sapply(1:ncol(comparisons), function(i){
 })
 
 
-library(VennDiagram)
 venn = venn.diagram(difGenes,filename=NULL)
 plot.new()
 grid.draw(venn)
 
 
 # look at the genes that are differentially expressed between sham surgery and MCAO
-ischemiaGenes = c(difGenes$`MCAO sham`)
+ischemiaGenes = intersectList(difGenes)
 devtools::use_data(ischemiaGenes,overwrite=TRUE)
-
-

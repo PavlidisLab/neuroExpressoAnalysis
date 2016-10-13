@@ -20,6 +20,7 @@ cellColors = function(){
                  Cholin = 'darkorange',
                  Spiny = 'blanchedalmond',
                  Gluta = 'slategray',
+                 Glutamatergic = 'slategray',
                  Basket = 'mediumpurple4',
                  Golgi = 'orchid',
                  Pyramidal = 'turquoise',

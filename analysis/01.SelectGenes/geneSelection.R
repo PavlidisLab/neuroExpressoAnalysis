@@ -194,13 +194,15 @@ if(end == 500){
     # Lpl is manually removed from the list as it is known to be expressed in adipocytes yet are not present
     # in our dataset
     bannedGenes = c('Lpl','S100a10')
-    banGenes('analysis/01.SelectGenes/FinalGenes1/',bannedGenes= bannedGenes,cores=8)
+    banGenes(restDir = 'analysis/01.SelectGenes/FinalGenes1/',
+             bannedGenes= bannedGenes,
+             cores=8)
     if (secondChip){
         banGenes('analysis/01.SelectGenes/FinalGenes2/',bannedGenes = bannedGenes,cores=8)
     }
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     
-    assertthat::validate_that(!bannedGenes %in% unlist(genes))
+    assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
     
     mouseMarkerGenes = genes
     
@@ -208,3 +210,48 @@ if(end == 500){
     devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
     
 }
+
+toPlotGenes = mouseMarkerGenes %>% lapply(function(x){
+    x = x[!grepl('Microglia_',names(x))]
+    x %<>% lapply(function(y){
+        y[!grepl('[|]', y)]
+    })
+})
+
+
+toPlotGenes %<>% lapply(function(x){
+    x %<>%sapply(len)
+    x[cellOrder] %>% trimNAs
+    x = x[!grepl('Microglia_',names(x))]
+    names(x) = publishableNameDictionary$ShinyNames[match(names(x),publishableNameDictionary$PyramidalDeep)]
+    return(x)
+})
+
+toPlotGenes$All = toPlotGenes$All[c('Astrocyte','Oligodendrocyte','Microglia')]
+toPlotGenes[-1] %<>% lapply(function(x){
+    x = x[!names(x) %in% c('Astrocyte','Oligodendrocyte','Microglia')]
+})
+# take the bottom ones in the region tree
+rockBottom = regionHierarchy %>% unlist %>% names %>% str_extract(pattern='(?<=[.])([A-Z]|[a-z])*$')
+
+toPlotGenes = toPlotGenes[c('All', rockBottom)]
+
+file.create('analysis/01.SelectGenes/geneTable.tsv')
+lapply(1:len(toPlotGenes), function(i){
+    print(i)
+    if(i == 1){
+        append = FALSE
+    } else {
+        append = TRUE
+    }
+    cat(paste0(names(toPlotGenes)[i],'\n'),
+        append = append,
+        file= 'analysis/01.SelectGenes/geneTable.tsv')
+    write.table(toPlotGenes[[i]], file = 'analysis/01.SelectGenes/geneTable.tsv',
+                sep = "\t",
+                quote = F, col.names = F,
+                row.names = T, append = TRUE)
+})
+
+
+

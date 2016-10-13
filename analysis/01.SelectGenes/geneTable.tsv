@@ -1,0 +1,45 @@
+All
+Astrocyte	106
+Oligodendrocyte	27
+Microglia	145
+Cortex
+FS Basket (G42)	5
+Martinotti (GIN)	4
+VIPReln (G30)	11
+Pyramidal CrtThalamic	5
+Pyramidal Glt25d2	5
+Pyramidal S100a10	10
+Pyramidal Thy1	3
+BasalForebrain
+Forebrain Cholinergic	86
+Striatum
+Forebrain Cholinergic	42
+Spiny	78
+Amygdala
+Glutamatergic	8
+Pyramidal Thy1	20
+Hippocampus
+DentateGranule	35
+GabaSSTReln	50
+Pyramidal Thy1	17
+Subependymal
+Ependymal	48
+Thalamus
+GabaReln	55
+Hypocretinergic	32
+Thalamus Cholinergic	38
+Midbrain
+Midbrain Cholinergic	35
+Dopaminergic	14
+Serotonergic	17
+LocusCereuleus
+Noradrenergic	51
+Serotonergic	26
+Cerebellum
+Basket	7
+Bergmann	52
+CerebGranule	12
+Golgi	27
+Purkinje	43
+SpinalCord
+SpinalChordCholinergic	118
