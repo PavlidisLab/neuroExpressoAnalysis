@@ -22,6 +22,7 @@ names(genes) = translatePublishable(names(genes))
 #              comparisons = 'all',
 #              estimateFile = 'analysis/04.MarkerGeneProfiles/cortex_white//estimations')
 
+#genes$`Pyramidal S100a10` = genes$`Pyramidal S100a10`[genes$`Pyramidal S100a10` %in% allowedProbes]
 
 cortex_whiteEstimate = cellTypeEstimate(cortex_white,
                                         genes= genes,

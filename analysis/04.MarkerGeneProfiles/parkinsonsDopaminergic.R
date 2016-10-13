@@ -4,6 +4,7 @@ library(limma)
 library(dplyr)
 library(magrittr)
 library(cowplot)
+library(VennDiagram)
 devtools::load_all()
 
 
@@ -25,6 +26,8 @@ LesnickEstimations =
 LesnickpVals = LesnickEstimations$estimates %>% sapply(function(x){
     p = wilcox.test(x[LesnickParkinsonsMeta$parkinson == TRUE], x[LesnickParkinsonsMeta$parkinson == FALSE])$p.value
 })
+
+
 
 # Moran GSE8397 ----------
 MoranDes = MoranParkinsonsMeta
@@ -148,6 +151,19 @@ LesnickDif = topTable(fit, coef=colnames(fit$design)[2],
                p.value = 0.05
                )
 
+dim(LesnickDif)
+
+mm = model.matrix(~ estimate + parkinson,data.frame(parkinson = LesnickParkinsonsMeta$parkinson,
+                                                    estimate = LesnickEstimations$estimates$Dopaminergic))
+fit <- lmFit(data, mm)
+fit <- eBayes(fit)
+LesnickDifCorr = topTable(fit, coef=colnames(fit$design)[3],p.value= 0.05,
+                    number = Inf)
+dim(LesnickDifCorr)
+
+venn = venn.diagram(x=list(Corrected = rn(LesnickDifCorr), Uncorrected = rn(LesnickDif)), filename=NULL)
+plot.new()
+grid.draw(venn)
 # Moran differentially expressed-------
 MoranDes = MoranParkinsonsMeta
 MoranDes %<>% mutate(patient = paste0(Disease, str_extract(Title,pattern='[0-9]+')))
@@ -158,7 +174,7 @@ rownames(expDatMoran) = geneDatMoran$Gene.Symbol
 expDatMoran = expDatMoran[(!MoranDes$Region %in% 'Superior frontal gyrus')]
 MoranDes = MoranDes[(!MoranDes$Region %in% 'Superior frontal gyrus') ,]
 
-mm = model.matrix(~ Disease,MoranDes)
+mm = model.matrix(~ Disease+ Region,MoranDes)
 fit <- lmFit(expDatMoran, mm)
 fit <- eBayes(fit)
 MoranDif = topTable(fit, coef=colnames(fit$design)[2],
@@ -166,7 +182,7 @@ MoranDif = topTable(fit, coef=colnames(fit$design)[2],
                       number = Inf, 
                       p.value = 0.05
 )
-
+dim(MoranDif)
 
 moranEstimations = cellTypeEstimate(exprData=cbind(geneDatMoran, expDatMoran),
                                     genes=genes,
@@ -177,6 +193,18 @@ moranEstimations = cellTypeEstimate(exprData=cbind(geneDatMoran, expDatMoran),
                                     PC = 1)
 
 
+mm = model.matrix(~ estimate + parkinson + region,data.frame(parkinson = MoranDes$Disease,
+                                                    region = MoranDes$Region,
+                                                    estimate = moranEstimations$estimates$Dopaminergic))
+fit <- lmFit(expDatMoran, mm)
+fit <- eBayes(fit)
+MoranDifCorr = topTable(fit, coef=colnames(fit$design)[3],p.value= 0.05,
+                          number = Inf)
+dim(MoranDifCorr)
+
+venn = venn.diagram(x=list(Corrected = rn(MoranDifCorr), Uncorrected = rn(MoranDif)), filename=NULL)
+plot.new()
+grid.draw(venn)
 # correlations to estimations ----------
 # moran PC and estimation
 moranPaperGene = data.frame(disease = MoranDes$Disease,
