@@ -272,7 +272,11 @@ cellTypeEstimate = function(exprData,
             indivGenes = melt(tempExp)
             names(indivGenes) = c( 'gene','GSM','expression')
             
-            indivGenes = indivGenes %>% mutate(group = groups[match(GSM, colnames(tempExp))])
+            indivGenes = indivGenes %>% 
+                mutate(group = groups[match(GSM, colnames(tempExp))]) %>%
+                # order based on the order of input
+                mutate(gene = factor(gene, levels = genes[[i]]) %>% droplevels)
+            
             
             switch(plotType[1],
                    groupBased = {
