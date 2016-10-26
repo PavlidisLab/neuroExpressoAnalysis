@@ -21,6 +21,7 @@
 #' @param foldChangeThresh minimum fold change required for selection
 #' @param minimumExpression minimum level of expression for a marker gene in its cell type
 #' @param regionHiearchy hiearchy of regions.
+#' @param seed seed for random generation. if NULL will be set to random
 #' @export
 markerCandidates = function(design,
                       expression,
@@ -36,7 +37,8 @@ markerCandidates = function(design,
                       foldChangeThresh = 10,
                       minimumExpression = 8,
                       regionHierarchy = NULL,
-                      geneID = 'Gene.Symbol'){
+                      geneID = 'Gene.Symbol',
+                      seed = NULL){
     # source('R/regionHierarchy.R')
     # so that I wont fry my laptop
     if (detectCores()<cores){ 
@@ -149,8 +151,12 @@ markerCandidates = function(design,
     groupNamesEn = names(nameGroups)
     
     # the main loop around groups ------
-    
-    foreach (i = 1:len(nameGroups)) %dopar% {
+    if (!is.null(seed)){
+        registerDoRNG(seed)
+    } else {
+        registerDoRNG()
+    }
+    foreach (i = 1:len(nameGroups)) %dorng% {
         #for (i in 1:len(nameGroups)){
         #debub point for groups
         typeNames = trimNAs(unique(nameGroups[[i]]))

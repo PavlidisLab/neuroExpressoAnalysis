@@ -31,7 +31,8 @@ Depends:
     grid (>= 3.1.2),
     gtable(>= 0.2.0),
     grDevices(>= 3.1.2),
-    limma (>= 3.22.7)
+    limma (>= 3.22.7),
+    doRNG (>= 1.6)
 Suggests:
     testthat,
     knitr,

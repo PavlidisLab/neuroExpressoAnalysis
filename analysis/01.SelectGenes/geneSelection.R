@@ -67,7 +67,8 @@ for (i in start:end){
                      regionNames = 'Region',
                      rotate=0.33,
                      regionHierarchy = regionHierarchy,
-                     cores=16)
+                     cores=16,
+                     seed = i)
     
 }
 cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
@@ -88,7 +89,8 @@ if(secondChip){
                          regionNames = 'Region',
                          rotate=0.33,
                          cores=16,
-                         regionHierarchy = regionHierarchy)
+                         regionHierarchy = regionHierarchy,
+                         seed = i)
     }
     cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation2/progress',append=TRUE)
     
