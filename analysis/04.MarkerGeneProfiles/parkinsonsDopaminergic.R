@@ -5,6 +5,7 @@ library(dplyr)
 library(magrittr)
 library(cowplot)
 library(VennDiagram)
+library(forcats)
 devtools::load_all()
 
 
@@ -285,3 +286,51 @@ genePCestimationPlot = masterFrame %>% ggplot(aes(x =estimation , y = paperGeneP
 ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/genePCestimation.png',
        plot= genePCestimationPlot,
        width=7,height=4.3,units='in')
+
+# plot of correlations to genes -----
+# moran
+moranGeneCorsPD = cor(moranEstimations$estimates$Dopaminergic[moranPaperGene$disease  == "PD"],
+                    expDatMoran[rownames(expDatMoran) %in% paperGenes,moranPaperGene$disease =="PD"] %>% t, 
+                    method='spearman') %>% t
+moranGeneCorsPD %<>% data.frame(Correlation = ., disease = 'PD', source  ='Moran (GSE8397)', gene = rn(.))
+
+moranGeneCorsCont = cor(moranEstimations$estimates$Dopaminergic[moranPaperGene$disease  == 'control'],
+                    expDatMoran[rownames(expDatMoran) %in% paperGenes,moranPaperGene$disease  == 'control'] %>% t, 
+                    method='spearman') %>% t
+moranGeneCorsCont %<>% data.frame(Correlation = ., disease = 'control', source  ='Moran (GSE8397)', gene = rn(.))
+
+# lesnick
+lesnickGeneCorsCont = cor(LesnickEstimations$estimates$Dopaminergic[lesnickPaperGene$disease  == 'control'],
+                        expDatLesnick[rownames(expDatLesnick) %in% paperGenes,lesnickPaperGene$disease  == 'control'] %>% t, 
+                        method='spearman') %>% t
+lesnickGeneCorsCont %<>% data.frame(Correlation = ., disease = 'control', source  ='Lesnick (GSE7621)', gene = rn(.))
+
+lesnickGeneCorsPD = cor(LesnickEstimations$estimates$Dopaminergic[lesnickPaperGene$disease  == 'PD'],
+                        expDatLesnick[rownames(expDatLesnick) %in% paperGenes,lesnickPaperGene$disease  == 'PD'] %>% t, 
+                          method='spearman') %>% t
+lesnickGeneCorsPD %<>% data.frame(Correlation = ., disease = 'PD', source  ='Lesnick (GSE7621)', gene = rn(.))
+
+toPlot = rbind(moranGeneCorsCont,
+               moranGeneCorsPD,
+               lesnickGeneCorsCont,
+               lesnickGeneCorsPD)
+
+toPlot$disease %<>% factor(levels=c('control','PD'))
+
+toPlot$gene %<>% fct_reorder(toPlot$Correlation,.desc=TRUE)
+    
+geneAllestimation = toPlot %>% ggplot(aes(x = gene, y = Correlation, color = disease)) + 
+    facet_grid(~source) +
+    geom_abline(slope = 0, intercept = 0 ,linetype =2 ) + 
+    theme_cowplot(17) +
+    theme(strip.background = element_blank(),
+          strip.text = element_text(size = 17))+
+    geom_point(size=3, alpha = 0.8) + 
+    scale_color_viridis(discrete=TRUE) +
+    xlab('') +
+    ylab('Dopaminergic MGP-\nGene expression correlation') + 
+    theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 10))
+
+ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/geneAllestimation.png',
+       plot= geneAllestimation,
+       width=8,height=4.3,units='in')
