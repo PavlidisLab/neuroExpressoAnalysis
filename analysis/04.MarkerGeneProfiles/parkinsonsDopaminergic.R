@@ -155,7 +155,7 @@ dim(LesnickDif)
 
 mm = model.matrix(~ estimate + parkinson,data.frame(parkinson = LesnickParkinsonsMeta$parkinson,
                                                     estimate = LesnickEstimations$estimates$Dopaminergic))
-fit <- lmFit(data, mm)
+fit <- lmFit(expDatLesnick, mm)
 fit <- eBayes(fit)
 LesnickDifCorr = topTable(fit, coef=colnames(fit$design)[3],p.value= 0.05,
                     number = Inf)
