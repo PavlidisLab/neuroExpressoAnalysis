@@ -44,7 +44,8 @@ for (i in start:end){
                      outLoc = paste0('analysis//06.BloodGeneProfiles/MouseMarkers/Rotation/',i),
                      groupNames = c('lm11','lm22'),
                      cores=2,
-                     rotate = 0.33)
+                     rotate = 0.33,
+                     seed=i)
     
     markerCandidates(design = humanBloodCellsSamples,PMID='PubMed.ID',
                      sampleName ='sampleName',
@@ -52,7 +53,8 @@ for (i in start:end){
                      outLoc = paste0('analysis//06.BloodGeneProfiles/HumanMarkers/Rotation/',i),
                      groupNames = c('lm11','lm22'),
                      cores=2,
-                     rotate = 0.33)
+                     rotate = 0.33,
+                     seed=i)
 }
 
 cat(paste(start,end,'\n'),file='analysis//06.BloodGeneProfiles/progress',append=TRUE)

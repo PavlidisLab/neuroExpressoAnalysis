@@ -1,45 +1,45 @@
 All
-Astrocyte	105
-Oligodendrocyte	26
-Microglia	140
+Astrocyte	5	105	Cahoy et al., 2008 (GSE9566)
+Oligodendrocyte	25	26	Bellesi et al 2013 (GSE48369), Cahoy et al., 2008 (GSE9566), Doyle et al., 2008 (GSE13379), Fomchenko et al 2011 (GSE30016)
+Microglia	3	140	Anandasabapathy et al., 2011 (GSE29949)
 Cortex
-FS Basket (G42)	6
-Martinotti (GIN)	4
-VIPReln (G30)	11
-Pyramidal CrtThalamic	5
-Pyramidal Glt25d2	5
-Pyramidal S100a10	10
-Pyramidal Thy1	3
+FS Basket (G42)	13	6	Okaty et al., 2009 (GSE17806), Sugino et al. 2014 (GSE8720), Sugino et al., 2006 (GSE2882)
+Martinotti (GIN)	3	4	Sugino et al., 2006 (GSE2882)
+VIPReln (G30)	6	11	Sugino et al., 2006 (GSE2882)
+Pyramidal CrtThalamic	3	5	Sugino et al., 2006 (GSE2882)
+Pyramidal Glt25d2	3	5	Schmidt et al 2012 (GSE35758)
+Pyramidal S100a10	3	10	Schmidt et al 2012 (GSE35751)
+Pyramidal Thy1	12	3	Sugino et al., 2006 (GSE2882)
 BasalForebrain
-Forebrain Cholinergic	86
+Forebrain Cholinergic	6	86	Doyle et al., 2008 (GSE13379)
 Striatum
-Forebrain Cholinergic	42
-Spiny	77
+Forebrain Cholinergic	6	42	Doyle et al., 2008 (GSE13379)
+Spiny	39	77	Doyle et al., 2008 (GSE13379), Heiman et al 2014 (GSE55096), Maze et al 2014 (GSE54656), Tan et al 2013 (GSE48813)
 Amygdala
-Glutamatergic	9
-Pyramidal Thy1	20
+Glutamatergic	3	9	Sugino et al., 2006 (GSE2882)
+Pyramidal Thy1	12	20	Sugino et al., 2006 (GSE2882)
 Hippocampus
-DentateGranule	35
-GabaSSTReln	50
-Pyramidal Thy1	18
+DentateGranule	3	35	Perrone-Bizzozero NI et al. 2011 (GSE11147)
+GabaSSTReln	3	50	Sugino et al., 2006 (GSE2882)
+Pyramidal Thy1	12	18	Sugino et al., 2006 (GSE2882)
 Subependymal
-Ependymal	48
+Ependymal	2	48	Beckervordersandforth et al 2010 (GSE18765)
 Thalamus
-GabaReln	55
-Hypocretinergic	32
-Thalamus Cholinergic	38
+GabaReln	3	55	Sugino et al., 2006 (GSE2882)
+Hypocretinergic	4	32	Dalal et al 2013 (GSE38668)
+Thalamus Cholinergic	3	38	G??rlich et al 2013 (GSE43164)
 Midbrain
-Midbrain Cholinergic	35
-Dopaminergic	14
-Serotonergic	16
+Midbrain Cholinergic	3	35	Doyle et al., 2008 (GSE13379)
+Dopaminergic	30	14	Chung et al., 2005 (NA), Phani et al. 2015 (GSE17542)
+Serotonergic	3	16	Dougherty et al 2013 (GSE36068)
 LocusCereuleus
-Noradrenergic	52
-Serotonergic	27
+Noradrenergic	9	52	Sugino et al. 2014 (GSE8720), Unpublished (NA)
+Serotonergic	3	27	Dougherty et al 2013 (GSE36068)
 Cerebellum
-Basket	6
-Bergmann	53
-CerebGranule	12
-Golgi	27
-Purkinje	43
+Basket	16	6	Doyle et al., 2008 (GSE13379), Paul et al 2012 (GSE37055)
+Bergmann	3	53	Doyle et al., 2008 (GSE13379)
+CerebGranule	3	12	Doyle et al., 2008 (GSE13379)
+Golgi	3	27	Doyle et al., 2008 (GSE13379)
+Purkinje	44	43	Doyle et al., 2008 (GSE13379), Galloway et al 2014 (GSE57034), Paul et al 2012 (GSE37055), Rossner et al., 2006 (NA), Sugino et al. 2014 (GSE8720), Unpublished (NA)
 SpinalCord
-SpinalChordCholinergic	117
+SpinalChordCholinergic	3	117	Doyle et al., 2008 (GSE13379)
