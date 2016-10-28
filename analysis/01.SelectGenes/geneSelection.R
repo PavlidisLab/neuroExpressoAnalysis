@@ -238,6 +238,23 @@ rockBottom = regionHierarchy %>% unlist %>% names %>% str_extract(pattern='(?<=[
 
 toPlotGenes = toPlotGenes[c('All', rockBottom)]
 
+toPlotGenes %<>% lapply(function(x){
+    sapply(1:len(x),function(i){
+        genes = x[i]
+        samples = n_expressoSamples %>% filter(ShinyNames %in% names(x[i])) %>% nrow
+        sources = 
+            n_expressoSamples %>% 
+            filter(ShinyNames %in% names(x[i])) %>% 
+            select(Reference,GSE) %>% 
+            unique %>% {
+                paste0(.[,1],' (', .[,2], ')')
+            } %>% paste(collapse = ', ')
+        out = c(names(x[i]),samples, genes, sources )
+        names(out) = NULL
+        return(out)
+    }) %>% as.data.frame %>% t
+}) 
+
 file.create('analysis/01.SelectGenes/geneTable.tsv')
 lapply(1:len(toPlotGenes), function(i){
     print(i)
@@ -252,7 +269,7 @@ lapply(1:len(toPlotGenes), function(i){
     write.table(toPlotGenes[[i]], file = 'analysis/01.SelectGenes/geneTable.tsv',
                 sep = "\t",
                 quote = F, col.names = F,
-                row.names = T, append = TRUE)
+                row.names = F, append = TRUE)
 })
 
 
