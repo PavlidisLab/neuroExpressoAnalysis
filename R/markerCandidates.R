@@ -106,14 +106,14 @@ markerCandidates = function(design,
     #expression = read.csv(exprLoc, header = T)
     list[geneData, exprData] = sepExpr(expression)
     
-    if (!all(colnames(exprData) %in% make.names(design[[sampleName]]))){
+    if (!all(colnames(exprData) %in% design[[sampleName]])){
         if(is.null(rotate)){
             print('Unless you are rotating samples, something has gone terribly wrong!')
         }
         exprData = exprData[,colnames(exprData) %in% design[[sampleName]]]
     }
     
-    design = design[match(colnames(exprData),make.names(design[[sampleName]]),),]
+    design = design[match(colnames(exprData),design[[sampleName]],),]
     
     exprData = t(exprData)
     noReg = F
@@ -124,7 +124,7 @@ markerCandidates = function(design,
     }
     
     
-    regionGroups = memoReg(design,regionNames,groupNames,regionHierarchy)
+    regionGroups = regionize(design,regionNames,groupNames,regionHierarchy)
     # concatanate new region based groups to design and to groupNames so they'll be processed normally
     if (!noReg){
         design = cbind(design,regionGroups)

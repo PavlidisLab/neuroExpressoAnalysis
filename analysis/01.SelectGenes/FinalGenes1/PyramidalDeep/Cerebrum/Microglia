@@ -1,6 +1,5 @@
 0610040J01Rik
 1700017B05Rik
-2510039O18Rik
 Abhd15
 Adap2
 Adgre1
@@ -14,10 +13,10 @@ AW112010
 B2m
 BC028528
 Bcl2a1a|Bcl2a1d|Bcl2a1b
+Btg2
 C1qc
 C3ar1
 Cables1
-Calcrl
 Casp1
 Casp7
 Casp8
@@ -142,7 +141,6 @@ Pros1
 Ptbp3
 Ptgs1
 Ptprc
-Pxn
 Rassf5
 Rbm39
 Rcsd1
@@ -157,9 +155,9 @@ Rnf130
 Rrbp1
 Sash3
 Serinc3
+Sfpq
 Sgpl1
 Sh3glb1
-Sh3tc1
 Siglecf
 Sipa1
 Skap2
@@ -167,8 +165,6 @@ Slc11a1
 Slc7a7
 Snord22
 Spi1
-Sppl2a
-Srgap2
 Srsf7
 Stab1
 Stat6
@@ -182,14 +178,12 @@ Tlr1
 Tm6sf1
 Tmc6
 Tmem179b
-Tob2
 Tor1aip1
 Tor4a
 Tpst2
 Trim12a
 Trim30e-ps1|Trim30d|Trim30a
 Trim34a
-Trpv2
 Tspan14
 Tyrobp
 Ugt1a1|Ugt1a10|Ugt1a7c|Ugt1a9|Ugt1a5|Ugt1a6b|Ugt1a2|Ugt1a6a

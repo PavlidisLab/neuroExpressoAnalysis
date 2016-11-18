@@ -1,107 +1,108 @@
-GSE	samples	MajorType	Neurotransmitter	ShinyNames	PyramidalDeep	Description	Age	Region	Platform	Method	Reference	PMID	RegionToChildren	RegionToParent	Normalize	Normalize2	Notes
-GSE9566	GSM241912,GSM241914,GSM241926	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocytes	17	Cortex,Cerebrum,Thalamus,Brainstem,SpinalCord,Subependymal	GPL1261	PAN/FACS	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
-GSE9566	GSM241915,GSM241925	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocytes	17	Cortex,Cerebrum,Thalamus,Brainstem,SpinalCord,Subependymal	GPL1261	PAN/FACS	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337861,GSM337862,GSM337863	Glia	Bergmann	Bergmann	Bergmann	Bergman Glia	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE18765	GSM465752,GSM465753	Glia	Ependymal	Ependymal	Ependymal	CD24+ (ependymal cell)	56	Subependymal	GPL1261	FACS	Beckervordersandforth et al 2010	21112568	TRUE	TRUE	TRUE	TRUE	
-GSE29949	GSM741193,GSM741194,GSM741192	Glia	Microglia	Microglia	Microglia	Microglia	42	All	GPL1261	FACS	Anandasabapathy et al., 2011	21788405	TRUE	TRUE	TRUE	TRUE	
-GSE48369	GSM1176624,GSM1176625,GSM1176626,GSM1176627,GSM1176628,GSM1176629	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligodendrocytes	66	Cerebellum	GPL1261	TRAP	Bellesi et al 2013	24005282	TRUE	TRUE	TRUE	TRUE	
-GSE9566	GSM241890,GSM241893,GSM241894,GSM241918	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Mature Oligodendrocytes	17	Cortex,All	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337841,GSM337842,GSM337843	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Mixed Oligodendrocytes	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337844,GSM337845,GSM337846	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Mixed Oligodendrocytes	Adult	Cortex,All	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	same as GSM1698237,GSM1698238,GSM1698239
-GSE13379	GSM337796,GSM337797,GSM337798	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Mature Oligodendrocytes	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337800,GSM337801,GSM337802	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Mature Oligodendrocytes	Adult	Cortex,All	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE30016	GSM742912,GSM742913,GSM742914	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Olig2 positive cells	90	Cortex,All	GPL1261	TRAP	Fomchenko et al 2011	21754979	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337773,GSM337774,GSM337775	Neuron	Cholinergic	Midbrain Cholinergic	BrainstemCholin	Motor Neurons, Midbrain Cholinergic Neurons	Adult	Brainstem,Midbrain	GPL1261	TRAP	Doyle et al., 2008	19013282	FALSE	TRUE	TRUE	TRUE	We removed it's midbrain status since original paper included no evidence of midbrain specificity.
-GSE13379	GSM337779,GSM337780,GSM337781	Neuron	Cholinergic	Forebrain Cholinergic	ForebrainCholin	Cholinergic Projection Neurons	Adult	BasalForebrain	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337791,GSM337792,GSM337793	Neuron	Cholinergic	Forebrain Cholinergic	ForebrainCholin	Cholinergic Neurons	Adult	Striatum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337785,GSM337786,GSM337787	Neuron	Cholinergic	SpinalChordCholinergic	SpinalChordCholinergic	Motor Neurons, Cholinergic Interneurons	Adult	SpinalCord	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE43164	GSM1057734,GSM1057735,GSM1057736	Neuron	Cholinergic	Thalamus Cholinergic	ThalamusCholin	Cholin	63	Thalamus	GPL1261	TRAP	G??rlich et al 2013	24082085	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337831,GSM337832,GSM337833	Neuron	Gabaergic	Basket	Basket	Stellate Basket Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909438,GSM909439,GSM909440,GSM909441	Neuron	Gabaergic	Basket	Basket	Stellate Basket Cells	14	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909442,GSM909443,GSM909444	Neuron	Gabaergic	Basket	Basket	Stellate Basket Cells	21	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909445,GSM909446,GSM909447,GSM909448	Neuron	Gabaergic	Basket	Basket	Stellate Basket Cells	28	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909449,GSM909450	Neuron	Gabaergic	Basket	Basket	Stellate Basket Cells	35	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	GSM909451 is contaminated with purkinje cells based on marker gene expression
-GSE17806	GSM444355,GSM444356,GSM444357	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GABAergic Interneurons, PV+, P13-P15	15	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
-GSE17806	GSM444358,GSM444359,GSM444360	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GABAergic Interneurons, PV+, P25	25	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
-GSE8720	GSM215857,GSM215858,GSM215859,GSM215860	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV from G42 line	38	Cortex	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	Same as Okaty 2009. GSM444361, GSM444362, GSM444363
-GSE2882	GSM63021,GSM63022,GSM63023	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GABAergic Interneurons, PV+	70	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63030,GSM63031,GSM63032	Neuron	Gabaergic	GabaReln	GabaReln	GABAergic Interneurons, PV+	71	Thalamus	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63018,GSM63019,GSM63020	Neuron	Gabaergic	Martinotti (GIN)	GabaRelnCalb	GABAergic Interneurons, SST+	68	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63015,GSM63016,GSM63017	Neuron	Gabaergic	GabaSSTReln	GabaSSTReln	GABAergic Interneurons, SST+	69	Hippocampus	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63024,GSM63025,GSM63026	Neuron	Gabaergic	VIPReln (G30)	GabaVIPReln	GABAergic Interneurons, VIP+	66	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63027,GSM63028,GSM63029	Neuron	Gabaergic	VIPReln (G30)	GabaVIPReln	GABAergic Interneurons, VIP+	67	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE13379	GSM337825,GSM337826,GSM337827	Neuron	Gabaergic	Golgi	Golgi	Golgi Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337848,GSM337849,GSM337850,GSM337851,GSM337852,GSM337853	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE57034	GSM1373399,GSM1373400,GSM1373401	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	84	Cerebellum	GPL1261	TRAP	Galloway et al 2014	24986919	TRUE	TRUE	TRUE	TRUE	
-GSE57034	GSM1373408,GSM1373409,GSM1373410	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	28	Cerebellum	GPL1261	TRAP	Galloway et al 2014	24986919	TRUE	TRUE	TRUE	TRUE	
-GSE57034	GSM1373414,GSM1373415,GSM1373416	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	56	Cerebellum	GPL1261	TRAP	Galloway et al 2014	24986919	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909419,GSM909420,GSM909421	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	14	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909422,GSM909423,GSM909424,GSM909425	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	21	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909426,GSM909427,GSM909428,GSM909429	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	28	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909430,GSM909431,GSM909432,GSM909433	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	35	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909434,GSM909435,GSM909436,GSM909437	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	56	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-NA	PC400_1,PC400_2,PC400_3	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	65	Cerebellum	GPL339	LCM	Rossner et al., 2006	17005859	TRUE	TRUE	TRUE	FALSE	
-GSE8720	GSM444379,GSM444380,GSM444381	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells from G42	38	Cerebellum	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	
-NA	v2_cbw60,v2_cbw73,v2_cbw87,v2_cbw87b	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje Cells	45	Cerebellum	GPL339	Manual	Unpublished	NA	TRUE	TRUE	TRUE	FALSE	
-GSE13379	GSM337807,GSM337808,GSM337809	Neuron	Gabaergic	Spiny	Spiny	Drd1+ Medium Spiny Neurons	Adult	Striatum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337812,GSM337813,GSM337814	Neuron	Gabaergic	Spiny	Spiny	Drd2+ Medium Spiny Neurons	Adult	Striatum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE55096	GSM1329477,GSM1329478,GSM1329479,GSM1329485,GSM1329486,GSM1329488,GSM1329489,GSM1329490,GSM1329491,GSM1329492	Neuron	Gabaergic	Spiny	Spiny	Drd2+ Medium Spiny Neurons	80	Striatum	GPL1261	TRAP	Heiman et al 2014	24599591	TRUE	TRUE	TRUE	TRUE	
-GSE55096	GSM1329516,GSM1329517,GSM1329521,GSM1329522,GSM1329523,GSM1329524,GSM1329527,GSM1329528,GSM1329529,GSM1329530	Neuron	Gabaergic	Spiny	Spiny	Drd1a+ Medium Spiny Neurons	80	Striatum	GPL1261	TRAP	Heiman et al 2014	24599591	TRUE	TRUE	TRUE	TRUE	
-GSE54656	GSM1321391,GSM1321398,GSM1321395	Neuron	Gabaergic	Spiny	Spiny	Drd1+ Medium Spiny Neurons	210	Striatum	GPL1261	TRAP	Maze et al 2014	24584053	TRUE	TRUE	TRUE	TRUE	
-GSE54656	GSM1321400,GSM1321402,GSM1321405	Neuron	Gabaergic	Spiny	Spiny	Drd2+ Medium Spiny Neurons	105	Striatum	GPL1261	TRAP	Maze et al 2014	24584053	TRUE	TRUE	TRUE	TRUE	
-GSE48813	GSM1185170,GSM1185171,GSM1185172,GSM1185173,GSM1185174,GSM1185175,GSM1185176	Neuron	Gabaergic	Spiny	Spiny	Drd1a+ Medium Spiny Neurons	180	Striatum	GPL1261	TRAP	Tan et al 2013	24311694	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337834,GSM337835,GSM337836	Neuron	Glutamatergic	CerebGranule	CerebGranule	Granule Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE11147	GSM281245,GSM281246,GSM281249	Neuron	Glutamatergic	DentateGranule	DentateGranule	dentate gyrus granule cells	49	Hippocampus	GPL1261	LCM	Perrone-Bizzozero NI et al. 2011	22004431	TRUE	TRUE	TRUE	TRUE	
-GSE2882	GSM63048,GSM63049,GSM63050	Neuron	Glutamatergic	Glutamatergic	Gluta	Glutamatergic Neuron (not well defined)	65	Amygdala	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE38668	GSM947326,GSM947327,GSM947328,GSM947329	Neuron	Hypocretinergic	Hypocretinergic	Hypocretinergic	hypocretinergic neurons	63	Thalamus	GPL1261	TRAP	Dalal et al 2013	23431030	TRUE	TRUE	TRUE	TRUE	
-NA	A10_15_Chee_S1_M430A,A10_16_Chee_S1_M430A,A10_17_Chee_S1_M430A,A10_18_Chee_S1_M430A,A10_19_Chee_S1_M430A,A10_13_Chee_S1_M430A,A10_14_Chee_S1_M430A,A10_2_Chee_S1_M430A,A10_20_Chee_S1_M430A,A10_7_Chee_S1_M430A,A10_8_Chee_S1_M430A,A10_3_Chee_S1_M430A,A10_6_Chee_S1_M430A	Neuron	Monoamine	Dopaminergic	Dopaminergic	A10 Dopaminergic Neurons	Adult	Midbrain	GPL339	LCM	Chung et al., 2005	15888489	FALSE	TRUE	TRUE	FALSE	
-NA	A9_13_Chee_S1_M430A,A9_15_Chee_S1_M430A,A9_17_Chee_S1_M430A,A9_14_Chee_S1_M430A,A9_16_Chee_S1_M430A,A9_18_Chee_S1_M430A,A9_19_Chee_S1_M430A,A9_20_Chee_S1_M430A,A9_6_Chee_S1_M430A,A9_7_Chee_S1_M430A,A9_8_Chee_S1_M430A	Neuron	Monoamine	Dopaminergic	Dopaminergic	A9 Dopaminergic Neurons	Adult	Midbrain	GPL339	LCM	Chung et al., 2005	15888489	FALSE	TRUE	TRUE	FALSE	
-GSE17542	GSM437382,GSM437383,GSM437384	Neuron	Monoamine	Dopaminergic	Dopaminergic	A9 Dopaminergic Neurons	Adult	Midbrain	GPL1261	LCM	Phani et al. 2015	20462502	TRUE	TRUE	TRUE	TRUE	
-GSE17542	GSM437391,GSM437392,GSM437393	Neuron	Monoamine	Dopaminergic	Dopaminergic	A10 Dopaminergic Neurons	Adult	Midbrain	GPL1261	LCM	Phani et al. 2015	20462502	TRUE	TRUE	TRUE	TRUE	
-GSE8720	GSM1464137,GSM1464138,GSM1464139	Neuron	Monoamine	Noradrenergic	Noradrenergic	Tyrosine Hydroxylase Expressing young	23	LocusCereuleus	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	
-GSE8720	GSM215871,GSM215872,GSM215873	Neuron	Monoamine	Noradrenergic	Noradrenergic	Tyrosine Hydroxylase Expressing	40	LocusCereuleus	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	
-NA	v2_th118LC,v2_th34LC,v2_th52LC	Neuron	Monoamine	Noradrenergic	Noradrenergic	Tyrosine Hydroxylase Expressing	45	LocusCereuleus	GPL339	Manual	Unpublished	NA	TRUE	TRUE	TRUE	FALSE	
-GSE36068	GSM880683,GSM880684,GSM880685	Neuron	Monoamine	Serotonergic	Serotonergic	Serotonergic Neurons	63	Brainstem	GPL1261	TRAP	Dougherty et al 2013	23407934	TRUE	TRUE	TRUE	TRUE	
-GSE8720	GSM215865,GSM215866,GSM215867	Neuron	Pyramidal	Layer5Pyra	Layer5Pyra	Pyramidal L5 thick tufted	38	Cortex	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	FALSE	TRUE	They are same with Sugino unpublished S_yrt_wt:v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt. e.g. any probe that is shared with GPL339 has identical values. Suggesting the files are generated from one another and they are not merely replicates of the same sample
-GSE2882	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	Pyramidal CrtThalamic	PyramidalCorticoThalam	Pyramidal Neurons	60	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE35758	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal_Glt_25d2	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
-GSE35751	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal_S100a10	S100a10 positive pyramidal cells	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
-GSE2882	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	63	Amygdala	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	62	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	64	Hippocampus	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2882	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal Neurons	61	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
-GSE2039	GSM37088,GSM37089	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P14	14	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE2039	GSM37084,GSM37085	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P3	3	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE2039	GSM37086,GSM37087	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P6	6	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE2039	GSM37097,GSM37098	Neuron	NA	NA	NA	Pyramidal Neurons, Corticospinal, P14	14	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE2039	GSM37092,GSM37093,GSM37094	Neuron	NA	NA	NA	Pyramidal Neurons, Corticospinal, P3	3	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE17783	GSM442554,GSM442555,GSM442556	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P3	3	Cortex	GPL1261	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	TRUE	Re-check the citation later, shreejoy wanted them
-GSE2039	GSM37095,GSM37096	Neuron	NA	NA	NA	Pyramidal Neurons, Corticospinal, P6	6	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE17783	GSM442557,GSM442558	Neuron	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P6	6	Cortex	GPL1261	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	TRUE	Re-check the citation later, shreejoy wanted them
-GSE2039	GSM37099,GSM37100	Neuron	NA	NA	NA	Pyramidal Neurons, Corticotectal, P14	14	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
-GSE9566	GSM241898,GSM241900,GSM241902	Glia	NA	NA	NA	Astrocytes	7	Cortex	GPL1261	PAN/FACS	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
-GSE9566	GSM241889,GSM241891,GSM241892,GSM241917	Glia	NA	NA	NA	Oligodendrocytes	7	Cortex	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
-GSE9566	GSM241895,GSM241916	Glia	NA	NA	NA	Oligodendrocyte Precursors	7	Cortex	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337760,GSM337761,GSM337762	Glia	NA	NA	NA	Astroglia	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337763,GSM337764,GSM337766,GSM337767	Glia	NA	NA	NA	Astroglia	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	same as GSM1698234,GSM1698236,GSM1698235
-GSE13379	GSM337804,GSM337805,GSM337806	Neuron	NA	NA	NA	Cort+ interneurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE13379	GSM337837,GSM337838,GSM337839	NA	NA	NA	NA	Pyramidal Neurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	Astrocyte contamination
-GSE13379	GSM337817,GSM337818,GSM337819	NA	NA	NA	NA	Pyramidal Neurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	Astrocyte contamination
-GSE13379	GSM337821,GSM337822,GSM337823	NA	NA	NA	NA	Pyramidal Neurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	Astrocyte contamination
-GSE13379	GSM337828,GSM337829,GSM337830	Neuron	NA	NA	NA	Unipolar Brush cells (some Bergman Glia)	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
-GSE56996	GSM1372745,GSM1372746,GSM1372747	Neuron	NA	NA	NA	Dlx1 gabaergic	63	Cortex	GPL1261	TRAP	Nakajima et al. 2015	25303526	TRUE	TRUE	TRUE	TRUE	same as GSM1698228,GSM1698229,GSM1698230
-GSE56996	GSM1372751,GSM1372752,GSM1372753	Neuron	NA	NA	NA	Nek7 Gabaergic	63	Cortex	GPL1261	TRAP	Nakajima et al. 2015	25303526	TRUE	TRUE	TRUE	TRUE	astrocyte-glia contamination
-GSE56996	GSM1372754,GSM1372755,GSM1372756	Neuron	Gabaergic	GabaHtr3a	NA	Htr3a cells, cortex	Adult	Cortex	GPL1261	TRAP	Nakanima et. Al 2014	25303526	TRUE	TRUE	TRUE	TRUE	Includes VIP cells
-GSE56996	GSM1372757,GSM1372758,GSM1372759	Neuron	Gabaergic	GabaOxtr	NA	Oxtr cells, cortex	Adult	Cortex	GPL1261	TRAP	Nakanima et. Al 2014	25303526	TRUE	TRUE	TRUE	TRUE	Similar to pyramidal cells
-GSE17806	GSM444352,GSM444353,GSM444354	Neuron	NA	NA	NA	GABAergic Interneurons, PV+, P10	10	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
-GSE17806	GSM444349,GSM444350,GSM444351	Neuron	NA	NA	NA	GABAergic Interneurons, PV+, P7	7	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909413,GSM909414,GSM909415	Neuron	NA	NA	NA	Purkinje Cells	3	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909416,GSM909417,GSM909418	Neuron	NA	NA	NA	Purkinje Cells	7	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
-GSE37055	GSM909452,GSM909453,GSM909454	Neuron	NA	NA	NA	Stellate Basket Cells	56	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	Purkinje cells contamination
-NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	LCM	Rossner et al., 2006	17005859	TRUE	TRUE	TRUE	FALSE	Astrocyte contamination
-NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	LCM	Rossner et al., 2006	17005859	TRUE	TRUE	TRUE	FALSE	Astrocyte contamination
-GSE35761	GSM874512,GSM874514,GSM874516	Neuron	NA	NA	NA	S100a10 pyramidal VEH Treated	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
-GSE35763	GSM874527,GSM874529,GSM874531	Neuron	NA	NA	NA	Glt25d2 pyramidal VEH Treated	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
-GSE69340	GSM1698217,GSM1698218,GSM1698219	Neuron	NA	NA	NA	Ntf3 pyramidal	63	Cortex	GPL1261	TRAP	Shrestha et al. 2015	26371510	TRUE	TRUE	TRUE	TRUE	
-GSE69340	GSM1698225,GSM1698226,GSM1698227	Neuron	NA	NA	NA	Ntsr1 pyramidal	63	Cortex	GPL1261	TRAP	Shrestha et al. 2015	26371510	TRUE	TRUE	TRUE	TRUE	
-NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal Neurons	60	Cortex	GPL339	Manual	Unpublished	NA	TRUE	TRUE	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
+GSE	samples	MajorType	Neurotransmitter	ShinyNames	PyramidalDeep	BroadTypes	Description	Age	Region	Platform	Method	Reference	PMID	RegionToChildren	RegionToParent	Normalize	Normalize2	Notes
+NA	GSM241912,GSM241914,GSM241926	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	Astrocytes	17	Cortex,Cerebrum,Thalamus,Brainstem,SpinalCord,Subependymal	GPL1261	PAN/FACS	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
+NA	GSM241915,GSM241925	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	Astrocytes	17	Cortex,Cerebrum,Thalamus,Brainstem,SpinalCord,Subependymal	GPL1261	PAN/FACS	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
+NA	GSM866327,GSM866328,GSM866329,GSM866330	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	Astrocyte	33	Cortex,Cerebrum,Thalamus,Brainstem,SpinalCord,Subependymal	GPL1261	FACS	Zamanian et al 2012	22553043	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337861,GSM337862,GSM337863	Glia	Bergmann	Bergmann	Bergmann	Bergmann	Bergman Glia	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM465752,GSM465753	Glia	Ependymal	Ependymal	Ependymal	Ependymal	CD24+ (ependymal cell)	56	Subependymal	GPL1261	FACS	Beckervordersandforth et al 2010	21112568	TRUE	TRUE	TRUE	TRUE	
+NA	GSM741193,GSM741194,GSM741192	Glia	Microglia	Microglia	Microglia	Microglia	Microglia	42	All	GPL1261	FACS	Anandasabapathy et al., 2011	21788405	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1176624,GSM1176625,GSM1176626,GSM1176627,GSM1176628,GSM1176629	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Oligodendrocytes	66	Cerebellum	GPL1261	TRAP	Bellesi et al 2013	24005282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM241890,GSM241893,GSM241894,GSM241918	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Mature Oligodendrocytes	17	Cortex,All	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337841,GSM337842,GSM337843	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Mixed Oligodendrocytes	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337844,GSM337845,GSM337846	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Mixed Oligodendrocytes	Adult	Cortex,All	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	same as GSM1698237,GSM1698238,GSM1698239
+NA	GSM337796,GSM337797,GSM337798	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Mature Oligodendrocytes	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337800,GSM337801,GSM337802	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Mature Oligodendrocytes	Adult	Cortex,All	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM742912,GSM742913,GSM742914	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Olig2 positive cells	90	Cortex,All	GPL1261	TRAP	Fomchenko et al 2011	21754979	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337773,GSM337774,GSM337775	Neuron	Cholinergic	Midbrain Cholinergic	BrainstemCholin	MidbrainCholinergic	Motor Neurons, Midbrain Cholinergic Neurons	Adult	Brainstem,Midbrain	GPL1261	TRAP	Doyle et al., 2008	19013282	FALSE	TRUE	TRUE	TRUE	We removed it's midbrain status since original paper included no evidence of midbrain specificity.
+NA	GSM337779,GSM337780,GSM337781	Neuron	Cholinergic	Forebrain Cholinergic	ForebrainCholin	Cholin	Cholinergic Projection Neurons	Adult	BasalForebrain	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337791,GSM337792,GSM337793	Neuron	Cholinergic	Forebrain Cholinergic	ForebrainCholin	Cholin	Cholinergic Neurons	Adult	Striatum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337785,GSM337786,GSM337787	Neuron	Cholinergic	SpinalChordCholinergic	SpinalChordCholinergic	SpinalChordCholinergic	Motor Neurons, Cholinergic Interneurons	Adult	SpinalCord	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1057734,GSM1057735,GSM1057736	Neuron	Cholinergic	Thalamus Cholinergic	ThalamusCholin	Cholin	Cholin	63	Thalamus	GPL1261	TRAP	G??rlich et al 2013	24082085	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337831,GSM337832,GSM337833	Neuron	Gabaergic	Basket	Basket	Basket	Stellate Basket Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909438,GSM909439,GSM909440,GSM909441	Neuron	Gabaergic	Basket	Basket	Basket	Stellate Basket Cells	14	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909442,GSM909443,GSM909444	Neuron	Gabaergic	Basket	Basket	Basket	Stellate Basket Cells	21	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909445,GSM909446,GSM909447,GSM909448	Neuron	Gabaergic	Basket	Basket	Basket	Stellate Basket Cells	28	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909449,GSM909450	Neuron	Gabaergic	Basket	Basket	Basket	Stellate Basket Cells	35	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	GSM909451 is contaminated with purkinje cells based on marker gene expression
+NA	GSM444355,GSM444356,GSM444357	Neuron	Gabaergic	FS Basket (G42)	GabaPV	Gabaergic	GABAergic Interneurons, PV+, P13-P15	15	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
+NA	GSM444358,GSM444359,GSM444360	Neuron	Gabaergic	FS Basket (G42)	GabaPV	Gabaergic	GABAergic Interneurons, PV+, P25	25	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
+NA	GSM215857,GSM215858,GSM215859,GSM215860	Neuron	Gabaergic	FS Basket (G42)	GabaPV	Gabaergic	GabaPV from G42 line	38	Cortex	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	Same as Okaty 2009. GSM444361, GSM444362, GSM444363
+NA	GSM63021,GSM63022,GSM63023	Neuron	Gabaergic	FS Basket (G42)	GabaPV	Gabaergic	GABAergic Interneurons, PV+	70	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63030,GSM63031,GSM63032	Neuron	Gabaergic	GabaReln	GabaReln	Gabaergic	GABAergic Interneurons, PV+	71	Thalamus	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63018,GSM63019,GSM63020	Neuron	Gabaergic	Martinotti (GIN)	GabaRelnCalb	Gabaergic	GABAergic Interneurons, SST+	68	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63015,GSM63016,GSM63017	Neuron	Gabaergic	GabaSSTReln	GabaSSTReln	Gabaergic	GABAergic Interneurons, SST+	69	Hippocampus	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63024,GSM63025,GSM63026	Neuron	Gabaergic	VIPReln (G30)	GabaVIPReln	Gabaergic	GABAergic Interneurons, VIP+	66	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63027,GSM63028,GSM63029	Neuron	Gabaergic	VIPReln (G30)	GabaVIPReln	Gabaergic	GABAergic Interneurons, VIP+	67	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM337825,GSM337826,GSM337827	Neuron	Gabaergic	Golgi	Golgi	Golgi	Golgi Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337848,GSM337849,GSM337850,GSM337851,GSM337852,GSM337853	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1373399,GSM1373400,GSM1373401	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	84	Cerebellum	GPL1261	TRAP	Galloway et al 2014	24986919	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1373408,GSM1373409,GSM1373410	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	28	Cerebellum	GPL1261	TRAP	Galloway et al 2014	24986919	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1373414,GSM1373415,GSM1373416	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	56	Cerebellum	GPL1261	TRAP	Galloway et al 2014	24986919	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909419,GSM909420,GSM909421	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	14	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909422,GSM909423,GSM909424,GSM909425	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	21	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909426,GSM909427,GSM909428,GSM909429	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	28	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909430,GSM909431,GSM909432,GSM909433	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	35	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909434,GSM909435,GSM909436,GSM909437	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	56	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	PC400_1,PC400_2,PC400_3	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	65	Cerebellum	GPL339	LCM	Rossner et al., 2006	17005859	TRUE	TRUE	TRUE	FALSE	
+NA	GSM444379,GSM444380,GSM444381	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells from G42	38	Cerebellum	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	
+NA	v2_cbw60,v2_cbw73,v2_cbw87,v2_cbw87b	Neuron	Gabaergic	Purkinje	Purkinje	Purkinje	Purkinje Cells	45	Cerebellum	GPL339	Manual	Unpublished	NA	TRUE	TRUE	TRUE	FALSE	
+NA	GSM337807,GSM337808,GSM337809	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd1+ Medium Spiny Neurons	Adult	Striatum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337812,GSM337813,GSM337814	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd2+ Medium Spiny Neurons	Adult	Striatum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1329477,GSM1329478,GSM1329479,GSM1329485,GSM1329486,GSM1329488,GSM1329489,GSM1329490,GSM1329491,GSM1329492	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd2+ Medium Spiny Neurons	80	Striatum	GPL1261	TRAP	Heiman et al 2014	24599591	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1329516,GSM1329517,GSM1329521,GSM1329522,GSM1329523,GSM1329524,GSM1329527,GSM1329528,GSM1329529,GSM1329530	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd1a+ Medium Spiny Neurons	80	Striatum	GPL1261	TRAP	Heiman et al 2014	24599591	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1321391,GSM1321398,GSM1321395	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd1+ Medium Spiny Neurons	210	Striatum	GPL1261	TRAP	Maze et al 2014	24584053	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1321400,GSM1321402,GSM1321405	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd2+ Medium Spiny Neurons	105	Striatum	GPL1261	TRAP	Maze et al 2014	24584053	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1185170,GSM1185171,GSM1185172,GSM1185173,GSM1185174,GSM1185175,GSM1185176	Neuron	Gabaergic	Spiny	Spiny	Spiny	Drd1a+ Medium Spiny Neurons	180	Striatum	GPL1261	TRAP	Tan et al 2013	24311694	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337834,GSM337835,GSM337836	Neuron	Glutamatergic	CerebGranule	CerebGranule	CerebGranule	Granule Cells	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM281245,GSM281246,GSM281249	Neuron	Glutamatergic	DentateGranule	DentateGranule	DentateGranule	dentate gyrus granule cells	49	Hippocampus	GPL1261	LCM	Perrone-Bizzozero NI et al. 2011	22004431	TRUE	TRUE	TRUE	TRUE	
+NA	GSM63048,GSM63049,GSM63050	Neuron	Glutamatergic	Glutamatergic	Gluta	Gluta	Glutamatergic Neuron (not well defined)	65	Amygdala	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM947326,GSM947327,GSM947328,GSM947329	Neuron	Hypocretinergic	Hypocretinergic	Hypocretinergic	Hypocretinergic	hypocretinergic neurons	63	Thalamus	GPL1261	TRAP	Dalal et al 2013	23431030	TRUE	TRUE	TRUE	TRUE	
+NA	A10_15_Chee_S1_M430A,A10_16_Chee_S1_M430A,A10_17_Chee_S1_M430A,A10_18_Chee_S1_M430A,A10_19_Chee_S1_M430A,A10_13_Chee_S1_M430A,A10_14_Chee_S1_M430A,A10_2_Chee_S1_M430A,A10_20_Chee_S1_M430A,A10_7_Chee_S1_M430A,A10_8_Chee_S1_M430A,A10_3_Chee_S1_M430A,A10_6_Chee_S1_M430A	Neuron	Monoamine	Dopaminergic	Dopaminergic	Dopaminergic	A10 Dopaminergic Neurons	Adult	SubstantiaNigra	GPL339	LCM	Chung et al., 2005	15888489	FALSE	TRUE	TRUE	FALSE	
+NA	A9_13_Chee_S1_M430A,A9_15_Chee_S1_M430A,A9_17_Chee_S1_M430A,A9_14_Chee_S1_M430A,A9_16_Chee_S1_M430A,A9_18_Chee_S1_M430A,A9_19_Chee_S1_M430A,A9_20_Chee_S1_M430A,A9_6_Chee_S1_M430A,A9_7_Chee_S1_M430A,A9_8_Chee_S1_M430A	Neuron	Monoamine	Dopaminergic	Dopaminergic	Dopaminergic	A9 Dopaminergic Neurons	Adult	SubstantiaNigra	GPL339	LCM	Chung et al., 2005	15888489	FALSE	TRUE	TRUE	FALSE	
+NA	GSM437382,GSM437383,GSM437384	Neuron	Monoamine	Dopaminergic	Dopaminergic	Dopaminergic	A9 Dopaminergic Neurons	Adult	SubstantiaNigra	GPL1261	LCM	Phani et al. 2015	20462502	FALSE	TRUE	TRUE	TRUE	
+NA	GSM437391,GSM437392,GSM437393	Neuron	Monoamine	Dopaminergic	Dopaminergic	Dopaminergic	A10 Dopaminergic Neurons	Adult	SubstantiaNigra	GPL1261	LCM	Phani et al. 2015	20462502	FALSE	TRUE	TRUE	TRUE	
+NA	GSM1464137,GSM1464138,GSM1464139	Neuron	Monoamine	Noradrenergic	Noradrenergic	Th_positive_LC	Tyrosine Hydroxylase Expressing young	23	LocusCereuleus	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	
+NA	GSM215871,GSM215872,GSM215873	Neuron	Monoamine	Noradrenergic	Noradrenergic	Th_positive_LC	Tyrosine Hydroxylase Expressing	40	LocusCereuleus	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	TRUE	TRUE	
+NA	v2_th118LC,v2_th34LC,v2_th52LC	Neuron	Monoamine	Noradrenergic	Noradrenergic	Th_positive_LC	Tyrosine Hydroxylase Expressing	45	LocusCereuleus	GPL339	Manual	Unpublished	NA	TRUE	TRUE	TRUE	FALSE	
+NA	GSM880683,GSM880684,GSM880685	Neuron	Monoamine	Serotonergic	Serotonergic	Serotonergic	Serotonergic Neurons	63	Brainstem,Midbrain,LocusCereuleus	GPL1261	TRAP	Dougherty et al 2013	23407934	FALSE	TRUE	TRUE	TRUE	
+NA	GSM215865,GSM215866,GSM215867	Neuron	Pyramidal	Layer5Pyra	Layer5Pyra	Pyramidal	Pyramidal L5 thick tufted	38	Cortex	GPL1261	Manual	Sugino et al. 2014	25232122	TRUE	TRUE	FALSE	TRUE	They are same with Sugino unpublished S_yrt_wt:v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt. e.g. any probe that is shared with GPL339 has identical values. Suggesting the files are generated from one another and they are not merely replicates of the same sample
+NA	GSM874480,GSM874481,GSM874482	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal_Glt_25d2	Pyramidal	Glt25d2 positive pyramidal cells	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	possible contamination same as Shrestha et al. 2015 GSM1698220,GSM1698221
+NA	GSM874416,GSM874418,GSM874420	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal_S100a10	Pyramidal	S100a10 positive pyramidal cells	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	possible contamination, same as Shrestha et al. 2015 GSM1698222,GSM1698223,GSM1698224
+NA	GSM63045,GSM63046,GSM63047	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal	Pyramidal Neurons	63	Amygdala	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63036,GSM63037,GSM63038	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal	Pyramidal Neurons	62	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63042,GSM63043,GSM63044	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal	Pyramidal Neurons	64	Hippocampus	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63039,GSM63040,GSM63041	Neuron	Pyramidal	Pyramidal Thy1	Pyramidal_Thy1	Pyramidal	Pyramidal Neurons	61	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM63033,GSM63034,GSM63035	Neuron	Pyramidal	Pyramidal CrtThalamic	PyramidalCorticoThalam	Pyramidal	Pyramidal Neurons	60	Cortex	GPL339	Manual	Sugino et al., 2006	16369481	TRUE	TRUE	TRUE	FALSE	
+NA	GSM37088,GSM37089	Neuron	NA	NA	NA	Pyramidal	Pyramidal Neurons, Callosally projecting, P14	14	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM37084,GSM37085	Neuron	NA	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P3	3	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM37086,GSM37087	Neuron	NA	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P6	6	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM37097,GSM37098	Neuron	NA	NA	NA	Pyramidal	Pyramidal Neurons, Corticospinal, P14	14	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM37092,GSM37093,GSM37094	Neuron	NA	NA	NA	NA	Pyramidal Neurons, Corticospinal, P3	3	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM442554,GSM442555,GSM442556	Neuron	NA	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P3	3	Cortex	GPL1261	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	TRUE	Re-check the citation later, shreejoy wanted them
+NA	GSM37095,GSM37096	Neuron	NA	NA	NA	NA	Pyramidal Neurons, Corticospinal, P6	6	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM442557,GSM442558	Neuron	NA	NA	NA	NA	Pyramidal Neurons, Callosally projecting, P6	6	Cortex	GPL1261	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	TRUE	Re-check the citation later, shreejoy wanted them
+NA	GSM37099,GSM37100	Neuron	NA	NA	NA	Pyramidal	Pyramidal Neurons, Corticotectal, P14	14	Cortex	GPL339	FACS	Arlotta et al., 2005	15664173	TRUE	TRUE	TRUE	FALSE	
+NA	GSM241898,GSM241900,GSM241902	Glia	NA	NA	NA	NA	Astrocytes	7	Cortex	GPL1261	PAN/FACS	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
+NA	GSM241889,GSM241891,GSM241892,GSM241917	Glia	NA	NA	NA	NA	Oligodendrocytes	7	Cortex	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
+NA	GSM241895,GSM241916	Glia	NA	NA	NA	NA	Oligodendrocyte Precursors	7	Cortex	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337760,GSM337761,GSM337762	Glia	NA	NA	NA	NA	Astroglia	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337763,GSM337764,GSM337766,GSM337767	Glia	NA	NA	NA	NA	Astroglia	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	same as GSM1698234,GSM1698236,GSM1698235
+NA	GSM337804,GSM337805,GSM337806	Neuron	NA	NA	NA	NA	Cort+ interneurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM337837,GSM337838,GSM337839	NA	NA	NA	NA	NA	Pyramidal Neurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	Astrocyte contamination
+NA	GSM337817,GSM337818,GSM337819	NA	NA	NA	NA	NA	Pyramidal Neurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	Astrocyte contamination
+NA	GSM337821,GSM337822,GSM337823	NA	NA	NA	NA	NA	Pyramidal Neurons	Adult	Cortex	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	Astrocyte contamination
+NA	GSM337828,GSM337829,GSM337830	Neuron	NA	NA	NA	NA	Unipolar Brush cells (some Bergman Glia)	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1372745,GSM1372746,GSM1372747	Neuron	NA	NA	NA	NA	Dlx1 gabaergic	63	Cortex	GPL1261	TRAP	Nakajima et al. 2015	25303526	TRUE	TRUE	TRUE	TRUE	same as GSM1698228,GSM1698229,GSM1698230
+NA	GSM1372751,GSM1372752,GSM1372753	Neuron	NA	NA	NA	NA	Nek7 Gabaergic	63	Cortex	GPL1261	TRAP	Nakajima et al. 2015	25303526	TRUE	TRUE	TRUE	TRUE	astrocyte-glia contamination
+NA	GSM1372754,GSM1372755,GSM1372756	Neuron	Gabaergic	GabaHtr3a	NA	NA	Htr3a cells, cortex	Adult	Cortex	GPL1261	TRAP	Nakanima et. Al 2014	25303526	TRUE	TRUE	TRUE	TRUE	Includes VIP cells
+NA	GSM1372757,GSM1372758,GSM1372759	Neuron	Gabaergic	GabaOxtr	NA	NA	Oxtr cells, cortex	Adult	Cortex	GPL1261	TRAP	Nakanima et. Al 2014	25303526	TRUE	TRUE	TRUE	TRUE	Similar to pyramidal cells
+NA	GSM444352,GSM444353,GSM444354	Neuron	NA	NA	NA	NA	GABAergic Interneurons, PV+, P10	10	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
+NA	GSM444349,GSM444350,GSM444351	Neuron	NA	NA	NA	NA	GABAergic Interneurons, PV+, P7	7	Cortex	GPL1261	Manual	Okaty et al., 2009	19474331	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909413,GSM909414,GSM909415	Neuron	NA	NA	NA	NA	Purkinje Cells	3	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909416,GSM909417,GSM909418	Neuron	NA	NA	NA	NA	Purkinje Cells	7	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	
+NA	GSM909452,GSM909453,GSM909454	Neuron	NA	NA	NA	NA	Stellate Basket Cells	56	Cerebellum	GPL1261	Manual	Paul et al 2012	22754500	TRUE	TRUE	TRUE	TRUE	Purkinje cells contamination
+NA	Y+MCx_1,Y+MCx_2,Y+MCx_3	NA	NA	NA	NA	NA	Pyramidal Neurons	66	Cortex	GPL339	LCM	Rossner et al., 2006	17005859	TRUE	TRUE	TRUE	FALSE	Astrocyte contamination
+NA	Y+SSCx_1,Y+SSCx_2,Y+SSCx_3	NA	NA	NA	NA	NA	Pyramidal Neurons	67	Cortex	GPL339	LCM	Rossner et al., 2006	17005859	TRUE	TRUE	TRUE	FALSE	Astrocyte contamination
+NA	GSM874512,GSM874514,GSM874516	Neuron	NA	NA	NA	NA	S100a10 pyramidal VEH Treated	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
+NA	GSM874527,GSM874529,GSM874531	Neuron	NA	NA	NA	NA	Glt25d2 pyramidal VEH Treated	60	Cortex	GPL1261	TRAP	Schmidt et al 2012	22632977	TRUE	TRUE	TRUE	TRUE	Vehicle treated samples. Not to use for gene selection
+NA	GSM1698217,GSM1698218,GSM1698219	Neuron	NA	NA	NA	NA	Ntf3 pyramidal	63	Cortex	GPL1261	TRAP	Shrestha et al. 2015	26371510	TRUE	TRUE	TRUE	TRUE	
+NA	GSM1698225,GSM1698226,GSM1698227	Neuron	NA	NA	NA	NA	Ntsr1 pyramidal	63	Cortex	GPL1261	TRAP	Shrestha et al. 2015	26371510	TRUE	TRUE	TRUE	TRUE	
+NA	v2_yrt2-wt,v2_yrt2-wt1,v2_yrt3-wt,v2_yrt6-wt	Neuron	NA	NA	NA	Pyramidal	Pyramidal Neurons	60	Cortex	GPL339	Manual	Unpublished	NA	TRUE	TRUE	TRUE	FALSE	Somehow 3 of the samples are same as GSM215865,GSM215866,GSM215867
