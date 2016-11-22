@@ -12,7 +12,7 @@ regionHierarchy = list(All = list(Cerebrum =
                                   Thalamus = '',
                                   Brainstem = 
                                       list(Midbrain = list(SubstantiaNigra = ''),
-                                           LocusCereuleus=''),
+                                           LocusCoeruleus=''),
                                   Cerebellum = '',
                                   SpinalCord ='')
 )

@@ -31,7 +31,8 @@ if (start == 1){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = 'analysis//01.SelectGenes/Quick',
-                     groupNames = c('PyramidalDeep','BroadTypes'),
+                     groupNames = c('PyramidalDeep','BroadTypes','DopaSelect'),
+                     #groupNames = 'DopaSelect',
                      #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
                      cores=16,
@@ -45,7 +46,8 @@ if (start == 1){
                          expression =
                              ogbox::read.exp('data-raw/Mouse_Cell_Type_Data/n_expressoExpr2.csv'),
                          outLoc = 'analysis//01.SelectGenes/Quick2',
-                         groupNames = c('PyramidalDeep','BroadTypes'),
+                         groupNames = c('PyramidalDeep','BroadTypes','DopaSelect'),
+                         #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          cores=16,
@@ -62,7 +64,8 @@ for (i in start:end){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = paste0('analysis//01.SelectGenes/Rotation/',i),
-                     groupNames = c('PyramidalDeep','BroadTypes'),
+                     groupNames = c('PyramidalDeep','BroadTypes','DopaSelect'),
+                     #groupNames = 'DopaSelect',
                      #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
                      rotate=0.33,
@@ -84,7 +87,8 @@ if(secondChip){
                          expression = 
                              ogbox::read.exp('data-raw/Mouse_Cell_Type_Data/n_expressoExpr2.csv'),
                          outLoc = paste0('analysis//01.SelectGenes/Rotation2/',i),
-                         groupNames = c('PyramidalDeep','BroadTypes'),
+                         groupNames = c('PyramidalDeep','BroadTypes','DopaSelect'),
+                         #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          rotate=0.33,
@@ -235,7 +239,7 @@ toPlotGenes[-1] %<>% lapply(function(x){
 })
 # take the bottom ones in the region tree
 rockBottom = regionHierarchy %>% unlist %>% names %>% str_extract(pattern='(?<=[.])([A-Z]|[a-z])*$')
-
+rockBottom = c(rockBottom,'Midbrain')
 toPlotGenes = toPlotGenes[c('All', rockBottom)]
 
 toPlotGenes %<>% lapply(function(x){
