@@ -47,12 +47,15 @@ p = frame %>% ggplot(aes(x = groups, y = oligoEstim, shape = groups)) +theme_cow
     # geom_point()+
     geom_segment(data=meanFrame, aes(x = x1, xend = x2, y = `mean(oligoEstim)`, yend = `mean(oligoEstim)`)) + 
     theme(axis.text.x = element_text(angle=45, hjust = 1),
-          strip.text.x = element_text(size = 14)) +
+          strip.text.x = element_text(size = 19),
+          legend.position='none') +
     geom_text(data=signifFrame,aes(label = text), size=10) + 
     scale_shape_manual(values = c(18, 2, 1, 0)) + 
     coord_cartesian(ylim = c(-0.03, 1.10))  + xlab('') + ylab('MGP estimation')
 
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.png',p,width=6,height=5,units='in')
+ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.png',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.svg',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.pdf',p,width=4.5,height=5,units='in')
 
 data = read.csv('data-raw/PlotExtract/plot.csv',header = F)
 data %<>% filter(!V1<0.5) %>%
@@ -81,10 +84,14 @@ p = data %>% ggplot(aes(x = groups, y = V2, shape = groups)) +theme_cowplot(17) 
     # geom_point()+
     geom_segment(data=meanFrame, aes(x = x1, xend = x2, y = `mean(V2)`, yend = `mean(V2)`)) + 
     theme(axis.text.x = element_text(angle=45, hjust = 1),
-          strip.text.x = element_text(size = 14),
-          axis.title.y = element_text(size = 13)) +
+          strip.text.x = element_text(size = 19),
+          axis.title.y = element_text(size = 14),
+          legend.position='none') +
     geom_text(data=signifFrame,aes(label = text), size=10) + 
     scale_shape_manual(values = c(18, 2, 1, 0)) + 
     #coord_cartesian(ylim = c(-0.03, 1.10))  + 
     xlab('') + ylab(bquote('No of Oligodendroglial cells / 0.001 mm'^3))
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.png',p,width=6,height=5,units='in')
+ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.png',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.svg',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.pdf',p,width=4.5,height=5,units='in')
+

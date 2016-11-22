@@ -33,15 +33,15 @@ LesnickpVals = LesnickEstimations$estimates %>% sapply(function(x){
 # Moran GSE8397 ----------
 MoranDes = MoranParkinsonsMeta
 MoranDes %<>% mutate(patient = paste0(Disease, str_extract(Title,pattern='[0-9]+')))
-list[geneDat, expDat] = sepExpr(MoranParkinsonsExp)
-rownames(expDat) = geneDat$Gene.Symbol
+list[geneDat, expDatMoran] = sepExpr(MoranParkinsonsExp)
+rownames(expDatMoran) = geneDat$Gene.Symbol
 
 # remove samples from superior frontal gyrus
-expDat = expDat[(!MoranDes$Region %in% 'Superior frontal gyrus')]
+expDatMoran = expDatMoran[(!MoranDes$Region %in% 'Superior frontal gyrus')]
 MoranDes = MoranDes[(!MoranDes$Region %in% 'Superior frontal gyrus') ,]
 
 
-moranLateralEstimations =  cellTypeEstimate(exprData=cbind(geneDat, expDat[MoranDes$Region %in% 'Lateral substantia nigra']),
+moranLateralEstimations =  cellTypeEstimate(exprData=cbind(geneDat, expDatMoran[MoranDes$Region %in% 'Lateral substantia nigra']),
                                             genes=genes,
                                             geneColName='Gene.Symbol',
                                             outlierSampleRemove=F,
@@ -49,7 +49,7 @@ moranLateralEstimations =  cellTypeEstimate(exprData=cbind(geneDat, expDat[Moran
                                             removeNegatives = T,
                                             PC = 1)
 
-moranMedialEstimation = cellTypeEstimate(exprData=cbind(geneDat, expDat[MoranDes$Region %in% "Medial substantia nigra"]),
+moranMedialEstimation = cellTypeEstimate(exprData=cbind(geneDat, expDatMoran[MoranDes$Region %in% "Medial substantia nigra"]),
                                          genes=genes,
                                          geneColName='Gene.Symbol',
                                          outlierSampleRemove=F,
@@ -74,9 +74,9 @@ geneCounts = c(LesnickEstimations$rotations$Dopaminergic %>% nrow,
                moranLateralEstimations$rotations$Dopaminergic %>% nrow,
                moranMedialEstimation$rotations$Dopaminergic %>% nrow)
 
-LesnickName = paste0('Lesnick GSE7621\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
-MoranLateralName = paste0('Moran Lateral\nGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
-MoranMediallName = paste0('Moran Medial\nGSE8397 (n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+LesnickName = paste0('Lesnick\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranLateralName = paste0('Moran Lateral\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
+MoranMediallName = paste0('Moran Medial\n(n genes = ',LesnickEstimations$rotations$Dopaminergic %>% nrow,')')
 
 frame1 = data.frame(parkinsons = setNames(c('PD','control'), c(T,F))[LesnickParkinsonsMeta$parkinson %>% as.character],
                     sex = setNames(c('F','M'), c(T,F))[LesnickParkinsonsMeta$female %>% as.character],
@@ -140,11 +140,11 @@ c('CDC42', 'FGF13',
 
 
 # Lesnick differentially expressed -----
-list[geneDatLesnick,expDatLesnick] = sepExpr(LesnickParkinsonsExp)
-rownames(expDatLesnick) = geneDatLesnick$Gene.Symbol
+list[geneDatLesnick,expDatMoranLesnick] = sepExpr(LesnickParkinsonsExp)
+rownames(expDatMoranLesnick) = geneDatLesnick$Gene.Symbol
 
 mm = model.matrix(~ parkinson,LesnickParkinsonsMeta)
-fit <- lmFit(expDatLesnick, mm)
+fit <- lmFit(expDatMoranLesnick, mm)
 fit <- eBayes(fit)
 LesnickDif = topTable(fit, coef=colnames(fit$design)[2],
                #lfc = log(1,base=2),
@@ -156,7 +156,7 @@ dim(LesnickDif)
 
 mm = model.matrix(~ estimate + parkinson,data.frame(parkinson = LesnickParkinsonsMeta$parkinson,
                                                     estimate = LesnickEstimations$estimates$Dopaminergic))
-fit <- lmFit(expDatLesnick, mm)
+fit <- lmFit(expDatMoranLesnick, mm)
 fit <- eBayes(fit)
 LesnickDifCorr = topTable(fit, coef=colnames(fit$design)[3],p.value= 0.05,
                     number = Inf)
@@ -168,15 +168,15 @@ grid.draw(venn)
 # Moran differentially expressed-------
 MoranDes = MoranParkinsonsMeta
 MoranDes %<>% mutate(patient = paste0(Disease, str_extract(Title,pattern='[0-9]+')))
-list[geneDatMoran, expDatMoran] = sepExpr(MoranParkinsonsExp)
-rownames(expDatMoran) = geneDatMoran$Gene.Symbol
+list[geneDatMoran, expDatMoranMoran] = sepExpr(MoranParkinsonsExp)
+rownames(expDatMoranMoran) = geneDatMoran$Gene.Symbol
 
 # remove samples from superior frontal gyrus
-expDatMoran = expDatMoran[(!MoranDes$Region %in% 'Superior frontal gyrus')]
+expDatMoranMoran = expDatMoranMoran[(!MoranDes$Region %in% 'Superior frontal gyrus')]
 MoranDes = MoranDes[(!MoranDes$Region %in% 'Superior frontal gyrus') ,]
 
 mm = model.matrix(~ Disease+ Region,MoranDes)
-fit <- lmFit(expDatMoran, mm)
+fit <- lmFit(expDatMoranMoran, mm)
 fit <- eBayes(fit)
 MoranDif = topTable(fit, coef=colnames(fit$design)[2],
                       #lfc = log(1,base=2),
@@ -185,7 +185,7 @@ MoranDif = topTable(fit, coef=colnames(fit$design)[2],
 )
 dim(MoranDif)
 
-moranEstimations = cellTypeEstimate(exprData=cbind(geneDatMoran, expDatMoran),
+moranEstimations = cellTypeEstimate(exprData=cbind(geneDatMoran, expDatMoranMoran),
                                     genes=genes,
                                     geneColName='Gene.Symbol',
                                     outlierSampleRemove=F,
@@ -197,7 +197,7 @@ moranEstimations = cellTypeEstimate(exprData=cbind(geneDatMoran, expDatMoran),
 mm = model.matrix(~ estimate + parkinson + region,data.frame(parkinson = MoranDes$Disease,
                                                     region = MoranDes$Region,
                                                     estimate = moranEstimations$estimates$Dopaminergic))
-fit <- lmFit(expDatMoran, mm)
+fit <- lmFit(expDatMoranMoran, mm)
 fit <- eBayes(fit)
 MoranDifCorr = topTable(fit, coef=colnames(fit$design)[3],p.value= 0.05,
                           number = Inf)
@@ -210,7 +210,7 @@ grid.draw(venn)
 # moran PC and estimation
 moranPaperGene = data.frame(disease = MoranDes$Disease,
                             paperGenePC = 
-                                t(expDatMoran[rownames(expDatMoran) %in% paperGenes,]) %>% 
+                                t(expDatMoranMoran[rownames(expDatMoranMoran) %in% paperGenes,]) %>% 
                                 prcomp(.scale=TRUE) %$% x[,1],
                             estimation = moranEstimations$estimates$Dopaminergic)
 
@@ -231,7 +231,7 @@ moranPDCor = cor(moranPaperGene$paperGenePC[moranPaperGene$disease=='PD'],
 # lesnick PC and estimation
 lesnickPaperGene = data.frame(disease = LesnickParkinsonsMeta$parkinson,
                             paperGenePC = 
-                                t(expDatLesnick[rownames(expDatLesnick) %in% paperGenes,]) %>% 
+                                t(expDatMoranLesnick[rownames(expDatMoranLesnick) %in% paperGenes,]) %>% 
                                 prcomp(.scale=TRUE) %$% x[,1],
                             estimation = LesnickEstimations$estimates$Dopaminergic)
 # overall lesnick
@@ -252,11 +252,11 @@ lesnickPDCor = cor(lesnickPaperGene$paperGenePC[lesnickPaperGene$disease==TRUE],
 lesnickPaperGene$disease %<>% ogbox::replaceElement(c('TRUE'='PD','FALSE' = 'control')) %$% newVector
 moranPaperGene$paperGenePC = -moranPaperGene$paperGenePC 
 masterFrame = rbind(
-    data.frame(moranPaperGene,source = 'Moran (GSE8397)'),
-    data.frame(lesnickPaperGene, source = 'Lesnick (GSE7621)'))
+    data.frame(moranPaperGene,source = 'Moran'),
+    data.frame(lesnickPaperGene, source = 'Lesnick'))
 
-annotation = data.frame(source = c('Moran (GSE8397)',
-                                   'Lesnick (GSE7621)'),
+annotation = data.frame(source = c('Moran',
+                                   'Lesnick'),
                         label = c(paste0('Spearman\'s ρ:\n',
                                        'controls: ',format(lesnickControlCor,digits = 3),'\n',
                                        'PD: ', format(moranPDCor,digits=3)),
@@ -290,25 +290,25 @@ ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/genePCestimation.
 # plot of correlations to genes -----
 # moran
 moranGeneCorsPD = cor(moranEstimations$estimates$Dopaminergic[moranPaperGene$disease  == "PD"],
-                    expDatMoran[rownames(expDatMoran) %in% paperGenes,moranPaperGene$disease =="PD"] %>% t, 
+                    expDatMoranMoran[rownames(expDatMoranMoran) %in% paperGenes,moranPaperGene$disease =="PD"] %>% t, 
                     method='spearman') %>% t
-moranGeneCorsPD %<>% data.frame(Correlation = ., disease = 'PD', source  ='Moran (GSE8397)', gene = rn(.))
+moranGeneCorsPD %<>% data.frame(Correlation = ., disease = 'PD', source  ='Moran', gene = rn(.))
 
 moranGeneCorsCont = cor(moranEstimations$estimates$Dopaminergic[moranPaperGene$disease  == 'control'],
-                    expDatMoran[rownames(expDatMoran) %in% paperGenes,moranPaperGene$disease  == 'control'] %>% t, 
+                    expDatMoranMoran[rownames(expDatMoranMoran) %in% paperGenes,moranPaperGene$disease  == 'control'] %>% t, 
                     method='spearman') %>% t
-moranGeneCorsCont %<>% data.frame(Correlation = ., disease = 'control', source  ='Moran (GSE8397)', gene = rn(.))
+moranGeneCorsCont %<>% data.frame(Correlation = ., disease = 'control', source  ='Moran', gene = rn(.))
 
 # lesnick
 lesnickGeneCorsCont = cor(LesnickEstimations$estimates$Dopaminergic[lesnickPaperGene$disease  == 'control'],
-                        expDatLesnick[rownames(expDatLesnick) %in% paperGenes,lesnickPaperGene$disease  == 'control'] %>% t, 
+                        expDatMoranLesnick[rownames(expDatMoranLesnick) %in% paperGenes,lesnickPaperGene$disease  == 'control'] %>% t, 
                         method='spearman') %>% t
-lesnickGeneCorsCont %<>% data.frame(Correlation = ., disease = 'control', source  ='Lesnick (GSE7621)', gene = rn(.))
+lesnickGeneCorsCont %<>% data.frame(Correlation = ., disease = 'control', source  ='Lesnick', gene = rn(.))
 
 lesnickGeneCorsPD = cor(LesnickEstimations$estimates$Dopaminergic[lesnickPaperGene$disease  == 'PD'],
-                        expDatLesnick[rownames(expDatLesnick) %in% paperGenes,lesnickPaperGene$disease  == 'PD'] %>% t, 
+                        expDatMoranLesnick[rownames(expDatMoranLesnick) %in% paperGenes,lesnickPaperGene$disease  == 'PD'] %>% t, 
                           method='spearman') %>% t
-lesnickGeneCorsPD %<>% data.frame(Correlation = ., disease = 'PD', source  ='Lesnick (GSE7621)', gene = rn(.))
+lesnickGeneCorsPD %<>% data.frame(Correlation = ., disease = 'PD', source  ='Lesnick', gene = rn(.))
 
 toPlot = rbind(moranGeneCorsCont,
                moranGeneCorsPD,
@@ -329,8 +329,77 @@ geneAllestimation = toPlot %>% ggplot(aes(x = gene, y = Correlation, color = dis
     scale_color_viridis(discrete=TRUE) +
     xlab('') +
     ylab('Dopaminergic MGP-\nGene expression correlation') + 
-    theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 10))
+    theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 13))
 
 ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/geneAllestimation.png',
        plot= geneAllestimation,
-       width=8,height=4.3,units='in')
+       width=9.5,height=4.3,units='in')
+
+# experimentation on apo-profile relationship --------------
+apoSet = list(apo = read.table('geneset.txt',skip = 2)$V1)
+
+LesnickApo = 
+    cellTypeEstimate(exprData=LesnickParkinsonsExp,
+                     genes=apoSet,
+                     geneTransform = NULL,
+                     geneColName='Gene.Symbol',
+                     outlierSampleRemove=F,
+                     groups=setNames(c('parkinson\'s','control'), c(T,F))[LesnickParkinsonsMeta$parkinson %>% as.character],
+                     removeNegatives=TRUE,
+                     PC = 1)
+
+LesnickFrame = data.frame(source = 'Lesnick',
+                          apo = LesnickApo$estimates$apo,
+                          dopa = LesnickEstimations$estimates$Dopaminergic,
+                          group = replaceElement(LesnickParkinsonsMeta$parkinson, c('TRUE' = 'PD', "FALSE" = 'control'))$newVector)
+
+MoranApo = cellTypeEstimate(exprData=cbind(geneDatMoran, expDatMoranMoran),
+                            genes=apoSet,
+                            geneTransform = NULL,
+                            geneColName='Gene.Symbol',
+                            outlierSampleRemove=F,
+                            groups=MoranDes$Disease,
+                            removeNegatives = T,
+                            PC = 1)
+moranLateralApo =  cellTypeEstimate(exprData=cbind(geneDat, expDatMoran[MoranDes$Region %in% 'Lateral substantia nigra']),
+                                    genes=apoSet,
+                                    geneTransform = NULL,
+                                    geneColName='Gene.Symbol',
+                                    outlierSampleRemove=F,
+                                    groups=MoranDes$Disease[MoranDes$Region %in% 'Lateral substantia nigra'],
+                                    removeNegatives = T,
+                                    PC = 1)
+MoranLatFrame  = data.frame(source = 'Moran Lateral',
+                            apo = moranLateralApo$estimates$apo,
+                            dopa = moranLateralEstimations$estimates$Dopaminergic,
+                            group  =MoranDes$Disease[MoranDes$Region %in% 'Lateral substantia nigra'])
+
+moranMedialApo = cellTypeEstimate(exprData=cbind(geneDat, expDatMoran[MoranDes$Region %in% "Medial substantia nigra"]),
+                                  genes=apoSet,
+                                  geneTransform = NULL,
+                                  geneColName='Gene.Symbol',
+                                  outlierSampleRemove=F,
+                                  groups=MoranDes$Disease[MoranDes$Region %in% "Medial substantia nigra"],
+                                  removeNegatives = T,
+                                  PC = 1)
+MoranMedFrame  = data.frame(source = 'Moran Medial',
+                            apo = moranMedialApo$estimates$apo,
+                            dopa = moranMedialEstimation$estimates$Dopaminergic,
+                            group=MoranDes$Disease[MoranDes$Region %in% "Medial substantia nigra"])
+
+
+cor(MoranLatFrame$apo[MoranLatFrame$group %in% 'control'],MoranLatFrame$dopa[MoranLatFrame$group %in% 'control'],method = 'spearman')
+cor(MoranLatFrame$apo,MoranLatFrame$dopa,method = 'spearman')
+
+rbind(MoranLatFrame,
+      MoranMedFrame,
+      LesnickFrame) -> hede
+
+hede %>% group_by(source,group) %>% do({cor(.$apo,.$dopa) %>% as.data.frame}) -> yo
+names(yo)[3] ='lele'
+
+rbind(MoranLatFrame,
+      MoranMedFrame,
+      LesnickFrame) %>% ggplot(aes(y = dopa,  x = apo)) + geom_point() + facet_grid(source~group) + geom_smooth(method = 'lm') +
+    geom_text(data= yo,x = -9,y = 5,aes(label = format(lele,digits=3)))
+

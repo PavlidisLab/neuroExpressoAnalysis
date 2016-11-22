@@ -55,7 +55,7 @@ if (download){
 
 # skip norm is for when cellTypeStudies.tsv is modified without addition or removal of any new 
 # samples
-skipNorm=F
+skipNorm=T
 if (skipNorm==F){
     readDesignMergeCel(desFile='data-raw/Mouse_Cell_Type_Data/n_expressoStudies.tsv',
                        gsm = 'samples',
