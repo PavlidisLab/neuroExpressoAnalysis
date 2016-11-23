@@ -11,6 +11,7 @@ cellColors = function(){
                  Bergmann = 'palegreen',
                  MotorCholin = 'darkorange4',
                  SpinalCordCholinergic = 'darkorange4',
+                 SpinalChordCholinergic = 'darkorange4', # temporary
                  BrainstemCholin = 'darkorange4',
                  'Midbrain Cholinergic' = 'darkorange4',
                  ForebrainCholin = 'darkorange',
