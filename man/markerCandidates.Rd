@@ -8,7 +8,7 @@ markerCandidates(design, expression, outLoc, groupNames, regionNames = NULL,
   PMID = "PMID", rotate = NULL, cores = 4, debug = NULL,
   sampleName = "sampleName", replicates = "originalIndex",
   foldChangeThresh = 10, minimumExpression = 8, regionHierarchy = NULL,
-  geneID = "Gene.Symbol")
+  geneID = "Gene.Symbol", seed = NULL)
 }
 \arguments{
 \item{design}{data.frame. Metadata for the samples.}
@@ -39,6 +39,8 @@ from the same study}
 \item{foldChangeThresh}{minimum fold change required for selection}
 
 \item{minimumExpression}{minimum level of expression for a marker gene in its cell type}
+
+\item{seed}{seed for random generation. if NULL will be set to random}
 
 \item{regionHiearchy}{hiearchy of regions.}
 }
