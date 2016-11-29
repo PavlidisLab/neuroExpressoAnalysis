@@ -118,3 +118,45 @@ MoranParkinsonsExp = read.exp('data-raw/MoranParkinsons/GSE8397_exp.csv')
 
 devtools::use_data(MoranParkinsonsMeta, overwrite=TRUE)
 devtools::use_data(MoranParkinsonsExp,overwrite=TRUE)
+
+# Zhang et al. dataset ----------------------------------------------
+gseDown('GSE20295',outDir='data-raw/cel/GPL96/')
+ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL96',annotType='noParents')
+dir.create('data-raw/ZhangParkinsons', showWarnings=FALSE)
+softDown('GSE20295',file='data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
+system('gunzip data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
+softData = softParser(softFile='data-raw/ZhangParkinsons/GSE20295_family.soft',expression=F)
+softData = softData[,c('!Sample_characteristics_ch1 = age',
+                       '!Sample_characteristics_ch1 = brain region',
+                       "!Sample_characteristics_ch1 = disease state",
+                       "!Sample_characteristics_ch1 = gender",
+                       '!Sample_geo_accession',
+                       "!Sample_platform_id")]
+names(softData) = c('Age',
+                    'brainRegion',
+                    'diseaseState',
+                    'gender',
+                    'GSM',
+                    'platform')
+
+softData$scanDate = sapply(softData$GSM, function(x){
+    celfileDate(paste0('data-raw/cel/GPL96/',x, '.cel')) %>% as.Date()
+})
+write.design(softData,'data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
+cels = paste0('data-raw/cel/GPL96/', softData$GSM, '.cel')
+
+
+affy = ReadAffy(filenames = cels)
+
+norm = affy::rma(affy)
+annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL96')
+medExp = annotated %>% sepExpr %>% {.[[2]]} %>% unlist %>% median
+annotated = mostVariable(annotated,threshold = medExp, threshFun= median)
+write.csv(annotated, 'data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv', row.names = F)
+
+
+ZhangParkinsonsMeta = read.design('data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
+ZhangParkinsonsExp = read.exp('data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv')
+
+devtools::use_data(ZhangParkinsonsMeta, overwrite=TRUE)
+devtools::use_data(ZhangParkinsonsExp, overwrite=TRUE)
