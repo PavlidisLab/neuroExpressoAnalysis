@@ -83,48 +83,14 @@ list[genes,expr] = sepExpr(humanExp)
 colnames(expr) = gsub('\\.cel\\.gz','',colnames(expr))
 softFile = read.design('data-raw/TrabzuniRegions/GSE60862_meta.tsv')
 
-groups = unique(softFile$brainRegion)
-pairwise = combn(groups,2)
+softFile %<>% filter(GSM %in% colnames(expr))
 
-difs = vector(mode = 'list', length = ncol(pairwise))
+groups = softFile$brainRegion
+expression = expr
 
-# get differentially expressed genes between any two regions
-for (i in 1:ncol(pairwise)){
-    subsetExpr = expr[,names(expr) %in% softFile$GSM[softFile$brainRegion %in% pairwise[,i]]]
-    subsetExpr = as.matrix(subsetExpr)
-    rownames(subsetExpr) = genes$Gene.Symbol
-    
-    subsetGroups = softFile$brainRegion[match(colnames(subsetExpr), softFile$GSM)]  
-    
-    mm = model.matrix(~ subsetGroups,data.frame(subsetGroups))
-    fit <- lmFit(subsetExpr, mm)
-    fit <- eBayes(fit)
-    dif = topTable(fit, coef=colnames(fit$design)[2],
-                   lfc = log(5,base=2),
-                   number = Inf, 
-                   p.value = 1e-5)
-    if (nrow(dif)==0){
-        print(paste('no genes found for',paste(pairwise[,i],collapse='/') ,'pair'))
-        next
-    }
-    difs[[i]] = rownames(dif)
-    #difs[[i]] = dif$ID
-    print(i)
-}
+outliers = sampleMixup(expression, groups)
 
-# detect outliers based on differentially expressed genes inside a single group
-outliers = lapply(1:len(groups), function(i){
-    print(i)
-    relevant = unlist(difs[apply(pairwise,2,function(x){
-        groups[[i]] %in%  x  
-    })])
-    subsetExpr = expr[,names(expr) %in% softFile$GSM[softFile$brainRegion %in% groups[i]],]
-    subsetExpr = subsetExpr[genes$Gene.Symbol %in% relevant,]
-    pca = prcomp(t(subsetExpr))
-    names(boxplot.stats(pca$x[,1])$out)
-})
-
-write.table(unlist(outliers),'data-raw/TrabzuniRegions/outliers', row.names=F,col.names=F,quote=F)
+write.table(outliers, 'data-raw/TrabzuniRegions/outliers', row.names=F,col.names=F,quote=F)
 
 # process trabzuni data (batch correction, removal of outliers) ----------------
 humanExp = read.exp('data-raw/TrabzuniRegions//GSE60862_expression.csv')
