@@ -1,3 +1,4 @@
+#' @export
 sampleMixup = function(expression, groups, p.value =  1e-5, lfc = log(5,base=2)){
     
     assertthat::assert_that(ncol(expression) == length(groups))
@@ -8,7 +9,7 @@ sampleMixup = function(expression, groups, p.value =  1e-5, lfc = log(5,base=2))
     difs = vector(mode = 'list', length = ncol(pairwise))
     
     for (i in 1:ncol(pairwise)){
-        subsetExpr = expr[,groups %in% pairwise[,i]]
+        subsetExpr = expression[,groups %in% pairwise[,i]]
         subsetExpr = as.matrix(subsetExpr)
         # rownames(subsetExpr) = genes$Gene.Symbol
         
