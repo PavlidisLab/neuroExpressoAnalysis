@@ -142,7 +142,6 @@ names(softData) = c('Age',
 softData$scanDate = sapply(softData$GSM, function(x){
     celfileDate(paste0('data-raw/cel/GPL96/',x, '.cel')) %>% as.Date()
 })
-write.design(softData,'data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
 cels = paste0('data-raw/cel/GPL96/', softData$GSM, '.cel')
 
 
@@ -150,13 +149,53 @@ affy = ReadAffy(filenames = cels)
 
 norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL96')
+bioGender = bioGender(annotated)
+
+softData$bioGender = bioGender %>% replaceElement(c("M" ='male','F' = 'female')) %$% newVector
+write.design(softData,'data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
+
+
 medExp = annotated %>% sepExpr %>% {.[[2]]} %>% unlist %>% median
+
+rowMedians = annotated %>% sepExpr %>% {.[[2]]} %>% 
+    apply(1, function(x){
+        regions =  softData$brainRegion %>% unique
+        sapply(regions, function(y){
+            x[softData$brainRegion %in% y] %>% mean
+        })
+    }) %>% apply(2, max)
+
+annotated = 
+    annotated[rowMedians > medExp,] %>% 
+    mostVariable(threshold=0)
+
 annotated = mostVariable(annotated,threshold = medExp, threshFun= median)
 write.csv(annotated, 'data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv', row.names = F)
 
 
 ZhangParkinsonsMeta = read.design('data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
 ZhangParkinsonsExp = read.exp('data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv')
+
+ZhangParkinsonsMeta$diseaseState %<>% replaceElement(c('Control' ='control', 
+                                                       "Parkinson's disease" = 'PD',
+                                                       'Parkinsons disease' = "PD")) %$% newVector
+
+list[gene, expression] = ZhangParkinsonsExp %>% sepExpr()
+
+expressionControl = expression[ZhangParkinsonsMeta$diseaseState %in% 'control']
+regionsControl = ZhangParkinsonsMeta$brainRegion[ZhangParkinsonsMeta$diseaseState %in% 'control']
+outliersControl = sampleMixup(expressionControl,regionsControl)
+
+
+expressionPD = expression[ZhangParkinsonsMeta$diseaseState %in% 'PD']
+regionsPD = ZhangParkinsonsMeta$brainRegion[ZhangParkinsonsMeta$diseaseState %in% 'PD']
+outliersPD = sampleMixup(expressionPD,regionsPD)
+
+badSamples = c(gsub(pattern = '.cel',replacement = '',c(outliersControl,outliersPD)), 
+               ZhangParkinsonsMeta %>% filter(bioGender!=gender) %$% GSM)
+
+# ZhangParkinsonsExp = ZhangParkinsonsExp[!grepl(regexMerge(badSamples), colnames(ZhangParkinsonsExp))]
+# ZhangParkinsonsMeta %<>% filter(!GSM %in% badSamples)
 
 devtools::use_data(ZhangParkinsonsMeta, overwrite=TRUE)
 devtools::use_data(ZhangParkinsonsExp, overwrite=TRUE)
