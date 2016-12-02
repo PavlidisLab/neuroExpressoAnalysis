@@ -36,8 +36,7 @@ groups = list(Lesnick = LesnickParkinsonsMeta$parkinson %>%
                   replaceElement(c('TRUE' = 'PD', 'FALSE' = 'control')) %$% newVector,
               'Moran Lateral' = MoranDes$Disease[MoranDes$Region %in% 'Lateral substantia nigra'],
               'Moran Medial' = MoranDes$Disease[MoranDes$Region %in% "Medial substantia nigra"],
-              Zhang = ZhangDes$diseaseState %>% 
-                  replaceElement(c(Control = 'control', 'Parkinsons disease' = 'PD')) %$% newVector)
+              Zhang = ZhangDes$diseaseState)
 
 
 
@@ -49,7 +48,7 @@ estimations = lapply(1:len(expDats),function(i){
                                          geneColName='Gene.Symbol',
                                          outlierSampleRemove=F,
                                          groups=groups[[i]],
-                                         removeNegatives = T,
+                                         removeNegatives = F,
                                          PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
@@ -140,8 +139,8 @@ corPlotFrames = lapply(1:len(expDats),function(i){
                                     geneColName='Gene.Symbol',
                                     outlierSampleRemove=F,
                                     groups=groups[[i]],
-                                    removeNegatives = T,
-                                    PC = 1)$estimates$Dopaminergic
+                                    removeNegatives = F,
+                                    PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
     PC = paperGeneExp %>% t %>% prcomp(scale=TRUE) %$% x[,1]
@@ -244,9 +243,6 @@ ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/geneAllestimation
 # Zhang other regions --------------------
 list[geneDatZhang, expDatZhang] = sepExpr(ZhangParkinsonsExp)
 
-ZhangParkinsonsMeta$diseaseState %<>% replaceElement(c('Control' ='control', 
-                                                      "Parkinson's disease" = 'PD',
-                                                      'Parkinsons disease' = "PD")) %$% newVector
 
 expDats = list('Zhang SN' = cbind(geneDatZhang,expDatZhang[ZhangParkinsonsMeta$brainRegion %in% 'Whole substantia nigra from postmortem brain'] ),
                'Zhang Putamen' =  cbind(geneDatZhang,expDatZhang[ZhangParkinsonsMeta$brainRegion %in% 'Putamen from postmortem brain'] ),
@@ -263,7 +259,7 @@ estimations = lapply(1:len(expDats),function(i){
                                     geneColName='Gene.Symbol',
                                     outlierSampleRemove=F,
                                     groups=groups[[i]],
-                                    removeNegatives = T,
+                                    removeNegatives = F,
                                     PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
@@ -320,7 +316,7 @@ pEstimate = masterFrame %>%  ggplot(aes( y = estimate, x = parkinsons)) +
     xlab('') +
     ylab('Dopaminergic MGP estimation')
 
-
+(pEstimate)
 
 
 corPlotFrames = lapply(1:len(expDats),function(i){
@@ -330,11 +326,11 @@ corPlotFrames = lapply(1:len(expDats),function(i){
                                   geneColName='Gene.Symbol',
                                   outlierSampleRemove=F,
                                   groups=groups[[i]],
-                                  removeNegatives = T,
-                                  PC = 1)$estimates$Dopaminergic
+                                  removeNegatives = F,
+                                  PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
-    PC = paperGeneExp %>% t %>% prcomp(scale=TRUE) %$% x[,1]
+    PC = paperGeneExp %>% t %>% prcomp(scale=TRUE) %$% x[,1] 
     cor = (cor(PC,dopaEstim) > 0) - (cor(PC,dopaEstim) < 0)
     
     data.frame(disease = groups[[i]],
@@ -383,7 +379,7 @@ genePCestimationPlot = masterCorPlot %>% ggplot(aes(x =estimation , y = paperGen
               vjust= 0,
               hjust= 1,
               size = 5)
-
+(genePCestimationPlot)
 
 # all genes correlation
 allGeneCors = lapply(1:len(expDats), function(i){
@@ -421,3 +417,4 @@ geneAllestimation = allGeneCors %>% ggplot(aes(x = gene, y = Correlation, color 
     xlab('') +
     ylab('Dopaminergic MGP-\nGene expression correlation') + 
     theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 13))
+(geneAllestimation)
