@@ -1,3 +1,4 @@
+# devtools::install_github('oganm/allenBrain')
 library(allenBrain)
 library(assertthat)
 devtools::load_all()
@@ -161,7 +162,7 @@ lapply(names(markers), function(x){
         system(paste0('convert ',
                       paste(theseFiles,collapse = ' '),
                       ' -quality 100 -append ',
-                      'analysis//05.ISHValidation/',x,'_singlePages/', i,'.png'))
+                      'analysis//05.ISHValidation/',x,'_singlePages/', format(i,width=2, flag="0"),'.png'))
     }
     
 })
