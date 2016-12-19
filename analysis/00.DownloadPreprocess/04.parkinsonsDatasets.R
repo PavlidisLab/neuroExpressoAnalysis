@@ -131,14 +131,17 @@ softData = softData[,c('!Sample_characteristics_ch1 = age',
                        "!Sample_characteristics_ch1 = disease state",
                        "!Sample_characteristics_ch1 = gender",
                        '!Sample_geo_accession',
-                       "!Sample_platform_id")]
+                       "!Sample_platform_id",
+                       "!Sample_title")]
 names(softData) = c('Age',
                     'brainRegion',
                     'diseaseState',
                     'gender',
                     'GSM',
-                    'platform')
+                    'platform',
+                    'title')
 
+softData$patient = str_extract(softData$title, '^(T|[0-9]).*?(?= )')
 softData$scanDate = sapply(softData$GSM, function(x){
     celfileDate(paste0('data-raw/cel/GPL96/',x, '.cel')) %>% as.Date()
 })
@@ -157,7 +160,7 @@ write.design(softData,'data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
 
 medExp = annotated %>% sepExpr %>% {.[[2]]} %>% unlist %>% median
 
-rowMedians = annotated %>% sepExpr %>% {.[[2]]} %>% 
+rowMedians = annotated %>% sepExpr %>% {.[[2]]} %>%
     apply(1, function(x){
         regions =  softData$brainRegion %>% unique
         sapply(regions, function(y){
@@ -165,18 +168,18 @@ rowMedians = annotated %>% sepExpr %>% {.[[2]]} %>%
         })
     }) %>% apply(2, max)
 
-annotated = 
-    annotated[rowMedians > medExp,] %>% 
+annotated =
+    annotated[rowMedians > medExp,] %>%
     mostVariable(threshold=0)
 
-annotated = mostVariable(annotated,threshold = medExp, threshFun= median)
+annotated = mostVariable(annotated,threshold = 0)
 write.csv(annotated, 'data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv', row.names = F)
 
 
 ZhangParkinsonsMeta = read.design('data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
 ZhangParkinsonsExp = read.exp('data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv')
 
-ZhangParkinsonsMeta$diseaseState %<>% replaceElement(c('Control' ='control', 
+ZhangParkinsonsMeta$diseaseState %<>% replaceElement(c('Control' ='control',
                                                        "Parkinson's disease" = 'PD',
                                                        'Parkinsons disease' = "PD")) %$% newVector
 
@@ -191,11 +194,11 @@ expressionPD = expression[ZhangParkinsonsMeta$diseaseState %in% 'PD']
 regionsPD = ZhangParkinsonsMeta$brainRegion[ZhangParkinsonsMeta$diseaseState %in% 'PD']
 outliersPD = sampleMixup(expressionPD,regionsPD)
 
-badSamples = c(gsub(pattern = '.cel',replacement = '',c(outliersControl,outliersPD)), 
+badSamples = c(gsub(pattern = '.cel',replacement = '',c(outliersControl,outliersPD)),
                ZhangParkinsonsMeta %>% filter(bioGender!=gender) %$% GSM)
 
-# ZhangParkinsonsExp = ZhangParkinsonsExp[!grepl(regexMerge(badSamples), colnames(ZhangParkinsonsExp))]
-# ZhangParkinsonsMeta %<>% filter(!GSM %in% badSamples)
+ZhangParkinsonsExp = ZhangParkinsonsExp[!grepl(regexMerge(badSamples), colnames(ZhangParkinsonsExp))]
+ZhangParkinsonsMeta %<>% filter(!GSM %in% badSamples)
 
 devtools::use_data(ZhangParkinsonsMeta, overwrite=TRUE)
 devtools::use_data(ZhangParkinsonsExp, overwrite=TRUE)

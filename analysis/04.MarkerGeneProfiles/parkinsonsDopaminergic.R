@@ -43,13 +43,13 @@ groups = list(Lesnick = LesnickParkinsonsMeta$parkinson %>%
 # estimation for all
 estimations = lapply(1:len(expDats),function(i){
     print(i)
-    estimations =  cellTypeEstimate(exprData=expDats[[i]],
-                                         genes=genes,
-                                         geneColName='Gene.Symbol',
-                                         outlierSampleRemove=F,
-                                         groups=groups[[i]],
-                                         removeNegatives = F,
-                                         PC = 1)
+    estimations =  mgpEstimate(exprData=expDats[[i]],
+                               genes=genes,
+                               geneColName='Gene.Symbol',
+                               outlierSampleRemove=F,
+                               groups=groups[[i]],
+                               removeNegatives = F,
+                               PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
         grp = unique(groups[[i]])
@@ -70,8 +70,8 @@ frames = lapply(1:len(estimations), function(i){
     name =  paste0(names(estimations)[i],'\n(n genes = ',geneCount,')')
     
     frame = data.frame(parkinsons = estimations[[i]]$estimations$groups$Dopaminergic,
-                        estimate = scale01(estimations[[i]]$estimations$estimates$Dopaminergic),
-                        name = name,stringsAsFactors = FALSE)
+                       estimate = scale01(estimations[[i]]$estimations$estimates$Dopaminergic),
+                       name = name,stringsAsFactors = FALSE)
 })
 
 masterFrame = rbindMult(list = frames)
@@ -134,13 +134,13 @@ groups = list(Lesnick = LesnickParkinsonsMeta$parkinson %>%
 
 corPlotFrames = lapply(1:len(expDats),function(i){
     print(i)
-    dopaEstim =  cellTypeEstimate(exprData=expDats[[i]],
-                                    genes=genes,
-                                    geneColName='Gene.Symbol',
-                                    outlierSampleRemove=F,
-                                    groups=groups[[i]],
-                                    removeNegatives = F,
-                                    PC = 1)$estimates$Dopaminergic %>% scale01
+    dopaEstim =  mgpEstimate(exprData=expDats[[i]],
+                             genes=genes,
+                             geneColName='Gene.Symbol',
+                             outlierSampleRemove=F,
+                             groups=groups[[i]],
+                             removeNegatives = F,
+                             PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
     PC = paperGeneExp %>% t %>% prcomp(scale=TRUE) %$% x[,1]
@@ -150,7 +150,7 @@ corPlotFrames = lapply(1:len(expDats),function(i){
                paperGenePC = PC*(cor),
                estimation = dopaEstim,
                source = names(expDats)[i])
-    })
+})
 names(corPlotFrames) = names(expDats)
 masterCorPlot = rbindMult(list = corPlotFrames )
 
@@ -160,11 +160,11 @@ groupCorrelations = lapply(1:len(expDats), function(i){
                      method='spearman') %>% abs
     
     PDCor = cor(corPlotFrames[[i]] %>% filter(disease == 'PD') %$% estimation,
-                     corPlotFrames[[i]] %>% filter(disease == 'PD') %$% paperGenePC,
-                     method='spearman') %>% abs
+                corPlotFrames[[i]] %>% filter(disease == 'PD') %$% paperGenePC,
+                method='spearman') %>% abs
     
     c(control = controlCor, PD = PDCor )
-    })
+})
 
 names(groupCorrelations) = names(expDats)
 
@@ -252,15 +252,19 @@ groups = list('Zhang SN' = ZhangParkinsonsMeta$diseaseState[ZhangParkinsonsMeta$
               'Zhang Putamen' = ZhangParkinsonsMeta$diseaseState[ZhangParkinsonsMeta$brainRegion %in% 'Putamen from postmortem brain'],
               'Zhang Cortex' =  ZhangParkinsonsMeta$diseaseState[ZhangParkinsonsMeta$brainRegion %in% 'Prefrontal cortex area 9'])
 
+patients = list('Zhang SN' = ZhangParkinsonsMeta$patient[ZhangParkinsonsMeta$brainRegion %in% 'Whole substantia nigra from postmortem brain'],
+                'Zhang Putamen' = ZhangParkinsonsMeta$patient[ZhangParkinsonsMeta$brainRegion %in% 'Putamen from postmortem brain'],
+                'Zhang Cortex' =  ZhangParkinsonsMeta$patient[ZhangParkinsonsMeta$brainRegion %in% 'Prefrontal cortex area 9'])
+
 estimations = lapply(1:len(expDats),function(i){
     print(i)
-    estimations =  cellTypeEstimate(exprData=expDats[[i]],
-                                    genes=genes,
-                                    geneColName='Gene.Symbol',
-                                    outlierSampleRemove=F,
-                                    groups=groups[[i]],
-                                    removeNegatives = F,
-                                    PC = 1)
+    estimations =  mgpEstimate(exprData=expDats[[i]],
+                               genes=genes,
+                               geneColName='Gene.Symbol',
+                               outlierSampleRemove=F,
+                               groups=groups[[i]],
+                               removeNegatives = F,
+                               PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
         grp = unique(groups[[i]])
@@ -269,7 +273,7 @@ estimations = lapply(1:len(expDats),function(i){
     return(list(estimations = estimations,pVals = pVals))
 })
 names(estimations) = names(expDats)
-estimations %>% map('pVals') %>% map('Dopaminergic')
+# estimations %>% map('pVals') %>% map('Dopaminergic')
 
 
 plotNames = sapply(1:len(estimations), function(i){
@@ -321,13 +325,13 @@ pEstimate = masterFrame %>%  ggplot(aes( y = estimate, x = parkinsons)) +
 
 corPlotFrames = lapply(1:len(expDats),function(i){
     print(i)
-    dopaEstim =  cellTypeEstimate(exprData=expDats[[i]],
-                                  genes=genes,
-                                  geneColName='Gene.Symbol',
-                                  outlierSampleRemove=F,
-                                  groups=groups[[i]],
-                                  removeNegatives = F,
-                                  PC = 1)$estimates$Dopaminergic %>% scale01
+    dopaEstim =  mgpEstimate(exprData=expDats[[i]],
+                             genes=genes,
+                             geneColName='Gene.Symbol',
+                             outlierSampleRemove=F,
+                             groups=groups[[i]],
+                             removeNegatives = F,
+                             PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
     PC = paperGeneExp %>% t %>% prcomp(scale=TRUE) %$% x[,1] 
@@ -336,8 +340,11 @@ corPlotFrames = lapply(1:len(expDats),function(i){
     data.frame(disease = groups[[i]],
                paperGenePC = PC*(cor),
                estimation = dopaEstim,
-               source = names(expDats)[i])
+               source = names(expDats)[i],
+               patients = patients[[i]],
+               GSM = names(PC))
 })
+names(corPlotFrames) = names(expDats)
 
 masterCorPlot = rbindMult(list = corPlotFrames )
 
@@ -403,7 +410,7 @@ allGeneCors %<>% rbindMult(list = .)
 
 allGeneCors$disease %<>% factor(levels=c('control','PD'))
 
-allGeneCors$gene %<>% fct_reorder(allGeneCors$Correlation,.desc=TRUE)
+allGeneCors$gene %<>% fct_reorder(abs(allGeneCors$Correlation),.desc=TRUE)
 
 
 geneAllestimation = allGeneCors %>% ggplot(aes(x = gene, y = Correlation, color = disease)) + 
@@ -418,3 +425,93 @@ geneAllestimation = allGeneCors %>% ggplot(aes(x = gene, y = Correlation, color 
     ylab('Dopaminergic MGP-\nGene expression correlation') + 
     theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 13))
 (geneAllestimation)
+
+
+
+
+# all genes correlation to SN -------------------------
+allGeneCors = lapply(1:len(expDats), function(i){
+    
+    snFrame = corPlotFrames[["Zhang SN"]][match(as.char(corPlotFrames[[i]]$patients ),
+                                                as.char(corPlotFrames[["Zhang SN"]]$patients)) %>% trimNAs,]
+    thisFrame = corPlotFrames[[i]][match(as.char(corPlotFrames[['Zhang SN']]$patients ),
+                                         as.char(corPlotFrames[[i]]$patients)) %>% trimNAs,]
+    
+    controlCor = cor(snFrame$estimation[snFrame$disease %in% 'control' ],
+                     expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,as.char(thisFrame$GSM)] %>% 
+                         sepExpr %>% {.[[2]][,thisFrame$disease %in% 'control' ]} %>% t) %>% t
+    
+    controlCor = data.frame(Correlation = controlCor, disease = 'control', 
+                            gene = expDats[[i]]$Gene.Symbol[expDats[[i]]$Gene.Symbol %in% paperGenes])
+    
+    PDcor =  cor(corPlotFrames$`Zhang SN`$estimation[corPlotFrames[[i]]$disease %in% 'PD' ],
+                 expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% 
+                     sepExpr %>% {.[[2]][,corPlotFrames[[i]]$disease %in% 'PD' ]} %>% t) %>% t
+    
+    PDcor = data.frame(Correlation = PDcor, disease = 'PD', 
+                       gene = expDats[[i]]$Gene.Symbol[expDats[[i]]$Gene.Symbol %in% paperGenes])
+    
+    data.frame(rbind(PDcor,controlCor),source = names(expDats)[i])
+})
+allGeneCors %<>% rbindMult(list = .)
+
+allGeneCors$disease %<>% factor(levels=c('control','PD'))
+
+allGeneCors$gene %<>% fct_reorder(abs(allGeneCors$Correlation),.desc=TRUE)
+
+
+geneAllestimation = allGeneCors %>% ggplot(aes(x = gene, y = Correlation, color = disease)) + 
+    facet_grid(~source) +
+    geom_abline(slope = 0, intercept = 0 ,linetype =2 ) + 
+    theme_cowplot(17) +
+    theme(strip.background = element_blank(),
+          strip.text = element_text(size = 17))+
+    geom_point(size=3, alpha = 0.8) + 
+    scale_color_viridis(discrete=TRUE) +
+    xlab('') +
+    ylab('Dopaminergic MGP-\nGene expression correlation') + 
+    theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 13))
+(geneAllestimation)
+
+####################
+masterCorPlot = rbindMult(list = corPlotFrames )
+
+groupCorrelations = lapply(1:len(expDats), function(i){
+    controlCor = cor(corPlotFrames[[i]] %>% filter(disease == 'control') %$% estimation,
+                     corPlotFrames[[i]] %>% filter(disease == 'control') %$% paperGenePC,
+                     method='spearman') %>% abs
+    
+    PDCor = cor(corPlotFrames[[i]] %>% filter(disease == 'PD') %$% estimation,
+                corPlotFrames[[i]] %>% filter(disease == 'PD') %$% paperGenePC,
+                method='spearman') %>% abs
+    
+    c(control = controlCor, PD = PDCor )
+})
+
+names(groupCorrelations) = names(expDats)
+
+annotation = data.frame(source = groupCorrelations %>% names,
+                        label = c(paste0('Spearman\'s ρ:\n',
+                                         'controls: ',format(groupCorrelations %>% map_dbl('control'),digits = 3),'\n',
+                                         'PD: ', format(groupCorrelations %>% map_dbl('PD'),digits=3))))
+
+
+genePCestimationPlot = masterCorPlot %>% ggplot(aes(x =estimation , y = paperGenePC, color = disease)) + 
+    facet_grid(~source) +
+    theme_cowplot(17) +
+    theme(strip.background = element_blank(),
+          strip.text = element_text(size = 17))+
+    geom_point(size=3) + 
+    stat_smooth(method=lm, se=FALSE) + 
+    scale_color_viridis(discrete=TRUE) +
+    xlab('Dopaminergic MGP estimation') +
+    ylab('PC1 of PD signature gene expression') + 
+    geom_text(data = annotation,
+              aes(label = label,
+                  y = min(masterCorPlot$paperGenePC),
+                  x = max(masterCorPlot$estimation)),
+              color = 'black',
+              vjust= 0,
+              hjust= 1,
+              size = 5)
+(genePCestimationPlot)

@@ -1,4 +1,6 @@
 devtools::load_all()
+library(markerGeneProfile)
+
 
 # white matter grey matter comparison -------------
 cortex_white = trabzuniRegionsExp[, c(trabzuniRegionsMeta$brainRegion %in% c('frontal cortex', 'white matter'))]
@@ -24,13 +26,13 @@ names(genes) = translatePublishable(names(genes))
 
 #genes$`Pyramidal S100a10` = genes$`Pyramidal S100a10`[genes$`Pyramidal S100a10` %in% allowedProbes]
 
-cortex_whiteEstimate = cellTypeEstimate(cortex_white,
-                                        genes= genes,
-                                        geneColName="Gene.Symbol",
-                                        groups = groups,
-                                        outlierSampleRemove= FALSE,
-                                        removeNegatives=TRUE,
-                                        seekConsensus = FALSE
+cortex_whiteEstimate = mgpEstimate(cortex_white,
+                                   genes= genes,
+                                   geneColName="Gene.Symbol",
+                                   groups = groups,
+                                   outlierSampleRemove= FALSE,
+                                   removeNegatives=TRUE,
+                                   seekConsensus = FALSE
 )
 
 cortex_whiteEstimate$estimates = cortex_whiteEstimate$estimates[(cortex_whiteEstimate$rotations %>% sapply(nrow))>1]
