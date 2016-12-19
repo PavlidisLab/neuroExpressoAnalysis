@@ -22,7 +22,6 @@
 #' @param PC integer. which principal component to use when calculating cell type profile.
 #' @param estimateFile name of the file that contains the final profile estimations
 #' @seealso \code{\link{cellTypeEstimate}}
-#' @export
 fullEstimate = function(exprData, # expression data
                         genes, # a list of gene lists containing marker genes for cell types
                         geneColName, # collumn name in the expression data that contains gene names
@@ -90,7 +89,6 @@ fullEstimate = function(exprData, # expression data
 #' @param comparisons a 2 by n matrix that includes group name pairs, indicating which groups should be compared when 
 #' calculating the p values. or "all" which will make comparison between all available groups by setting it to
 #' combn(groups,2)
-#' @export
 plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
                          pAdjMethod = p.adjust.methods,
                          comparisons = 'all' # if p value correction should happen in per plot or for the entire list of ps
@@ -198,7 +196,6 @@ plotEstimates = function(estimates,groups,plotNames, sigTest =  wilcox.test,
 #' @param plotType if indivGenePlot is provided, type of plot to be saved. groupBased separates expression between groups
 #' cummulative plots a single value
 #' @param PC which principal component to use. For debugging purposes. Recommended value is always 1
-#' @export
 cellTypeEstimate = function(exprData,
                             genes,
                             geneColName = 'Gene.Symbol',
@@ -370,7 +367,6 @@ cellTypeEstimate = function(exprData,
 #' to human genes. set to NULL to keep the genes as they are
 #' @param synonymTaxID Taxonomy identifier of the source of cell type markers. If provided, synonyms of the genes will 
 #' be added as markers, not recommended since unrelated genes can share names
-#' @export
 groupRotations = function(exprData, genes,geneColName, groups, outDir,
                           geneTransform = function(x){mouse2human(x)$humanGene},
                           synonymTaxID = NULL)

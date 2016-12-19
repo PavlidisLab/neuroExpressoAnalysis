@@ -6,7 +6,7 @@ StanleyC = data.frame(Gene.Symbol = rn(StanleyCExp), StanleyCExp)
 
 genes = mouseMarkerGenes$Cortex['Oligo']
 groups = StanleyCMeta$Profile
-StanleyCEstimate = cellTypeEstimate(StanleyC,
+StanleyCEstimate = mgpEstimate(StanleyC,
                                     genes= genes,
                                     geneColName="Gene.Symbol",
                                     groups = groups,
