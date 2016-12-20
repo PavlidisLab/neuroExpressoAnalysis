@@ -6,10 +6,10 @@ Cortex
 FS Basket (G42)	13	6	Okaty et al., 2009 (GSE17806), Sugino et al. 2014 (GSE8720), Sugino et al., 2006 (GSE2882)
 Martinotti (GIN)	3	4	Sugino et al., 2006 (GSE2882)
 VIPReln (G30)	6	11	Sugino et al., 2006 (GSE2882)
-Pyramidal CrtThalamic	3	6	Sugino et al., 2006 (GSE2882)
 Pyramidal Glt25d2	3	6	Schmidt et al 2012 (GSE35758)
 Pyramidal S100a10	3	10	Schmidt et al 2012 (GSE35751)
 Pyramidal Thy1	12	3	Sugino et al., 2006 (GSE2882)
+Pyramidal CrtThalamic	3	6	Sugino et al., 2006 (GSE2882)
 BasalForebrain
 Forebrain Cholinergic	6	89	Doyle et al., 2008 (GSE13379)
 Striatum
