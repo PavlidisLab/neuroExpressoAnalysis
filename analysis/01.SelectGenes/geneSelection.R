@@ -10,6 +10,9 @@
 # the default output location is data-raw. Other directories will be created if not already
 # existing
 devtools::load_all()
+library(jsonlite)
+library(stringi)
+library(XLConnect)
 #library(markerGenesManuscript)
 
 if(length(commandArgs(trailingOnly=TRUE))==0){
@@ -276,5 +279,17 @@ lapply(1:len(toPlotGenes), function(i){
                 row.names = F, append = TRUE)
 })
 
+# gene list in single files -------
+mouseMarkerGenes %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenes.json')
 
+sheet = loadWorkbook('analysis/01.SelectGenes/markerGenes.xls', create = TRUE)
 
+dir.create('analysis/01.SelectGenes/markerGeneTSVs')
+1:len(mouseMarkerGenes) %>% sapply(function(i){
+    out = stri_list2matrix(mouseMarkerGenes[[i]]) %>% as.data.frame
+    names(out) = names(mouseMarkerGenes[[i]])
+    write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVs',names(mouseMarkerGenes[i])),na= '', sep = "\t", quote = F, row.names = F)
+    createSheet(sheet, name = names(mouseMarkerGenes[i]))
+    writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
+})
+saveWorkbook(sheet)
