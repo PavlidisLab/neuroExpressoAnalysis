@@ -293,3 +293,7 @@ dir.create('analysis/01.SelectGenes/markerGeneTSVs')
     writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
 })
 saveWorkbook(sheet)
+
+
+# create archive
+system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/*')
