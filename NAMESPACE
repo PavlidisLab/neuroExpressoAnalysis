@@ -3,6 +3,7 @@
 export(banGenes)
 export(bioGender)
 export(cellColors)
+export(findGene)
 export(fixTable)
 export(list)
 export(markerCandidates)
