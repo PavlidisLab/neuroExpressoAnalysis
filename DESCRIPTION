@@ -32,7 +32,8 @@ Depends:
     gtable(>= 0.2.0),
     grDevices(>= 3.1.2),
     limma (>= 3.22.7),
-    doRNG (>= 1.6)
+    doRNG (>= 1.6),
+    stringi (>= 1.1.2)
 Imports:
     ogbox (>= 1.0)
 Suggests:
