@@ -1,0 +1,126 @@
+---
+output:
+    pdf_document:
+        includes:
+            in_header: import.sty
+---
+
+\begin{figure}
+\begin{center}
+  \captionsetup{labelformat=empty}
+  \caption{\textbf{Figure S1:} Expression of dentate granule cell markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database.}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/01.png}
+  \label{fig:allenAllDentate}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/05.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/09.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/13.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/17.png}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/21.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 7.5in]{DentateGranule_singlePages/25.png}
+\end{center}
+\end{figure}
+
+\newpage
+
+
+
+\begin{figure}
+\begin{center}
+  \captionsetup{labelformat=empty}
+  \caption{\textbf{Figure S2:} Expression of purkinje markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database.}
+  \includegraphics[height = 10in]{Purkinje_singlePages/01.png}
+  \label{fig:allenAllPurkinje}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/05.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/09.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/13.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/17.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/21.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/25.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/29.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/33.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 10in]{Purkinje_singlePages/37.png}
+\end{center}
+\end{figure}
