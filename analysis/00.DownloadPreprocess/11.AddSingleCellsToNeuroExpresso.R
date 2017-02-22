@@ -9,7 +9,7 @@ names(TasicPrimaryMean)  =  TasicMouseMeta$primary_type %>% unique
 
 
 TasicPrimaryMeanComparable = TasicPrimaryMean %>%  
-    qNormToValues(values = n_expressoExpr %>% unlist)%>%
+    qNormToValues(values = n_expressoExpr %>% sepExpr %>% {.[[2]]} %>% unlist)%>%
     as.data.frame
 rownames(TasicPrimaryMeanComparable) =TasicPrimaryMean %>% rn 
 
