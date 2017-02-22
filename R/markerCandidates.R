@@ -39,12 +39,15 @@ markerCandidates = function(design,
                       regionHierarchy = NULL,
                       geneID = 'Gene.Symbol',
                       seed = NULL){
+    #browser()
     # source('R/regionHierarchy.R')
     # so that I wont fry my laptop
+    if(!is.na(detectCores())){
     if (detectCores()<cores){ 
         cores = detectCores()
         print('max cores exceeded')
         print(paste('set core no to',cores))
+    }
     }
     registerDoMC(cores)
     
@@ -124,7 +127,7 @@ markerCandidates = function(design,
     }
     
     
-    regionGroups = regionize(design,regionNames,groupNames,regionHierarchy)
+    regionGroups = memoReg(design,regionNames,groupNames,regionHierarchy)
     # concatanate new region based groups to design and to groupNames so they'll be processed normally
     if (!noReg){
         design = cbind(design,regionGroups)
