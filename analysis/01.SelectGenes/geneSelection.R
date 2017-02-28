@@ -18,23 +18,75 @@ library(XLConnect)
 if(length(commandArgs(trailingOnly=TRUE))==0){
     start = 1
     end = 500
-    secondChip = TRUE
+    secondChip = FALSE
+    signleCell = TRUE
 } else{
     args <- commandArgs(trailingOnly = TRUE)
     start = as.numeric(args[1])
     end = as.numeric(args[2])
     secondChip = as.logical(args[3])
+    singleCell = as.logical(args[4])
 }
 
+# processing single cell data ---------
 
+regionGroups = memoReg(n_expressoSamplesWithRNAseq,'Region',c('PyramidalDeep'),regionHierarchy)
+
+list[gene,exp] = n_expressoExprWithRNAseq %>% sepExpr
+cortexSamples = n_expressoSamplesWithRNAseq$sampleName[!is.na(regionGroups$Cortex_PyramidalDeep)]
+cortexMustSamples = n_expressoSamplesWithRNAseq$sampleName[!is.na(regionGroups$Cortex_PyramidalDeep) & 
+                                                               (!(n_expressoSamplesWithRNAseq$PyramidalDeep %in%  n_expressoSamples$PyramidalDeep & 
+                                                                      n_expressoSamplesWithRNAseq$Platform %in% 'RNAseq'))]
+
+cortexOldSamples =  n_expressoSamplesWithRNAseq$sampleName[!grepl('Layer', n_expressoSamplesWithRNAseq$PyramidalDeep) & !is.na(regionGroups$Cortex_PyramidalDeep)]
+
+n_expressoSamplesWithRNAseq$PyramidalDeepNoNewPyramidal = n_expressoSamplesWithRNAseq$PyramidalDeep
+n_expressoSamplesWithRNAseq$PyramidalDeepNoNewPyramidal[!n_expressoSamplesWithRNAseq$sampleName %in% cortexOldSamples] = NA
+
+n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveTo =  n_expressoSamplesWithRNAseq$PyramidalDeep
+n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveTo[!n_expressoSamplesWithRNAseq$sampleName %in% cortexMustSamples] = NA
+
+n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals = n_expressoSamplesWithRNAseq$PyramidalDeep
+n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals[!n_expressoSamplesWithRNAseq$sampleName %in% cortexMustSamples | !n_expressoSamplesWithRNAseq$sampleName %in% cortexOldSamples] = NA
+
+meltedSingleCells$PyramidalDeepNoNewPyramidal = meltedSingleCells$PyramidalDeep
+meltedSingleCells$PyramidalDeepNoNewPyramidal[!meltedSingleCells$sampleName %in% cortexOldSamples] = NA
+
+    
+# quick selection ---------------------------
 if (start == 1){
     # this is a quick way to select "goog enough" markers without doing permutations
     # output of this will not be robust to outliers. These genes are not used in the study
     # and are not readily available in the package
+    if(singleCell){
+        markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
+                         expression = cbind(gene,exp[cortexSamples]),
+                         outLoc = 'analysis//01.SelectGenes/QuickSingleCell',
+                         groupNames = c('PyramidalDeep',
+                                        'PyramidalDeepNoNewPyramidal',
+                                        'PyramidalDeepNoSingleCellUnlessYouHaveTo',
+                                        'PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals'),
+                         #groupNames = 'DopaSelect',
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                         regionNames = NULL,
+                         cores=16,
+                         regionHierarchy= NULL)
+        
+        markerCandidates(design = meltedSingleCells,
+                         expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),
+                         outLoc = 'analysis//01.SelectGenes/QuickJustSingleCell',
+                         groupNames = c('PyramidalDeep','PyramidalDeepNoNewPyramidal'),
+                         #groupNames = 'DopaSelect',
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                         regionNames = NULL,
+                         cores=16,
+                         regionHierarchy= NULL)
+    }
+    
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = 'analysis//01.SelectGenes/Quick',
-                     groupNames = c('PyramidalDeep','BroadTypes','DopaSelect'),
+                     groupNames = c('PyramidalDeep'),
                      #groupNames = 'DopaSelect',
                      #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
@@ -58,7 +110,8 @@ if (start == 1){
     }
 }
 
-# here we do the permutations required for selection of marker genes robust to outliers.
+
+# rotations ----------------------------
 if(start==1){
     file.create('analysis//01.SelectGenes/Rotation/progress')
 }
@@ -67,7 +120,7 @@ for (i in start:end){
     markerCandidates(design = n_expressoSamples,
                      expression = n_expressoExpr,
                      outLoc = paste0('analysis//01.SelectGenes/Rotation/',i),
-                     groupNames = c('PyramidalDeep','BroadTypes','DopaSelect'),
+                     groupNames = c('PyramidalDeep'),
                      #groupNames = 'DopaSelect',
                      #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                      regionNames = 'Region',
@@ -79,6 +132,28 @@ for (i in start:end){
 }
 cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
 
+# rotation with single cells ------------------------------
+if(start==1){
+    file.create('analysis//01.SelectGenes/RotationSingleCell/progress')
+}
+for(i in start:end){
+    markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
+                     expression = cbind(gene,exp[cortexSamples]),
+                     outLoc = paste0('analysis//01.SelectGenes/RotationSingleCell/',i),
+                     groupNames = c('PyramidalDeep',
+                                    'PyramidalDeepNoNewPyramidal',
+                                    'PyramidalDeepNoSingleCellUnlessYouHaveTo',
+                                    'PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals'),
+                     #groupNames = 'DopaSelect',
+                     #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                     regionNames = NULL,
+                     cores=16,
+                     rotate=0.33,
+                     regionHierarchy= NULL)
+}
+cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/RotationSingleCell/progress',append=TRUE)
+
+# second chip rotations -------------------
 if(secondChip){
     if(start==1){
         file.create('analysis//01.SelectGenes/Rotation2/progress')
@@ -103,7 +178,7 @@ if(secondChip){
     
 }
 
-# if this is the last rotation, calculate the selection percentages of genes.
+# if this is the last rotation, calculate the selection percentages of genes. ----------------
 if(end == 500){
     # wait for all other branches to complete operation
     repeat{
@@ -120,19 +195,46 @@ if(end == 500){
     rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                  rotSelOut='analysis/01.SelectGenes/RotSel',
                  cores = 16,foldChange = 1)
+    
+    # rotsel second chip ----------------
     if(secondChip){
+        repeat{
+            progress = read.table('analysis//01.SelectGenes/Rotation2/progress') %>% apply(1, function(x){
+                x[1]:x[2]
+            }) %>% sapply(len) %>% sum
+            if (progress>=500){
+                break
+            }
+            Sys.sleep(60) 
+        }
         rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                      rotSelOut='analysis/01.SelectGenes/RotSel2',
                      cores = 16, foldChange = 1)
     }
-    
-    
+    # rotsel single cells
+    if(singleCell){
+        repeat{
+            progress = read.table('analysis//01.SelectGenes/RotationSingleCell//progress') %>% apply(1, function(x){
+                x[1]:x[2]
+            }) %>% sapply(len) %>% sum
+            if (progress>=500){
+                break
+            }
+            Sys.sleep(60) 
+        }
+        rotateSelect(rotationOut='analysis//01.SelectGenes/RotationSingleCell//',
+                     rotSelOut='analysis/01.SelectGenes/RotSelSingleCell',
+                     cores = 16, foldChange = 1)
+    }
     # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     # that are selected in more than 95% of the permutations
     allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
     if (secondChip){
-        allGenes = list(genes1 = allGenes[[1]],
-                        genes2 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
+        allGenes = c(allGenes = allGenes[[1]],
+                        list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSel/')))
+    }
+    if(singleCell){
+        allGenes = c(allGenes, list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')))
     }
     
     
