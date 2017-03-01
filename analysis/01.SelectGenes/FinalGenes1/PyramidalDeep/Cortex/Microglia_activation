@@ -5,11 +5,11 @@ Birc3
 C1qa
 C1qb
 Casp4
-Ccdc86
 Ccl12
 Ccl2
 Ccl4
 Ccl9
+Ccnl1
 Ccr5
 Cd14
 Cd53
@@ -28,7 +28,7 @@ Fcgr2b
 Fcgr3
 Frrs1
 Gas5
-Gbp7
+Gcnt2
 Glipr1
 Gpr84
 Hck
@@ -40,6 +40,7 @@ Ifi30
 Ifi35
 Il17ra
 Il1a
+Il1b
 Il4ra
 Il6
 Irf9
@@ -59,6 +60,7 @@ Myd88
 Ncf1
 Ncf2
 Ncf4
+Nfkbia
 Nfkbie
 Nfkbiz
 Npl
@@ -72,7 +74,6 @@ Plk3
 Pmaip1
 Ptbp1
 Rab20
-Rbm26
 Rela
 Rhoh
 Ripk1
@@ -98,12 +99,14 @@ Tlr2
 Tlr6
 Tlr7
 Tmem173
+Tnf
 Tnfaip2
 Tpp2
 Trim30a
 Tsc22d3
 Tspo
 Tubb6
+Ucp2
 Vasp
 Vav1
 Zfp36

@@ -1,6 +1,5 @@
 1700019G17Rik
 2810459M11Rik
-4931406C07Rik
 Aass
 Abhd3
 Acaa2
@@ -26,6 +25,7 @@ Cbs
 Ccdc80
 Cd38
 Cdc42ep4
+Clcn2
 Cldn10
 Clu
 Col4a5
@@ -79,9 +79,7 @@ Hacd2
 Hapln1
 Hnrnpa2b1
 Hsd11b1
-Htra1
 Il18
-Il33
 Inhbb
 Itga7
 Itih5
@@ -90,7 +88,6 @@ Kctd5
 Kif1c
 Klf15
 Lamb2
-Lap3
 Lcat
 Lgi4
 Lhx2
@@ -98,6 +95,7 @@ Lmcd1
 Lpp
 Lrig1
 Lrp4
+Lxn
 Metrn
 Mfge8
 Mgst1
@@ -112,7 +110,6 @@ Naaa
 Nde1
 Ndp
 Ndrg2
-Neat1
 Nhsl1
 Notch1
 Nrarp
@@ -137,7 +134,7 @@ Prodh
 Ptpn13
 Ptprz1
 Pygb
-Rapgef3
+Pygm
 Rdh5
 Retsat
 Rftn2
@@ -164,6 +161,7 @@ Smo
 Smpd2
 Smpdl3a
 Soat1
+Sorcs2
 Sox21
 Sox9
 Srebf1
