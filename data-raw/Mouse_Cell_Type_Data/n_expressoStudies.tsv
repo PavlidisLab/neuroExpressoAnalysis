@@ -4,7 +4,7 @@ GSE9566	GSM241915,GSM241925	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	Astrocy
 GSE35338	GSM866327,GSM866328,GSM866329,GSM866330	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	Astrocyte	Astrocyte	33	Cortex,Cerebrum,Thalamus,Brainstem,SpinalCord,Subependymal	GPL1261	FACS	Zamanian et al 2012	22553043	TRUE	TRUE	TRUE	TRUE	
 GSE13379	GSM337861,GSM337862,GSM337863	Glia	Bergmann	Bergmann	Bergmann	Bergmann	Bergmann	Bergman Glia	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
 GSE18765	GSM465752,GSM465753	Glia	Ependymal	Ependymal	Ependymal	Ependymal	Ependymal	CD24+ (ependymal cell)	56	Subependymal	GPL1261	FACS	Beckervordersandforth et al 2010	21112568	TRUE	TRUE	TRUE	TRUE	
-GSE29949	GSM741193,GSM741194,GSM741192	Glia	Microglia	Microglia	Microglia	Microglia	Microglia	Microglia	42	All	GPL1261	FACS	Anandasabapathy et al., 2011	21788405	TRUE	TRUE	TRUE	TRUE	
+GSE29949	GSM741193,GSM741194,GSM741192	Glia	Microglia	Microglia	Microglia	Microglia	Microglia	Microglia	42	All,Cortex	GPL1261	FACS	Anandasabapathy et al., 2011	21788405	TRUE	TRUE	TRUE	TRUE	
 GSE48369	GSM1176624,GSM1176625,GSM1176626,GSM1176627,GSM1176628,GSM1176629	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Oligo	Oligodendrocytes	66	Cerebellum	GPL1261	TRAP	Bellesi et al 2013	24005282	TRUE	TRUE	TRUE	TRUE	
 GSE9566	GSM241890,GSM241893,GSM241894,GSM241918	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Oligo	Mature Oligodendrocytes	17	Cortex,All	GPL1261	PAN	Cahoy et al., 2008	18171944	TRUE	TRUE	TRUE	TRUE	
 GSE13379	GSM337841,GSM337842,GSM337843	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	Oligo	Mixed Oligodendrocytes	Adult	Cerebellum	GPL1261	TRAP	Doyle et al., 2008	19013282	TRUE	TRUE	TRUE	TRUE	
