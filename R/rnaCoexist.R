@@ -147,7 +147,7 @@ rnaCoexist = function(rnaExp, # matrix of expressio values with row names = gene
                              meanCor = realProbs %>%sapply(mean),
                              geneCount = genesInSeq %>% sapply(len))
         write.table(toWrite,
-                    paste0(dataOut, '/','realProbs'),quote=F)
+                    paste0(dataOut, '/','realProbs'),quote=FALSE, sep = '\t')
         #write.table(as.data.frame(simuProbs),
         #            paste0(dataOut,'/','simuProbs'), quote=F, row.names=F)
         for (i in 1:len(genes)){
