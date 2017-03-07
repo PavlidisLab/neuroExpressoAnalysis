@@ -10,11 +10,13 @@ TasicPrimaryMean = TasicMouseMeta$primary_type %>% unique %>% lapply(function(x)
 names(TasicPrimaryMean)  =  TasicMouseMeta$primary_type %>% unique
 
 
+TasicPrimaryMeanComparable = TasicPrimaryMean %>% 
+    apply(2,qNormToValues,values =  n_expressoExpr %>%
+              sepExpr %>% {.[[2]]} %>% unlist) %>%
+    as.df
 
-TasicPrimaryMeanComparable = TasicPrimaryMean %>%  
-    qNormToValues(values = n_expressoExpr %>% sepExpr %>% {.[[2]]} %>% unlist)%>%
-    as.data.frame
-rownames(TasicPrimaryMeanComparable) =TasicPrimaryMean %>% rn 
+rownames(TasicPrimaryMeanComparable) = rn(TasicPrimaryMean)
+
 
 
 sampleLines = singleCells$Tasic %>% str_split(', ')
