@@ -133,38 +133,39 @@ for (i in start:end){
 cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
 
 # rotation with single cells ------------------------------
-if(start==1){
-    file.create('analysis//01.SelectGenes/RotationSingleCell/progress')
+if(singleCell){
+    if(start==1){
+        file.create('analysis//01.SelectGenes/RotationSingleCell/progress')
+    }
+    for(i in start:end){
+        markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
+                         expression = cbind(gene,exp[cortexSamples]),
+                         outLoc = paste0('analysis//01.SelectGenes/RotationSingleCell/',i),
+                         groupNames = c('PyramidalDeep',
+                                        'PyramidalDeepNoNewPyramidal',
+                                        'PyramidalDeepNoSingleCellUnlessYouHaveTo',
+                                        'PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals'),
+                         #groupNames = 'DopaSelect',
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                         regionNames = NULL,
+                         cores=16,
+                         rotate=0.33,
+                         regionHierarchy= NULL)
+        markerCandidates(design = meltedSingleCells,
+                         expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),
+                         outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCell/',i),
+                         groupNames = c('PyramidalDeep','PyramidalDeepNoNewPyramidal'),
+                         #groupNames = 'DopaSelect',
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                         regionNames = NULL,
+                         cores=15,
+                         rotate = 0.33,
+                         regionHierarchy= NULL)
+        
+        
+    }
+    cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/RotationSingleCell/progress',append=TRUE)
 }
-for(i in start:end){
-    markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
-                     expression = cbind(gene,exp[cortexSamples]),
-                     outLoc = paste0('analysis//01.SelectGenes/RotationSingleCell/',i),
-                     groupNames = c('PyramidalDeep',
-                                    'PyramidalDeepNoNewPyramidal',
-                                    'PyramidalDeepNoSingleCellUnlessYouHaveTo',
-                                    'PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals'),
-                     #groupNames = 'DopaSelect',
-                     #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
-                     regionNames = NULL,
-                     cores=16,
-                     rotate=0.33,
-                     regionHierarchy= NULL)
-    markerCandidates(design = meltedSingleCells,
-                     expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),
-                     outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCell/',i),
-                     groupNames = c('PyramidalDeep','PyramidalDeepNoNewPyramidal'),
-                     #groupNames = 'DopaSelect',
-                     #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
-                     regionNames = NULL,
-                     cores=15,
-                     rotate = 0.33,
-                     regionHierarchy= NULL)
-    
-    
-}
-cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/RotationSingleCell/progress',append=TRUE)
-
 # second chip rotations -------------------
 if(secondChip){
     if(start==1){
