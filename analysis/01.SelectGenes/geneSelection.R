@@ -253,7 +253,7 @@ if(end == 500){
     }
     if(singleCell){
         allGenes = c(allGenes, list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')),
-                     list(genes4 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')))
+                     list(genes4 = pickMarkersAll('analysis/01.SelectGenes/RotSelJustSingleCell//')))
     }
     
     
