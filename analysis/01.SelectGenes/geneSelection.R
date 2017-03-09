@@ -52,7 +52,7 @@ n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyra
 meltedSingleCells$PyramidalDeepNoNewPyramidal = meltedSingleCells$PyramidalDeep
 meltedSingleCells$PyramidalDeepNoNewPyramidal[!meltedSingleCells$sampleName %in% cortexOldSamples] = NA
 
-    
+
 # quick selection ---------------------------
 if (start == 1){
     # this is a quick way to select "goog enough" markers without doing permutations
@@ -150,6 +150,18 @@ for(i in start:end){
                      cores=16,
                      rotate=0.33,
                      regionHierarchy= NULL)
+    markerCandidates(design = meltedSingleCells,
+                     expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),
+                     outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCell/',i),
+                     groupNames = c('PyramidalDeep','PyramidalDeepNoNewPyramidal'),
+                     #groupNames = 'DopaSelect',
+                     #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                     regionNames = NULL,
+                     cores=15,
+                     rotate = 0.33,
+                     regionHierarchy= NULL)
+    
+    
 }
 cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/RotationSingleCell/progress',append=TRUE)
 
@@ -225,20 +237,30 @@ if(end == 500){
         rotateSelect(rotationOut='analysis//01.SelectGenes/RotationSingleCell//',
                      rotSelOut='analysis/01.SelectGenes/RotSelSingleCell',
                      cores = 16, foldChange = 1)
+        
+        rotateSelect(rotationOut='analysis//01.SelectGenes/RotationJustSingleCell//',
+                     rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCell',
+                     cores = 16, foldChange = 1)
     }
     # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     # that are selected in more than 95% of the permutations
     allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
     if (secondChip){
         allGenes = c(allGenes = allGenes[[1]],
-                        list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSel/')))
+                     list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSel/')))
+    } else{
+        allGenes$gene2=NA
     }
     if(singleCell){
-        allGenes = c(allGenes, list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')))
+        allGenes = c(allGenes, list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')),
+                     list(genes4 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')))
     }
     
     
     for (n in 1:len(allGenes)){
+        if(is.na(allGenes[[n]])){
+            next
+        }
         genes = allGenes[[n]]
         for (i in 1:len(genes)){
             pieces = strsplit(names(genes)[i],'_')[[1]]
@@ -277,16 +299,20 @@ if(end == 500){
     if (secondChip){
         microglialException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
     }
+    if(singleCell){
+        microglialException('analysis/01.SelectGenes/FinalGenes3/',cores=8)
+        microglialException('analysis/01.SelectGenes/FinalGenes4/',cores=8)
+    }
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     allMicroglia = genes %>% lapply(function(x){
         x['Microglia']
     }) %>% unlist %>% unique %>% len
     print(paste0('Microglia now have ', allMicroglia, ' genes'))
     
-  
+    
     
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-
+    
     allS100 = genes %>% lapply(function(x){
         x['Pyramidal_S100a10']
     }) %>% unlist %>% unique %>% len
@@ -295,6 +321,10 @@ if(end == 500){
     s100a10exception('analysis/01.SelectGenes/FinalGenes1/',cores=8)
     if (secondChip){
         s100a10exception('analysis/01.SelectGenes/FinalGenes2/',cores=8)
+    }
+    if(singleCell){
+        # s100a10exception('analysis/01.SelectGenes/FinalGenes3/',cores=8)
+        # s100a10exception('analysis/01.SelectGenes/FinalGenes4/',cores=8)
     }
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     allS100 = genes %>% lapply(function(x){
@@ -311,6 +341,11 @@ if(end == 500){
     if (secondChip){
         banGenes('analysis/01.SelectGenes/FinalGenes2/',bannedGenes = bannedGenes,cores=8)
     }
+    if(singleCell){
+        banGenes('analysis/01.SelectGenes/FinalGenes3/',bannedGenes = bannedGenes,cores=8)
+        banGenes('analysis/01.SelectGenes/FinalGenes4/',bannedGenes = bannedGenes,cores=8)
+    }
+    
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     
     assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
