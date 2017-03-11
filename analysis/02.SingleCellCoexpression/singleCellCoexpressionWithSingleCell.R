@@ -8,6 +8,13 @@ withSingleCells = pickMarkersAll('analysis/01.SelectGenes/FinalGenes3/PyramidalD
 
 justSingleCells = pickMarkersAll('analysis/01.SelectGenes/QuickJustSingleCell/')
 
+genes = allCorticalMarkers
+#genes = genes %>% lapply(function(x){x[x %>% mouse2human %$% humanGene %>% {. %in% rn(trabzuniRegionsExp)}]})
+#genes = genes[genes %>% sapply(length) %>% {.>1}]
+genes= genes[!grepl(pattern='Microglia_',names(genes))]
+
+markerGenes=genes
+
 markerGenes = names(withSingleCells$All) %>% sapply(function(x){
     c(withSingleCells$All[[x]],justSingleCells$PyramidalDeep[[x]]) %>% unique
 },simplify=FALSE)
