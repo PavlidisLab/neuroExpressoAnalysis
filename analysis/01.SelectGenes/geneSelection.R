@@ -151,6 +151,7 @@ if(singleCell){
                          cores=16,
                          rotate=0.33,
                          regionHierarchy= NULL)
+        
         markerCandidates(design = meltedSingleCells,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),
                          outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCell/',i),
@@ -159,6 +160,17 @@ if(singleCell){
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = NULL,
                          cores=15,
+                         rotate = 0.33,
+                         regionHierarchy= NULL)
+        
+        markerCandidates(design = meltedSingleCells,foldChangeThresh = 8,minimumExpression = 7,
+                         expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),
+                         outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCellRelaxed/',i),
+                         groupNames = c('PyramidalDeep','PyramidalDeepNoNewPyramidal'),
+                         #groupNames = 'DopaSelect',
+                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
+                         regionNames = NULL,
+                         cores=4,
                          rotate = 0.33,
                          regionHierarchy= NULL)
         
@@ -191,7 +203,7 @@ if(secondChip){
     
 }
 
-# if this is the last rotation, calculate the selection percentages of genes. ----------------
+# RotSel: if this is the last rotation, calculate the selection percentages of genes. ----------------
 if(end == 500){
     # wait for all other branches to complete operation
     repeat{
@@ -209,7 +221,7 @@ if(end == 500){
                  rotSelOut='analysis/01.SelectGenes/RotSel',
                  cores = 16,foldChange = 1)
     
-    # rotsel second chip ----------------
+    # rotsel second chip
     if(secondChip){
         repeat{
             progress = read.table('analysis//01.SelectGenes/Rotation2/progress') %>% apply(1, function(x){
@@ -242,6 +254,10 @@ if(end == 500){
         rotateSelect(rotationOut='analysis//01.SelectGenes/RotationJustSingleCell//',
                      rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCell',
                      cores = 16, foldChange = 1)
+        
+        rotateSelect(rotationOut='analysis//01.SelectGenes/RotationJustSingleCellRelaxed//',
+                     rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCellRelaxed',
+                     cores = 16, foldChange = 1)
     }
     # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     # that are selected in more than 95% of the permutations
@@ -254,7 +270,8 @@ if(end == 500){
     }
     if(singleCell){
         allGenes = c(allGenes, list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')),
-                     list(genes4 = pickMarkersAll('analysis/01.SelectGenes/RotSelJustSingleCell//')))
+                     list(genes4 = pickMarkersAll('analysis/01.SelectGenes/RotSelJustSingleCell//')),
+                     list(genes5 = pickMarkersAll(('analysis/01.SelectGenes/RotSelJustSingleCellRelaxed/'))))
     }
     
     
@@ -303,6 +320,7 @@ if(end == 500){
     if(singleCell){
         microglialException('analysis/01.SelectGenes/FinalGenes3/',cores=8)
         microglialException('analysis/01.SelectGenes/FinalGenes4/',cores=8)
+        microglialException('analysis/01.SelectGenes/FinalGenes5/',cores=8)
     }
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
     allMicroglia = genes %>% lapply(function(x){
@@ -345,6 +363,7 @@ if(end == 500){
     if(singleCell){
         banGenes('analysis/01.SelectGenes/FinalGenes3/',bannedGenes = bannedGenes,cores=8)
         banGenes('analysis/01.SelectGenes/FinalGenes4/',bannedGenes = bannedGenes,cores=8)
+        banGenes('analysis/01.SelectGenes/FinalGenes5/',bannedGenes = bannedGenes,cores=8)
     }
     
     genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
