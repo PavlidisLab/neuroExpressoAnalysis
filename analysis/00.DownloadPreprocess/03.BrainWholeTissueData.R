@@ -8,7 +8,7 @@ library(ogbox)
 devtools::load_all()
 
 # trabzuni dataset ----------------------
-#ogbox::getGemmaAnnot('GPL5175','data-raw/GemmaAnnots/GPL5175',annotType='noParents')
+ogbox::getGemmaAnnot('GPL5175','data-raw/GemmaAnnots/GPL5175',annotType='noParents',overwrite = TRUE)
 
 dir.create('data-raw/TrabzuniRegions/',showWarnings=FALSE)
 # download.file('ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60862/soft/GSE60862_family.soft.gz',
@@ -147,7 +147,7 @@ devtools::use_data(trabzuniRegionsExp,
 
 # stanley data is taken from Lilah -----------------
 load('data-raw/StanleyData/StanleyData.RData')
-ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents')
+ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents',overwrite=TRUE)
 
 stanleyOut = function(stanleyStud){
     stud = stanleyStud$aned_good
@@ -179,7 +179,7 @@ devtools::use_data(stanleyStud1,
                    overwrite=TRUE)
 
 # Chen (2016) (Sibille) dataset -----------------
-ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents')
+ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents',overwrite=TRUE)
 dir.create('data-raw/ChenCortex/', showWarnings=FALSE)
 softDown('GSE71620','data-raw/ChenCortex//GSE71620_family.soft.gz')
 system('gunzip data-raw/ChenCortex//GSE71620_family.soft.gz')
