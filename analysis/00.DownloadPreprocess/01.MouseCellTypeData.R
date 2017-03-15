@@ -44,8 +44,8 @@ if (download){
     
     # before normalization, download probe to gene annotations from gemma
     dir.create('data-raw/GemmaAnnots', showWarnings=FALSE)
-    ogbox::getGemmaAnnot('GPL339','data-raw/GemmaAnnots/GPL339',annotType='noParents')
-    ogbox::getGemmaAnnot('GPL1261','data-raw/GemmaAnnots/GPL1261',annotType='noParents')
+    ogbox::getGemmaAnnot('GPL339','data-raw/GemmaAnnots/GPL339',annotType='noParents',overwrite = TRUE)
+    ogbox::getGemmaAnnot('GPL1261','data-raw/GemmaAnnots/GPL1261',annotType='noParents',overwrite = TRUE)
 }
 
 # normalization of the data ----------------
