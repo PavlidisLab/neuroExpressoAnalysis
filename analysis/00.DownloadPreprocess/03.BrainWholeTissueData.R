@@ -7,14 +7,20 @@ library(magrittr)
 library(ogbox)
 devtools::load_all()
 
+downloadData = FALSE
+downloadGemma = TRUE
+
 # trabzuni dataset ----------------------
-ogbox::getGemmaAnnot('GPL5175','data-raw/GemmaAnnots/GPL5175',annotType='noParents',overwrite = TRUE)
-
+if(downloadGemma){
+    ogbox::getGemmaAnnot('GPL5175','data-raw/GemmaAnnots/GPL5175',annotType='noParents',overwrite = TRUE)
+}
 dir.create('data-raw/TrabzuniRegions/',showWarnings=FALSE)
-# download.file('ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60862/soft/GSE60862_family.soft.gz',
-#               destfile='data-raw/TrabzuniRegions/GSE60862_family.soft.gz')
-# system('gunzip data-raw/TrabzuniRegions/GSE60862_family.soft.gz')
 
+if(downloadData){
+    download.file('ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE60nnn/GSE60862/soft/GSE60862_family.soft.gz',
+                  destfile='data-raw/TrabzuniRegions/GSE60862_family.soft.gz')
+    system('gunzip data-raw/TrabzuniRegions/GSE60862_family.soft.gz')
+}
 # deal with softfile
 softData = softParser('data-raw/TrabzuniRegions/GSE60862_family.soft')
 
@@ -51,12 +57,13 @@ colnames(softData) = c('deatAge',
 
 
 # download cel files
-dir.create('data-raw/cel/GPL5175')
-sapply(softData$GSM,function(x){
-    xNow<<-x
-    gsmDown(gsm=x,outfile=paste0('data-raw//cel/GPL5175/',x,'.cel'),unzip=F)
-})
-
+dir.create('data-raw/cel/GPL5175',showWarnings = FALSE)
+if(downloadData){
+    sapply(softData$GSM,function(x){
+        xNow<<-x
+        gsmDown(gsm=x,outfile=paste0('data-raw//cel/GPL5175/',x,'.cel'),unzip=F)
+    })
+}
 # attach scandates
 softData$scanDate = sapply(softData$GSM, function(x){
     celfileDate(paste0('data-raw/cel/GPL5175/',x, '.cel.gz'))
@@ -147,7 +154,9 @@ devtools::use_data(trabzuniRegionsExp,
 
 # stanley data is taken from Lilah -----------------
 load('data-raw/StanleyData/StanleyData.RData')
-ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents',overwrite=TRUE)
+if(downloadGemma){
+    ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents',overwrite=TRUE)
+}
 
 stanleyOut = function(stanleyStud){
     stud = stanleyStud$aned_good
@@ -179,10 +188,14 @@ devtools::use_data(stanleyStud1,
                    overwrite=TRUE)
 
 # Chen (2016) (Sibille) dataset -----------------
-ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents',overwrite=TRUE)
+if(downloadGemma){
+    ogbox::getGemmaAnnot('GPL11532','data-raw/GemmaAnnots/GPL11532',annotType='noParents',overwrite=TRUE)
+}
 dir.create('data-raw/ChenCortex/', showWarnings=FALSE)
-softDown('GSE71620','data-raw/ChenCortex//GSE71620_family.soft.gz')
-system('gunzip data-raw/ChenCortex//GSE71620_family.soft.gz')
+if(downloadData){
+    softDown('GSE71620','data-raw/ChenCortex//GSE71620_family.soft.gz')
+    system('gunzip data-raw/ChenCortex//GSE71620_family.soft.gz')
+}
 softData = softParser('data-raw/ChenCortex/GSE71620_family.soft',expression=FALSE)
 
 #list[softData,expression]  = softParser('data-raw/ChenCortex/GSE71620_family.soft',expression=TRUE)
@@ -219,12 +232,12 @@ write.design(softData,file='data-raw/ChenCortex/GSE71620_design.tsv')
 dir.create('data-raw/cel/GPL11532/',showWarnings=FALSE)
 
 softData = read.design('data-raw/ChenCortex/GSE71620_design.tsv', comment.char='')
-
-sapply(softData$GSM,function(x){
-    xNow<<-x
-    gsmDown(gsm=x,outfile=paste0('data-raw//cel/GPL11532/',x,'.cel'),unzip=F)
-})
-
+if(downloadData){
+    sapply(softData$GSM,function(x){
+        xNow<<-x
+        gsmDown(gsm=x,outfile=paste0('data-raw//cel/GPL11532/',x,'.cel'),unzip=F)
+    })
+}
 expTable = readOligoCel(softData$GSM,
              gemmaAnnot= 'data-raw/GemmaAnnots/GPL11532',
              file = NULL,
