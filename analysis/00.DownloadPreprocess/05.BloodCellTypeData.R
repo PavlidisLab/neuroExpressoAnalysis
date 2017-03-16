@@ -2,13 +2,21 @@
 library(XLConnect)
 devtools::load_all()
 
+downloadData = FALSE
+downloadGemma = TRUE
+
 # human blood------
-dir.create('data-raw/GemmaAnnots')
-ogbox::getGemmaAnnot(chipName='GPL96', chipFile='data-raw/GemmaAnnots/GPL96',annotType='noParents')
+dir.create('data-raw/GemmaAnnots',showWarnings = FALSE)
+if(downloadGemma){
+    ogbox::getGemmaAnnot(chipName='GPL96', chipFile='data-raw/GemmaAnnots/GPL96',annotType='noParents',overwrite = TRUE)
+}
+
 dir.create('data-raw/HumanBloodCellTypeData', showWarnings=FALSE)
 
-download.file('http://www.nature.com/nmeth/journal/v12/n5/extref/nmeth.3337-S2.xls',
-              destfile='data-raw/HumanBloodCellTypeData/supp2.xls')
+if(downloadData){
+    download.file('http://www.nature.com/nmeth/journal/v12/n5/extref/nmeth.3337-S2.xls',
+                  destfile='data-raw/HumanBloodCellTypeData/supp2.xls')
+}
 bloodDes = loadWorkbook('data-raw/HumanBloodCellTypeData/supp2.xls')
 bloodDes = readWorksheet(bloodDes, sheet = 2, header = TRUE)
 
@@ -28,41 +36,42 @@ devtools::use_data(humanBloodCellsSamples,overwrite=TRUE)
 
 gsms = bloodDes$sampleName[grepl('GSM',bloodDes$sampleName)]
 
-sapply(gsms,function(gsm){
-    gsmDown(gsm, paste0('data-raw/cel/GPL96/',gsm,'.CEL'))
-})
-
-# download the ones that not GSMs
-links = c('http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/TN_U133A_1.CEL',
-          'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/TN_U133A_2.CEL',
-          'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/TN_U133A_3.CEL',
-          'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/CXCR5hiICOShi_U133A_1.CEL',
-          'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/CXCR5hiICOShi_U133A_2.CEL',
-          'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/CXCR5hiICOShi_U133A_3.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/Tcells/gamma%20delta/A_TS_RN_gdTcells_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/Tcells/gamma%20delta/A_TS_RN_gdTcellsREP_A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/Control/exp2/A_LW_mastcellctrl_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/Control/exp1/A_MF_ControlMASTCELL_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/IgE/exp1/A_MF_IgEMASTCELL_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/IgE/exp2/A_LW_mastcellIgE_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/eosinophils/pma/A_MF_2hrEosinophils.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/eosinophils/control/A_MF_ControlEosinophil.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/neutrophils/control/exp2/A_LW_neutrophil_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/neutrophils/control/exp1/A_MF_neutrophils_U133A.CEL',
-          'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/neutrophils/LPS/A_TS_MSNeutroLPS_U133A.CEL')
-
-links %>% sapply(function(x){
-    if(file.exists(paste0('data-raw//cel//GPL96/',basename(x)))){
-        print('You already have this file. Skipping')
-        return(NULL)
-    }
+if(downloadData){
+    sapply(gsms,function(gsm){
+        gsmDown(gsm, paste0('data-raw/cel/GPL96/',gsm,'.CEL'))
+    })
     
-    download.file(x, paste0('data-raw//cel//GPL96/',basename(x)))
-})
-
+    # download the ones that not GSMs
+    links = c('http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/TN_U133A_1.CEL',
+              'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/TN_U133A_2.CEL',
+              'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/TN_U133A_3.CEL',
+              'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/CXCR5hiICOShi_U133A_1.CEL',
+              'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/CXCR5hiICOShi_U133A_2.CEL',
+              'http://www.ebi.ac.uk/arrayexpress/files/E-MEXP-750/E-MEXP-750.raw.1.zip/CXCR5hiICOShi_U133A_3.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/Tcells/gamma%20delta/A_TS_RN_gdTcells_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/Tcells/gamma%20delta/A_TS_RN_gdTcellsREP_A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/Control/exp2/A_LW_mastcellctrl_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/Control/exp1/A_MF_ControlMASTCELL_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/IgE/exp1/A_MF_IgEMASTCELL_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/mastcell/IgE/exp2/A_LW_mastcellIgE_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/eosinophils/pma/A_MF_2hrEosinophils.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/eosinophils/control/A_MF_ControlEosinophil.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/neutrophils/control/exp2/A_LW_neutrophil_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/neutrophils/control/exp1/A_MF_neutrophils_U133A.CEL',
+              'http://linkage.garvan.unsw.edu.au/public/microarrays/Arthritis_Inflammation/human/neutrophils/LPS/A_TS_MSNeutroLPS_U133A.CEL')
+    
+    links %>% sapply(function(x){
+        if(file.exists(paste0('data-raw//cel//GPL96/',basename(x)))){
+            print('You already have this file. Skipping')
+            return(NULL)
+        }
+        
+        download.file(x, paste0('data-raw//cel//GPL96/',basename(x)))
+    })
+}
 cels = paste0('data-raw/cel/GPL96/',bloodDes$sampleName,'.CEL')
 affy = ReadAffy(filenames = cels)
-norm = rma(affy)
+norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL96')
 names(annotated) = gsub('[.]CEL','',names(annotated))
 #write.csv(annotated, 'data-raw/HumanBloodCellTypeData/bloodCellsExp.csv', row.names = F)
@@ -80,7 +89,9 @@ humanBloodCellsExp= mostVariableCT(annotated,
 devtools::use_data(humanBloodCellsExp,overwrite=TRUE)
 
 # mouse blood ------
-ogbox::getGemmaAnnot(chipName='GPL1261', chipFile='data-raw/GemmaAnnots/GPL96',annotType='noParents')
+if(downloadGemma){
+    ogbox::getGemmaAnnot(chipName='GPL1261', chipFile='data-raw/GemmaAnnots/GPL96',annotType='noParents',overwrite = TRUE)
+}
 mouseBloodDes = read.design('data-raw/MouseBloodCellTypeData/mouseBloodDes.tsv')
 # here for historic reasons. delete eventually
 # mouseHumanDictionary22 = c(Treg = 'Tregs',
@@ -121,14 +132,14 @@ mouseBloodDes = read.design('data-raw/MouseBloodCellTypeData/mouseBloodDes.tsv')
 # mouseBloodDes$lm11 %<>% replaceElement(mouseHumanDictionary11) %$% newVector
 # write.design(mouseBloodDes, file='data-raw/MouseBloodCellTypeData/mouseBloodDes.tsv')
 gsms = mouseBloodDes$GSM
-
-sapply(gsms,function(gsm){
-    gsmDown(gsm, paste0('data-raw/cel/GPL1261/',gsm,'.cel'))
-})
-
+if(downloadData){
+    sapply(gsms,function(gsm){
+        gsmDown(gsm, paste0('data-raw/cel/GPL1261/',gsm,'.cel'))
+    })
+}
 cels = paste0('data-raw/cel/GPL1261/',gsms,'.cel')
 affy = ReadAffy(filenames = cels)
-norm = rma(affy)
+norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL1261')
 names(annotated) = gsub('[.]cel','',names(annotated))
 #write.csv(annotated, 'data-raw/HumanBloodCellTypeData/bloodCellsExp.csv', row.names = F)
