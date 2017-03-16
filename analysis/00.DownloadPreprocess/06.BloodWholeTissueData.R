@@ -1,9 +1,17 @@
-library(XLconnect)
+library(XLConnect)
+devtools::load_all()
+
+downloadData = FALSE
+downloadGemma = TRUE
 
 #lymphoma dataset ----------
 dir.create('data-raw/wholeBloodDatasets',showWarnings=FALSE)
-getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL570',annotType='noParents')
-gseDown(GSE='GSE65135',regex='lymph',outDir='data-raw/cel/GPL570')
+if(downloadGemma){
+    getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL570',annotType='noParents',overwrite=TRUE)
+}
+if(downloadData){
+    gseDown(GSE='GSE65135',regex='lymph',outDir='data-raw/cel/GPL570')
+}
 cels =celFiles('data-raw/cel/GPL570',full.names=T) 
 cels = cels[grep(regexMerge(gsmFind('GSE65135', 'lymph')), cels)]
 affy = ReadAffy(filenames = cels)
@@ -21,7 +29,7 @@ write.csv(annotated, paste0('data-raw/wholeBloodDatasets/','lymphoma.csv'), row.
 devtools::use_data(LYMPHexpr, overwrite=TRUE)
 
 # pbmc dataset ---------------
-PBMCs = read.table(textConnection(getURL('https://cibersort.stanford.edu/inc/inc.download.page.handler.php?file=PBMCs-Fig3a-HumanHT-12-V4.txt')),sep='\t',header=T)
+PBMCs = read.table(textConnection(getURL('http://cibersort.stanford.edu/inc/inc.download.page.handler.php?file=PBMCs-Fig3a-HumanHT-12-V4.txt')),sep='\t',header=T)
 write.table(PBMCs, 'data-raw/wholeBloodDatasets/PBMCs.csv', sep=',', quote=FALSE, row.names=F)
 PBMCexpr = PBMCs
 devtools::use_data(PBMCexpr, overwrite=TRUE)
