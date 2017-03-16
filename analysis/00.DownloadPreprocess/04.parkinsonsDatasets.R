@@ -4,13 +4,22 @@ library(affy)
 devtools::load_all()
 # download the parkinsons disease dasaets
 
+downloadData = FALSE
+downloadGemma = TRUE
+
 # Lesnick et al -------------------------------------------
-gseDown('GSE7621',outDir='data-raw/cel/GPL570/')
-ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL570',annotType='noParents')
+if (downloadGemma){
+    ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL570',annotType='noParents', overwrite =TRUE)
+}
 
 dir.create('data-raw/LesnickParkinsons', showWarnings=FALSE)
-softDown('GSE7621','data-raw/LesnickParkinsons/GSE7621_family.soft.gz')
-system('gunzip data-raw/LesnickParkinsons/GSE7621_family.soft.gz')
+dir.create('data-raw/cel/GPL570/', showWarnings=FALSE)
+
+if(downloadData){
+    gseDown('GSE7621',outDir='data-raw/cel/GPL570/')
+    softDown('GSE7621','data-raw/LesnickParkinsons/GSE7621_family.soft.gz')
+    system('gunzip data-raw/LesnickParkinsons/GSE7621_family.soft.gz')
+}
 softData = softParser(softFile='data-raw/LesnickParkinsons/GSE7621_family.soft',expression=F)
 softData = softData[c('!Sample_characteristics_ch1',
                       '!Sample_geo_accession',
@@ -49,14 +58,22 @@ devtools::use_data(LesnickParkinsonsExp, overwrite=TRUE)
 
 
 # Moran et al dataset -------------------
-gseDown('GSE8397',regex="A chip",outDir='data-raw/cel/GPL96/')
-gseDown('GSE8397',regex="B chip",outDir='data-raw/cel/GPL97/')
-ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL96',annotType='noParents')
-ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL97',annotType='noParents')
-
+dir.create('data-raw/cel/GPL97', showWarnings=FALSE)
+dir.create('data-raw/cel/GPL96', showWarnings=FALSE)
 dir.create('data-raw/MoranParkinsons', showWarnings=FALSE)
-softDown('GSE8397',file='data-raw/MoranParkinsons/GSE8397_family.soft.gz')
-system('gunzip data-raw/MoranParkinsons/GSE8397_family.soft.gz')
+
+if(downloadData){
+    gseDown('GSE8397',regex="A chip",outDir='data-raw/cel/GPL96/')
+    gseDown('GSE8397',regex="B chip",outDir='data-raw/cel/GPL97/')
+    softDown('GSE8397',file='data-raw/MoranParkinsons/GSE8397_family.soft.gz')
+    system('gunzip data-raw/MoranParkinsons/GSE8397_family.soft.gz')
+    
+    
+}
+if(downloadGemma){
+    ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL96',annotType='noParents', overwrite = TRUE)
+    ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL97',annotType='noParents', overwrite = TRUE)
+}
 softData = softParser(softFile='data-raw/MoranParkinsons/GSE8397_family.soft',expression=F)
 softData = softData[c("!Sample_characteristics_ch1 = age",
                       "!Sample_title",
@@ -120,11 +137,18 @@ devtools::use_data(MoranParkinsonsMeta, overwrite=TRUE)
 devtools::use_data(MoranParkinsonsExp,overwrite=TRUE)
 
 # Zhang et al. dataset ----------------------------------------------
-gseDown('GSE20295',outDir='data-raw/cel/GPL96/')
-ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL96',annotType='noParents')
 dir.create('data-raw/ZhangParkinsons', showWarnings=FALSE)
-softDown('GSE20295',file='data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
-system('gunzip data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
+dir.create('data-raw/cel/GPL96', showWarnings=FALSE)
+
+if(downloadData){
+    gseDown('GSE20295',outDir='data-raw/cel/GPL96/')
+    softDown('GSE20295',file='data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
+    system('gunzip data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
+    
+}
+if(downloadGemma){
+    ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL96',annotType='noParents', overwrite=TRUE)
+}
 softData = softParser(softFile='data-raw/ZhangParkinsons/GSE20295_family.soft',expression=F)
 softData = softData[,c('!Sample_characteristics_ch1 = age',
                        '!Sample_characteristics_ch1 = brain region',
