@@ -65,9 +65,9 @@ markerCandidates = function(design,
                                      return(group2)
                                  })
         
-        g19 = groupAverage1 < (log(10,base=2) + 6) & groupAverage1 > minimumExpression
+        g19 = groupAverage1 < (log(f,base=2) + 6) & groupAverage1 > minimumExpression
         g16 = groupAverage1  < 6
-        g29 = groupAverage2 < (log(10,base=2) + 6) & groupAverage2 > minimumExpression
+        g29 = groupAverage2 < (log(f,base=2) + 6) & groupAverage2 > minimumExpression
         g26 = groupAverage2 < 6
         # this is a late addition preventing anything that is below 8 from being
         # selected. ends up removing the the differentially underexpressed stuff as well
