@@ -9,10 +9,12 @@ TasicPrimaryMean = TasicMouseMeta$primary_type %>% unique %>% lapply(function(x)
 }) %>% as.data.frame
 names(TasicPrimaryMean)  =  TasicMouseMeta$primary_type %>% unique
 
+rnaSeqMed = TasicPrimaryMean %>% {.+1} %>%log(base=2) %>% unlist %>% median
 
 # filter expression values (low level filter)
 TasicPrimaryMean = TasicPrimaryMean[(TasicPrimaryMean %>% apply(1,max))>(TasicPrimaryMean %>% unlist %>% median),]
 
+TasicPrimaryMeanLog = TasicPrimaryMean %>% {.+1} %>%log(base=2)
 
 
 TasicPrimaryMeanComparable = TasicPrimaryMean %>% 
@@ -62,6 +64,7 @@ meltedSingleCells %<>%
                MajorType = .$MajorType,
                Neurotransmitter = .$Neurotransmitter,
                ShinyNames = .$ShinyNames  %>% replaceElement(NA,'') %$%newVector,
+               CellTypes =  .$CellTypes %>% replaceElement(NA,'') %$%newVector,
                PyramidalDeep = .$PyramidalDeep %>% replaceElement(NA,'') %$%newVector,
                BroadTypes = NA,
                DopaSelect = NA,
@@ -81,9 +84,11 @@ meltedSingleCells %<>%
 
 TasicPrimaryMean = TasicPrimaryMean[meltedSingleCells$sampleName]
 TasicPrimaryMeanComparable = TasicPrimaryMeanComparable[meltedSingleCells$sampleName]
-
+TasicPrimaryMeanLog = TasicPrimaryMeanLog[meltedSingleCells$sampleName]
 use_data(meltedSingleCells, overwrite = TRUE)
 use_data(TasicPrimaryMean, overwrite = TRUE)
+use_data(TasicPrimaryMeanLog, overwrite = TRUE)
+
 use_data(TasicPrimaryMeanComparable, overwrite = TRUE)
 write.design(meltedSingleCells,file = 'data-raw/Mouse_Cell_Type_Data/meltedSingleCells.tsv')
 write.csv(data.frame(Gene.Symbol = rn(TasicPrimaryMeanComparable),TasicPrimaryMeanComparable,check.names = FALSE),file = 'data-raw/Mouse_Cell_Type_Data/TasicPrimaryMeanComparable.csv',row.names=FALSE )
