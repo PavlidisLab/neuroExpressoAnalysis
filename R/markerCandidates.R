@@ -36,6 +36,7 @@ markerCandidates = function(design,
                       replicates = 'originalIndex',
                       foldChangeThresh = 10,
                       minimumExpression = 8,
+                      background = 6,
                       regionHierarchy = NULL,
                       geneID = 'Gene.Symbol',
                       seed = NULL){
@@ -65,10 +66,10 @@ markerCandidates = function(design,
                                      return(group2)
                                  })
         
-        g19 = groupAverage1 < (log(f,base=2) + 6) & groupAverage1 > minimumExpression
-        g16 = groupAverage1  < 6
-        g29 = groupAverage2 < (log(f,base=2) + 6) & groupAverage2 > minimumExpression
-        g26 = groupAverage2 < 6
+        g19 = groupAverage1 < (log(f,base=2) + background) & groupAverage1 > minimumExpression
+        g16 = groupAverage1  < background
+        g29 = groupAverage2 < (log(f,base=2) +background) & groupAverage2 > minimumExpression
+        g26 = groupAverage2 < background
         # this is a late addition preventing anything that is below 8 from being
         # selected. ends up removing the the differentially underexpressed stuff as well
         gMinTresh = groupAverage1 > minimumExpression
