@@ -90,7 +90,7 @@ markerCandidates = function(design,
         fold = groupAverage1 - groupAverage2
         # take everything below 6 as the same when selecting
         # fold =  sapply(groupAverage1,max,6) - sapply(groupAverage2,max,6)
-        chosen =  which(({(fold >= (log(f)/log(2))) & !(g19 & g26) } | add1 | add2)&gMinTresh)
+        chosen =  which(({(fold >= (log(f)/log(2))) & !(g19 & g26) } | add1 )&gMinTresh)
         return(
             data.frame(index = chosen, foldChange = fold[chosen])
         )
