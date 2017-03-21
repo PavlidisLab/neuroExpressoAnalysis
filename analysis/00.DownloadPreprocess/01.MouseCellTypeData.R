@@ -122,14 +122,3 @@ n_expressoSamples =  ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_express
 devtools::use_data(n_expressoExpr,overwrite=TRUE)
 devtools::use_data(n_expressoSamples,overwrite=TRUE)
 
-# order of cell types that makes sense
-cellOrder = n_expressoSamples %>%
-    arrange(MajorType,Neurotransmitter,PyramidalDeep) %>% 
-    filter(!is.na(PyramidalDeep)) %>% .$PyramidalDeep %>% unique
-#cellOrder = c(cellOrder[1],'AstrocyteReactive','AstrocyteInactive', cellOrder[2:len(cellOrder)])
-devtools::use_data(cellOrder,overwrite=TRUE)
-
-publishableNameDictionary = n_expressoSamples %>% filter(!is.na(PyramidalDeep)) %>%  select(PyramidalDeep, ShinyNames) %>% unique
-devtools::use_data(publishableNameDictionary,overwrite=TRUE)
-
-
