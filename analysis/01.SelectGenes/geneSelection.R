@@ -14,6 +14,7 @@ library(jsonlite)
 library(stringi)
 #library(markerGenesManuscript)
 
+print('it starts')
 if(length(commandArgs(trailingOnly=TRUE))==0){
     start = 1
     end = 500
@@ -76,8 +77,8 @@ if (start == 1){
         #                  cores=16,
         #                  regionHierarchy= NULL)
         ptm <- proc.time()
-
-        markerCandidates(design = meltedSingleCells,foldChangeThresh = 10,minimumExpression = 2.5,
+        
+        markerCandidates(design = meltedSingleCells,foldChangeThresh = 10,minimumExpression = 2.5, background = 0.1,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
                          outLoc = 'analysis//01.SelectGenes/QuickJustSingleCell',
                          groupNames = c('PyramidalDeep','CellTypes'),
@@ -90,7 +91,7 @@ if (start == 1){
         
         ptm <- proc.time()
         
-        markerCandidates(design = meltedSingleCells,foldChangeThresh = 8,minimumExpression = 1.5,
+        markerCandidates(design = meltedSingleCells,foldChangeThresh = 8,minimumExpression = 1.5, background = 0.1,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
                          outLoc = 'analysis//01.SelectGenes/QuickJustSingleCellRelax',
                          groupNames = c('PyramidalDeep','CellTypes'),
@@ -142,6 +143,7 @@ if(start==1){
 if(firstChip){
     for (i in start:end){
         print(i)
+        ptm <- proc.time()
         markerCandidates(design = n_expressoSamples,
                          expression = n_expressoExpr,
                          outLoc = paste0('analysis//01.SelectGenes/Rotation/',i),
@@ -153,7 +155,7 @@ if(firstChip){
                          regionHierarchy = regionHierarchy,
                          cores=16,
                          seed = i)
-        
+        firstChipRotationTime = proc.time() - ptm
     }
 }
 cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
@@ -177,8 +179,8 @@ if(singleCell){
         #                  cores=16,
         #                  rotate=0.33,
         #                  regionHierarchy= NULL)
-        
-        markerCandidates(design = meltedSingleCells,foldChangeThresh = 10, minimumExpression = 2.5,
+        ptm <- proc.time()
+        markerCandidates(design = meltedSingleCells,foldChangeThresh = 10, minimumExpression = 2.5, background = 0.1,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
                          outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCell/',i),
                          groupNames = c('PyramidalDeep','CellTypes'),
@@ -188,8 +190,9 @@ if(singleCell){
                          cores=15,
                          rotate = 0.33,
                          regionHierarchy= NULL)
+        singleRotationTime = proc.time() - ptm
         
-        markerCandidates(design = meltedSingleCells,foldChangeThresh = 8,minimumExpression = 1.5,
+        markerCandidates(design = meltedSingleCells,foldChangeThresh = 8,minimumExpression = 1.5,background = 0.1,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
                          outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCellRelaxed/',i),
                          groupNames = c('PyramidalDeep','CellTypes'),
@@ -202,7 +205,7 @@ if(singleCell){
         
         
     }
-    cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/RotationSingleCell/progress',append=TRUE)
+    cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/RotationJustSingleCell/progress',append=TRUE)
 }
 # second chip rotations -------------------
 if(secondChip){
@@ -266,7 +269,7 @@ if(end == 500){
     # rotsel single cells
     if(singleCell){
         repeat{
-            progress = read.table('analysis//01.SelectGenes/RotationSingleCell//progress') %>% apply(1, function(x){
+            progress = read.table('analysis//01.SelectGenes/RotationJustSingleCell//progress') %>% apply(1, function(x){
                 x[1]:x[2]
             }) %>% sapply(len) %>% sum
             if (progress>=500){
@@ -274,9 +277,9 @@ if(end == 500){
             }
             Sys.sleep(60) 
         }
-        rotateSelect(rotationOut='analysis//01.SelectGenes/RotationSingleCell//',
-                     rotSelOut='analysis/01.SelectGenes/RotSelSingleCell',
-                     cores = 16, foldChange = 1)
+        # rotateSelect(rotationOut='analysis//01.SelectGenes/RotationSingleCell//',
+        #              rotSelOut='analysis/01.SelectGenes/RotSelSingleCell',
+        #              cores = 16, foldChange = 1)
         
         rotateSelect(rotationOut='analysis//01.SelectGenes/RotationJustSingleCell//',
                      rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCell',
@@ -287,211 +290,359 @@ if(end == 500){
                      cores = 16, foldChange = 1)
     }
     # upon calculation of selection percentages in permutations, create a directory that houses genes -----
+    
+    
     # that are selected in more than 95% of the permutations
+    #rm(allGenes)
+    #rm(names)
+    
     if(firstChip){
         allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
-    } else
+        names = 'Markers_Microarray'
+    } else {
         allGenes$gene1 = NA
-}
-if (secondChip){
-    allGenes = c(allGenes = allGenes[[1]],
-                 list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSel/')))
-} else{
-    allGenes$gene2=NA
-}
-if(singleCell){
-    allGenes = c(allGenes, list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')),
-                 list(genes4 = pickMarkersAll('analysis/01.SelectGenes/RotSelJustSingleCell//')),
-                 list(genes5 = pickMarkersAll(('analysis/01.SelectGenes/RotSelJustSingleCellRelaxed/'))))
-}
-
-
-for (n in 1:len(allGenes)){
-    if(is.na(allGenes[[n]])){
-        next
+        names = NA
     }
-    genes = allGenes[[n]]
-    for (i in 1:len(genes)){
-        pieces = strsplit(names(genes)[i],'_')[[1]]
-        if (is.na(pieces[2])){
-            pieces[2] = pieces[1]
-            pieces[1] ='All'
+    
+    if (secondChip){
+        allGenes = c(allGenes = allGenes[[1]],
+                     list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSel/')))
+        names = c(names,'Markers_LargeMicroarray')
+    } else{
+        allGenes$gene2=NA
+        names = c(names,NA)
+    }
+    if(singleCell){
+        allGenes = c(allGenes, #list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')),
+                     list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelJustSingleCell//')),
+                     list(genes4 = pickMarkersAll(('analysis/01.SelectGenes/RotSelJustSingleCellRelaxed/'))))
+        names = c(names,'Markers_SingleCell','Markers_RelaxedSingleCell')
+    }
+    
+    # final folder creation -------------------------------
+    for (n in 1:len(allGenes)){
+        if(is.na(names[[n]])){
+            next
         }
-        dir.create(paste0('analysis//01.SelectGenes/FinalGenes',n,'/',
-                          pieces[2] , '/' , pieces[1]), 
-                   showWarnings=F, recursive=T)
+        genes = allGenes[[n]]
+        for (i in 1:len(genes)){
+            pieces = strsplit(names(genes)[i],'_')[[1]]
+            if (is.na(pieces[2])){
+                pieces[2] = pieces[1]
+                pieces[1] ='All'
+            }
+            dir.create(paste0('analysis//01.SelectGenes/',names[n],'/',
+                              pieces[2] , '/' , pieces[1]), 
+                       showWarnings=F, recursive=T)
+            
+            
+            for (j in 1:len(genes[[i]])){
+                write.table(genes[[i]][[j]],
+                            paste0('analysis//01.SelectGenes/',names[n],'/',
+                                   pieces[2],'/',pieces[1],'/', 
+                                   names(genes[[i]])[j]),
+                            row.names=F,
+                            quote=F,
+                            col.names=F      
+                )
+            }
+        }
+    }
+    # here we do some wrangling of the gene list to deatl with astrocytes and microglia
+    referenceGroup = 'PyramidalDeep'
+    log = 'analysis/01.SelectGenes/markers.log'
+    file.create(log)
+    for(i in 1:len(names)){
+        if(is.na(names[i])){
+            next
+        }
+        cat(paste0(names[i],'\n########\n'),file = log,append = TRUE)
+        cat('Microglial Exception\n---------------\n', file = log, append = TRUE)
+        
+        genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/',referenceGroup))
+        allMicroglia = genes %>% lapply(function(x){
+            x['Microglia']
+        }) %>% unlist %>% unique %>% len
+        cat(paste0('Microglia used to have ', allMicroglia, ' genes\n'), file = log,append = TRUE)
+        
+        microglialException(paste0('analysis//01.SelectGenes/',names[i]),cores=8)
+        
+        genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/',referenceGroup))
+        allMicroglia = genes %>% lapply(function(x){
+            x['Microglia']
+        }) %>% unlist %>% unique %>% len
+        cat(paste0('Microglia now have ', allMicroglia, ' genes\n\n'), file = log,append = TRUE)
+        
+        cat('S100a10 Exception\n--------------------\n',file=log,append = TRUE)
         
         
-        for (j in 1:len(genes[[i]])){
-            write.table(genes[[i]][[j]],
-                        paste0('analysis/01.SelectGenes/FinalGenes',n,'/',
-                               pieces[2],'/',pieces[1],'/', 
-                               names(genes[[i]])[j]),
+        
+        if(!grepl('SingleCell',names[i])){
+            
+            allS100 = genes %>% lapply(function(x){
+                x['Pyramidal_S100a10']
+            }) %>% unlist %>% unique %>% len
+            cat(paste0('S100a10 pyramdials used to have ', allS100, ' genes\n'),file=log,append=TRUE)
+            
+            s100a10exception(paste0('analysis//01.SelectGenes/',names[i]),cores=8)
+            
+            genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/',referenceGroup))
+            allS100 = genes %>% lapply(function(x){
+                x['Pyramidal_S100a10']
+            }) %>% unlist %>% unique %>% len
+            
+            cat(paste0('S100a10 pyramdials now have ', allS100, ' genes\n\n'),file=log,append=TRUE)
+        }
+        
+        bannedGenes = c('Lpl','S100a10')
+        banGenes(restDir = paste0('analysis//01.SelectGenes/',names[i],'/',referenceGroup),
+                 bannedGenes= bannedGenes,
+                 cores=8)
+        
+    }
+    
+    
+    typeSets = list.files('analysis/01.SelectGenes/Markers_Microarray/')
+    
+    
+    # select simple markers for verification
+    if(firstChip & singleCell){
+        for (x in typeSets){
+            # for neuroExpresso
+            cortex = memoReg(n_expressoSamples,regionNames = 'Region',groupNames = x,regionHierarchy = regionHierarchy)$Cortex
+            
+            n_Exp = n_expressoExpr %>% filter(!grepl('\\|',Gene.Symbol))
+            list[gene, exp] = sepExpr(n_Exp)
+            rownames(exp) = gene$Gene.Symbol
+            exp = exp[!is.na(cortex)]
+            n_samples = n_expressoSamples[!is.na(cortex),]
+            NeuroExpressoPrimaryMean = n_samples[[x]] %>% unique %>% trimNAs %>% lapply(function(y){
+                exp[, n_samples[[x]] %in% y] %>% apply(1,mean)
+            }) %>% as.data.frame
+            names(NeuroExpressoPrimaryMean) =  n_samples[[x]] %>% unique %>% trimNAs 
+            rownames(NeuroExpressoPrimaryMean) = gene$Gene.Symbol
+            # use_data(NeuroExpressoPrimaryMean,overwrite = TRUE)
+            
+            nxSimpleMarkers = NeuroExpressoPrimaryMean %>% apply(1,which.max) %>% names(NeuroExpressoPrimaryMean)[.]
+            names(nxSimpleMarkers) = rn(NeuroExpressoPrimaryMean)
+            teval(paste0('nxSimpleMarkers_',x,'<<-nxSimpleMarkers'))
+            teval(paste0('use_data(nxSimpleMarkers_',x,",overwrite=TRUE)"))
+            
+            # for Tasic
+            singleCells = ogbox::read.design('data-raw/Mouse_Cell_Type_Data/singleCellMatchings.tsv')
+            
+            tasicCellTypeMeans = singleCells[[x]] %>% unique %>% lapply(function(y){
+                cluster = (singleCells$Tasic[singleCells[[x]] %in% y]) %>% str_split(', ') %>% {.[[1]]}
+                TasicPrimaryMean[cluster] %>% apply(1,mean) 
+            }) %>% as.data.frame()
+            names(tasicCellTypeMeans) =  singleCells[[x]] %>% unique %>% trimNAs()
+            tasicSimpleMarkers = tasicCellTypeMeans %>% apply(1,which.max) %>% names(tasicCellTypeMeans)[.]
+            names(tasicSimpleMarkers) = rn(tasicCellTypeMeans)
+            teval(paste0('tasicSimpleMarkers_',x,'<<-tasicSimpleMarkers'))
+            teval(paste0('use_data(tasicSimpleMarkers_',x,",overwrite=TRUE)"))
+            
+        }
+    }
+    
+    system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_Final')
+    system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
+    
+    # merge single cell genes for cortex
+    if(firstChip & singleCell){
+
+        for (x in typeSets){
+            original = pickMarkers(file.path('analysis/01.SelectGenes/Markers_Microarray',x,'/Cortex/'))
+            singleCells = pickMarkers(paste0("analysis/01.SelectGenes/Markers_SingleCell/",x,"/All/"))
+            singleCellRelaxed = pickMarkers(paste0("analysis/01.SelectGenes/Markers_RelaxedSingleCell/",x,"//All/"))
+            
+            frame = names(singleCells) %>% sapply(function(y){
+                c(nx = {
+                    if(is.null(original[[y]])){
+                        NA
+                    } else{
+                        original[[y]] %>% length
+                    }
+                },
+                singleCells = singleCells[[y]] %>% length,
+                SCRelax = singleCellRelaxed[[y]] %>% length)
+            },simplify=FALSE) %>% as.df %>% t
+            
+            
+            trimOrig = 1:length(original) %>% lapply(function(i){
+                genes = original[[i]]
+                out = c(genes[simpleSingleCellMarkers[genes] == names(original)[i]], genes[is.na(simpleSingleCellMarkers[genes])]) %>% trimNAs()
+            })
+            names(trimOrig) = names(original)
+            
+            
+            trimSingle = 1:length(singleCells) %>% lapply(function(i){
+                genes = singleCells[[i]]
+                if(!names(singleCells)[i] %in% names(original)){
+                    return(genes)
+                }
+                out = c(genes[nxSimpleMarkers[genes] == names(original)[i]],
+                        genes[is.na(nxSimpleMarkers[genes])]) %>% trimNAs()
+            })
+            names(trimSingle) = names(singleCells)
+            
+            trimSingleRelax = 1:length(singleCellRelaxed) %>% lapply(function(i){
+                genes = singleCellRelaxed[[i]]
+                if(!names(singleCellRelaxed)[i] %in% names(original)){
+                    return(genes)
+                }
+                out = c(genes[nxSimpleMarkers[genes] == names(original)[i]],
+                        genes[is.na(nxSimpleMarkers[genes])]) %>% trimNAs()
+            })
+            names(trimSingleRelax) = names(singleCellRelaxed)
+            
+            frameTrim = names(singleCells) %>% sapply(function(y){
+                c(nx = {
+                    if(is.null(trimOrig[[y]])){
+                        NA
+                    } else{
+                        trimOrig[[y]] %>% length
+                    }
+                },
+                singleCells = trimSingle[[y]] %>% length,
+                SCRelax = trimSingleRelax[[y]] %>% length)
+            },simplify=FALSE) %>% as.df %>% t
+            
+            
+            allMarkers = names(trimSingle) %>% sapply(function(i){
+                c(trimSingle[[i]],trimOrig[[i]]) %>% unique
+            },simplify=FALSE)
+            
+            allMarkersRelax = names(trimSingle) %>% sapply(function(i){
+                c(trimSingleRelax[[i]],trimOrig[[i]]) %>% unique
+            },simplify=FALSE)
+            
+            frameAll = names(allMarkers) %>% sapply(function(x){
+                c(total = allMarkers[[x]] %>% length,
+                  totalRelax = allMarkersRelax[[x]] %>% length)
+            },simplify=FALSE) %>% as.df %>% t
+            
+            
+            framePresent = 1:ncol(frameTrim) %>% sapply(function(i){
+                paste0(frame[,i],' (',frameTrim[,i],')')
+            })
+            
+            cn(framePresent) = cn(frameTrim)
+            rn(framePresent) = rn(frameTrim)
+            framePresent %<>% cbind(frameAll)
+
+            write.table(framePresent,file = paste0('analysis/01.SelectGenes/cortexTable_',x,'.tsv'),sep = "\t", quote = F, row.names = T)
+            
+            
+            for(i in 1:length(allMarkers)){
+                write.table(allMarkers[i],
+                        paste0('analysis/01.SelectGenes/Markers_Final/',
+                               x,'/Cortex/',names(allMarkers)[i]),
                         row.names=F,
                         quote=F,
-                        col.names=F      
-            )
+                        col.names=F)
+            }
+            for(i in 1:length(allMarkersRelax)){
+                write.table(allMarkers[i],
+                            paste0('analysis/01.SelectGenes/Markers_FinalRelax//',
+                                   x,'/Cortex/',names(allMarkers)[i]),
+                            row.names=F,
+                            quote=F,
+                            col.names=F)
+            }
         }
     }
-}
-# here we do some wrangling of the gene list to deatl with astrocytes and microglia
-
-# remove activated microglia genes
-
-if(firstChip){
-    # number of genes removed from microglia is needed in the paper
-    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    allMicroglia = genes %>% lapply(function(x){
-        x['Microglia']
-    }) %>% unlist %>% unique %>% len
-    print(paste0('Microglia used to have ', allMicroglia, ' genes'))
-    
-    microglialException('analysis/01.SelectGenes/FinalGenes1/',cores=8)
-    
-    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    allMicroglia = genes %>% lapply(function(x){
-        x['Microglia']
-    }) %>% unlist %>% unique %>% len
-    print(paste0('Microglia now have ', allMicroglia, ' genes'))
-}
-if (secondChip){
-    microglialException('analysis/01.SelectGenes/FinalGenes2/',cores=8)
-}
-if(singleCell){
-    microglialException('analysis/01.SelectGenes/FinalGenes3/',cores=8)
-    microglialException('analysis/01.SelectGenes/FinalGenes4/',cores=8)
-    microglialException('analysis/01.SelectGenes/FinalGenes5/',cores=8)
-}
-
-
-
-if(firstChip){
-    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    
-    allS100 = genes %>% lapply(function(x){
-        x['Pyramidal_S100a10']
-    }) %>% unlist %>% unique %>% len
-    print(paste0('S100a10 pyramdials used to have ', allS100, ' genes'))
-    
-    s100a10exception('analysis/01.SelectGenes/FinalGenes1/',cores=8)
-    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    allS100 = genes %>% lapply(function(x){
-        x['Pyramidal_S100a10']
-    }) %>% unlist %>% unique %>% len
-    print(paste0('S100a10 pyramdials now have ', allS100, ' genes'))
-}
-if (secondChip){
-    s100a10exception('analysis/01.SelectGenes/FinalGenes2/',cores=8)
-}
-if(singleCell){
-    # s100a10exception('analysis/01.SelectGenes/FinalGenes3/',cores=8)
-    # s100a10exception('analysis/01.SelectGenes/FinalGenes4/',cores=8)
-}
-
-
-# Lpl is manually removed from the list as it is known to be expressed in adipocytes yet are not present
-# in our dataset
-bannedGenes = c('Lpl','S100a10')
-if(firstChip){
-    banGenes(restDir = 'analysis/01.SelectGenes/FinalGenes1/',
-             bannedGenes= bannedGenes,
-             cores=8)
-}
-if (secondChip){
-    banGenes('analysis/01.SelectGenes/FinalGenes2/',bannedGenes = bannedGenes,cores=8)
-}
-if(singleCell){
-    banGenes('analysis/01.SelectGenes/FinalGenes3/',bannedGenes = bannedGenes,cores=8)
-    banGenes('analysis/01.SelectGenes/FinalGenes4/',bannedGenes = bannedGenes,cores=8)
-    banGenes('analysis/01.SelectGenes/FinalGenes5/',bannedGenes = bannedGenes,cores=8)
-}
-
-if(firstChip){
-    
-    genes = pickMarkersAll('analysis//01.SelectGenes/FinalGenes1/PyramidalDeep/')
-    
-    assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
-    
-    mouseMarkerGenes = genes
     
     
-    devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
-    
-    toPlotGenes = mouseMarkerGenes %>% lapply(function(x){
-        x = x[!grepl('Microglia_',names(x))]
-        x %<>% lapply(function(y){
-            y[!grepl('[|]', y)]
+    if(firstChip){
+        
+        genes = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/PyramidalDeep/')
+        genes2 = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/CellTypes//')
+        
+        # assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
+        
+        mouseMarkerGenes = genes2
+        mouseMarkerGenesPyramidalDeep = genes
+        
+        
+        devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
+        devtools::use_data(mouseMarkerGenesPyramidalDeep, overwrite=TRUE)
+        
+        toPlotGenes = mouseMarkerGenesPyramidalDeep %>% lapply(function(x){
+            x = x[!grepl('Microglia_',names(x))]
+            x %<>% lapply(function(y){
+                y[!grepl('[|]', y)]
+            })
         })
-    })
-    
-    
-    toPlotGenes %<>% lapply(function(x){
-        x %<>%sapply(len)
-        x[cellOrder] %>% trimNAs
-        x = x[!grepl('Microglia_',names(x))]
-        names(x) = publishableNameDictionary$ShinyNames[match(names(x),publishableNameDictionary$PyramidalDeep)]
-        return(x)
-    })
-    
-    toPlotGenes$All = toPlotGenes$All[c('Astrocyte','Oligodendrocyte','Microglia')]
-    toPlotGenes[-1] %<>% lapply(function(x){
-        x = x[!names(x) %in% c('Astrocyte','Oligodendrocyte','Microglia')]
-    })
-    # take the bottom ones in the region tree
-    rockBottom = regionHierarchy %>% unlist %>% names %>% str_extract(pattern='(?<=[.])([A-Z]|[a-z])*$')
-    rockBottom = c(rockBottom,'Midbrain')
-    toPlotGenes = toPlotGenes[c('All', rockBottom)]
-    
-    toPlotGenes %<>% lapply(function(x){
-        sapply(1:len(x),function(i){
-            genes = x[i]
-            samples = n_expressoSamples %>% filter(ShinyNames %in% names(x[i])) %>% nrow
-            sources = 
-                n_expressoSamples %>% 
-                filter(ShinyNames %in% names(x[i])) %>% 
-                select(Reference,GSE) %>% 
-                unique %>% {
-                    paste0(.[,1],' (', .[,2], ')')
-                } %>% paste(collapse = ', ')
-            out = c(names(x[i]),samples, genes, sources )
-            names(out) = NULL
-            return(out)
-        }) %>% as.data.frame %>% t
-    }) 
-    
-    file.create('analysis/01.SelectGenes/geneTable.tsv')
-    lapply(1:len(toPlotGenes), function(i){
-        print(i)
-        if(i == 1){
-            append = FALSE
-        } else {
-            append = TRUE
-        }
-        cat(paste0(names(toPlotGenes)[i],'\n'),
-            append = append,
-            file= 'analysis/01.SelectGenes/geneTable.tsv')
-        write.table(toPlotGenes[[i]], file = 'analysis/01.SelectGenes/geneTable.tsv',
-                    sep = "\t",
-                    quote = F, col.names = F,
-                    row.names = F, append = TRUE)
-    })
-    
-    # gene list in single files -------
-    mouseMarkerGenes %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenes.json')
-    
-    sheet = loadWorkbook('analysis/01.SelectGenes/markerGenes.xls', create = TRUE)
-    
-    dir.create('analysis/01.SelectGenes/markerGeneTSVs')
-    1:len(mouseMarkerGenes) %>% sapply(function(i){
-        out = stri_list2matrix(mouseMarkerGenes[[i]]) %>% as.data.frame
-        names(out) = names(mouseMarkerGenes[[i]])
-        write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVs',names(mouseMarkerGenes[i])),na= '', sep = "\t", quote = F, row.names = F)
-        createSheet(sheet, name = names(mouseMarkerGenes[i]))
-        writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
-    })
-    saveWorkbook(sheet)
-    
-    
-    # create archive
-    system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/*')
+        
+        
+        toPlotGenes %<>% lapply(function(x){
+            x %<>%sapply(len)
+            x[cellOrder] %>% trimNAs
+            x = x[!grepl('Microglia_',names(x))]
+            names(x) = publishableNameDictionary$ShinyNames[match(names(x),publishableNameDictionary$PyramidalDeep)]
+            return(x)
+        })
+        
+        toPlotGenes$All = toPlotGenes$All[c('Astrocyte','Oligodendrocyte','Microglia')]
+        toPlotGenes[-1] %<>% lapply(function(x){
+            x = x[!names(x) %in% c('Astrocyte','Oligodendrocyte','Microglia')]
+        })
+        # take the bottom ones in the region tree
+        rockBottom = regionHierarchy %>% unlist %>% names %>% str_extract(pattern='(?<=[.])([A-Z]|[a-z])*$')
+        rockBottom = c(rockBottom,'Midbrain')
+        toPlotGenes = toPlotGenes[c('All', rockBottom)]
+        
+        toPlotGenes %<>% lapply(function(x){
+            sapply(1:len(x),function(i){
+                genes = x[i]
+                samples = n_expressoSamples %>% filter(ShinyNames %in% names(x[i])) %>% nrow
+                sources = 
+                    n_expressoSamples %>% 
+                    filter(ShinyNames %in% names(x[i])) %>% 
+                    select(Reference,GSE) %>% 
+                    unique %>% {
+                        paste0(.[,1],' (', .[,2], ')')
+                    } %>% paste(collapse = ', ')
+                out = c(names(x[i]),samples, genes, sources )
+                names(out) = NULL
+                return(out)
+            }) %>% as.data.frame %>% t
+        }) 
+        
+        file.create('analysis/01.SelectGenes/geneTable.tsv')
+        lapply(1:len(toPlotGenes), function(i){
+            print(i)
+            if(i == 1){
+                append = FALSE
+            } else {
+                append = TRUE
+            }
+            cat(paste0(names(toPlotGenes)[i],'\n'),
+                append = append,
+                file= 'analysis/01.SelectGenes/geneTable.tsv')
+            write.table(toPlotGenes[[i]], file = 'analysis/01.SelectGenes/geneTable.tsv',
+                        sep = "\t",
+                        quote = F, col.names = F,
+                        row.names = F, append = TRUE)
+        })
+        
+        # gene list in single files -------
+        mouseMarkerGenes %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenes.json')
+        
+        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenes.xls', create = TRUE)
+        
+        dir.create('analysis/01.SelectGenes/markerGeneTSVs')
+        1:len(mouseMarkerGenes) %>% sapply(function(i){
+            out = stri_list2matrix(mouseMarkerGenes[[i]]) %>% as.data.frame
+            names(out) = names(mouseMarkerGenes[[i]])
+            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVs',names(mouseMarkerGenes[i])),na= '', sep = "\t", quote = F, row.names = F)
+            createSheet(sheet, name = names(mouseMarkerGenes[i]))
+            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
+        })
+        saveWorkbook(sheet)
+        
+        
+        # create archive
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/*')
+    }
 }
