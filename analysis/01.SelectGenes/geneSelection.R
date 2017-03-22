@@ -501,7 +501,7 @@ if(end == 500){
     
     #create the files that people will read ----------
     if(firstChip){
-        
+        library(XLConnect)
         genes = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/PyramidalDeep/')
         genes2 = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/CellTypes//')
         
@@ -587,9 +587,8 @@ if(end == 500){
             writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
         })
         saveWorkbook(sheet)
-        
-        
         # create archive
-        system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/FinalGenes1/PyramidalDeep/*')
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
+        
     }
 }
