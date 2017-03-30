@@ -41,6 +41,6 @@ microglialException = function(restDir=NULL, genelist = NULL, cores = 1){
     
     # just apply to a single microglia list
     if (!is.null(genelist)){
-        return(genelist[!genelist %in% effectedGenes])
+        return(genelist[!toupper(genelist) %in% effectedGenes])
     }
 }
