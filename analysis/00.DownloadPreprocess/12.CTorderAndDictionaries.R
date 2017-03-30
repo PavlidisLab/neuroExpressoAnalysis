@@ -10,6 +10,7 @@ samples = rbind(n_expressoSamples,TasicSamples)
 cellOrder = samples %>%
     arrange(MajorType,Neurotransmitter,PyramidalDeep) %>% 
     filter(!is.na(PyramidalDeep)) %>% .$PyramidalDeep %>% unique
+cellOrder = c(cellOrder[1:27],'Pyramidal',cellOrder[28:34])
 #cellOrder = c(cellOrder[1],'AstrocyteReactive','AstrocyteInactive', cellOrder[2:len(cellOrder)])
 devtools::use_data(cellOrder,overwrite=TRUE)
 
