@@ -20,7 +20,7 @@ if(length(commandArgs(trailingOnly=TRUE))==0){
     end = 500
     firstChip = TRUE
     secondChip = FALSE
-    signleCell = TRUE
+    singleCell = TRUE
 } else{
     args <- commandArgs(trailingOnly = TRUE)
     start = as.numeric(args[1])
@@ -287,7 +287,7 @@ if(end == 500){
     if(singleCell){
         allGenes = c(allGenes, #list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelSingleCell/')),
                      list(genes3 = pickMarkersAll('analysis/01.SelectGenes/RotSelJustSingleCell//')))
-        names = c(names,'Markers_SingleCell','Markers_RelaxedSingleCell')
+        names = c(names,'Markers_SingleCell')
     }
     
     # final folder creation -------------------------------
@@ -417,7 +417,7 @@ if(end == 500){
     }
     
     system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_Final')
-    system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
+    #system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
     
     # merge single cell genes for cortex
     if(firstChip & singleCell){
@@ -521,7 +521,10 @@ if(end == 500){
             })
         })
         
-        
+        toPlotGenes$Cortex$Pyramidal = mouseMarkerGenes$Cortex$Pyramidal %>% {
+            .[!grepl('[|]', .)]
+        }
+            
         toPlotGenes %<>% lapply(function(x){
             x %<>%sapply(len)
             x[cellOrder] %>% trimNAs
@@ -575,6 +578,7 @@ if(end == 500){
         
         # gene list in single files -------
         mouseMarkerGenes %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenes.json')
+        mouseMarkerGenesPyramidalDeep %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenesPyraDeep.json')
         
         sheet = loadWorkbook('analysis/01.SelectGenes/markerGenes.xls', create = TRUE)
         
@@ -587,6 +591,19 @@ if(end == 500){
             writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
         })
         saveWorkbook(sheet)
+        
+        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
+        
+        dir.create('analysis/01.SelectGenes/markerGeneTSVPyraDeep')
+        1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
+            out = stri_list2matrix(mouseMarkerGenes[[i]]) %>% as.data.frame
+            names(out) = names(mouseMarkerGenes[[i]])
+            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVs',names(mouseMarkerGenes[i])),na= '', sep = "\t", quote = F, row.names = F)
+            createSheet(sheet, name = names(mouseMarkerGenes[i]))
+            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
+        })
+        saveWorkbook(sheet)
+        
         # create archive
         system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
         
