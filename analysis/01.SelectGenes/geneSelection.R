@@ -14,6 +14,8 @@ library(jsonlite)
 library(stringi)
 #library(markerGenesManuscript)
 
+assertthat::are_equal('Vsir' %in% rn(TasicPrimaryMeanLog),TRUE)
+
 print('it starts')
 if(length(commandArgs(trailingOnly=TRUE))==0){
     start = 1
@@ -150,7 +152,7 @@ cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',appe
 # rotation with single cells ------------------------------
 if(singleCell){
     if(start==1){
-        file.create('analysis//01.SelectGenes/RotationSingleCell/progress')
+        file.create('analysis//01.SelectGenes/RotationJustSingleCell/progress')
     }
     for(i in start:end){
         # markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
