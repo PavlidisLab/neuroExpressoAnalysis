@@ -103,40 +103,40 @@ Prodh	Ltc4s	Trim30a	Ptpn6	Resp18
 Ptch1	Ly86	Tsc22d3	Pycard	Rgs11	
 Ptprz1	Ly96	Tubb6	Rasa4	Rian	
 Pygb	Lyn	Ucp2	Rgl1	Rph3a	
-Pygm	Lyz2|Lyz1	Vav1	Rgs10	S100a10	
-Rorb	Mef2a	Zfp36	Rgs2	Scg2	
-S1pr1	Mlxipl		Rps6ka1	Scn2a	
-Sash1	Mrc1		S100a8	Scn3b	
-Scara3	Msn		S100a9	Sept6	
-Scg3	Myh9		Selplg	Slc29a4	
-Sdc4	Myo7a		Slamf9	Slc6a15	
-Serhl	Naip2		Slc16a6	Slc6a17	
-Serpinh1	Naip5		Slc25a37	Slc6a2	
-Slc14a1	Nckap1l		Slc25a45	Sncg	
-Slc15a2	Nrros		Slc2a5	Snhg11	
-Slc1a2	Pald1		Slc37a2	Spint2	
-Slc1a3	Pdgfb		Slc40a1	Sstr2	
-Slc1a4	Pf4		Slc7a8	St8sia2	
-Slc38a3	Phyhd1		Snx5	St8sia4	
-Slc41a1	Pik3cd		St3gal6	Stbd1	
-Slc4a4	Pla2g15		Tcirg1	Stk32c	
-Slc7a10	Plcg2		Tec	Stmn2	
-Slco1c1	Plekho1		Tgfbi	Stx3	
-Smpdl3a	Plxdc2		Tgfbr1	Susd2	
-Sorcs2	Pon3		Tgif1	Syn2	
-Sox5	Ppp1r15a		Themis2	Syngr3	
-Sox9	Prkab1		Tifa	Syt17	
-Sparcl1	Pros1		Tlr4	Syt4	
-St6galnac5	Ptbp3		Tmem119	Syt9	
-Tfcp2l1	Ptprc		Tmem140	Tenm2	
-Tgfb2	Rassf5		Tnfrsf1b	Tfap2b	
-Timp3	Rbm39		Tnfsf13b	Th	
-Tlcd1	Rcsd1		Trem2	Tmsb10	
-Tmem47	Rel		Trim47	Trpc3	
-Tnfrsf19	Rgs1		Uba7	Tubb3	
-Tril	Rnase4		Unc93b1	Tubg2	
-Trps1	Sash3		Vamp8	Usp29	
-Ttpa	Serinc3		Vrk2	Vat1	
+Pygm	Lyz2|Lyz1	Vav1	Rgs10	Scg2	
+Rorb	Mef2a	Zfp36	Rgs2	Scn2a	
+S1pr1	Mlxipl		Rps6ka1	Scn3b	
+Sash1	Mrc1		S100a8	Sept6	
+Scara3	Msn		S100a9	Slc29a4	
+Scg3	Myh9		Selplg	Slc6a15	
+Sdc4	Myo7a		Slamf9	Slc6a17	
+Serhl	Naip2		Slc16a6	Slc6a2	
+Serpinh1	Naip5		Slc25a37	Sncg	
+Slc14a1	Nckap1l		Slc25a45	Snhg11	
+Slc15a2	Nrros		Slc2a5	Spint2	
+Slc1a2	Pald1		Slc37a2	Sstr2	
+Slc1a3	Pdgfb		Slc40a1	St8sia2	
+Slc1a4	Pf4		Slc7a8	St8sia4	
+Slc38a3	Phyhd1		Snx5	Stbd1	
+Slc41a1	Pik3cd		St3gal6	Stk32c	
+Slc4a4	Pla2g15		Tcirg1	Stmn2	
+Slc7a10	Plcg2		Tec	Stx3	
+Slco1c1	Plekho1		Tgfbi	Susd2	
+Smpdl3a	Plxdc2		Tgfbr1	Syn2	
+Sorcs2	Pon3		Tgif1	Syngr3	
+Sox5	Ppp1r15a		Themis2	Syt17	
+Sox9	Prkab1		Tifa	Syt4	
+Sparcl1	Pros1		Tlr4	Syt9	
+St6galnac5	Ptbp3		Tmem119	Tenm2	
+Tfcp2l1	Ptprc		Tmem140	Tfap2b	
+Tgfb2	Rassf5		Tnfrsf1b	Th	
+Timp3	Rbm39		Tnfsf13b	Tmsb10	
+Tlcd1	Rcsd1		Trem2	Trpc3	
+Tmem47	Rel		Trim47	Tubb3	
+Tnfrsf19	Rgs1		Uba7	Tubg2	
+Tril	Rnase4		Unc93b1	Usp29	
+Trps1	Sash3		Vamp8	Vat1	
+Ttpa	Serinc3		Vrk2		
 Vcam1	Siglecf				
 Vegfa	Sipa1				
 Wnt7a	Skap2				

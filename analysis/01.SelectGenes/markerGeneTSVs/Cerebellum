@@ -78,88 +78,88 @@ Tfap2b	Bcar3	Otx2	Ceacam10	Adgrg1	Casp4	Aif1	Ddc	Calb1
 				Grn	Parp14	Laptm5		
 				Gusb	Parp9	Lcn2		
 				H2-Ab1	Per1	Lgmn		
-				H2-K1	Plek	Lpl		
-				H2-K1|H2-D1	Plk3	Lpxn		
-				H2-Oa	Pmaip1	Lrba		
-				H2-Q7|H2-Q9	Ptger4	Lrmp		
-				H2-T23|H2-T-ps	Rab20	Lrp1		
-				Hacd4	Rab3il1	Lrrk1		
-				Havcr2	Rac2	Lst1		
-				Hba-a1|Hba-a2	Relb	Ltf		
-				Hba-a2|Hba-a1	Rhoh	Lyl1		
-				Hbb-b1|Hbb-b2|Hbb-bs|Hbb-bt	Ripk1	Lyz1		
-				Hcls1	Rnasel	Mafb		
-				Herpud1	Rrad	Man2b1		
-				Hp	Runx1	Mertk		
-				Hps4	Samsn1	Mfng		
-				Ier2	Serpine1	Mpeg1		
-				Ier5	Sh2b2	Mylip		
-				Ifngr1	Slc15a3	Myo1g		
-				Igsf6	Slc39a8	Naalad2		
-				Il13ra1	Smagp	Naglu		
-				Il21r	Socs3	Nfam1		
-				Il6ra	Spint1	Ngp		
-				Il7r	Sqrdl	Notch2		
-				Irf5	Srgn	Nrip1		
-				Irgm2	Sult1a1	Nrp1		
-				Itgb2	Syk	Olfml3		
-				Itpr2	Tap1	P2ry12		
-				Junb	Tgm2	Parvg		
-				Klf2	Tlr2	Pik3cg		
-				Klf6	Tlr6	Plcl2		
-				Lag3	Tlr7	Pld1		
-				Lcp1	Tmed5	Pld4		
-				Lgals3bp	Tmem173	Plxnb2		
-				Lgals9	Tnf	Psmb9		
-				Lilr4b|Lilrb4a	Tnfaip2	Ptpn18		
-				Lpcat3	Tnfrsf1a	Ptpn6		
-				Ly86	Tpp2	Ptpro		
-				Ly96	Traf5	Pycard		
-				Lyn	Trim30a	Pygl		
-				Lyz2|Lyz1	Tsc22d3	Rbl1		
-				Mir692-3|Mir692-2|Ftl1	Tuba1c	Rgl2		
-				Mlxipl	Tubb6	Rgs10		
-				Morc3	Vasp	Rgs2		
-				Mrc1	Vav1	S100a8		
-				Msn	Zfp36	S100a9		
-				Myh9		Scamp2		
-				Myo7a		Selplg		
-				Naip2		Sirpa		
-				Naip5		Slamf9		
-				Nckap1l		Slc15a4		
-				Nrros		Slc16a6		
-				Oaf		Slc16a7		
-				Pag1		Slc25a37		
-				Pald1		Slc25a45		
-				Pbxip1		Slc29a3		
-				Pdgfb		Slc2a5		
-				Pf4		Slc37a2		
-				Phxr1		Slc40a1		
-				Phxr4		Slc7a8		
-				Phyhd1		Snx5		
-				Pik3cd		Srpk3		
-				Pla2g15		St3gal6		
-				Pla2g4a		Stard8		
-				Plcg2		Tcirg1		
-				Pnp		Tec		
-				Pnp|Pnp2		Tgfbi		
-				Pnpla7		Tgfbr1		
-				Pon3		Tgif1		
-				Ppp1r15a		Themis2		
-				Pros1		Tifa		
-				Ptbp3		Tlr4		
-				Ptgs1		Tmem119		
-				Ptprc		Tmem140		
-				Rassf5		Tnfrsf1b		
-				Rcsd1		Tnfsf13b		
-				Rel		Tor3a		
-				Rgs1		Trem2		
-				Rgs19		Trim47		
-				Rin2		Twf2		
-				Rnase4		Uba7		
-				Rnaset2a|Rnaset2b		Unc93b1		
-				Rrbp1		Vrk2		
-				Sash3		Zfp36l2		
+				H2-K1	Plek	Lpxn		
+				H2-K1|H2-D1	Plk3	Lrba		
+				H2-Oa	Pmaip1	Lrmp		
+				H2-Q7|H2-Q9	Ptger4	Lrp1		
+				H2-T23|H2-T-ps	Rab20	Lrrk1		
+				Hacd4	Rab3il1	Lst1		
+				Havcr2	Rac2	Ltf		
+				Hba-a1|Hba-a2	Relb	Lyl1		
+				Hba-a2|Hba-a1	Rhoh	Lyz1		
+				Hbb-b1|Hbb-b2|Hbb-bs|Hbb-bt	Ripk1	Mafb		
+				Hcls1	Rnasel	Man2b1		
+				Herpud1	Rrad	Mertk		
+				Hp	Runx1	Mfng		
+				Hps4	Samsn1	Mpeg1		
+				Ier2	Serpine1	Mylip		
+				Ier5	Sh2b2	Myo1g		
+				Ifngr1	Slc15a3	Naalad2		
+				Igsf6	Slc39a8	Naglu		
+				Il13ra1	Smagp	Nfam1		
+				Il21r	Socs3	Ngp		
+				Il6ra	Spint1	Notch2		
+				Il7r	Sqrdl	Nrip1		
+				Irf5	Srgn	Nrp1		
+				Irgm2	Sult1a1	Olfml3		
+				Itgb2	Syk	P2ry12		
+				Itpr2	Tap1	Parvg		
+				Junb	Tgm2	Pik3cg		
+				Klf2	Tlr2	Plcl2		
+				Klf6	Tlr6	Pld1		
+				Lag3	Tlr7	Pld4		
+				Lcp1	Tmed5	Plxnb2		
+				Lgals3bp	Tmem173	Psmb9		
+				Lgals9	Tnf	Ptpn18		
+				Lilr4b|Lilrb4a	Tnfaip2	Ptpn6		
+				Lpcat3	Tnfrsf1a	Ptpro		
+				Ly86	Tpp2	Pycard		
+				Ly96	Traf5	Pygl		
+				Lyn	Trim30a	Rbl1		
+				Lyz2|Lyz1	Tsc22d3	Rgl2		
+				Mir692-3|Mir692-2|Ftl1	Tuba1c	Rgs10		
+				Mlxipl	Tubb6	Rgs2		
+				Morc3	Vasp	S100a8		
+				Mrc1	Vav1	S100a9		
+				Msn	Zfp36	Scamp2		
+				Myh9		Selplg		
+				Myo7a		Sirpa		
+				Naip2		Slamf9		
+				Naip5		Slc15a4		
+				Nckap1l		Slc16a6		
+				Nrros		Slc16a7		
+				Oaf		Slc25a37		
+				Pag1		Slc25a45		
+				Pald1		Slc29a3		
+				Pbxip1		Slc2a5		
+				Pdgfb		Slc37a2		
+				Pf4		Slc40a1		
+				Phxr1		Slc7a8		
+				Phxr4		Snx5		
+				Phyhd1		Srpk3		
+				Pik3cd		St3gal6		
+				Pla2g15		Stard8		
+				Pla2g4a		Tcirg1		
+				Plcg2		Tec		
+				Pnp		Tgfbi		
+				Pnp|Pnp2		Tgfbr1		
+				Pnpla7		Tgif1		
+				Pon3		Themis2		
+				Ppp1r15a		Tifa		
+				Pros1		Tlr4		
+				Ptbp3		Tmem119		
+				Ptgs1		Tmem140		
+				Ptprc		Tnfrsf1b		
+				Rassf5		Tnfsf13b		
+				Rcsd1		Tor3a		
+				Rel		Trem2		
+				Rgs1		Trim47		
+				Rgs19		Twf2		
+				Rin2		Uba7		
+				Rnase4		Unc93b1		
+				Rnaset2a|Rnaset2b		Vrk2		
+				Rrbp1		Zfp36l2		
+				Sash3				
 				Sgpl1				
 				Siglecf				
 				Sipa1				

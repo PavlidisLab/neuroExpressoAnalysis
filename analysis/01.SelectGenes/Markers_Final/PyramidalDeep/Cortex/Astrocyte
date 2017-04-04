@@ -93,18 +93,14 @@ Vit
 Vnn1
 Wnt7b
 Zic5
-1190005I06Rik
 1600014C23Rik
 1700008J07Rik
 1700040N02Rik
 1700084C01Rik
 1700084J12Rik
-2010002N04Rik
 2010110P09Rik
 2210417K05Rik
 2410004I01Rik
-2610034M16Rik
-2810055G20Rik
 2900052N01Rik
 2900093L17Rik
 3110082J24Rik
@@ -118,7 +114,6 @@ AB124611
 Acad12
 Acat3
 Acsl3
-Agxt2l1
 Alpk1
 Apoc3
 Arhgef26
@@ -134,7 +129,6 @@ C230035I16Rik
 Calr4
 Ccdc69
 Cml3
-Cml5
 cx_tRNA-Ala-GCG
 D630033O11Rik
 Dmp1
@@ -171,7 +165,6 @@ Lonrf3
 Lpin3
 Lrrc9
 Mettl11b
-Naprt1
 Nphp3
 Nr2e1
 Nwd1
@@ -189,7 +182,6 @@ Ppil6
 Prr5
 Psd2
 Rmst
-Sc4mol
 Sctr
 Sfxn5
 Shpk
@@ -227,6 +219,7 @@ Cyp2j9
 Dennd4c
 Dtna
 Elovl5
+Eva1a
 Ezr
 F3
 Fjx1
@@ -247,10 +240,13 @@ Lhx2
 Lpp
 Mfge8
 Mmp14
+Nat8f1
+Nat8f4
 Ndrg2
 Ntrk2
 Ntsr2
 Oplah
+Pdzph1
 Phka1
 Pla2g7
 Ppara
@@ -283,10 +279,4 @@ Tril
 Trps1
 Vav3
 Vcam1
-Adgrg1
-Cpq
-Eva1a
-Nat8f1
-Nat8f4
-Pdzph1
 Selenbp1|Selenbp2

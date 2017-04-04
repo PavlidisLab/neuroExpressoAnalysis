@@ -96,35 +96,35 @@ Phka1	Klf2	Tlr2	Pik3cg		Rhov
 Phkg1	Klf6	Tlr6	Plcl2		Rph3a
 Pla2g7	Lag3	Tlr7	Pld4		Rspo2
 Pou3f4	Lgals9	Tmem173	Psmb9		Ryr2
-Ppara	Lilr4b|Lilrb4a	Tnf	Ptpn18		S100a10
-Ppic	Ltc4s	Tnfaip2	Ptpn6		Scn1a
-Prelp	Ly86	Tpp2	Pycard		Sema3a
-Prkd1	Ly96	Trim30a	Rasa4		Sh3bgr
-Prodh	Lyn	Ucp2	Rgs10		Sh3bgrl2
-Ptch1	Lyz2|Lyz1	Vav1	Rgs2		Slc17a6
-Ptprz1	Mef2a	Zfp36	Rps6ka1		Slc18a3
-Pygb	Mlxipl		S100a8		Slc29a4
-Rorb	Mrc1		S100a9		Slc6a15
-S1pr1	Myh9		Selplg		Sln
-Sash1	Myo1b		Slamf9		Sncg
-Scara3	Myo7a		Slc16a6		Spock1
-Scg3	Naip2		Slc25a37		Spp1
-Sdc4	Naip5		Slc25a45		Srxn1
-Serpinh1	Nckap1l		Slc2a5		Stbd1
-Slc14a1	Nrros		Slc37a2		Stmn2
-Slc15a2	Pald1		Slc40a1		Sult4a1
-Slc1a2	Pdgfb		Slc7a8		Susd2
-Slc1a3	Pf4		Snx5		Tdrp
-Slc1a4	Phxr1		St3gal6		Tesc
-Slc38a3	Phyhd1		Tcirg1		Tmsb10
-Slc41a1	Pik3cd		Tec		Tmtc4
-Slc4a4	Pla2g15		Tgfbi		Tnfsf13b
-Slc7a10	Plcg2		Tgfbr1		Tpd52l1
-Slco1c1	Plekho1		Tgif1		Trhr
-Smpdl3a	Plxdc2		Themis2		Uts2
-Sorcs2	Pon3		Tifa		Vamp1
-Sox5	Ppp1r15a		Tlr4		Wnk4
-St6galnac5	Pros1		Tmem119		Ykt6
+Ppara	Lilr4b|Lilrb4a	Tnf	Ptpn18		Scn1a
+Ppic	Ltc4s	Tnfaip2	Ptpn6		Sema3a
+Prelp	Ly86	Tpp2	Pycard		Sh3bgr
+Prkd1	Ly96	Trim30a	Rasa4		Sh3bgrl2
+Prodh	Lyn	Ucp2	Rgs10		Slc17a6
+Ptch1	Lyz2|Lyz1	Vav1	Rgs2		Slc18a3
+Ptprz1	Mef2a	Zfp36	Rps6ka1		Slc29a4
+Pygb	Mlxipl		S100a8		Slc6a15
+Rorb	Mrc1		S100a9		Sln
+S1pr1	Myh9		Selplg		Sncg
+Sash1	Myo1b		Slamf9		Spock1
+Scara3	Myo7a		Slc16a6		Spp1
+Scg3	Naip2		Slc25a37		Srxn1
+Sdc4	Naip5		Slc25a45		Stbd1
+Serpinh1	Nckap1l		Slc2a5		Stmn2
+Slc14a1	Nrros		Slc37a2		Sult4a1
+Slc15a2	Pald1		Slc40a1		Susd2
+Slc1a2	Pdgfb		Slc7a8		Tdrp
+Slc1a3	Pf4		Snx5		Tesc
+Slc1a4	Phxr1		St3gal6		Tmsb10
+Slc38a3	Phyhd1		Tcirg1		Tmtc4
+Slc41a1	Pik3cd		Tec		Tnfsf13b
+Slc4a4	Pla2g15		Tgfbi		Tpd52l1
+Slc7a10	Plcg2		Tgfbr1		Trhr
+Slco1c1	Plekho1		Tgif1		Uts2
+Smpdl3a	Plxdc2		Themis2		Vamp1
+Sorcs2	Pon3		Tifa		Wnk4
+Sox5	Ppp1r15a		Tlr4		Ykt6
+St6galnac5	Pros1		Tmem119		
 Tfcp2l1	Ptbp3		Tmem140		
 Tgfb2	Ptprc		Tnfrsf1b		
 Timp3	Rassf5		Trem2		
