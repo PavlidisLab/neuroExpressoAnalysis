@@ -1,4 +1,3 @@
-library(viridis)
 
 #' Return default colors for the cell types
 #' @return A named vector. Due to existance of different naming schemes, 
@@ -9,7 +8,9 @@ cellColors = function(){
     coloring = c(Oligo = 'darkgreen',
                  Oligodendrocyte = 'darkgreen',
                  "Oligodendrocyte precursors" = 'green',
-                 Endothelial = 'yellow',
+                 "Oligodendrocyte prec." = 'green',
+                 
+                 Endothelial = 'gold4',
                  Bergmann = 'palegreen',
                  MotorCholin = 'darkorange4',
                  SpinalCordCholinergic = 'darkorange4',
@@ -26,7 +27,6 @@ cellColors = function(){
                  Glutamatergic = 'slategray',
                  Basket = 'mediumpurple4',
                  Golgi = 'orchid',
-                 Pyramidal = 'turquoise',
                  Purkinje = 'purple',
                  Inter = 'pink',
                  CerebGranule = 'thistle',
@@ -56,7 +56,7 @@ cellColors = function(){
                  GabaHtr3a = 'darkred',
                  GabaVIPReln = 'firebrick4',
                  GabaReln = 'firebrick',
-                 Pyramidal = 'turquoise',
+                 Pyramidal = muted('blue'),
                  'Layer 4 Pyra' = 'cornflowerblue',
                  'Layer 2 3 Pyra' = 'cadetblue4',
                  'Layer 6a Pyra' = 'lightblue1',
