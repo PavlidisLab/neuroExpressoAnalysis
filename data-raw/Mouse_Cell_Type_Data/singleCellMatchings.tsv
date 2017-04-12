@@ -1,16 +1,16 @@
-PyramidalDeep	Neurotransmitter	ShinyNames	Region	MajorType	Tasic	TasicEvidence	Notes
-Astrocyte	Astrocyte	Astrocyte	Cortex	Glia	Astro Gja1	Tasic match	
-Microglia	Microglia	Microglia	Cortex	Glia	Micro Ctss	Tasic match	
-Oligo	Oligodendrocyte	Oligodendrocyte	Cortex	Glia	Oligo Opalin	Tasic match	
-GabaPV	Gabaergic	FS Basket (G42)	Cortex	Neuron	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	iDefinition: fast spiking interneurons	unclear consider merging the chandelier. Other class of Pv positive cells: express Calbindinin according to http://www.cell.com/neuron/fulltext/S0896-6273(03)00300-3. So I removed clusters with calb1 expression.  Cpne chandelier 
-GabaRelnCalb	Gabaergic	Martinotti (GIN)	Cortex	Neuron	Sst Cbln4	Tasic match	
-GabaVIPReln	Gabaergic	VIPReln (G30)	Cortex	Neuron	Vip Sncg	Unique Sncg expression, high Sncg expression in neuroexpresso	
-Pyramidal_Glt_25d2	Pyramidal	Pyramidal Glt25d2	Cortex	Neuron	L5b Tph2, L5b Cdh13	Definition: Glt25d2 positive Fam84b positive	 enriched with Fam84b layer 5b according to Schmidth, 6 according to doyle, 5 according to Groh
-Pyramidal_S100a10	Pyramidal	Pyramidal S100a10	Cortex	Neuron	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Definition: S100a10 expressing cells at layer 5	Layer 5a S100a10 expressing. Also present in layer 4 and 5b Enriched with Akap12 Deptor(Depdc6) Fam3c(D6Wsu176e) Dexi Emb
-PyramidalCorticoThalam	Pyramidal	Pyramidal CrtThalamic	Cortex	Neuron	L6a Car12, L6a Syt17	Tasic match	Foxp2 positive corticothalamic cells
-Endothelial	Endothelial	Endothelial	Cortex	Ephitelium	Endo Myl9, Endo Tbc1d4	Tasic match	
-OligoPrecursors	Oligodendrocyte	Oligodendrocyte precursors	Cortex	Glia	OPC Pdgfra	Tasic match	
-Layer 4 Pyra	Pyramidal	Layer 4 Pyra	Cortex	Neuron	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Tasic match	
-Layer 2 3 Pyra	Pyramidal	Layer 2 3 Pyra	Cortex	Neuron	L2 Ngb, L2/3 Ptgs2	Tasic match	
-Layer 6a Pyra	Pyramidal	Layer 6a Pyra	Cortex	Neuron	L6a Mgp, L6a Sla	Tasic match	
-Layer 6b Pyra	Pyramidal	Layer 6b Pyra	Cortex	Neuron	L6b Serpinb11, L6b Rgs12	Tasic match	
+CellTypes	PyramidalDeep	Neurotransmitter	ShinyNames	Region	MajorType	Tasic	TasicEvidence	Notes
+Astrocyte	Astrocyte	Astrocyte	Astrocyte	Cortex	Glia	Astro Gja1	Tasic match	
+Microglia	Microglia	Microglia	Microglia	Cortex	Glia	Micro Ctss	Tasic match	
+Oligo	Oligo	Oligodendrocyte	Oligodendrocyte	Cortex	Glia	Oligo Opalin	Tasic match	
+GabaPV	GabaPV	Gabaergic	FS Basket (G42)	Cortex	Neuron	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	iDefinition: fast spiking interneurons	unclear consider merging the chandelier. Other class of Pv positive cells: express Calbindinin according to http://www.cell.com/neuron/fulltext/S0896-6273(03)00300-3. So I removed clusters with calb1 expression.  Cpne chandelier 
+GabaRelnCalb	GabaRelnCalb	Gabaergic	Martinotti (GIN)	Cortex	Neuron	Sst Cbln4	Tasic match	
+GabaVIPReln	GabaVIPReln	Gabaergic	VIPReln (G30)	Cortex	Neuron	Vip Sncg	Unique Sncg expression, high Sncg expression in neuroexpresso	
+Pyramidal	Pyramidal_Glt_25d2	Pyramidal	Pyramidal Glt25d2	Cortex	Neuron	L5b Tph2, L5b Cdh13	Definition: Glt25d2 positive Fam84b positive	 enriched with Fam84b layer 5b according to Schmidth, 6 according to doyle, 5 according to Groh
+Pyramidal	Pyramidal_S100a10	Pyramidal	Pyramidal S100a10	Cortex	Neuron	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Definition: S100a10 expressing cells at layer 5	Layer 5a S100a10 expressing. Also present in layer 4 and 5b Enriched with Akap12 Deptor(Depdc6) Fam3c(D6Wsu176e) Dexi Emb
+Pyramidal	PyramidalCorticoThalam	Pyramidal	Pyramidal CrtThalamic	Cortex	Neuron	L6a Car12, L6a Syt17	Tasic match	Foxp2 positive corticothalamic cells
+Endothelial	Endothelial	Endothelial	Endothelial	Cortex	Ephitelium	Endo Myl9, Endo Tbc1d4	Tasic match	
+OligoPrecursors	OligoPrecursors	Oligodendrocyte	Oligodendrocyte precursors	Cortex	Glia	OPC Pdgfra	Tasic match	
+Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	Cortex	Neuron	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Tasic match	
+Pyramidal	Layer 2 3 Pyra	Pyramidal	Layer 2 3 Pyra	Cortex	Neuron	L2 Ngb, L2/3 Ptgs2	Tasic match	
+Pyramidal	Layer 6a Pyra	Pyramidal	Layer 6a Pyra	Cortex	Neuron	L6a Mgp, L6a Sla	Tasic match	
+Pyramidal	Layer 6b Pyra	Pyramidal	Layer 6b Pyra	Cortex	Neuron	L6b Serpinb11, L6b Rgs12	Tasic match	
