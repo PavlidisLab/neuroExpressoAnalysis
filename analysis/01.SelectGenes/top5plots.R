@@ -1,5 +1,5 @@
 # assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
-# library(neuroExpressoAnalysis)
+library(neuroExpressoAnalysis)
 library(dplyr)
 library(viridis)
 library(reshape2)
@@ -10,9 +10,10 @@ library(stringr)
 library(magrittr)
 library(pheatmap) # dev version is used
 # expression of top 5 heatmap --------
+order = cellOrder %>% translatePublishable()
 
-genes = mouseMarkerGenesPyramidalDeep
-genes$Cortex %<>% c(list('Pyramidal' = mouseMarkerGenes$Cortex$Pyramidal))
+genes = mouseMarkerGenes
+#genes$Cortex %<>% c(list('Pyramidal' = mouseMarkerGenes$Cortex$Pyramidal))
 
 genes %<>% lapply(function(x){x[!grepl(pattern='Microglia_',names(x))]})
 geneNames = names(genes)
@@ -47,9 +48,9 @@ genesMicroarray = lapply(genesMicroarray, function(x){
 genesSingleCell  = lapply(1:len(genes$Cortex), function(i){
     print(names(genes$Cortex[i]))
     if(names(genes$Cortex[i]) == 'Pyramidal'){
-        scores = read.table(paste0('analysis/01.SelectGenes/QuickJustSingleCellRelax//CellTypes/',names(genes$Cortex[i])))
+        scores = read.table(paste0('analysis/01.SelectGenes/QuickJustSingleCell//CellTypes/',names(genes$Cortex[i])))
     } else{
-        scores = read.table(paste0('analysis/01.SelectGenes/QuickJustSingleCellRelax//PyramidalDeep/',names(genes$Cortex[i])))
+        scores = read.table(paste0('analysis/01.SelectGenes/QuickJustSingleCell//PyramidalDeep/',names(genes$Cortex[i])))
     }
     assertthat::are_equal(all(genes$Cortex[[i]] %in% scores$V1),TRUE)
     (scores %>% filter(V1 %in% genes$Cortex[[i]]))[1:5,]$V1 %>% unlist %>% as.char
@@ -65,7 +66,7 @@ design = n_expressoSamples
 dpylrFriendly = cbind(design, t(exp))
 
 dpylrFriendly %<>%
-    mutate(ShinyNames = ShinyNames %>% factor(levels = translatePublishable(cellOrder)[translatePublishable(cellOrder) %in% ShinyNames])) %>% 
+    mutate(ShinyNames = CellTypes %>% translatePublishable %>% factor(levels = order[order %in% (CellTypes %>% translatePublishable)])) %>% 
     arrange(ShinyNames) %>% filter(!is.na(PyramidalDeep))
 
 genesMicroarray %<>% lapply(function(x){
@@ -82,25 +83,33 @@ exp %<>% cbind(NA)
 
 colors = cellColors()
 
-dir.create('analysis/01.SelectGenes/GenePlotsTop')
+dir.create('analysis/01.SelectGenes/GenePlotsTop', showWarnings = FALSE)
 topGenes = genesMicroarray[names(regionSamples)]
+
+null = list(NULL)
+names(null) = NA
 
 for (i in 1:len(regionSamples)){
     print(i)
-    order = cellOrder %>% translatePublishable()
     
     if(names(regionSamples)[i] == 'Cortex'){
         genes = names(genesMicroarray$Cortex) %>% sapply(function(x){
             c( genesMicroarray$Cortex[[x]],genesSingleCell[[x]]) %>% unique
         })
+        
+        genes = c(genes[order[order %in% c(design$ShinyNames %>% as.char,'Pyramidal')]] %>% trimElement(null),
+                  genesSingleCell[order[order %in% names(genesSingleCell)[!names(genesSingleCell) %in% c(design$ShinyNames %>% as.char,'Pyramidal')]]])
+        
     }  else{
-        genes = topGenes[[i]]
+        genes = topGenes[[i]] %>% {.[order[order %in% design$ShinyNames]]} %>% trimElement(null)
     }
-    genes = genes[order[order %in% names(genes)]]
+    
+    
+   # genes = genes[order[order %in% names(genes)]]
     
     cellTypes = regionSamples[[i]] %>% as.char %>%trimNAs %>%  unique()
     if(names(regionSamples)[i] == 'Cortex'){
-        cellTypes = c(cellTypes, meltedSingleCells$ShinyNames %>% as.char) %>% unique
+        cellTypes = c(cellTypes, meltedSingleCells$CellTypes %>% translatePublishable %>% as.char) %>% unique
     }
     relExp = exp[!is.na(regionSamples[[i]]),
                  match(unlist(genes), geneDat$Gene.Symbol) %>% 
@@ -115,12 +124,17 @@ for (i in 1:len(regionSamples)){
     if(names(regionSamples)[i] == 'Cortex'){
         relExp2 = TasicPrimaryMeanLog[match(unlist(genes),rn(TasicPrimaryMeanLog)),] %>% t
         
-        meltedSingleCells %<>%mutate(ShinyNames = ShinyNames %>%   factor(levels =  translatePublishable(cellOrder)[translatePublishable(cellOrder) %in% ShinyNames])) %>% 
+        meltedSingleCells %<>%
+            mutate(ShinyNames = CellTypes %>% translatePublishable %>% 
+                       factor(
+                           levels =  
+                               c(order[order%in% (regionSamples$Cortex %>% unique %>% trimNAs)],
+                                 order[order %in% (CellTypes %>% translatePublishable)[!(CellTypes %>% translatePublishable) %in% (regionSamples$Cortex %>% unique %>% trimNAs)]]))) %>% 
             arrange(ShinyNames)
         relExp2 = relExp2[meltedSingleCells$sampleName,] %>% apply(2,scale01)
         cn(relExp2) = unlist(genes)
         
-        relExp = rbind(relExp,relExp2)
+        relExp = rbind(relExp2,relExp)
     }
     
     geneCellTypes = repIndiv(names(genes), genes %>% sapply(len))
@@ -138,14 +152,15 @@ for (i in 1:len(regionSamples)){
         rexTasic = TasicPrimaryMeanLog[,]
     }
     
-    png(paste0('analysis/01.SelectGenes/GenePlotsTop/',names(regionSamples)[i],'.png'),height=1400,width=2000)
+    
+   png(paste0('analysis/01.SelectGenes/GenePlotsTop/',names(regionSamples)[i],'.png'),height=1900,width=2000)
     # heatmap.2(t(relExp),Rowv=F,Colv=F,trace='none',col=viridis(20),
     #           ColSideColors=heatCols$cols,RowSideColors=geneCols$cols,labRow='',labCol='', main = names(regionSamples[i]))
     # legend(title= 'Cell Types','bottomleft' ,legend= names(heatCols$palette), fill = heatCols$palette )
     
     anotCol = data.frame(Samples = design$ShinyNames[!is.na(regionSamples[[i]])])
     if(names(regionSamples)[i] == 'Cortex'){
-        anotCol = rbind(anotCol,data.frame(Samples= meltedSingleCells$ShinyNames))
+        anotCol = rbind(data.frame(Samples= meltedSingleCells$ShinyNames),anotCol)
     }
     
     rownames(anotCol) = colnames(t(relExp))
@@ -154,18 +169,32 @@ for (i in 1:len(regionSamples)){
     colnames(relExp) = genes %>% unlist 
     rownames(anotRow) = colnames((relExp))
     
-    pheatmap(t(relExp),fontsize=30,gaps_col = sum(!is.na(regionSamples[[i]])),gaps_row= anotRow$`Specific Genes` %>% duplicated %>% not %>% which %>% {.-1},
+    pheatmap(t(relExp),
+             fontsize=30,
+             #fontsize = 11,
+             #gaps_col = sum(!is.na(regionSamples[[i]])),
+             gaps_col = relExp2 %>% ncol,
+             gaps_row= anotRow$`Specific Genes` %>% duplicated %>% not %>% which %>% {.-1},
              show_rownames=TRUE ,
              show_colnames=FALSE,
              annotation_col=anotCol,
              annotation_row = anotRow,
-             annotation_colors=list(Samples = heatCols$palette[names(heatCols$palette) %in% cellTypes],
-                                    'Specific Genes' = geneCols$palette[names(geneCols$palette) %in% names(genes)]),
+             annotation_colors=list(Samples = heatCols$palette[match(anotCol$Samples %>% unique,names(heatCols$palette))],
+                                    'Specific Genes' = geneCols$palette[match(anotRow$`Specific Genes` %>% unique,names(heatCols$palette))]),
              annotation_legend= T,
              cluster_rows=F,
              cluster_cols=F,
              main=paste(names(regionSamples[i]), 'marker gene expression'),
              color=viridis(20),
-             na_col = 'black')
+             na_col = 'grey',
+             border_color = NA)
     dev.off()
 }
+
+# single cell plot
+
+
+
+
+
+

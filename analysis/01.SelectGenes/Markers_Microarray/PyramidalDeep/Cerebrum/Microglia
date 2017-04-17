@@ -38,8 +38,9 @@ Clec4a2|Clec4b1
 Clec5a
 Clic1
 Cln3
-Coro1a
 Cr1l
+Creg1
+Crlf3
 Crybb1
 Ctsa
 Ctsh
@@ -51,11 +52,9 @@ D17H6S56E-5
 Dapp1
 Dnajb1
 Dock2
-Dusp6
 Ebi3
 Ehd4
 Entpd1
-Epb41l2
 Erap1
 F11r
 Fam91a1
@@ -117,6 +116,7 @@ Lyz2|Lyz1
 Map3k1
 Mir692-3|Mir692-2|Ftl1
 Mlxipl
+Morc3
 Mrc1
 Msn
 Naip2
@@ -150,10 +150,12 @@ Rgs19
 Rin2
 Rnase4
 Rnaset2a|Rnaset2b
+Rnaset2b|Rnaset2a
 Rnf130
 Rrbp1
 Sash3
 Serinc3
+Sfpq
 Sgpl1
 Sh3glb1
 Siglecf
@@ -163,7 +165,6 @@ Slc11a1
 Slc7a7
 Snord22
 Spi1
-Srgap2
 Srsf7
 Stab1
 Stat6
@@ -176,7 +177,6 @@ Tgfbr2
 Tlr1
 Tmc6
 Tmem179b
-Tob2
 Tor1aip1
 Tor4a
 Tpst2
@@ -184,6 +184,7 @@ Trim12a
 Trim30d|Trim30e-ps1|Trim30a
 Trim34a
 Trpv2
+Tspan14
 Tyrobp
 Ugt1a1|Ugt1a10|Ugt1a5|Ugt1a6b|Ugt1a2|Ugt1a9|Ugt1a7c|Ugt1a6a
 Ugt1a2|Ugt1a7c|Ugt1a6b|Ugt1a6a|Ugt1a9|Ugt1a1|Ugt1a10|Ugt1a5

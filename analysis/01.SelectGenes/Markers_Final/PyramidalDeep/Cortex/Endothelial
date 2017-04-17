@@ -8,6 +8,9 @@
 9530026P05Rik
 Abcb1a
 Acvrl1
+Adgre5
+Adgrf5
+Adgrl4
 Ahnak
 Amotl2
 Angptl2
@@ -19,7 +22,6 @@ Atp10a
 AU021092
 Aurka
 Bcl2l12
-Bub1b
 Cast
 Ccdc109b
 Ccl19
@@ -90,6 +92,7 @@ LOC545261
 Lsr
 Ltbp4
 Ly6c2
+Map3k20
 Mecom
 Mfsd7c
 Mmrn2
@@ -109,6 +112,7 @@ Pdgfd
 Pdgfrb
 Pecam1
 Pglyrp1
+Plac9b|Plac9a
 Plscr4
 Pltp
 Podxl
@@ -120,6 +124,7 @@ Rassf9
 Rbms2
 Rbpms
 Ret
+Rflnb
 Rhoj
 Rnf125
 Robo4
@@ -157,7 +162,9 @@ Thbd
 Tinagl1
 Tm4sf1
 Tmem123
+Tmem252
 Tns1
+Tns2
 Tpm4
 Trim34a
 Uaca

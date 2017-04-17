@@ -35,34 +35,10 @@ if(length(commandArgs(trailingOnly=TRUE))==0){
     singleCell = as.logical(args[4])
 }
 
-# processing single cell data ---------
-
-# regionGroups = memoReg(n_expressoSamplesWithRNAseq,'Region',c('PyramidalDeep'),regionHierarchy)
-
-# list[gene,exp] = n_expressoExprWithRNAseq %>% sepExpr
-# cortexSamples = n_expressoSamplesWithRNAseq$sampleName[!is.na(regionGroups$Cortex_PyramidalDeep)]
-# cortexMustSamples = n_expressoSamplesWithRNAseq$sampleName[!is.na(regionGroups$Cortex_PyramidalDeep) & 
-#                                                                (!(n_expressoSamplesWithRNAseq$PyramidalDeep %in%  n_expressoSamples$PyramidalDeep & 
-#                                                                       n_expressoSamplesWithRNAseq$Platform %in% 'RNAseq'))]
-# 
-# cortexOldSamples =  n_expressoSamplesWithRNAseq$sampleName[!grepl('Layer', n_expressoSamplesWithRNAseq$PyramidalDeep) & !is.na(regionGroups$Cortex_PyramidalDeep)]
-# 
-# n_expressoSamplesWithRNAseq$PyramidalDeepNoNewPyramidal = n_expressoSamplesWithRNAseq$PyramidalDeep
-# n_expressoSamplesWithRNAseq$PyramidalDeepNoNewPyramidal[!n_expressoSamplesWithRNAseq$sampleName %in% cortexOldSamples] = NA
-# 
-# n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveTo =  n_expressoSamplesWithRNAseq$PyramidalDeep
-# n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveTo[!n_expressoSamplesWithRNAseq$sampleName %in% cortexMustSamples] = NA
-# 
-# n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals = n_expressoSamplesWithRNAseq$PyramidalDeep
-# n_expressoSamplesWithRNAseq$PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals[!n_expressoSamplesWithRNAseq$sampleName %in% cortexMustSamples | !n_expressoSamplesWithRNAseq$sampleName %in% cortexOldSamples] = NA
-# 
-# meltedSingleCells$PyramidalDeepNoNewPyramidal = meltedSingleCells$PyramidalDeep
-# meltedSingleCells$PyramidalDeepNoNewPyramidal[!meltedSingleCells$sampleName %in% cortexOldSamples] = NA
-
 
 # quick selection ---------------------------
 if (start == 1){
-    # this is a quick way to select "goog enough" markers without doing permutations
+    # this is a quick way to select "good enough" markers without doing permutations
     # output of this will not be robust to outliers. These genes are not used in the study
     # and are not readily available in the package
     if(singleCell){
@@ -87,7 +63,7 @@ if (start == 1){
                          #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = NULL,
-                         cores=16,
+                         cores=15,
                          regionHierarchy= NULL)
         singleCellTime = proc.time() - ptm
         
@@ -102,7 +78,7 @@ if (start == 1){
                          #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
-                         cores=16,
+                         cores=15,
                          regionHierarchy = regionHierarchy)
         neuroExpTime = proc.time() - ptm
         
@@ -119,7 +95,7 @@ if (start == 1){
                          #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
-                         cores=16,
+                         cores=15,
                          regionHierarchy = regionHierarchy)
     }
 }
@@ -142,7 +118,7 @@ if(firstChip){
                          regionNames = 'Region',
                          rotate=0.33,
                          regionHierarchy = regionHierarchy,
-                         cores=16,
+                         cores=15,
                          seed = i)
         firstChipRotationTime = proc.time() - ptm
     }
@@ -202,7 +178,7 @@ if(secondChip){
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          rotate=0.33,
-                         cores=16,
+                         cores=15,
                          regionHierarchy = regionHierarchy,
                          seed = i)
     }
@@ -227,7 +203,7 @@ if(end == 500){
         print('waiting complete')
         rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                      rotSelOut='analysis/01.SelectGenes/RotSel',
-                     cores = 16,foldChange = 1)
+                     cores = 15,foldChange = 1)
     }
     # rotsel second chip
     if(secondChip){
@@ -242,7 +218,7 @@ if(end == 500){
         }
         rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
                      rotSelOut='analysis/01.SelectGenes/RotSel2',
-                     cores = 16, foldChange = 1)
+                     cores = 15, foldChange = 1)
     }
     # rotsel single cells
     if(singleCell){
@@ -261,7 +237,7 @@ if(end == 500){
         
         rotateSelect(rotationOut='analysis//01.SelectGenes/RotationJustSingleCell//',
                      rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCell',
-                     cores = 16, foldChange = 1)
+                     cores = 15, foldChange = 1)
     }
     # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     
@@ -322,7 +298,7 @@ if(end == 500){
         }
     }
     
-    # here we do some wrangling of the gene list to deatl with astrocytes and microglia
+    # here we do some wrangling of the gene list to deal with astrocytes and microglia
     referenceGroup = 'CellTypes'
     log = 'analysis/01.SelectGenes/markers.log'
     file.create(log)
