@@ -1,9 +1,11 @@
 #' @export
 microglialException = function(restDir=NULL, genelist = NULL, cores = 1){
-    if (detectCores()<cores){ 
-        cores = detectCores()
-        print('max cores exceeded')
-        print(paste('set core no to',cores))
+    if(!is.na(detectCores())){
+        if (detectCores()<cores){ 
+            cores = detectCores()
+            print('max cores exceeded')
+            print(paste('set core no to',cores))
+        }
     }
     registerDoMC(cores)
     # genes effected by old age and LPS stimulation

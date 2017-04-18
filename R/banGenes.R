@@ -1,9 +1,11 @@
 #' @export
 banGenes = function(restDir=NULL, genelist = NULL, bannedGenes, cores = 1){
-    if (detectCores()<cores){ 
-        cores = detectCores()
-        print('max cores exceeded')
-        print(paste('set core no to',cores))
+    if(!is.na(detectCores())){
+        if (detectCores()<cores){ 
+            cores = detectCores()
+            print('max cores exceeded')
+            print(paste('set core no to',cores))
+        }
     }
     registerDoMC(cores)
         

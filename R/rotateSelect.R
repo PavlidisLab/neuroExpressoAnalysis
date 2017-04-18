@@ -3,10 +3,12 @@
 rotateSelect = function(rotationOut,rotSelOut,cores=4, lilah=F, ...){
     
     # so that I wont fry my laptop
-    if (detectCores()<cores){ 
-        cores = detectCores()
-        print('max cores exceeded')
-        print(paste('set core no to',cores))
+    if(!is.na(detectCores())){
+        if (detectCores()<cores){ 
+            cores = detectCores()
+            print('max cores exceeded')
+            print(paste('set core no to',cores))
+        }
     }
     registerDoMC(cores)
     
