@@ -7,6 +7,11 @@ library(magrittr)
 library(praise)
 library(devtools)
 devtools::load_all()
+# skip norm is for when cellTypeStudies.tsv is modified without addition or removal of any new 
+# samples
+skipNorm=T
+download = F
+
 # library(cellTypeManuscript)
 
 design = ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_expressoStudies.tsv')
@@ -20,7 +25,7 @@ devtools::use_data(n_expressoStudies, overwrite=TRUE)
 # non-GEO samples should be acquired through personal communication.
 # to download samples from GEO we need to extract their GSM identifiers.
 # for ease of organization we place the samples from different platforms to their own folders
-download = F
+
 
 if (download){
     GPL339 = design %>% filter(Platform == 'GPL339')
@@ -53,9 +58,7 @@ if (download){
 # that only has samples from GPL1261. While we select marker genes for this file as well, 
 # the data and the markers are not included in the project repository
 
-# skip norm is for when cellTypeStudies.tsv is modified without addition or removal of any new 
-# samples
-skipNorm=F
+
 if (skipNorm==F){
     readDesignMergeCel(desFile='data-raw/Mouse_Cell_Type_Data/n_expressoStudies.tsv',
                        gsm = 'samples',
