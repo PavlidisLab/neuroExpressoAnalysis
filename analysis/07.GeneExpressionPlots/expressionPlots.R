@@ -87,24 +87,51 @@ dopaminergic = exp[geneDat$Gene.Symbol %in% c('Map2','Plcb4','Card10','Kifc2'),d
 # Olig1 and Fam114a1 in cortex----------------
 design = n_expressoSamples
 
-regionSamples = memoReg(design = design,regionNames = 'Region',groupNames = 'PyramidalDeep',regionHierarchy=regionHierarchy)
+regionSamples = memoReg(design = design,regionNames = 'Region',groupNames = 'CellTypes',regionHierarchy=regionHierarchy)
 
-design %<>% filter(!is.na(regionSamples$Cortex_PyramidalDeep)) %>% 
-    arrange(MajorType,Neurotransmitter,ShinyNames)
+design %<>% filter(!is.na(regionSamples$Cortex_CellTypes)) %>% 
+    arrange(MajorType,Neurotransmitter,CellTypes)
 
-cortical = exp[geneDat$Gene.Symbol %in% c('Olig1','Fam114a1'),design$sampleName] %>% as.matrix %>% melt %>% 
-    mutate(Var2 = design$ShinyNames[match(Var2,design$sampleName)] %>% factor(levels=design$ShinyNames %>% unique))
+cortical = exp[geneDat$Gene.Symbol %in% c('Fam114a1'),design$sampleName] %>% as.matrix %>% melt %>% 
+    mutate(Var2 = design$CellTypes[match(Var2,design$sampleName)] %>% translatePublishable #%>% factor(levels=design$CellTypes %>% unique)
+           )
+cortical$source=  'Microarray'
+
+design = meltedSingleCells
+
+cortical2 = TasicPrimaryMeanLog[c('Fam114a1'),design$sampleName] %>% as.matrix %>% melt %>% 
+    mutate(Var2 = design$CellTypes[match(Var2,design$sampleName)])
+cortical2$source = 'RNAseq'
+
+
+cortical2$Var2 %<>% translatePublishable
+
+cortical2$Var2 %<>% replaceElement(c('Oligodendrocyte precursors' = 'Oligodendrocyte prec.')) %$% newVector
+order = cellOrder %>% translatePublishable %>%  replaceElement(c('Oligodendrocyte precursors' = 'Oligodendrocyte prec.')) %$% newVector
+
+
+cortical = rbind(cortical,cortical2)
+
+
+cortical %<>% 
+    mutate(Var2 = Var2 %>%
+               factor(levels =cortical$Var2 %>% unique %>% {.[match(order,.)]} %>% trimNAs))
+
 
 (cortical %>% ggplot(aes(x = Var2, y = value, color = Var2)) + 
     geom_point(size = 1) +
     theme_cowplot(8) + 
     xlab('') +
-    ylab(bquote(log[2]~' expression'))+
-    theme(axis.text.x = element_text(angle = 90, hjust = 1),
+    ylab(bquote('Fam114a1 '~log[2]~' expression'))+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1),
           panel.background = element_rect(fill=NA, color="black",size=0.3,linetype='solid'))+
-    facet_grid(Var1~.,scales='free',switch='y') + 
+    facet_wrap(~source,scales='free') + 
     scale_color_manual(values = cellColors(),guide = FALSE)) %>%
-    ggsave(plot = .,filename = 'analysis/07.GeneExpressionPlots/olig1_Fam114a1.png', width = 5.25,height = 9.5,units='cm')
+    ggsave(plot = .,filename = 'analysis/07.GeneExpressionPlots/olig1_Fam114a1.png', width = 6,height = 5.50,units='cm')
+
+
+
+
 
 # Ddc in oligodendrocyte --------------
 design = n_expressoSamples
@@ -126,14 +153,37 @@ cortical$Groups = cortical %>% apply(1,function(x){
     }
 })
 
-cortical$Groups %<>% factor(levels=c('Cahoy et al., 2008', 'Doyle et al., 2008', 'Fomchenko et al 2011', 'dopaminergic', 'others'))
+cortical$Source = 'Microarray'
 
-(cortical %>% ggplot(aes(x = Groups, y = value, color = Groups)) + 
+
+design = meltedSingleCells
+regionSamples = memoReg(design = design,regionNames = 'Region',groupNames = 'ShinyNames',regionHierarchy=regionHierarchy)
+design %<>% filter((!is.na(regionSamples$Cortex_ShinyNames))| design$ShinyNames %in% 'Dopaminergic') %>% 
+    arrange(MajorType,Neurotransmitter,PyramidalDeep)
+cortical2 = TasicPrimaryMeanLog['Ddc',design$sampleName] %>% as.matrix %>% melt %>% 
+    mutate(Source = design$Reference[match(Var2,design$sampleName)],
+           Var2 = design$ShinyNames[match(Var2,design$sampleName)] %>% factor(levels=design$ShinyNames %>% unique))           
+cortical2$Groups = cortical2 %>% apply(1,function(x){
+    if(x['Var2'] == 'Oligodendrocyte' | x['Var2'] == 'Oligodendrocyte precursors' ){
+        return(x['Var2'])
+        } else{
+        return('others')
+    }
+})
+
+cortical2$Source = 'RNAseq'
+
+cortical = rbind(cortical,cortical2)
+cortical$Groups %<>% replaceElement(c('Oligodendrocyte precursors' = 'Oligodendrocyte prec')) %$% newVector
+cortical$Groups %<>% factor(levels=c('Cahoy et al., 2008', 'Doyle et al., 2008', 'Fomchenko et al 2011', 'dopaminergic','Oligodendrocyte','Oligodendrocyte prec' ,'others'))
+
+
+(cortical %>% ggplot(aes(x = Groups, y = value, color = Groups)) + facet_wrap(~Source,scales='free')+
     geom_point(size = 4) +
     theme_cowplot(21) + 
     xlab('') +
     ylab(bquote('Ddc '~log[2]~' expression'))+
     theme(axis.text.x = element_text(angle = 60, hjust = 1))+ 
-    scale_color_viridis(discrete =  TRUE, guide=FALSE)) %>% ggsave(plot = .,filename = 'analysis/07.GeneExpressionPlots/Ddc.png', width = 3.5,height = 6)
+    scale_color_viridis(discrete =  TRUE, guide=FALSE)) %>% ggsave(plot = .,filename = 'analysis/07.GeneExpressionPlots/Ddc.png', width = 4.5,height = 6)
 
 
