@@ -1,4 +1,4 @@
-devtools::load_all()
+#devtools::load_all()
 library(homologene)
 library(data.table)
 
@@ -39,12 +39,14 @@ zeiselSinglePs = zeiselSinglePs[-3]
 tasicSinglePs = tasicSinglePs[-3]
 darmanisSinglePs = darmanisSinglePs[-3]
 
-frame = data.frame(zeiselSinglePs[c(2,3)],
-                   tasicSinglePs[c(2,3)],
-                   darmanisSinglePs[c(2,3)])
+frame = merge(merge(zeiselSinglePs,tasicSinglePs,by='V1',all=TRUE),darmanisSinglePs,by='V1',all=TRUE)
+rownames(frame) = frame$V1
+frame = frame[-1]
 
 names(frame) = c('p value','Gene Count', 'p value','Gene Count','p value','Gene Count')
 frame %<>% fixTable
+
+
 frame = data.frame('Cell type' =zeiselSinglePs[1] ,frame,check.names=F)
 frame = frame[ogbox::trimNAs(match(cellOrder,frame$V1)),]
 frame$V1 = publishableNameDictionary$ShinyNames[match(frame$V1,
