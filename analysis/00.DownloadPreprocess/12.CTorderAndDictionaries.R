@@ -1,5 +1,4 @@
 # now load the data and place it in the package
-n_expressoExpr = ogbox::read.exp('data-raw//Mouse_Cell_Type_Data//n_expressoExpr.csv')
 n_expressoSamples =  ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_expressoSamples.tsv')
 
 TasicSamples = ogbox::read.design('data-raw/Mouse_Cell_Type_Data/meltedSingleCells.tsv')
@@ -10,7 +9,7 @@ samples = rbind(n_expressoSamples,TasicSamples)
 cellOrder = samples %>%
     arrange(MajorType,Neurotransmitter,PyramidalDeep) %>% 
     filter(!is.na(PyramidalDeep)) %>% .$PyramidalDeep %>% unique
-cellOrder = c(cellOrder[1:27],'Pyramidal',cellOrder[28:34])
+cellOrder = c(cellOrder[1:27],'Pyramidal',cellOrder[28:36])
 #cellOrder = c(cellOrder[1],'AstrocyteReactive','AstrocyteInactive', cellOrder[2:len(cellOrder)])
 devtools::use_data(cellOrder,overwrite=TRUE)
 
