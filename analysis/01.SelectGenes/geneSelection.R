@@ -523,9 +523,9 @@ if(end == 500){
         toPlotGenes %<>% lapply(function(x){
             sapply(1:len(x),function(i){
                 genes = x[i]
-                samples = n_expressoSamples %>% filter(ShinyNames %in% names(x[i])) %>% nrow
+                samples = n_expressoSamplesWithRNAseq %>% filter(ShinyNames %in% names(x[i])) %>% nrow
                 sources = 
-                    n_expressoSamples %>% 
+                    n_expressoSamplesWithRNAseq %>% 
                     filter(ShinyNames %in% names(x[i])) %>% 
                     select(Reference,GSE) %>% 
                     unique %>% {
