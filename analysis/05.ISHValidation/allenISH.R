@@ -13,8 +13,12 @@ purkinjeMarkers  = genes$Purkinje
 
 
 # loop is only around markers so don't bother commenting others out
-markers = list(DentateGranule = granuleMarkers,
-               Purkinje = purkinjeMarkers)
+# Prox1 and Pcp2 are full markers, removed at the creation of the single pages for pdf
+markers = list(DentateGranule = c(granuleMarkers,'Prox1'),
+               Purkinje = c(purkinjeMarkers,'Pcp2'))
+
+# markers = list(DentateGranule = c('Prox1'),
+#                Purkinje = c('Pcp2'))
 
 IDs = getStructureIDs()
 granuleID = IDs[grepl('^hippocampal region',IDs$name),]$id
@@ -156,13 +160,14 @@ lapply(names(markers), function(x){
 lapply(names(markers), function(x){
     dir.create(paste0('analysis//05.ISHValidation/',x,'_singlePages'))
     files = list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'), full.names=TRUE)
+    files = files[!grepl('(Prox1)|(Pcp2)',files)]
     iterate = seq(from=1,to=len(files),by=4)
     for(i in iterate){
         theseFiles = files[i:(i+3)] %>% trimNAs()
         system(paste0('convert ',
                       paste(theseFiles,collapse = ' '),
                       ' -quality 100 -append ',
-                      'analysis//05.ISHValidation/',x,'_singlePages/', format(i,width=2, flag="0"),'.png'))
+                      'analysis//05.ISHValidation/',x,'_singlePages/', formatC(i,width=2, flag="0"),'.png'))
     }
     
 })
