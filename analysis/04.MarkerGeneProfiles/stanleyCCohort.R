@@ -1,10 +1,13 @@
-devtools::load_all()
 library(ggplot2)
 library(dplyr)
 library(magrittr)
+library(markerGeneProfile)
+devtools::load_all()
+set.seed(1)
+
 StanleyC = data.frame(Gene.Symbol = rn(StanleyCExp), StanleyCExp)
 
-genes = mouseMarkerGenes$Cortex['Oligo']
+genes = neuroExpressoAnalysis::mouseMarkerGenes$Cortex['Oligo']
 groups = StanleyCMeta$Profile
 StanleyCEstimate = mgpEstimate(StanleyC,
                                     genes= genes,
@@ -75,7 +78,6 @@ signifFrame = data.frame(groups = c('Schizophrenia',
                                     'Depression'),
                          text = c('*','*','*'),
                          V2 = 110)
-
 p = data %>% ggplot(aes(x = groups, y = V2, shape = groups)) +theme_cowplot(17) + 
     #geom_violin( color="#C4C4C4", fill="#C4C4C4") +
     #geom_boxplot(width=0.1,fill = 'lightblue',outlier.size=0) + 

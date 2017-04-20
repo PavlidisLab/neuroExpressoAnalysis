@@ -7,9 +7,10 @@ library(cowplot)
 library(VennDiagram)
 library(forcats)
 library(purrr)
-devtools::load_all()
+library(markerGeneProfile)
+# devtools::load_all()
 
-genes = mouseMarkerGenes$Midbrain[
+genes = neuroExpressoAnalysis::mouseMarkerGenes$Midbrain[
     !grepl('Microglia_',names(mouseMarkerGenes$Midbrain))]
 MoranDes = MoranParkinsonsMeta
 # MoranDes %<>% mutate(patient = paste0(Disease, str_extract(Title,pattern='[0-9]+')))
@@ -48,7 +49,7 @@ estimations = lapply(1:len(expDats),function(i){
                                geneColName='Gene.Symbol',
                                outlierSampleRemove=F,
                                groups=groups[[i]],
-                               removeNegatives = F,
+                               removeNegatives = T,
                                PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
@@ -174,8 +175,15 @@ annotation = data.frame(source = groupCorrelations %>% names,
                                          'PD: ', format(groupCorrelations %>% map_dbl('PD'),digits=3))))
 
 
+onlySigFigures <- function(){
+    # return a function responpsible for formatting the 
+    # axis labels with a given number of decimals 
+    function(x) as.char(x)
+}
+
 genePCestimationPlot = masterCorPlot %>% ggplot(aes(x =estimation , y = paperGenePC, color = disease)) + 
     facet_grid(~source) +
+    scale_x_continuous(breaks= c(0,0.5,1),labels = onlySigFigures()) + 
     theme_cowplot(17) +
     theme(strip.background = element_blank(),
           strip.text = element_text(size = 17))+
@@ -195,7 +203,7 @@ genePCestimationPlot = masterCorPlot %>% ggplot(aes(x =estimation , y = paperGen
 
 ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/genePCestimation.png',
        plot= genePCestimationPlot,
-       width=8,height=4.3,units='in')
+       width=8.5,height=4.3,units='in')
 
 
 # all genes correlation
@@ -237,7 +245,7 @@ geneAllestimation = allGeneCors %>% ggplot(aes(x = gene, y = Correlation, color 
 
 ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/geneAllestimation.png',
        plot= geneAllestimation,
-       width=11,height=4.3,units='in')
+       width=12,height=4.3,units='in')
 
 
 # Zhang other regions --------------------
