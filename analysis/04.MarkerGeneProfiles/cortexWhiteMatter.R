@@ -8,7 +8,10 @@ groups = trabzuniRegionsMeta$brainRegion[trabzuniRegionsMeta$brainRegion %in% c(
 
 cortex_white  = data.frame(Gene.Symbol = rownames(cortex_white), cortex_white)
 
-genes = mouseMarkerGenes$Cortex[!grepl('Microglia_',names(mouseMarkerGenes$Cortex))]
+genes = neuroExpressoAnalysis::mouseMarkerGenes$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenes$Cortex))]
+
+genes = genes[(genes %>% sapply(function(x){sum((x %>% mouse2human %$% humanGene) %in% cortex_white$Gene.Symbol)}))>0]
+
 
 names(genes) = translatePublishable(names(genes))
 # 
