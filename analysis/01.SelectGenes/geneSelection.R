@@ -323,11 +323,14 @@ if(end == 500){
         }) %>% unlist %>% unique %>% len
         cat(paste0('Microglia now have ', allMicroglia, ' genes\n\n'), file = log,append = TRUE)
         
+        
+        
         cat('S100a10 Exception\n--------------------\n',file=log,append = TRUE)
         
         
         
         if(!grepl('SingleCell',names[i])){
+            genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/','PyramidalDeep'))
             
             allS100 = genes %>% lapply(function(x){
                 x['Pyramidal_S100a10']
@@ -336,7 +339,7 @@ if(end == 500){
             
             s100a10exception(paste0('analysis//01.SelectGenes/',names[i]),cores=8)
             
-            genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/',referenceGroup))
+            genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/','PyramidalDeep'))
             allS100 = genes %>% lapply(function(x){
                 x['Pyramidal_S100a10']
             }) %>% unlist %>% unique %>% len
