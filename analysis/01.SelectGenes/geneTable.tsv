@@ -1,7 +1,7 @@
 All
-Astrocyte	10	105	Cahoy et al., 2008 (GSE9566), Zamanian et al 2012 (GSE35338), Tasic et al. (GSE71585)
+Astrocyte	10	103	Cahoy et al., 2008 (GSE9566), Zamanian et al 2012 (GSE35338), Tasic et al. (GSE71585)
 Oligodendrocyte	26	26	Bellesi et al 2013 (GSE48369), Cahoy et al., 2008 (GSE9566), Doyle et al., 2008 (GSE13379), Fomchenko et al 2011 (GSE30016), Tasic et al. (GSE71585)
-Microglia	4	138	Anandasabapathy et al., 2011 (GSE29949), Tasic et al. (GSE71585)
+Microglia	4	137	Anandasabapathy et al., 2011 (GSE29949), Tasic et al. (GSE71585)
 Cortex
 Endothelial	2	178	Tasic et al. (GSE71585)
 FS Basket (G42)	18	14	Okaty et al., 2009 (GSE17806), Sugino et al. 2014 (GSE8720), Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
@@ -23,11 +23,11 @@ Forebrain Cholinergic	6	45	Doyle et al., 2008 (GSE13379)
 Spiny	39	79	Doyle et al., 2008 (GSE13379), Heiman et al 2014 (GSE55096), Maze et al 2014 (GSE54656), Tan et al 2013 (GSE48813)
 Amygdala
 Glutamatergic	3	11	Sugino et al., 2006 (GSE2882)
-Pyramidal Thy1	12	22	Sugino et al., 2006 (GSE2882)
+Pyramidal Thy1 Amyg	3	22	Sugino et al., 2006 (GSE2882)
 Hippocampus
 DentateGranule	3	31	Perrone-Bizzozero NI et al. 2011 (GSE11147)
 GabaSSTReln	3	55	Sugino et al., 2006 (GSE2882)
-Pyramidal Thy1	12	19	Sugino et al., 2006 (GSE2882)
+Pyramidal Thy1 Hipp	3	19	Sugino et al., 2006 (GSE2882)
 Subependymal
 Ependymal	2	50	Beckervordersandforth et al 2010 (GSE18765)
 Thalamus
