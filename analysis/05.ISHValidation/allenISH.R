@@ -39,10 +39,12 @@ yProportions = list(DentateGranule = c(0.125,0.125),
 
 # get raw image
 for(i in 1:len(markers)){
+    dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i],'_full'),recursive=TRUE,showWarnings=FALSE)
     dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i]),recursive=TRUE,showWarnings=FALSE)
     
     for (j in 1:len(markers[[i]])){
         tryCatch({
+            filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
             filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
             
             datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal')[1]
@@ -51,8 +53,8 @@ for(i in 1:len(markers)){
                 next
             }
             dowloadImage(imageID["imageID"], view = 'projection',
-                         output = filename)
-            centerImage(imageFile = filename, x = imageID['x'],
+                         output = filenameFull)
+            centerImage(imageFile = filenameFull, x = imageID['x'],
                         y= imageID['y'],
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
@@ -67,13 +69,14 @@ for(i in 1:len(markers)){
 for(i in 1:len(markers)){
     for (j in 1:len(markers[[i]])){
         tryCatch({
+            filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
             filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
             
             datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal')[1]
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
             dowloadImage(imageID["imageID"], view = 'expression',
-                         output = filename)
-            centerImage(imageFile = filename, x = imageID['x'],
+                         output = filenameFull)
+            centerImage(imageFile = filenameFull, x = imageID['x'],
                         y= imageID['y'],
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
@@ -170,4 +173,12 @@ lapply(names(markers), function(x){
                       'analysis//05.ISHValidation/',x,'_singlePages/', formatC(i,width=2, flag="0"),'.png'))
     }
     
+})
+
+lapply(names(markers),function(x){
+    df = data.frame(Gene = markers[[x]])
+    df$Status = df$Gene %>% sapply(function(y){
+        grepl(y,list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'))) %>% any
+    }) %>% replaceElement(labels = c(TRUE,FALSE),dictionary = c('','not in ABA')) %$% newVector
+    write.design(df,file = paste0('analysis//05.ISHValidation/',x,'.tsv'))
 })
