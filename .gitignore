@@ -48,7 +48,7 @@ data-raw/Mouse_Cell_Type_Data/rmaExp.csv
 data-raw/Mouse_Cell_Type_Data/rmaExp.csv.gz
 data-raw/Mouse_Cell_Type_Data/rmaExp2.csv
 data-raw/Mouse_Cell_Type_Data/rmaExp2.csv.gz
-
+data-raw/StanleyC
 
 
 
@@ -75,3 +75,13 @@ Purkinje_doubleMerged
 Purkinje_resize
 analysis/05.ISHValidation/DentateGranule
 analysis/05.ISHValidation/Purkinje
+
+# inside lab files
+*shree*
+*Shree*
+*lilah*
+*Lilah*
+Design.tsv
+
+#Opened file
+*~lock.*
