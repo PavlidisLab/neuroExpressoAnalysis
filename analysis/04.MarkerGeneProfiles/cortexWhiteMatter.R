@@ -23,7 +23,7 @@ names(genes) = translatePublishable(names(genes))
 #              seekConsensus=FALSE,
 #              groupRotations=TRUE,
 #              outlierSampleRemove=FALSE,
-#              removeNegatives =TRUE,
+#              removeMinority =TRUE,
 #              comparisons = 'all',
 #              estimateFile = 'analysis/04.MarkerGeneProfiles/cortex_white//estimations')
 
@@ -34,7 +34,7 @@ cortex_whiteEstimate = mgpEstimate(cortex_white,
                                    geneColName="Gene.Symbol",
                                    groups = groups,
                                    outlierSampleRemove= FALSE,
-                                   removeNegatives=TRUE,
+                                   removeMinority=TRUE,
                                    seekConsensus = FALSE
 )
 

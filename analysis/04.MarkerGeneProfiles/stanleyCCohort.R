@@ -14,7 +14,7 @@ StanleyCEstimate = mgpEstimate(StanleyC,
                                     geneColName="Gene.Symbol",
                                     groups = groups,
                                     outlierSampleRemove= FALSE,
-                                    removeNegatives=TRUE,
+                                    removeMinority=TRUE,
                                     seekConsensus = FALSE)
 
 frame = data.frame(oligoEstim = StanleyCEstimate$estimates$Oligo %>% scale01, groups = StanleyCEstimate$groups$Oligo %>% factor(levels=c('Control', 

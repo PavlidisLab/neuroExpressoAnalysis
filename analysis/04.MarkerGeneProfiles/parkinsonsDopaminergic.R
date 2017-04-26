@@ -49,7 +49,7 @@ estimations = lapply(1:len(expDats),function(i){
                                geneColName='Gene.Symbol',
                                outlierSampleRemove=F,
                                groups=groups[[i]],
-                               removeNegatives = T,
+                               removeMinority = T,
                                PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
@@ -140,7 +140,7 @@ corPlotFrames = lapply(1:len(expDats),function(i){
                              geneColName='Gene.Symbol',
                              outlierSampleRemove=F,
                              groups=groups[[i]],
-                             removeNegatives = F,
+                             removeMinority = F,
                              PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
@@ -271,7 +271,7 @@ estimations = lapply(1:len(expDats),function(i){
                                geneColName='Gene.Symbol',
                                outlierSampleRemove=F,
                                groups=groups[[i]],
-                               removeNegatives = F,
+                               removeMinority = F,
                                PC = 1)
     
     pVals = estimations$estimates %>% sapply(function(x){
@@ -338,7 +338,7 @@ corPlotFrames = lapply(1:len(expDats),function(i){
                              geneColName='Gene.Symbol',
                              outlierSampleRemove=F,
                              groups=groups[[i]],
-                             removeNegatives = F,
+                             removeMinority = F,
                              PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
