@@ -4,18 +4,18 @@ Oligodendrocyte	26	26	Bellesi et al 2013 (GSE48369), Cahoy et al., 2008 (GSE9566
 Microglia	4	137	Anandasabapathy et al., 2011 (GSE29949), Tasic et al. (GSE71585)
 Cortex
 Endothelial	2	178	Tasic et al. (GSE71585)
-FS Basket (G42)	18	14	Okaty et al., 2009 (GSE17806), Sugino et al. 2014 (GSE8720), Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
-Martinotti (GIN)	4	14	Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
-VIPReln (G30)	7	30	Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
+FS Basket (G42)	18	21	Okaty et al., 2009 (GSE17806), Sugino et al. 2014 (GSE8720), Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
+Martinotti (GIN)	4	18	Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
+VIPReln (G30)	7	34	Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
 Layer 2 3 Pyra	2	4	Tasic et al. (GSE71585)
 Layer 4 Pyra	3	10	Tasic et al. (GSE71585)
 Layer 6a Pyra	2	7	Tasic et al. (GSE71585)
 Layer 6b Pyra	2	9	Tasic et al. (GSE71585)
 Oligodendrocyte precursors	1	188	Tasic et al. (GSE71585)
-Pyramidal Glt25d2	5	2	Schmidt et al 2012 (GSE35758), Tasic et al. (GSE71585)
+Pyramidal Glt25d2	5	3	Schmidt et al 2012 (GSE35758), Tasic et al. (GSE71585)
 Pyramidal S100a10	7	2	Schmidt et al 2012 (GSE35751), Tasic et al. (GSE71585)
 Pyramidal CrtThalamic	5	2	Sugino et al., 2006 (GSE2882), Tasic et al. (GSE71585)
-Pyramidal	0	25	 ()
+Pyramidal	0	42	 ()
 BasalForebrain
 Forebrain Cholinergic	6	90	Doyle et al., 2008 (GSE13379)
 Striatum
