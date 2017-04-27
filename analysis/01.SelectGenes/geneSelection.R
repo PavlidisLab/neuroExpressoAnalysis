@@ -421,17 +421,20 @@ if(end == 500){
             
             trimOrig = 1:length(original) %>% lapply(function(i){
                 genes = original[[i]]
-                out = c(genes[teval(paste0("tasicSimpleMarkers_",x))[genes] == names(original)[i]], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
+                name = names(original)[i] %>% gsub(pattern = '(_activation)|(_deactivation)',replacement = '')
+                out = c(genes[teval(paste0("tasicSimpleMarkers_",x))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
             })
             names(trimOrig) = names(original)
             
             
             trimSingle = 1:length(singleCells) %>% lapply(function(i){
                 genes = singleCells[[i]]
+                #names(original)[i]]
+                name = names(singleCells)[i] %>% gsub(pattern = '(_activation)|(_deactivation)',replacement = '')
                 if(!names(singleCells)[i] %in% names(original)){
                     return(genes)
                 }
-                out = c(genes[teval(paste0("nxSimpleMarkers_",x))[genes] == names(original)[i]],
+                out = c(genes[teval(paste0("nxSimpleMarkers_",x))[genes] == name],
                         genes[is.na(teval(paste0("nxSimpleMarkers_",x))[genes])]) %>% trimNAs()
             })
             names(trimSingle) = names(singleCells)
