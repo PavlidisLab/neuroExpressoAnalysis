@@ -10,6 +10,7 @@
 # the default output location is data-raw. Other directories will be created if not already
 # existing
 devtools::load_all()
+library(markerGeneProfile)
 library(jsonlite)
 library(stringi)
 #library(markerGenesManuscript)
