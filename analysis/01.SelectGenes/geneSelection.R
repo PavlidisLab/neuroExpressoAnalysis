@@ -13,6 +13,7 @@ devtools::load_all()
 library(markerGeneProfile)
 library(jsonlite)
 library(stringi)
+library(bitops)
 #library(markerGenesManuscript)
 
 assertthat::are_equal('Vsir' %in% rn(TasicPrimaryMeanLog),TRUE)
@@ -123,8 +124,9 @@ if(firstChip){
                          seed = i)
         firstChipRotationTime = proc.time() - ptm
     }
+    cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
+    
 }
-cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
 
 # rotation with single cells ------------------------------
 if(singleCell){
@@ -217,7 +219,7 @@ if(end == 500){
             }
             Sys.sleep(60) 
         }
-        rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
+        rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation2/',
                      rotSelOut='analysis/01.SelectGenes/RotSel2',
                      cores = 15, foldChange = 1)
     }
@@ -590,6 +592,7 @@ if(end == 500){
         saveWorkbook(sheet)
         
         # create archive
+        file.remove('analysis/01.SelectGenes/markerGenes.rar')
         system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
         
     }
