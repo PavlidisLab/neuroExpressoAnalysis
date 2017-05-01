@@ -47,9 +47,12 @@ cortex_whiteEstimate$rotations = cortex_whiteEstimate$rotations[(cortex_whiteEst
 frame = data.frame(melt(cortex_whiteEstimate$estimates %>% lapply(scale01)), cortex_whiteEstimate$groups[[1]]) 
 names(frame) = c('estimation','cellType','brainRegions')
 
+frame$cellType  %<>% replaceElement(c('Oligodendrocyte precursors' = 'Olig. precursors' )) %$% newVector
+
 # get gene counts used in the estimation. rotations list hass rotations of the genes in the PCs. Use it to see
 # how many genes were used in the estimation
 genesUsed = cortex_whiteEstimate$rotations %>% sapply(nrow)
+names(genesUsed) %<>% replaceElement(c('Oligodendrocyte precursors' = 'Olig. precursors' )) %$% newVector
 
 numberedNames = paste0(names(genesUsed),'\n(n genes = ', genesUsed, ')')
 names(numberedNames) = names(genesUsed)
@@ -57,7 +60,7 @@ names(numberedNames) = names(genesUsed)
 frame$cellType = ogbox::replaceElement(frame$cellType,
                                        numberedNames)$newVector
 
-order = translatePublishable(cellOrder)
+order = translatePublishable(cellOrder) %>% replaceElement(c('Oligodendrocyte precursors' = 'Olig. precursors' )) %$% newVector
 
 frame %<>% mutate(cellType = cellType %>% 
                       factor(levels =unique(frame$cellType)[unique(frame$cellType) %>% str_extract('^.*?(?=\n)') %>% match(order,.)] %>% trimNAs ))
