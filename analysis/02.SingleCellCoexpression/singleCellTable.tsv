@@ -1,10 +1,10 @@
 V1	p value	Gene Count	p value	Gene Count	p value	Gene Count
 Endothelial	p<0.001	180	p<0.001	184	p<0.001	157
-Astrocyte	p<0.001	288	p<0.001	297	p<0.001	241
+Astrocyte	p<0.001	282	p<0.001	291	p<0.001	239
 Microglia	p<0.001	248	p<0.001	268	p<0.001	201
 Oligodendrocyte	p<0.001	156	p<0.001	154	p<0.001	131
-Oligodendrocyte precursors	0.835	193	p<0.001	203	0.999	170
-FS Basket (G42)	p<0.001	30	p<0.001	29	p<0.001	30
-Martinotti (GIN)	p<0.001	23	p<0.001	24	p<0.001	21
-VIPReln (G30)	p<0.001	45	p<0.001	46	p<0.001	37
-Pyramidal	p<0.001	40	p<0.001	40	p<0.001	32
+Oligodendrocyte precursors	0.831	193	p<0.001	203	0.999	170
+FS Basket (G42)	p<0.001	26	p<0.001	26	p<0.001	26
+Martinotti (GIN)	p<0.001	21	p<0.001	22	p<0.001	20
+VIPReln (G30)	p<0.001	43	p<0.001	44	p<0.001	36
+Pyramidal	p<0.001	34	p<0.001	34	p<0.001	27
