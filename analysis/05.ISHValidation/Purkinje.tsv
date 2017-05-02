@@ -1,7 +1,7 @@
 Gene	Status	Note
 Atp2a3	ok	
 B3gnt5	ok	
-Bcl11a	not expressed	is expressed on the rest of the slide
+Bcl11a	not expressed	other probeset is specific
 Bean1	ok	
 Cacna1g	ok	
 Cacna2d2	not specific	
@@ -9,7 +9,7 @@ Calb1	ok
 Casq2	ok	
 Cck	ok	
 Col18a1	ok	
-Dgkg	not expressed	Not expressed anywhere else in the entire slide
+Dgkg	not expressed	Autocapture gets the sense version, regular is specific
 Doc2b	ok	
 Ebf1	not in ABA	
 Ebf2	ok	low but specific. Better seen from the whole slide image
@@ -41,4 +41,4 @@ Stac	ok
 Sycp1	not expressed	Not expressed anywhere else in the entire slide
 Tgfb2	ok	
 Trpc3	ok	
-Tuba8	not in ABA	
+Tuba8	not in ABA
