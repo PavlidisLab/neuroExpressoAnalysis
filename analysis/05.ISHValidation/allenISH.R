@@ -47,14 +47,14 @@ for(i in 1:len(markers)){
             filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
             filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
             
-            datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal')[1]
+            datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
             if(len(imageID) ==0){
                 next
             }
             dowloadImage(imageID["imageID"], view = 'projection',
                          output = filenameFull)
-            centerImage(imageFile = filenameFull, x = imageID['x'],
+            centerImage(image = filenameFull, x = imageID['x'],
                         y= imageID['y'],
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
@@ -75,8 +75,8 @@ for(i in 1:len(markers)){
             datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal')[1]
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
             dowloadImage(imageID["imageID"], view = 'expression',
-                         output = filenameFull)
-            centerImage(imageFile = filenameFull, x = imageID['x'],
+                         outputFile = filename)
+            centerImage(imageFile = filename, x = imageID['x'],
                         y= imageID['y'],
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
