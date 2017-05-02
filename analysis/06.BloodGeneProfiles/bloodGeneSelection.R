@@ -1,3 +1,4 @@
+library(markerGeneProfile)
 devtools::load_all()
 
 if(length(commandArgs(trailingOnly=TRUE))==0){
