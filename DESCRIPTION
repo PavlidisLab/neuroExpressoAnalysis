@@ -36,7 +36,8 @@ Depends:
     doRNG (>= 1.6),
     stringi (>= 1.1.2),
     oligo (>= 1.38.0),
-    sva (>= 3.22.0)
+    sva (>= 3.22.0),
+    glue
 Imports:
     ogbox (>= 1.0)
 Suggests:
