@@ -27,8 +27,13 @@ lm22GenesMouse = lm22GenesMouse[c('Naïve B cells',
                                  'Monos')]
 names(lm22GenesMouse)[8] = 'Monocytes'
 
-geneLists = list(lm22GenesHuman,
-                 lm22GenesMouse %>% lapply(function(x){mouse2human(x)%$% humanGene}))
+geneLists = list(lm22GenesHuman %>% lapply(function(x){x %>% {.[. %in% PBMCexpr$GeneSym]}}),
+                 lm22GenesMouse %>% lapply(function(x){mouse2human(x)%$% humanGene %>% {.[. %in% PBMCexpr$GeneSym]}}))
+
+geneLists %<>% lapply(function(x){
+    x = x[x %>% sapply(length) %>% {.>0}]
+})
+
 names(geneLists) =  c('lm22GenesHumanPBMC',
                       'lm22GenesMousePBMC')
 

@@ -1,9 +1,0 @@
-CIBERSORT	Marker.Genes	n.genes	Marker.Genes.1	n.genes.1
-Naïve B cells	0.617	0.386	4	0.456	1
-Memory B cells	0.449	0.549	2	-0.735	2
-CD8 T cells	0.83	0.902	2	0.902	2
-CD4 naïve T cells	0.665	0.692	7	-0.108	5
-CD4 memory T cells-	0.455	0.167	1	-0.349	1
-CD4 memory T cells+	0.671	0.0842	13	0.349	13
-NK cells-	0.69	0.586	3	0.63	4
-Monocytes	0.683	0.505	5	0.233	2

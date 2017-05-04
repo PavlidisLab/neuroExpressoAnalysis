@@ -1,4 +1,4 @@
 CIBERSORT	Marker.Genes	n.genes	Marker.Genes.1	n.genes.1
-B cells	0.587	0.455	15	0.56	15
-CD4 T cells	0.745	0.692	2	0.688	6
-CD8 T cells	0.724	0.678	7	0.708	2
+B cells	0.587	0.508	13	0.626	12
+CD4 T cells	0.745	0.679	1	0.662	2
+CD8 T cells	0.724	0.678	7	-0.614	1
