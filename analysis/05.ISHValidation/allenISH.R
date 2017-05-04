@@ -49,7 +49,7 @@ for(i in 1:len(markers)){
             filenameFullExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
             filenameExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
             
-            if(markers[[i]][j] %in% c('Bcl11a','Dgkg')){
+            if(markers[[i]][j] %in% c('Bcl11a')){
                 datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[2]
             } else {
                 datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]

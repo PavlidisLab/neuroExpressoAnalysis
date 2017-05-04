@@ -124,3 +124,9 @@ output:
   \includegraphics[height = 10in]{Purkinje_singlePages/37.png}
 \end{center}
 \end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 2.5in]{Purkinje_singlePages/41.png}
+\end{center}
+\end{figure}
