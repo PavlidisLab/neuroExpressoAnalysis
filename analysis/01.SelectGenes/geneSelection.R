@@ -242,12 +242,8 @@ if(end == 500){
                      rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCell',
                      cores = 15, foldChange = 1)
     }
-    # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     
-    
-    # that are selected in more than 95% of the permutations
-    #rm(allGenes)
-    #rm(names)
+    # final folder creation -------------------------------
     
     if(firstChip){
         allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
@@ -271,7 +267,6 @@ if(end == 500){
         names = c(names,'Markers_SingleCell')
     }
     
-    # final folder creation -------------------------------
     for (n in 1:len(allGenes)){
         if(is.na(names[[n]])){
             next
@@ -383,13 +378,13 @@ if(end == 500){
     trimMicroarray = 1:length(microMicroarray) %>% lapply(function(i){
         genes = microMicroarray[[i]]
         name = 'Microglia'
-        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
+        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes])]) %>% trimNAs()
     })
     
     trimRNASeq = 1:length(microRNAseq) %>% lapply(function(i){
         genes = microMicroarray[[i]]
         name = 'Microglia'
-        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("nxSimpleMarkers_",x))[genes])]) %>% trimNAs()
+        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("nxSimpleMarkers_",referenceGroup))[genes])]) %>% trimNAs()
     })
     
     oldGenes = len(trimMicroarray[[2]]) + len(trimRNASeq[[2]])
@@ -578,6 +573,17 @@ if(end == 500){
         saveWorkbook(sheet)
         
         sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
+        dir.create('analysis/01.SelectGenes/markerGeneTSVsPyraDeep')
+        1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
+            out = stri_list2matrix(mouseMarkerGenesPyramidalDeep[[i]]) %>% as.data.frame
+            names(out) = names(mouseMarkerGenesPyramidalDeep[[i]])
+            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVsPyraDeep',names(mouseMarkerGenesPyramidalDeep[i])),na= '', sep = "\t", quote = F, row.names = F)
+            createSheet(sheet, name = names(mouseMarkerGenesPyramidalDeep[i]))
+            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenesPyramidalDeep[i]), startRow = 1, startCol = 1)
+        })
+        saveWorkbook(sheet)
+        
+        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
         
         dir.create('analysis/01.SelectGenes/markerGeneTSVPyraDeep')
         1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
@@ -591,7 +597,10 @@ if(end == 500){
         
         # create archive
         file.remove('analysis/01.SelectGenes/markerGenes.rar')
+        file.remove('analysis/01.SelectGenes/markerGenesPyraDeep.rar')
+        
         system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenesPyraDeep.rar analysis/01.SelectGenes/Markers_Final/PyramidalDeep/*')
         
     }
 }
