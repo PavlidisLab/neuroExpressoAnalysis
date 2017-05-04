@@ -356,11 +356,16 @@ if(end == 500){
             cat(paste0('S100a10 pyramdials now have ', allS100, ' genes\n\n'),file=log,append=TRUE)
         }
         
-        bannedGenes = c('Lpl','S100a10')
+        bannedGenes = c('Lpl')
         banGenes(restDir = paste0('analysis//01.SelectGenes/',names[i],'/'),
                  bannedGenes= bannedGenes,
                  cores=8)
         
+        bannedGenes = 'S100a10'
+        banGenes(restDir = paste0('analysis//01.SelectGenes/',names[i],'/'),
+                 bannedGenes= bannedGenes,
+                 regex= 'S100a10',
+                 cores=8)        
     }
     
     # counting microglia genes again. not necesarry for analysis -------------------
@@ -378,13 +383,13 @@ if(end == 500){
     trimMicroarray = 1:length(microMicroarray) %>% lapply(function(i){
         genes = microMicroarray[[i]]
         name = 'Microglia'
-        out = c(genes[teval(paste0("tasicSimpleMarkers_",x))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
+        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
     })
     
     trimRNASeq = 1:length(microRNAseq) %>% lapply(function(i){
         genes = microMicroarray[[i]]
         name = 'Microglia'
-        out = c(genes[teval(paste0("tasicSimpleMarkers_",x))[genes] == name], genes[is.na(teval(paste0("nxSimpleMarkers_",x))[genes])]) %>% trimNAs()
+        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("nxSimpleMarkers_",x))[genes])]) %>% trimNAs()
     })
     
     oldGenes = len(trimMicroarray[[2]]) + len(trimRNASeq[[2]])
