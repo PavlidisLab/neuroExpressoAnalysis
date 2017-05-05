@@ -12,10 +12,10 @@ Col18a1	ok
 Dgkg	ok	
 Doc2b	ok	
 Ebf1	ok	
-Ebf2	ok	low but specific. Better seen from the whole slide image
-Eps8l2	not expressed	Not expressed anywhere else in the entire slide
+Ebf2	ok	
+Eps8l2	not expressed	
 Fam174b	not in ABA	
-Gipc2	ok	low but specific. Better seen from the whole slide image
+Gipc2	ok	
 Gng13	ok	
 Grik1	ok	
 Homer3	ok	
@@ -27,7 +27,7 @@ Kcnip1	ok
 Krt25	ok	
 Lhx5	ok	
 Lmo7	ok	
-Nrk	not expressed	Not expressed anywhere else in the entire slide
+Nrk	not expressed	Not expressed anywhere else in the rest of the brain
 Ppp1r17	ok	
 Ptpn2	ok	
 Ptprr	ok	
@@ -36,9 +36,9 @@ Rhod	ok
 Ryr1	ok	
 Slc1a6	ok	
 Slc5a1	ok	
-Smpx	not expressed	Not expressed anywhere else in the entire slide
+Smpx	not expressed	Not expressed anywhere else in the rest of the brain
 Stac	ok	
-Sycp1	not expressed	Not expressed anywhere else in the entire slide
+Sycp1	not expressed	Not expressed anywhere else in the rest of the brain
 Tgfb2	ok	
 Trpc3	ok	
 Tuba8	not in ABA	
