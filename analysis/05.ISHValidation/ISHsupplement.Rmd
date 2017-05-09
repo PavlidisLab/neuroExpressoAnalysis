@@ -124,3 +124,25 @@ output:
   \includegraphics[height = 10in]{Purkinje_singlePages/37.png}
 \end{center}
 \end{figure}
+
+\begin{figure}
+
+\textbf{Table S1:} Validation status of dentate granule cell markers.
+
+```{r,echo=FALSE}
+granule = ogbox::read.design('DentateGranule.tsv')
+knitr::kable(granule,format= 'latex')
+```
+\end{figure}
+
+
+\begin{figure}
+
+\textbf{Table S2:} Validation status of purkinje cell markers.
+
+```{r,echo=FALSE}
+purkinjeTable = ogbox::read.design('Purkinje.tsv')
+knitr::kable(purkinjeTable,format= 'latex')
+```
+
+\end{figure}
