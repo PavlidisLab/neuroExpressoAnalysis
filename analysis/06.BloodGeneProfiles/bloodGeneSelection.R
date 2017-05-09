@@ -1,3 +1,4 @@
+library(markerGeneProfile)
 devtools::load_all()
 
 if(length(commandArgs(trailingOnly=TRUE))==0){
@@ -33,7 +34,7 @@ if (start == 1){
 
 # here we do the permutations required for selection of marker genes robust to outliers.
 if(start==1){
-    file.create('analysis//01.SelectGenes/Rotation/progress')
+    file.create('analysis//06.BloodGeneProfiles/progress')
 }
 for (i in start:end){
     print(i)

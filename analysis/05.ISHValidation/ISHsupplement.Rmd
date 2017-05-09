@@ -126,6 +126,7 @@ output:
 \end{figure}
 
 \begin{figure}
+<<<<<<< HEAD
 
 \textbf{Table S1:} Validation status of dentate granule cell markers.
 
@@ -182,5 +183,9 @@ frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
   \captionsetup{labelformat=empty}
   \caption{\textbf{Figure S3:} Expression of Pter and St8sia4 in pooled RNA-seq data from Hipposeq. Data acquired from http://hipposeq.janelia.org}
   \includegraphics[height = 4in]{hippposeqSup.png}
+=======
+\begin{center}
+  \includegraphics[height = 2.5in]{Purkinje_singlePages/41.png}
+>>>>>>> 25c2c8996759397e4709916bdd0f256e96986573
 \end{center}
 \end{figure}

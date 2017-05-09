@@ -75,7 +75,7 @@ superImpose = function(genes, expression, CIBERSORTpred, geneSymbol, outDir,PC=1
             ggtitle(paste0(names(estimates$estimates[i]),'\n(n genes = ',
                     estimates$rotations[[i]] %>% nrow, ')')) + 
             theme(axis.text= element_text(size=30),
-                  plot.title = element_text(size=35)) 
+                  plot.title = element_text(size=35,hjust = 0.5)) 
         
         cibersortRange = frame2$CibersortPred  %>% range
         #ybreak1 = round(cibersortRange[1],digits=-1) + (mod(cibersortRange[1],5) <5)*10

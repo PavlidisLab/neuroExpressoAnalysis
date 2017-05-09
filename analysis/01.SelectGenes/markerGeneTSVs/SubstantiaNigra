@@ -72,30 +72,30 @@ Ppp1r3c		H2-Oa	Rrad	Lsp1
 Prelp		H2-Q7|H2-Q9	Runx1	Lst1	
 Prkd1		H2-T23|H2-T-ps	Samsn1	Ltf	
 Prodh		Havcr2	Serpine1	Lyl1	
-Ptger4		Hba-a1|Hba-a2	Sertad1	Lyz1	
-Ptprz1		Hcls1	Sh2b2	Mafb	
-Scara3		Herpud1	Sla	Man2b1	
-Scg3		Hk2	Slc15a3	Mfng	
-Slc14a1		Hp	Smagp	Mpeg1	
-Slc15a2		Hps4	Socs3	Mylip	
-Slc1a3		Ier2	Spint1	Myo1g	
-Slc38a3		Ier5	Srgn	Naalad2	
-Slc41a1		Ifngr1	Syk	Nfam1	
-Slc7a10		Igsf6	Tlr2	Ngp	
-Slco1c1		Il13ra1	Tlr7	Nrip1	
-Smpdl3a		Il21r	Tmem173	Olfml3	
-Sorcs2		Il6ra	Tnf	P2ry12	
-Tfcp2l1		Il7r	Tnfaip2	Parvg	
-Tlcd1		Irf5	Tpp2	Pik3cg	
-Tnfrsf19		Itgb2	Trim30a	Plcl2	
-Tril		Junb	Tsc22d3	Pld4	
-Trps1		Klf2	Tubb6	Plxdc1	
-Ttpa		Klf6	Ucp2	Prkcd	
-Vcam1		Lag3	Vav1	Psmb9	
-Vcl		Lcp1	Zfp36	Ptpn18	
-Vegfa		Lgals3		Ptpn6	
-Wnt7a		Lgals9		Pycard	
-Wwtr1		Lilr4b|Lilrb4a		Rasa4	
+Ptprz1		Hba-a1|Hba-a2	Sertad1	Lyz1	
+Scara3		Hcls1	Sh2b2	Mafb	
+Scg3		Herpud1	Sla	Man2b1	
+Slc14a1		Hk2	Slc15a3	Mfng	
+Slc15a2		Hp	Smagp	Mpeg1	
+Slc1a3		Hps4	Socs3	Mylip	
+Slc38a3		Ier2	Spint1	Myo1g	
+Slc41a1		Ier5	Srgn	Naalad2	
+Slc7a10		Ifngr1	Syk	Nfam1	
+Slco1c1		Igsf6	Tlr2	Ngp	
+Smpdl3a		Il13ra1	Tlr7	Nrip1	
+Sorcs2		Il21r	Tmem173	Olfml3	
+Tfcp2l1		Il6ra	Tnf	P2ry12	
+Tlcd1		Il7r	Tnfaip2	Parvg	
+Tnfrsf19		Irf5	Tpp2	Pik3cg	
+Tril		Itgb2	Trim30a	Plcl2	
+Trps1		Junb	Tsc22d3	Pld4	
+Ttpa		Klf2	Tubb6	Plxdc1	
+Vcam1		Klf6	Ucp2	Prkcd	
+Vcl		Lag3	Vav1	Psmb9	
+Vegfa		Lcp1	Zfp36	Ptpn18	
+Wnt7a		Lgals3		Ptpn6	
+Wwtr1		Lgals9		Pycard	
+		Lilr4b|Lilrb4a		Rasa4	
 		Ltc4s		Rgs10	
 		Ly86		Rps6ka1	
 		Ly96		S100a8	

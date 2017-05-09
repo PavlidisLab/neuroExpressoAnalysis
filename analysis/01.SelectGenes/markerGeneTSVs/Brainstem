@@ -4,18 +4,18 @@ Acsbg1	Anxa2	Caprin1	Abhd15	B4galt1	Abcc3	Baiap3	Aspa	Ceacam10
 Acsl6	Cabp1	Nr4a2	Adap2	Bach1	Adcy7	Cacng5	Fa2h	Cited1
 Add3	Calcb	Ntn1	Akna	Birc3	Adrb1	Calcr	Gal3st1	Crct1
 Adhfe1	Cd55	Prkcg	Alas2	C1qa	Adrb2	Dbh	Gamt	Ctla2a
-AI464131	Cela1	Scn2a	Alox5ap	C1qb	Afp	Gstm6	Gjb1	Ctla2a|Ctla2b
-Aldh1l1	Fxyd7	Slc6a3	Ankrd44	Casp4	Aif1	Mab21l1	Gltp	Fev
-Aldh6a1	Hebp2	Zim3	Anxa3	Ccl12	Ang	Maoa	Gsn	Gata3
-Amot	Hspb1		Apobec1	Ccl2	Arap3	Mcub	Josd2	H2-Q1
-Antxr1	Hspb8		Arhgap45	Ccl4	Arhgap17	Ngb	Lims2	Htr5b
-Aox1	Ifitm10		Arrb2	Ccl9	Arhgap4	Ovgp1	Mag	Klk1b27
-Appl2	Irx3		AW112010	Ccnl1	Arhgap9	Phox2a	Mog	Pcdhac1
-Aqp4	Isl1		B2m	Ccr5	Arhgdib	Rab3b	Ninj2	Ptger3
-Axl	Kazald1		Bcl2a1a|Bcl2a1b|Bcl2a1d	Cd14	Atf3	Slc6a2	Olig2	Slc22a3
-Bcar3	Kcnj14		Btg2	Cd53	Batf3	Sstr2	Pdlim2	Slc6a4
-Btbd17	Lgals1		C1qc	Cd83	Blnk	Stbd1	Phldb1	Sln
-Cbs	Medag		C3ar1	Cd86	Btk	Tfap2b	Plekhh1	Trh
+AI464131	Cela1	Scn2a	Alox5ap	C1qb	Afp	Mab21l1	Gjb1	Ctla2a|Ctla2b
+Aldh1l1	Fxyd7	Slc6a3	Ankrd44	Casp4	Aif1	Maoa	Gltp	Fev
+Aldh6a1	Hebp2	Zim3	Anxa3	Ccl12	Ang	Mcub	Gsn	Gata3
+Amot	Hspb1		Apobec1	Ccl2	Arap3	Ngb	Josd2	H2-Q1
+Antxr1	Hspb8		Arhgap45	Ccl4	Arhgap17	Ovgp1	Lims2	Htr5b
+Aox1	Ifitm10		Arrb2	Ccl9	Arhgap4	Phox2a	Mag	Pcdhac1
+Appl2	Irx3		AW112010	Ccnl1	Arhgap9	Rab3b	Mog	Ptger3
+Aqp4	Isl1		B2m	Ccr5	Arhgdib	Slc6a2	Ninj2	Slc22a3
+Axl	Kazald1		Bcl2a1a|Bcl2a1b|Bcl2a1d	Cd14	Atf3	Sstr2	Olig2	Slc6a4
+Bcar3	Kcnj14		Btg2	Cd53	Batf3	Stbd1	Pdlim2	Sln
+Btbd17	Lgals1		C1qc	Cd83	Blnk	Tfap2b	Phldb1	Trh
+Cbs	Medag		C3ar1	Cd86	Btk		Plekhh1	
 Ccdc80	Nts		Casp1	Cebpb	Calhm2		Ppp1r14a	
 Ccnd2	Patj		Casp8	Cep152	Camp		Rab33a	
 Cd38	Pcp4l1		Ccl3	Chst7	Capn3		Sgk2	

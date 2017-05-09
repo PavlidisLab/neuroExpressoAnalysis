@@ -10,8 +10,10 @@
 # the default output location is data-raw. Other directories will be created if not already
 # existing
 devtools::load_all()
+library(markerGeneProfile)
 library(jsonlite)
 library(stringi)
+library(bitops)
 #library(markerGenesManuscript)
 
 assertthat::are_equal('Vsir' %in% rn(TasicPrimaryMeanLog),TRUE)
@@ -122,8 +124,9 @@ if(firstChip){
                          seed = i)
         firstChipRotationTime = proc.time() - ptm
     }
+    cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
+    
 }
-cat(paste(start,end,'\n'),file='analysis//01.SelectGenes/Rotation/progress',append=TRUE)
 
 # rotation with single cells ------------------------------
 if(singleCell){
@@ -216,7 +219,7 @@ if(end == 500){
             }
             Sys.sleep(60) 
         }
-        rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation/',
+        rotateSelect(rotationOut='analysis//01.SelectGenes/Rotation2/',
                      rotSelOut='analysis/01.SelectGenes/RotSel2',
                      cores = 15, foldChange = 1)
     }
@@ -239,12 +242,8 @@ if(end == 500){
                      rotSelOut='analysis/01.SelectGenes/RotSelJustSingleCell',
                      cores = 15, foldChange = 1)
     }
-    # upon calculation of selection percentages in permutations, create a directory that houses genes -----
     
-    
-    # that are selected in more than 95% of the permutations
-    #rm(allGenes)
-    #rm(names)
+    # final folder creation -------------------------------
     
     if(firstChip){
         allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
@@ -268,7 +267,6 @@ if(end == 500){
         names = c(names,'Markers_SingleCell')
     }
     
-    # final folder creation -------------------------------
     for (n in 1:len(allGenes)){
         if(is.na(names[[n]])){
             next
@@ -299,8 +297,14 @@ if(end == 500){
     }
     
     # here we do some wrangling of the gene list to deal with astrocytes and microglia
-    referenceGroup = 'CellTypes'
+    referenceGroup = 'PyramidalDeep'
     log = 'analysis/01.SelectGenes/markers.log'
+    
+    # this is to count what changed about the microglia genes in the combined list
+    oldMicroglia = list()
+    oldMicroglia[['Microarray']] = pickMarkersAll("analysis//01.SelectGenes/Markers_Microarray/PyramidalDeep")$Cortex$Microglia
+    oldMicroglia[['RNAseq']] = pickMarkersAll("analysis//01.SelectGenes/Markers_SingleCell/PyramidalDeep")$All$Microglia
+    
     file.create(log)
     for(i in 1:len(names)){
         if(is.na(names[i])){
@@ -347,60 +351,52 @@ if(end == 500){
             cat(paste0('S100a10 pyramdials now have ', allS100, ' genes\n\n'),file=log,append=TRUE)
         }
         
-        bannedGenes = c('Lpl','S100a10')
-        banGenes(restDir = paste0('analysis//01.SelectGenes/',names[i],'/',referenceGroup),
+        bannedGenes = c('Lpl')
+        banGenes(restDir = paste0('analysis//01.SelectGenes/',names[i],'/'),
                  bannedGenes= bannedGenes,
                  cores=8)
         
+        bannedGenes = 'S100a10'
+        banGenes(restDir = paste0('analysis//01.SelectGenes/',names[i],'/'),
+                 bannedGenes= bannedGenes,
+                 regex= 'S100a10',
+                 cores=8)        
     }
     
+    # counting microglia genes again. not necesarry for analysis -------------------
+    newMicroglia = list()
+    newMicroglia[['Microarray']] = pickMarkersAll("analysis//01.SelectGenes/Markers_Microarray/CellTypes")$Cortex$Microglia
+    newMicroglia[['RNAseq']] = pickMarkersAll("analysis//01.SelectGenes/Markers_SingleCell/CellTypes")$All$Microglia
+    
+    # calculate how many genes microglia would have had
+
+    microRNAseq = list(new = newMicroglia$RNAseq,
+                       old = oldMicroglia$RNAseq)
+    microMicroarray = list(new = newMicroglia$Microarray,
+                           old = oldMicroglia$Microarray)
+    
+    trimMicroarray = 1:length(microMicroarray) %>% lapply(function(i){
+        genes = microMicroarray[[i]]
+        name = 'Microglia'
+        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes])]) %>% trimNAs()
+    })
+    
+    trimRNASeq = 1:length(microRNAseq) %>% lapply(function(i){
+        genes = microMicroarray[[i]]
+        name = 'Microglia'
+        out = c(genes[teval(paste0("tasicSimpleMarkers_",referenceGroup))[genes] == name], genes[is.na(teval(paste0("nxSimpleMarkers_",referenceGroup))[genes])]) %>% trimNAs()
+    })
+    
+    oldGenes = len(trimMicroarray[[2]]) + len(trimRNASeq[[2]])
+    newGenes = len(trimMicroarray[[1]]) + len(trimRNASeq[[1]])
+    cat(glue::glue('\nMicrglia together would have had {oldGenes} genes.\nMicroglia together has {oldGenes-newGenes} genes' ),file=log,append=TRUE)
     
     typeSets = list.files('analysis/01.SelectGenes/Markers_Microarray/')
-    
-    
-    # select simple markers for verification
-    if(firstChip & singleCell){
-        for (x in typeSets){
-            # for neuroExpresso
-            cortex = memoReg(n_expressoSamples,regionNames = 'Region',groupNames = x,regionHierarchy = regionHierarchy)$Cortex
-            
-            n_Exp = n_expressoExpr %>% filter(!grepl('\\|',Gene.Symbol))
-            list[gene, exp] = sepExpr(n_Exp)
-            rownames(exp) = gene$Gene.Symbol
-            exp = exp[!is.na(cortex)]
-            n_samples = n_expressoSamples[!is.na(cortex),]
-            NeuroExpressoPrimaryMean = n_samples[[x]] %>% unique %>% trimNAs %>% lapply(function(y){
-                exp[, n_samples[[x]] %in% y] %>% apply(1,mean)
-            }) %>% as.data.frame
-            names(NeuroExpressoPrimaryMean) =  n_samples[[x]] %>% unique %>% trimNAs 
-            rownames(NeuroExpressoPrimaryMean) = gene$Gene.Symbol
-            # use_data(NeuroExpressoPrimaryMean,overwrite = TRUE)
-            
-            nxSimpleMarkers = NeuroExpressoPrimaryMean %>% apply(1,which.max) %>% names(NeuroExpressoPrimaryMean)[.]
-            names(nxSimpleMarkers) = rn(NeuroExpressoPrimaryMean)
-            teval(paste0('nxSimpleMarkers_',x,'<<-nxSimpleMarkers'))
-            teval(paste0('use_data(nxSimpleMarkers_',x,",overwrite=TRUE)"))
-            
-            # for Tasic
-            singleCells = ogbox::read.design('data-raw/Mouse_Cell_Type_Data/singleCellMatchings.tsv')
-            
-            tasicCellTypeMeans = singleCells[[x]] %>% unique %>% lapply(function(y){
-                cluster = (singleCells$Tasic[singleCells[[x]] %in% y]) %>% str_split(', ') %>% {.[[1]]}
-                TasicPrimaryMean[cluster] %>% apply(1,mean) 
-            }) %>% as.data.frame()
-            names(tasicCellTypeMeans) =  singleCells[[x]] %>% unique %>% trimNAs()
-            tasicSimpleMarkers = tasicCellTypeMeans %>% apply(1,which.max) %>% names(tasicCellTypeMeans)[.]
-            names(tasicSimpleMarkers) = rn(tasicCellTypeMeans)
-            teval(paste0('tasicSimpleMarkers_',x,'<<-tasicSimpleMarkers'))
-            teval(paste0('use_data(tasicSimpleMarkers_',x,",overwrite=TRUE)"))
-            
-        }
-    }
-    
+
     system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_Final')
     #system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
     
-    # merge single cell genes for cortex
+    # merge single cell genes for cortex -----------
     if(firstChip & singleCell){
 
         for (x in typeSets){
@@ -421,17 +417,20 @@ if(end == 500){
             
             trimOrig = 1:length(original) %>% lapply(function(i){
                 genes = original[[i]]
-                out = c(genes[teval(paste0("tasicSimpleMarkers_",x))[genes] == names(original)[i]], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
+                name = names(original)[i] %>% gsub(pattern = '(_activation)|(_deactivation)',replacement = '')
+                out = c(genes[teval(paste0("tasicSimpleMarkers_",x))[genes] == name], genes[is.na(teval(paste0("tasicSimpleMarkers_",x))[genes])]) %>% trimNAs()
             })
             names(trimOrig) = names(original)
             
             
             trimSingle = 1:length(singleCells) %>% lapply(function(i){
                 genes = singleCells[[i]]
+                #names(original)[i]]
+                name = names(singleCells)[i] %>% gsub(pattern = '(_activation)|(_deactivation)',replacement = '')
                 if(!names(singleCells)[i] %in% names(original)){
                     return(genes)
                 }
-                out = c(genes[teval(paste0("nxSimpleMarkers_",x))[genes] == names(original)[i]],
+                out = c(genes[teval(paste0("nxSimpleMarkers_",x))[genes] == name],
                         genes[is.na(teval(paste0("nxSimpleMarkers_",x))[genes])]) %>% trimNAs()
             })
             names(trimSingle) = names(singleCells)
@@ -574,6 +573,17 @@ if(end == 500){
         saveWorkbook(sheet)
         
         sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
+        dir.create('analysis/01.SelectGenes/markerGeneTSVsPyraDeep')
+        1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
+            out = stri_list2matrix(mouseMarkerGenesPyramidalDeep[[i]]) %>% as.data.frame
+            names(out) = names(mouseMarkerGenesPyramidalDeep[[i]])
+            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVsPyraDeep',names(mouseMarkerGenesPyramidalDeep[i])),na= '', sep = "\t", quote = F, row.names = F)
+            createSheet(sheet, name = names(mouseMarkerGenesPyramidalDeep[i]))
+            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenesPyramidalDeep[i]), startRow = 1, startCol = 1)
+        })
+        saveWorkbook(sheet)
+        
+        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
         
         dir.create('analysis/01.SelectGenes/markerGeneTSVPyraDeep')
         1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
@@ -586,7 +596,11 @@ if(end == 500){
         saveWorkbook(sheet)
         
         # create archive
+        file.remove('analysis/01.SelectGenes/markerGenes.rar')
+        file.remove('analysis/01.SelectGenes/markerGenesPyraDeep.rar')
+        
         system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenesPyraDeep.rar analysis/01.SelectGenes/Markers_Final/PyramidalDeep/*')
         
     }
 }

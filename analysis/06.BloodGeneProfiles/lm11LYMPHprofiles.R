@@ -2,9 +2,6 @@ library(ogbox)
 devtools::load_all()
 library(homologene)
 
-
-
-
 lm11GenesHuman = humanBloodMarkers$lm11
 lm11GenesHuman = lm11GenesHuman[c("B Cells",
                                   'CD4',

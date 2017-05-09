@@ -1,5 +1,5 @@
 #' @export
-banGenes = function(restDir=NULL, genelist = NULL, bannedGenes, cores = 1){
+banGenes = function(restDir=NULL, genelist = NULL, bannedGenes, regex = NULL,  cores = 1){
     if(!is.na(detectCores())){
         if (detectCores()<cores){ 
             cores = detectCores()
@@ -11,6 +11,9 @@ banGenes = function(restDir=NULL, genelist = NULL, bannedGenes, cores = 1){
         
     if (!is.null(restDir)){
         fileNames = list.files(restDir, recursive =T )
+        if(!is.null(regex)){
+            fileNames = fileNames[grepl(regex,fileNames)]
+        }
         #for(i in fileNames){
         foreach (i = fileNames) %dopar% {
             print(i)

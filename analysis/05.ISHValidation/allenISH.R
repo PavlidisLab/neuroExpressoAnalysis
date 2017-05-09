@@ -46,47 +46,42 @@ for(i in 1:len(markers)){
         tryCatch({
             filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
             filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
+            filenameFullExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
+            filenameExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
             
-            datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal')[1]
+            if(markers[[i]][j] %in% c('Bcl11a')){
+                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[2]
+            } else {
+                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
+            }
+            
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
             if(len(imageID) ==0){
                 next
             }
             dowloadImage(imageID["imageID"], view = 'projection',
-                         output = filenameFull)
-            centerImage(imageFile = filenameFull, x = imageID['x'],
+                         outputFile = filenameFull)
+            centerImage(image = filenameFull, x = imageID['x'],
                         y= imageID['y'],
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
                         outputFile = filename)
-        },  error=function(cond){
-            print('meh')  
-        })
-    }
-}
-
-# get processed expression image
-for(i in 1:len(markers)){
-    for (j in 1:len(markers[[i]])){
-        tryCatch({
-            filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
-            filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
             
-            datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal')[1]
-            imageID = getImageID(datasetID = datasetID, regionID = ids[i])
+            
             dowloadImage(imageID["imageID"], view = 'expression',
-                         output = filenameFull)
-            centerImage(imageFile = filenameFull, x = imageID['x'],
+                         outputFile = filenameFullExp)
+            centerImage(image = filenameFullExp, x = imageID['x'],
                         y= imageID['y'],
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
-                        outputFile = filename)
+                        outputFile = filenameExp)
+            
+
         },  error=function(cond){
             print('meh')  
         })
     }
 }
-
 
 # resize all images to 700x500 px and label the projection images
 # this part does not work as intended in chalmers due to imagemagick version (must be )

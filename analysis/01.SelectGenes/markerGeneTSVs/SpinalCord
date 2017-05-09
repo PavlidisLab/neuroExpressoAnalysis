@@ -117,13 +117,13 @@ Slc1a2	Pdgfb		Slc7a8		Tdrp
 Slc1a3	Pf4		Snx5		Tesc
 Slc1a4	Phxr1		St3gal6		Tmsb10
 Slc38a3	Phyhd1		Tcirg1		Tmtc4
-Slc41a1	Pik3cd		Tec		Tnfsf13b
-Slc4a4	Pla2g15		Tgfbi		Tpd52l1
-Slc7a10	Plcg2		Tgfbr1		Trhr
-Slco1c1	Plekho1		Tgif1		Uts2
-Smpdl3a	Plxdc2		Themis2		Vamp1
-Sorcs2	Pon3		Tifa		Wnk4
-Sox5	Ppp1r15a		Tlr4		Ykt6
+Slc41a1	Pik3cd		Tec		Tpd52l1
+Slc4a4	Pla2g15		Tgfbi		Trhr
+Slc7a10	Plcg2		Tgfbr1		Uts2
+Slco1c1	Plekho1		Tgif1		Vamp1
+Smpdl3a	Plxdc2		Themis2		Wnk4
+Sorcs2	Pon3		Tifa		Ykt6
+Sox5	Ppp1r15a		Tlr4		
 St6galnac5	Pros1		Tmem119		
 Tfcp2l1	Ptbp3		Tmem140		
 Tgfb2	Ptprc		Tnfrsf1b		

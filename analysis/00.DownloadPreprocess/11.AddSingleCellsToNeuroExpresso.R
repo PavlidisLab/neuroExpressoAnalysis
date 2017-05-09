@@ -24,7 +24,7 @@ replaceGenes = replaceGenes[!replaceGenes %in% replaceGenes[replaceGenes %>% dup
 replace = names(replaceGenes)
 names(replace) = replaceGenes
 
-rn(TasicPrimaryMean)[rn(TasicPrimaryMean) %in% replaceGenes] 
+# rn(TasicPrimaryMean)[rn(TasicPrimaryMean) %in% replaceGenes] 
 
 rn(TasicPrimaryMean) = rn(TasicPrimaryMean) %>% replaceElement(replace) %$% newVector
 
@@ -118,10 +118,13 @@ write.csv(data.frame(Gene.Symbol = rn(TasicPrimaryMean),TasicPrimaryMean,check.n
 # used in neuroexpresso.org
 n_expressoSamplesWithRNAseq = rbind(n_expressoSamples, meltedSingleCells)
 
-n_expressoExprWithRNAseq = cbind(n_expressoExpr[n_expressoExpr$Gene.Symbol %in% rn(TasicPrimaryMeanComparable),],
-                                 TasicPrimaryMeanComparable[match(n_expressoExpr$Gene.Symbol[n_expressoExpr$Gene.Symbol %in% rn(TasicPrimaryMeanComparable)],
-                                                                  rn(TasicPrimaryMeanComparable)),])
+# n_expressoExprWithRNAseq = cbind(n_expressoExpr[n_expressoExpr$Gene.Symbol %in% rn(TasicPrimaryMeanComparable),],
+#                                  TasicPrimaryMeanComparable[match(n_expressoExpr$Gene.Symbol[n_expressoExpr$Gene.Symbol %in% rn(TasicPrimaryMeanComparable)],
+#                                                                   rn(TasicPrimaryMeanComparable)),])
 
+n_expressoExprWithRNAseq = cbind(n_expressoExpr, TasicPrimaryMeanComparable[match(n_expressoExpr$Gene.Symbol,
+                                                            rn(TasicPrimaryMeanComparable)),])
+# n_expressoExprWithRNAseq[n_expressoExprWithRNAseq$Gene.Symbol %in% 'Nrk',]
 write.design(n_expressoSamplesWithRNAseq,'data-raw/Mouse_Cell_Type_Data/n_expressoSamplesWithRNAseq.tsv')
 use_data(n_expressoSamplesWithRNAseq,overwrite = TRUE)
 use_data(n_expressoExprWithRNAseq,overwrite = TRUE)
