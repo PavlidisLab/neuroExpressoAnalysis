@@ -145,7 +145,7 @@ suppressMessages(library(ogbox))
 
 
 granule = ogbox::read.design('DentateGranule.tsv')
-knitr::kable(granule,format= 'latex') %>% ogbox::prettifyLatexKable
+knitr::kable(granule,format= 'latex') %>% (ogbox::prettifyLatexKable)
 ```
 \end{center}
 
@@ -158,8 +158,9 @@ knitr::kable(granule,format= 'latex') %>% ogbox::prettifyLatexKable
 \newline
 \begin{center}
 ```{r,echo=FALSE}
+library(dplyr)
 purkinjeTable = ogbox::read.design('Purkinje.tsv')
-knitr::kable(purkinjeTable,format= 'latex')%>%  ogbox::prettifyLatexKable
+knitr::kable(purkinjeTable,format= 'latex')%>%  (ogbox::prettifyLatexKable)
 ```
 \end{center}
 
@@ -220,7 +221,7 @@ purkinjeTable %<>% mutate(NewGenes = annotGenes)
 purkinjeTable = purkinjeTable[c('NewGenes','Probe set name','%a')]
 purkinjeTable %<>% filter(NewGenes %in% mouseMarkerGenes$Cerebellum$Purkinje[mouseMarkerGenes$Cerebellum$Purkinje %in% annotGenes])
 names(purkinjeTable) = c('Gene Symbol','Probeset','Fold change')
-knitr::kable(purkinjeTable,format= 'latex') %>%  ogbox::prettifyLatexKable
+knitr::kable(purkinjeTable,format= 'latex') %>%  (ogbox::prettifyLatexKable)
 ```
 \end{center}
 
