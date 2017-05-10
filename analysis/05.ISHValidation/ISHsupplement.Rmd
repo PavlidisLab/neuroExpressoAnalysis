@@ -199,7 +199,7 @@ frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
 \begin{figure}
 \begin{center}
   \captionsetup{labelformat=empty}
-  \caption{\textbf{Figure S3:} Expression of Pter and St8sia4 in pooled RNA-seq data from Hipposeq. Data acquired from http://hipposeq.janelia.org}
+  \caption{\textbf{Figure S3:} Expression of Pter and St8sia4 in pooled RNA-seq data from Cembrowski et al.. Data acquired from http://hipposeq.janelia.org}
   \includegraphics[height = 4in]{hippposeqSup.png}
 \end{center}
 \end{figure}
