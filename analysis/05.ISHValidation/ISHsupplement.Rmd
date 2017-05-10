@@ -1,6 +1,7 @@
 ---
 output:
     pdf_document:
+        keep_tex: true
         includes:
             in_header: import.sty
 ---
@@ -126,25 +127,41 @@ output:
 \end{figure}
 
 \begin{figure}
-<<<<<<< HEAD
+\begin{center}
+  \includegraphics[height = 2.5in]{Purkinje_singlePages/41.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
 
 \textbf{Table S1:} Validation status of dentate granule cell markers.
-
+\newline
+\begin{center}
 ```{r,echo=FALSE}
+suppressMessages(library(dplyr))
+suppressMessages(library(ogbox))
+
+
+
+
 granule = ogbox::read.design('DentateGranule.tsv')
-knitr::kable(granule,format= 'latex')
+knitr::kable(granule,format= 'latex') %>% ogbox::prettifyLatexKable
 ```
+\end{center}
+
 \end{figure}
 
 
 \begin{figure}
 
 \textbf{Table S2:} Validation status of purkinje cell markers.
-
+\newline
+\begin{center}
 ```{r,echo=FALSE}
 purkinjeTable = ogbox::read.design('Purkinje.tsv')
-knitr::kable(purkinjeTable,format= 'latex')
+knitr::kable(purkinjeTable,format= 'latex')%>%  ogbox::prettifyLatexKable
 ```
+\end{center}
 
 \end{figure}
 
@@ -183,9 +200,28 @@ frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
   \captionsetup{labelformat=empty}
   \caption{\textbf{Figure S3:} Expression of Pter and St8sia4 in pooled RNA-seq data from Hipposeq. Data acquired from http://hipposeq.janelia.org}
   \includegraphics[height = 4in]{hippposeqSup.png}
-=======
-\begin{center}
-  \includegraphics[height = 2.5in]{Purkinje_singlePages/41.png}
->>>>>>> 25c2c8996759397e4709916bdd0f256e96986573
 \end{center}
+\end{figure}
+
+
+
+\begin{figure}
+
+
+\textbf{Table S3:} Intersection of purkinje markers from NeuroExpresso markers and Rong et al. 2004 study. Rong et al. genes are taken from Table 2 of the paper. Probe to gene annotations are repeated using annotations from Gemma. Fold change column shows the difference of expession between wild type and pcd\textsuperscript{3J} mouse which lacks purkinje cells according to Rong et al..
+\newline
+\begin{center}
+
+```{r,echo=FALSE}
+load('../../data/mouseMarkerGenes.rda')
+purkinjeTable = data.table::fread('Rong et al table 2.csv',data.table = FALSE)
+annotGenes = purkinjeTable$`Probe set name` %>% gemmaGeneMatch('../../data-raw/GemmaAnnots/GPL1261')
+purkinjeTable %<>% mutate(NewGenes = annotGenes)
+purkinjeTable = purkinjeTable[c('NewGenes','Probe set name','%a')]
+purkinjeTable %<>% filter(NewGenes %in% mouseMarkerGenes$Cerebellum$Purkinje[mouseMarkerGenes$Cerebellum$Purkinje %in% annotGenes])
+names(purkinjeTable) = c('Gene Symbol','Probeset','Fold change')
+knitr::kable(purkinjeTable,format= 'latex') %>%  ogbox::prettifyLatexKable
+```
+\end{center}
+
 \end{figure}
