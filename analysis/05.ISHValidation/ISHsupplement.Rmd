@@ -9,7 +9,7 @@ output:
 \begin{figure}
 \begin{center}
   \captionsetup{labelformat=empty}
-  \caption{\textbf{Figure S1:} Expression of dentate granule cell markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database.}
+  \caption{\textbf{Figure S1:} Expression of dentate granule cell markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Prox1, a known marker of dentate granule cells.}
   \includegraphics[height = 10in]{DentateGranule_singlePages/01.png}
   \label{fig:allenAllDentate}
 \end{center}
@@ -51,7 +51,7 @@ output:
 
 \begin{figure}
 \begin{center}
-  \includegraphics[height = 7.5in]{DentateGranule_singlePages/25.png}
+  \includegraphics[height = 10in]{DentateGranule_singlePages/25.png}
 \end{center}
 \end{figure}
 
@@ -62,7 +62,7 @@ output:
 \begin{figure}
 \begin{center}
   \captionsetup{labelformat=empty}
-  \caption{\textbf{Figure S2:} Expression of purkinje markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database.}
+  \caption{\textbf{Figure S2:} Expression of Purkinje markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Pcp2, a known marker of Purkinje cells.}
   \includegraphics[height = 10in]{Purkinje_singlePages/01.png}
   \label{fig:allenAllPurkinje}
 \end{center}
@@ -128,7 +128,7 @@ output:
 
 \begin{figure}
 \begin{center}
-  \includegraphics[height = 2.5in]{Purkinje_singlePages/41.png}
+  \includegraphics[height = 5in]{Purkinje_singlePages/41.png}
 \end{center}
 \end{figure}
 
@@ -154,7 +154,7 @@ knitr::kable(granule,format= 'latex') %>% (ogbox::prettifyLatexKable)
 
 \begin{figure}
 
-\textbf{Table S2:} Validation status of purkinje cell markers.
+\textbf{Table S2:} Validation status of Purkinje cell markers.
 \newline
 \begin{center}
 ```{r,echo=FALSE}
@@ -199,7 +199,7 @@ frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
 \begin{figure}
 \begin{center}
   \captionsetup{labelformat=empty}
-  \caption{\textbf{Figure S3:} Expression of Pter and St8sia4 in pooled RNA-seq data from Cembrowski et al.. Data acquired from http://hipposeq.janelia.org}
+  \caption{\textbf{Figure S3:} Expression of Pter and St8sia4 in pooled RNA-seq data from Cembrowski et al. Data acquired from http://hipposeq.janelia.org}
   \includegraphics[height = 4in]{hippposeqSup.png}
 \end{center}
 \end{figure}
@@ -209,7 +209,7 @@ frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
 \begin{figure}
 
 
-\textbf{Table S3:} Intersection of purkinje markers from NeuroExpresso markers and Rong et al. 2004 study. Rong et al. genes are taken from Table 2 of the paper. Probe to gene annotations are repeated using annotations from Gemma. Fold change column shows the difference of expession between wild type and pcd\textsuperscript{3J} mouse which lacks purkinje cells according to Rong et al..
+\textbf{Table S3:} Intersection of Purkinje markers from NeuroExpresso markers and Rong et al. 2004 study. Rong et al. genes are taken from Table 2 of the paper. Probe to gene annotations are repeated using annotations from Gemma. Fold change column shows the difference of expession between wild type and pcd\textsuperscript{3J} mouse which lacks Purkinje cells according to Rong et al.
 \newline
 \begin{center}
 

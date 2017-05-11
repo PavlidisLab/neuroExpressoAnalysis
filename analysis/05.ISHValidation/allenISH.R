@@ -1,6 +1,7 @@
 # devtools::install_github('oganm/allenBrain')
 library(allenBrain)
 library(assertthat)
+library(magick)
 devtools::load_all()
 
 genes = mouseMarkerGenes$Hippocampus
@@ -56,6 +57,10 @@ for(i in 1:len(markers)){
             }
             
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
+            if(markers[[i]][j] %in% c('Flywch2')){
+                imageID['y'] = imageID['y'] + 600
+            }
+                
             if(len(imageID) ==0){
                 next
             }
@@ -84,7 +89,6 @@ for(i in 1:len(markers)){
 }
 
 # resize all images to 700x500 px and label the projection images
-# this part does not work as intended in chalmers due to imagemagick version (must be )
 lapply(names(markers), function(x){
     dir.create(paste0('analysis/05.ISHValidation/',x,'_resize'))
     files = list.files(paste0('analysis/05.ISHValidation/',x), full.names=TRUE)
@@ -98,6 +102,22 @@ lapply(names(markers), function(x){
                           '\'',
                           ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
             
+            if(grepl(pattern = 'Prox1',y)){
+                system(paste0("convert ",
+                              'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                              ' -fill black -undercolor white -gravity NorthWest -pointsize 25 -annotate +490+306 \'',
+                              'Dentate gyrus',
+                              '\'',
+                              ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+            }
+            if(grepl(pattern = 'Pcp2',y)){
+                system(paste0("convert ",
+                              'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                              ' -fill black -undercolor white -gravity NorthWest -pointsize 25 -annotate +330+70 \'',
+                              'Purkinje cell layer',
+                              '\'',
+                              ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+            }
         }
         # add borders
         system(paste0('convert ',
@@ -158,7 +178,9 @@ lapply(names(markers), function(x){
 lapply(names(markers), function(x){
     dir.create(paste0('analysis//05.ISHValidation/',x,'_singlePages'))
     files = list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'), full.names=TRUE)
-    files = files[!grepl('(Prox1)|(Pcp2)',files)]
+    known = grep('(Prox1)|(Pcp2)',files)
+    knownFile = files[known]
+    files = c(knownFile,files[-known])
     iterate = seq(from=1,to=len(files),by=4)
     for(i in iterate){
         theseFiles = files[i:(i+3)] %>% trimNAs()
@@ -170,10 +192,10 @@ lapply(names(markers), function(x){
     
 })
 
-lapply(names(markers),function(x){
-    df = data.frame(Gene = markers[[x]])
-    df$Status = df$Gene %>% sapply(function(y){
-        grepl(y,list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'))) %>% any
-    }) %>% replaceElement(labels = c(TRUE,FALSE),dictionary = c('','not in ABA')) %$% newVector
-    write.design(df,file = paste0('analysis//05.ISHValidation/',x,'.tsv'))
-})
+# lapply(names(markers),function(x){
+#     df = data.frame(Gene = markers[[x]])
+#     df$Status = df$Gene %>% sapply(function(y){
+#         grepl(y,list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'))) %>% any
+#     }) %>% replaceElement(labels = c(TRUE,FALSE),dictionary = c('','not in ABA')) %$% newVector
+#     write.design(df,file = paste0('analysis//05.ISHValidation/',x,'.tsv'))
+# })
