@@ -33,7 +33,6 @@ inst/doc
 data-raw/cel
 data-raw/ChenCortex
 data-raw/DarmanisHuman
-data-raw/GemmaAnnots
 data-raw/LesnickParkinsons
 data-raw/MoranParkinsons
 data-raw/StanleyData
@@ -70,8 +69,6 @@ analysis/06.BloodGeneProfiles/MouseMarkers/RotSel
 *Backup
 *backup
 *DentateGranule_resize
-*DentateGranule_doubleMerged
-Purkinje_doubleMerged
 Purkinje_resize
 analysis/05.ISHValidation/DentateGranule
 analysis/05.ISHValidation/Purkinje
