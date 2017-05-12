@@ -48,7 +48,7 @@ newCoordinates = imageToImage2D(imageID$section.image.id,imageID$x,imageID$y,ima
 
 geneOverrides = list(Bcl11a = 
                          list(datasetID =  getGeneDatasets(gene = 'Bcl11a',planeOfSection = 'sagittal',probeOrientation = 'antisense')[2]),
-                     Stx3 = list(imageID = c(imageID = as.numeric(imageBefore),
+                     Stx3 = list(imageID = list(section.image.id = as.numeric(imageBefore),
                                              x = newCoordinates['x'] %>% as.numeric(),
                                              y = newCoordinates['y'] %>% as.numeric()))
                      )
