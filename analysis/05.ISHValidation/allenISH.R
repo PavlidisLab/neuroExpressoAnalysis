@@ -38,11 +38,11 @@ yProportions = list(DentateGranule = c(0.155,0.065),
 
 # chagning the out of focus image of Stx3
 Stx3Images = listImages(68795397)
-Stx3Images %<>% arrange(as.numeric(`section-number`))
-imageID = getImageID(datasetID = 68795397, regionID = ids['granule'])
-which(Stx3Images$id %in% imageID['imageID'])
+Stx3Images %<>% arrange(as.numeric(`section.number`))
+imageID = structureToImage(datasetID = 68795397, regionID = ids['granule'])
+which(Stx3Images$id %in% imageID$section.image.id)
 imageBefore = Stx3Images[5,'id']
-newCoordinates = imageToImage2D(imageID['imageID'],imageID['x'],imageID['y'],imageBefore)
+newCoordinates = imageToImage2D(imageID$section.image.id,imageID$x,imageID$y,imageBefore)
 
 
 
@@ -76,7 +76,7 @@ for(i in 1:len(markers)){
                 attach(geneOverrides[[markers[[i]][j]]])
             }
             
-            imageID = getImageID(datasetID = datasetID, regionID = ids[i])
+            imageID = structureToImage(datasetID = datasetID, regionID = ids[i])
             
             if(markers[[i]][j] %in% names(geneOverrides)){
                 detach(geneOverrides[[markers[[i]][j]]])
@@ -87,19 +87,19 @@ for(i in 1:len(markers)){
             if(len(imageID) ==0){
                 next
             }
-            dowloadImage(imageID["imageID"], view = 'projection',
+            dowloadImage(imageID$section.image.id, view = 'projection',
                          outputFile = filenameFull)
-            centerImage(image = filenameFull, x = imageID['x'],
-                        y= imageID['y'],
+            centerImage(image = filenameFull, x = imageID$x,
+                        y= imageID$y,
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
                         outputFile = filename)
             
             
-            dowloadImage(imageID["imageID"], view = 'expression',
+            dowloadImage(imageID$section.image.id, view = 'expression',
                          outputFile = filenameFullExp)
-            centerImage(image = filenameFullExp, x = imageID['x'],
-                        y= imageID['y'],
+            centerImage(image = filenameFullExp, x = imageID$x,
+                        y= imageID$y,
                         xProportion = xProportions[[i]],
                         yProportion = yProportions[[i]],
                         outputFile = filenameExp)
