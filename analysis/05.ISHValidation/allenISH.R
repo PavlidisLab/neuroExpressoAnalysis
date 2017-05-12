@@ -69,6 +69,9 @@ for(i in 1:len(markers)){
 
 
             datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
+            if(markers[[i]][j] =='Ogn'){
+                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'coronal',probeOrientation = 'antisense')[1]
+            }
 
             
             if(markers[[i]][j] %in% names(geneOverrides)){
