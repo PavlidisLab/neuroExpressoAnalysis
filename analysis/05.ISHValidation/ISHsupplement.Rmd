@@ -9,7 +9,7 @@ output:
 \begin{figure}
 \begin{center}
   \captionsetup{labelformat=empty}
-  \caption{\textbf{Figure S1:} Expression of dentate granule cell markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Prox1, a known marker of dentate granule cells.}
+  \caption{\textbf{Figure S1:} Expression of dentate granule cell markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Prox1, a known marker of dentate granule cells. The intensity is color-coded to range from blue (low expression intensity), through green (medium intensity) to red (high intensity).}
   \includegraphics[height = 10in]{DentateGranule_singlePages/01.png}
   \label{fig:allenAllDentate}
 \end{center}
@@ -62,7 +62,7 @@ output:
 \begin{figure}
 \begin{center}
   \captionsetup{labelformat=empty}
-  \caption{\textbf{Figure S2:} Expression of Purkinje markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Pcp2, a known marker of Purkinje cells.}
+  \caption{\textbf{Figure S2:} Expression of Purkinje markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Pcp2, a known marker of Purkinje cells. The intensity is color-coded to range from blue (low expression intensity), through green (medium intensity) to red (high intensity).}
   \includegraphics[height = 10in]{Purkinje_singlePages/01.png}
   \label{fig:allenAllPurkinje}
 \end{center}

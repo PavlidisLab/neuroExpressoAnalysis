@@ -131,8 +131,8 @@ lapply(names(markers), function(x){
             if(grepl(pattern = 'Prox1',y)){
                 system(paste0("convert ",
                               'analysis/05.ISHValidation/',x,'_resize/',basename(y),
-                              ' -fill black -undercolor white -gravity NorthWest -pointsize 25 -annotate +490+306 \'',
-                              'Dentate gyrus',
+                              ' -fill black -undercolor white -gravity NorthWest -pointsize 25 -annotate +480+266 \'',
+                              'Granule cell layer',
                               '\'',
                               ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
             }
