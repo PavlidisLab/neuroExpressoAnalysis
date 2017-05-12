@@ -22,7 +22,7 @@ markers = list(DentateGranule = c(granuleMarkers,'Prox1'),
 #                Purkinje = c('Pcp2'))
 
 IDs = getStructureIDs()
-granuleID = IDs[grepl('^hippocampal region',IDs$name),]$id
+granuleID = IDs[grepl('dentate gyrus, granule cell layer',IDs$name),]$id
 purkinjeID = IDs[grepl('^cerebellum$', IDs$name),]$id
 
 
@@ -33,10 +33,13 @@ ids = c(granule = granuleID,
 xProportions = list(DentateGranule = c(0.17,0.08),
                     Purkinje = c(0.15,0.15))
 
-yProportions = list(DentateGranule = c(0.125,0.125),
+yProportions = list(DentateGranule = c(0.135,0.115),
                     Purkinje = c(.25,.20))
 
-
+# geneOverrides = list(Flywch2 = c(y = 600,
+#                                  imageID), # change id
+#                      Ptprk,
+#                      ) # change id
 
 # get raw image
 for(i in 1:len(markers)){
@@ -57,9 +60,12 @@ for(i in 1:len(markers)){
             }
             
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
-            if(markers[[i]][j] %in% c('Flywch2')){
-                imageID['y'] = imageID['y'] + 600
-            }
+            # if(markers[[i]][j] %in% c('Flywch2')){
+            #     imageID['y'] = imageID['y'] + 600
+            # }
+            # if(markers[[i]][j] %in% c('Ptprk')){
+            #     imageID['y'] = imageID['y'] + 600
+            # }
                 
             if(len(imageID) ==0){
                 next
