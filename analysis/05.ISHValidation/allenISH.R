@@ -33,7 +33,7 @@ ids = c(granule = granuleID,
 xProportions = list(DentateGranule = c(0.17,0.08),
                     Purkinje = c(0.15,0.15))
 
-yProportions = list(DentateGranule = c(0.135,0.115),
+yProportions = list(DentateGranule = c(0.155,0.065),
                     Purkinje = c(.25,.20))
 
 # geneOverrides = list(Flywch2 = c(y = 600,
