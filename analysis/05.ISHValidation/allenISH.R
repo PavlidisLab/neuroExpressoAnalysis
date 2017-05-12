@@ -36,11 +36,25 @@ xProportions = list(DentateGranule = c(0.17,0.08),
 yProportions = list(DentateGranule = c(0.155,0.065),
                     Purkinje = c(.25,.20))
 
-# geneOverrides = list(Flywch2 = c(y = 600,
-#                                  imageID), # change id
-#                      Ptprk,
-#                      ) # change id
+# chagning the out of focus image of Stx3
+Stx3Images = listImages(68795397)
+Stx3Images %<>% arrange(as.numeric(`section-number`))
+imageID = getImageID(datasetID = 68795397, regionID = ids['granule'])
+which(Stx3Images$id %in% imageID['imageID'])
+imageBefore = Stx3Images[5,'id']
+newCoordinates = imageToImage2D(imageID['imageID'],imageID['x'],imageID['y'],imageBefore)
 
+
+
+geneOverrides = list(Bcl11a = 
+                         list(datasetID =  getGeneDatasets(gene = 'Bcl11a',planeOfSection = 'sagittal',probeOrientation = 'antisense')[2]),
+                     Stx3 = list(imageID = c(imageID = as.numeric(imageBefore),
+                                             x = newCoordinates['x'] %>% as.numeric(),
+                                             y = newCoordinates['y'] %>% as.numeric()))
+                     )
+
+                     
+                     
 # get raw image
 for(i in 1:len(markers)){
     dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i],'_full'),recursive=TRUE,showWarnings=FALSE)
@@ -52,21 +66,24 @@ for(i in 1:len(markers)){
             filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
             filenameFullExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
             filenameExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
+
+
+            datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
+
             
-            if(markers[[i]][j] %in% c('Bcl11a')){
-                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[2]
-            } else {
-                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
+            if(markers[[i]][j] %in% names(geneOverrides)){
+                rm(list = names(geneOverrides[[markers[[i]][[j]]]]))
+                attach(geneOverrides[[markers[[i]][j]]])
             }
             
             imageID = getImageID(datasetID = datasetID, regionID = ids[i])
-            # if(markers[[i]][j] %in% c('Flywch2')){
-            #     imageID['y'] = imageID['y'] + 600
-            # }
-            # if(markers[[i]][j] %in% c('Ptprk')){
-            #     imageID['y'] = imageID['y'] + 600
-            # }
-                
+            
+            if(markers[[i]][j] %in% names(geneOverrides)){
+                detach(geneOverrides[[markers[[i]][j]]])
+                rm(list = names(geneOverrides[[markers[[i]][[j]]]]))
+                attach(geneOverrides[[markers[[i]][j]]])
+            }
+             
             if(len(imageID) ==0){
                 next
             }
@@ -87,7 +104,10 @@ for(i in 1:len(markers)){
                         yProportion = yProportions[[i]],
                         outputFile = filenameExp)
             
-
+            if(markers[[i]][j] %in% names(geneOverrides)){
+                detach(geneOverrides[[markers[[i]][j]]])
+            }
+            
         },  error=function(cond){
             print('meh')  
         })
