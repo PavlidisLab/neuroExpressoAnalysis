@@ -32,10 +32,10 @@ Cth	Nsf	Pdyn	Chil3	Frrs1	Clec7a	Slain1	Sh3bgrl2
 Cyp2d22	Otx2	Rab3b	Chil3|Chil4	Gcnt2	Cmtm6	Slc44a1	Slc18a3
 Cyp2j9	Parm1	Rhov	Clec4a2|Clec4b1	Glipr1	Cmtm7	Sox10	Sncg
 Cyp4f14	Pcbp3	Rspo1	Clec5a	Gpr84	Csf1r	Tmem163	Socs2
-Cyp4f15	Pcdh20	Slc6a3	Clic1	Hck	Csf3r	Tmem98	Sostdc1
-Cyp7b1	Pcdha10|Pcdha12|Pcdha4|Pcdha8|Pcdha2|Pcdhac1|Pcdha11|Pcdha7|Pcdha1|Pcdha6|Pcdha3|Pcdha5|Pcdhac2|Pcdha9	Spint2	Coro1a	Hfe	Ctc1	Trim59	Spa17
-Cyr61	Pcdhb21	Trhr	Crybb1	Hlx	Cx3cr1		Sstr2
-Dag1	Pclo		Ctsh	Icam1	Daglb		Tac2
+Cyp4f15	Pcdh20	S100a10	Clic1	Hck	Csf3r	Tmem98	Sostdc1
+Cyp7b1	Pcdha10|Pcdha12|Pcdha4|Pcdha8|Pcdha2|Pcdhac1|Pcdha11|Pcdha7|Pcdha1|Pcdha6|Pcdha3|Pcdha5|Pcdhac2|Pcdha9	Slc6a3	Coro1a	Hfe	Ctc1	Trim59	Spa17
+Cyr61	Pcdhb21	Spint2	Crybb1	Hlx	Cx3cr1		Sstr2
+Dag1	Pclo	Trhr	Ctsh	Icam1	Daglb		Tac2
 Dclk1	Pnoc		Ctss	Ier3	Dock8		Tcf7
 Dio2	Ppargc1b		Ctsz	Ifi30	Edem1		Tex15
 Dkk3	Ptprt		Cttnbp2nl	Ifi35	Elf1		Tnfaip2

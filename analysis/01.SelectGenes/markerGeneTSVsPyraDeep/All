@@ -1,16 +1,16 @@
 Astrocyte	Basket	Bergmann	BrainstemCholin	CerebGranule	DentateGranule	Dopaminergic	Ependymal	ForebrainCholin	GabaPV	GabaReln	GabaRelnCalb	GabaSSTReln	GabaVIPReln	Gluta	Golgi	Hypocretinergic	Microglia	Microglia_activation	Microglia_deactivation	Noradrenergic	Oligo	Purkinje	Pyramidal Thy1 Amyg	Pyramidal Thy1 Hipp	Pyramidal_Glt_25d2	Pyramidal_S100a10	PyramidalCorticoThalam	Serotonergic	SpinalCordCholinergic	Spiny	ThalamusCholin
-Aass	Socs2	A2m	Fgf18	Car4	Anxa11	Slc6a3	Acvr2b	Crabp1	Cox6a2	Gabrr1	Nppc	Gp5	Col14a1	Tshz2	Actn3	2010005H15Rik	1700017B05Rik	Asxl1	Abcc3	4930550L24Rik	Anln	Atp2a3	Ifi205|Mndal|Ifi211		Sox17	Dkkl1	Ephb6	Apol9a|Apol9b	Elf5	Dmkn	C130026I21Rik
-Acaa2		Baalc		Cbln3	Dsg2		Arid1a	Lhx8		Gabrr2		Grpr	Htr3a		Ccnb1ip1	Avpr1a	2510039O18Rik	Atp7a	Adrb1	Asb4	Aspa	Casq2	Il1rapl2		Tsen15	Tnnc1	Rai14	Cited1	Gna14	Foxo1	Chrna3
-Acsl6		Casp12		Crtam	Dsp		Aspm	Ptger2		Lmo1		Kcnmb2	Npas1		Dapk2	Cckar	Abhd15	B4galt1	Adrb2	Calcr	D16Ertd472e	Col18a1	Mndal					Crct1	Hoxa9	Foxp1	Cxcl11
-Add3		Cd70		Dleu2	Iigp1		Ccnb2	Slc5a7		Otx2		Postn	Vip		Flt4	Crhr2	Adap2	Bach1	Aif1	Dbh	Elovl7	Cox6b2						Ctla2a|Ctla2b	Hoxc8	Gpr88	Cytip
-Adgrg1		Cdc42ep1		Eomes	Lct		Ccr6			Tal1			Wnt5a		Rasgrp2	Hcrt	Akna	Birc3	Ang	Gstm6	Fa2h	Ebf1						Fev	Mmp9	Ido1	Eno3
-Adhfe1		Chil1		Mapk12	Npy2r		Cd1d1			Tnnt1					Sgcg	Hmx2	Ankrd44	Casp4	Arap3	Maoa	Gamt	Ebf2						H2-Q1	Polr3g	Npas2	Fzd7
-Adora2b		Dao		Pax6	Npy5r		Cdc20									Pcsk1	Arhgap45	Ccl12	Arhgap17	Ovgp1	Gjb1	Eps8l2						Ptger3	Wnk4	Pde10a	Galm
-AI464131		E2f5		Sptssb	Phf20l1		Cdca7									Pdyn	Arrb2	Ccl2	Arhgap4	Phox2a	Grb14	Fam117a						Slc22a3		Pde1b	Htr5b
-Aldh6a1		Evc		Tbata	Rnf112		Cdk1									Rspo1	AW112010	Ccl9	Arhgap9	Slc6a2	Hapln2	Gng13						Slc6a4		Pde7b	Irx2
-Amot		Fam227b		Trim62	Sema5a		Cdt1									Trhr	C3ar1	Ccr5	Arhgdib	Stbd1	Mag	Homer3						Trh		Rarb	Irx5
-Antxr1		Gstt2		Uncx	Stxbp6		Cenpe										Casp1	Cd164	Batf3	Tm4sf1	Mobp	Icmt								Rin1	Map3k6
-Aox1		Hist1h4i			Tdo2		Cenpf										Casp8	Cd86	Btk		Mog	Inpp5a									Necab3
+Aass	Socs2	A2m	Fgf18	Car4	Dsg2	Slc6a3	Acvr2b	Crabp1	Cox6a2	Gabrr1	Nppc	Gp5	Col14a1	Tshz2	Actn3	2010005H15Rik	1700017B05Rik	Asxl1	Abcc3	4930550L24Rik	Anln	Atp2a3	Ifi205|Mndal|Ifi211		Sox17	Dkkl1	Ephb6	Apol9a|Apol9b	Elf5	Dmkn	C130026I21Rik
+Acaa2		Baalc		Cbln3	Dsp		Arid1a	Lhx8		Gabrr2		Grpr	Htr3a		Ccnb1ip1	Avpr1a	2510039O18Rik	Atp7a	Adrb1	Asb4	Aspa	Casq2	Il1rapl2		Tsen15	Tnnc1	Rai14	Cited1	Gna14	Foxo1	Chrna3
+Acsl6		Casp12		Crtam	Iigp1		Aspm	Ptger2		Lmo1		Kcnmb2	Npas1		Dapk2	Cckar	Abhd15	B4galt1	Adrb2	Calcr	D16Ertd472e	Col18a1	Mndal					Crct1	Hoxa9	Foxp1	Cxcl11
+Add3		Cd70		Dleu2	Npy5r		Ccnb2	Slc5a7		Otx2		Postn	Vip		Flt4	Crhr2	Adap2	Bach1	Aif1	Dbh	Elovl7	Cox6b2						Ctla2a|Ctla2b	Hoxc8	Gpr88	Cytip
+Adgrg1		Cdc42ep1		Eomes	Phf20l1		Ccr6			Tal1			Wnt5a		Rasgrp2	Hcrt	Akna	Birc3	Ang	Gstm6	Fa2h	Ebf1						Fev	Mmp9	Ido1	Eno3
+Adhfe1		Chil1		Mapk12	Sema5a		Cd1d1			Tnnt1					Sgcg	Hmx2	Ankrd44	Casp4	Arap3	Maoa	Gamt	Ebf2						H2-Q1	Polr3g	Npas2	Fzd7
+Adora2b		Dao		Pax6	Stxbp6		Cdc20									Pcsk1	Arhgap45	Ccl12	Arhgap17	Ovgp1	Gjb1	Eps8l2						Ptger3	Wnk4	Pde10a	Galm
+AI464131		E2f5		Sptssb	Tdo2		Cdca7									Pdyn	Arrb2	Ccl2	Arhgap4	Phox2a	Grb14	Fam117a						Slc22a3		Pde1b	Htr5b
+Aldh6a1		Evc		Tbata			Cdk1									Rspo1	AW112010	Ccl9	Arhgap9	Slc6a2	Hapln2	Gng13						Slc6a4		Pde7b	Irx2
+Amot		Fam227b		Trim62			Cdt1									Trhr	C3ar1	Ccr5	Arhgdib	Stbd1	Mag	Homer3						Trh		Rarb	Irx5
+Antxr1		Gstt2		Uncx			Cenpe										Casp1	Cd164	Batf3	Tm4sf1	Mobp	Icmt								Rin1	Map3k6
+Aox1		Hist1h4i					Cenpf										Casp8	Cd86	Btk		Mog	Inpp5a									Necab3
 Appl2		Htra3					Cep55										Ccl6	Cebpb	Calhm2		Nkx6-2	Krt25									Nppa
 Axl		Mob3b					D930015E06Rik										Cd300c2	Cep152	Camp		Olig2	Lhx5									Prkcq
 Bcan		Msx2					Dbf4										Cd34	Chst7	Capn3		Plekhh1	Nrk									Sh3bgrl2

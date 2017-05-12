@@ -1,24 +1,24 @@
 Astrocyte	DentateGranule	ForebrainCholin	GabaPV	GabaRelnCalb	GabaSSTReln	GabaVIPReln	Gluta	Microglia	Microglia_activation	Microglia_deactivation	Oligo	Pyramidal Thy1 Amyg	Pyramidal Thy1 Hipp	Pyramidal_Glt_25d2	Pyramidal_S100a10	PyramidalCorticoThalam	Spiny
-2810459M11Rik	Anxa11	Cartpt	Adamts15	Calb2	Gna14	Cplx3	Tshz2	0610040J01Rik	Atp7a	Abcc3	Adamts4	Ifi205|Mndal|Ifi211	Nr4a2	Sox17	Car4	Col5a1	Arg2
-4931406C07Rik	B3galnt2	Crabp1	Cenpa	Nppc	Grpr	Htr3a		1700017B05Rik	B4galt1	Adrb1	Anln	Il1rapl2		Tsen15	Csrp2	Col6a1	Cacnb2
-Aass	C77370	Ecel1	Cox6a2	Pcsk5	Postn	Kit		Abhd15	Bach1	Adrb2	Aspa	Mndal			Dkkl1	Prss12	Dmkn
-Abhd3	Ccdc85a	Gdnf	Pip5kl1		Ptprt	Tac2		Adap2	Bcl10	Afp	Cers2				Perp	Rai14	Foxo1
-Acaa2	Cdhr1	Gpx3				Vip		Adgre1	Birc3	Aif1	Cldn11				Tnnc1		Gpr88
-Acsbg1	Dsg2	Hopx				Wnt5a		Akna	C1qa	Ang	Ddc						Ido1
-Acsl6	Dsp	Lhx8						Alas2	Casp4	Arap3	Elovl7						Kcna5
-Add3	Iigp1	Popdc3						Alox5ap	Ccdc86	Arhgap17	Fa2h						Kctd1
-Adgrg1	Lct	Ptger2						Ankrd44	Ccl12	Arhgap4	Gal3st1						Npas2
-Adhfe1	Lhx9	Serpinb1b						Arhgap45	Ccl2	Arhgap9	Gamt						Pde10a
-Agl	Mcm6	Slc18a3						Arrb2	Ccl4	Atf3	Gatm						Pde7b
-AI464131	Neurod1	Slc5a7						AW112010	Ccl9	Batf3	Gjb1						Ppp1r1b
-Aldh1l1	Nfia	Sncg						B2m	Ccr5	Blnk	Gltp						Rarb
-Aldh6a1	Npy2r	Tacr3						BC028528	Cd14	Btk	Grb14						
-Amot	Npy5r	Trpc3						Bcl2a1a|Bcl2a1b|Bcl2a1d	Cd164	Calhm2	Gsn						
-Antxr1	Pter	Zic3						Btg2	Cd53	Camp	Hapln2						
-Aox1	Rpl41							C1qc	Cd83	Capn3	Ick						
-Appl2	Tanc1							C3ar1	Cd86	Cd177	Jam3						
-Aqp4	Tdo2							Cables1	Cebpb	Cd2ap	Josd2						
-Atp1b2	Trpc6							Casp1	Cep152	Cd300a	Lims2						
+2810459M11Rik	Ccdc85a	Cartpt	Adamts15	Calb2	Gna14	Cplx3	Tshz2	0610040J01Rik	Atp7a	Abcc3	Adamts4	Ifi205|Mndal|Ifi211	Nr4a2	Sox17	Car4	Col5a1	Arg2
+4931406C07Rik	Cdhr1	Crabp1	Cenpa	Nppc	Grpr	Htr3a		1700017B05Rik	B4galt1	Adrb1	Anln	Il1rapl2		Tsen15	Csrp2	Col6a1	Cacnb2
+Aass	Dsg2	Ecel1	Cox6a2	Pcsk5	Postn	Kit		Abhd15	Bach1	Adrb2	Aspa	Mndal			Dkkl1	Prss12	Dmkn
+Abhd3	Dsp	Gdnf	Pip5kl1		Ptprt	Tac2		Adap2	Bcl10	Afp	Cers2				Perp	Rai14	Foxo1
+Acaa2	Iigp1	Gpx3				Vip		Adgre1	Birc3	Aif1	Cldn11				Tnnc1		Gpr88
+Acsbg1	Mcm6	Hopx				Wnt5a		Akna	C1qa	Ang	Ddc						Ido1
+Acsl6	Neurod1	Lhx8						Alas2	Casp4	Arap3	Elovl7						Kcna5
+Add3	Nfia	Popdc3						Alox5ap	Ccdc86	Arhgap17	Fa2h						Kctd1
+Adgrg1	Npy5r	Ptger2						Ankrd44	Ccl12	Arhgap4	Gal3st1						Npas2
+Adhfe1	Pter	Serpinb1b						Arhgap45	Ccl2	Arhgap9	Gamt						Pde10a
+Agl	Tdo2	Slc18a3						Arrb2	Ccl4	Atf3	Gatm						Pde7b
+AI464131	Trpc6	Slc5a7						AW112010	Ccl9	Batf3	Gjb1						Ppp1r1b
+Aldh1l1		Sncg						B2m	Ccr5	Blnk	Gltp						Rarb
+Aldh6a1		Tacr3						BC028528	Cd14	Btk	Grb14						
+Amot		Trpc3						Bcl2a1a|Bcl2a1b|Bcl2a1d	Cd164	Calhm2	Gsn						
+Antxr1		Zic3						Btg2	Cd53	Camp	Hapln2						
+Aox1								C1qc	Cd83	Capn3	Ick						
+Appl2								C3ar1	Cd86	Cd177	Jam3						
+Aqp4								Cables1	Cebpb	Cd2ap	Josd2						
+Atp1b2								Casp1	Cep152	Cd300a	Lims2						
 Axl								Casp8	Chst7	Cd33	Lpar1						
 Btbd17								Ccl3	Csf2rb2	Cd48	Mag						
 Cbs								Ccl6	Ctla2b	Cd79b	Mcam						

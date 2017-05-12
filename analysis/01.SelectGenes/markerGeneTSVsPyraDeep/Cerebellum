@@ -77,86 +77,86 @@ Tfap2b	Baalc	Dleu2	Ceacam10	Adgre1	C1qb	Adrb2	Ddc	Cacna2d2
 				Grn	Parp14	Laptm5		
 				Gusb	Parp9	Lcn2		
 				H2-Ab1	Per1	Lgmn		
-				H2-K1	Plek	Lpl		
-				H2-K1|H2-D1	Plk3	Lpxn		
-				H2-Oa	Pmaip1	Lrba		
-				H2-Q7|H2-Q9	Ptger4	Lrmp		
-				H2-T23|H2-T-ps	Rab20	Lrp1		
-				Hacd4	Rab3il1	Lrrk1		
-				Havcr2	Rac2	Lst1		
-				Hba-a1|Hba-a2	Relb	Ltf		
-				Hba-a2|Hba-a1	Rhoh	Lyl1		
-				Hbb-b1|Hbb-b2|Hbb-bs|Hbb-bt	Ripk1	Lyz1		
-				Hcls1	Rnasel	Mafb		
-				Herpud1	Rrad	Man2b1		
-				Hp	Runx1	Mertk		
-				Hps4	Samsn1	Mfng		
-				Ier2	Serpine1	Mpeg1		
-				Ier5	Sh2b2	Mylip		
-				Ifngr1	Slc15a3	Myo1g		
-				Igsf6	Slc39a8	Naalad2		
-				Il13ra1	Smagp	Naglu		
-				Il21r	Socs3	Nfam1		
-				Il6ra	Spint1	Ngp		
-				Il7r	Sqrdl	Notch2		
-				Irf5	Srgn	Nrip1		
-				Irgm2	Sult1a1	Nrp1		
-				Itgb2	Syk	Olfml3		
-				Itpr2	Tap1	P2ry12		
-				Junb	Tgm2	Parvg		
-				Klf2	Tlr2	Pik3cg		
-				Klf6	Tlr6	Plcl2		
-				Lag3	Tlr7	Pld1		
-				Lcp1	Tmed5	Pld4		
-				Lgals3bp	Tmem173	Plxnb2		
-				Lgals9	Tnf	Psmb9		
-				Lilr4b|Lilrb4a	Tnfaip2	Ptpn18		
-				Lpcat3	Tnfrsf1a	Ptpn6		
-				Ly86	Tpp2	Pycard		
-				Ly96	Traf5	Pygl		
-				Lyn	Trim30a	Rbl1		
-				Lyz2|Lyz1	Tsc22d3	Rgl2		
-				Mir692-3|Mir692-2|Ftl1	Tuba1c	Rgs10		
-				Mlxipl	Tubb6	Rgs2		
-				Morc3	Vasp	S100a8		
-				Mrc1	Vav1	S100a9		
-				Msn	Zfp36	Scamp2		
-				Myh9		Selplg		
-				Myo7a		Sirpa		
-				Naip2		Slamf9		
-				Naip5		Slc15a4		
-				Nckap1l		Slc16a6		
-				Nrros		Slc16a7		
-				Oaf		Slc25a37		
-				Pag1		Slc25a45		
-				Pald1		Slc29a3		
-				Pbxip1		Slc2a5		
-				Pdgfb		Slc37a2		
-				Pf4		Slc40a1		
-				Phxr1		Slc7a8		
-				Phxr4		Snx5		
-				Phyhd1		Srpk3		
-				Pik3cd		St3gal6		
-				Pla2g15		Stard8		
-				Pla2g4a		Tcirg1		
-				Plcg2		Tec		
-				Pnp		Tgfbi		
-				Pnp|Pnp2		Tgfbr1		
-				Pnpla7		Tgif1		
-				Pon3		Themis2		
-				Ppp1r15a		Tifa		
-				Pros1		Tlr4		
-				Ptbp3		Tmem119		
-				Ptgs1		Tmem140		
-				Ptprc		Tnfrsf1b		
-				Rassf5		Tnfsf13b		
-				Rcsd1		Tor3a		
-				Rel		Trem2		
-				Rgs1		Trim47		
-				Rgs19		Uba7		
-				Rin2		Unc93b1		
-				Rnase4		Vrk2		
-				Rnaset2a|Rnaset2b		Zfp36l2		
+				H2-K1	Plek	Lpxn		
+				H2-K1|H2-D1	Plk3	Lrba		
+				H2-Oa	Pmaip1	Lrmp		
+				H2-Q7|H2-Q9	Ptger4	Lrp1		
+				H2-T23|H2-T-ps	Rab20	Lrrk1		
+				Hacd4	Rab3il1	Lst1		
+				Havcr2	Rac2	Ltf		
+				Hba-a1|Hba-a2	Relb	Lyl1		
+				Hba-a2|Hba-a1	Rhoh	Lyz1		
+				Hbb-b1|Hbb-b2|Hbb-bs|Hbb-bt	Ripk1	Mafb		
+				Hcls1	Rnasel	Man2b1		
+				Herpud1	Rrad	Mertk		
+				Hp	Runx1	Mfng		
+				Hps4	Samsn1	Mpeg1		
+				Ier2	Serpine1	Mylip		
+				Ier5	Sh2b2	Myo1g		
+				Ifngr1	Slc15a3	Naalad2		
+				Igsf6	Slc39a8	Naglu		
+				Il13ra1	Smagp	Nfam1		
+				Il21r	Socs3	Ngp		
+				Il6ra	Spint1	Notch2		
+				Il7r	Sqrdl	Nrip1		
+				Irf5	Srgn	Nrp1		
+				Irgm2	Sult1a1	Olfml3		
+				Itgb2	Syk	P2ry12		
+				Itpr2	Tap1	Parvg		
+				Junb	Tgm2	Pik3cg		
+				Klf2	Tlr2	Plcl2		
+				Klf6	Tlr6	Pld1		
+				Lag3	Tlr7	Pld4		
+				Lcp1	Tmed5	Plxnb2		
+				Lgals3bp	Tmem173	Psmb9		
+				Lgals9	Tnf	Ptpn18		
+				Lilr4b|Lilrb4a	Tnfaip2	Ptpn6		
+				Lpcat3	Tnfrsf1a	Pycard		
+				Ly86	Tpp2	Pygl		
+				Ly96	Traf5	Rbl1		
+				Lyn	Trim30a	Rgl2		
+				Lyz2|Lyz1	Tsc22d3	Rgs10		
+				Mir692-3|Mir692-2|Ftl1	Tuba1c	Rgs2		
+				Mlxipl	Tubb6	S100a8		
+				Morc3	Vasp	S100a9		
+				Mrc1	Vav1	Scamp2		
+				Msn	Zfp36	Selplg		
+				Myh9		Sirpa		
+				Myo7a		Slamf9		
+				Naip2		Slc15a4		
+				Naip5		Slc16a6		
+				Nckap1l		Slc16a7		
+				Nrros		Slc25a37		
+				Oaf		Slc25a45		
+				Pag1		Slc29a3		
+				Pald1		Slc2a5		
+				Pbxip1		Slc37a2		
+				Pdgfb		Slc40a1		
+				Pf4		Slc7a8		
+				Phxr1		Snx5		
+				Phxr4		Srpk3		
+				Phyhd1		St3gal6		
+				Pik3cd		Stard8		
+				Pla2g15		Tcirg1		
+				Pla2g4a		Tec		
+				Plcg2		Tgfbi		
+				Pnp		Tgfbr1		
+				Pnp|Pnp2		Tgif1		
+				Pnpla7		Themis2		
+				Pon3		Tifa		
+				Ppp1r15a		Tlr4		
+				Pros1		Tmem119		
+				Ptbp3		Tmem140		
+				Ptgs1		Tnfrsf1b		
+				Ptprc		Tnfsf13b		
+				Rassf5		Tor3a		
+				Rcsd1		Trem2		
+				Rel		Trim47		
+				Rgs1		Uba7		
+				Rgs19		Unc93b1		
+				Rin2		Vrk2		
+				Rnase4		Zfp36l2		
+				Rnaset2a|Rnaset2b				
 				Rrbp1				
 				Sash3				
 				Sgpl1				

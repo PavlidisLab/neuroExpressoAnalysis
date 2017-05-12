@@ -329,11 +329,9 @@ if(end == 500){
         
         
         
-        cat('S100a10 Exception\n--------------------\n',file=log,append = TRUE)
-        
-        
         
         if(!grepl('SingleCell',names[i])){
+            cat('S100a10 Exception\n--------------------\n',file=log,append = TRUE)
             genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/','PyramidalDeep'))
             
             allS100 = genes %>% lapply(function(x){
@@ -341,7 +339,12 @@ if(end == 500){
             }) %>% unlist %>% unique %>% len
             cat(paste0('S100a10 pyramdials used to have ', allS100, ' genes\n'),file=log,append=TRUE)
             
-            s100a10exception(paste0('analysis//01.SelectGenes/',names[i]),cores=8)
+            allowGenes(paste0('analysis//01.SelectGenes/',names[i]),
+                       allowedGenes = allowedProbesS100a10,
+                       regex = 'S100a10',
+                       cores = 8)
+            
+            # s100a10exception(paste0('analysis//01.SelectGenes/',names[i]),cores=8)
             
             genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/','PyramidalDeep'))
             allS100 = genes %>% lapply(function(x){
@@ -349,6 +352,25 @@ if(end == 500){
             }) %>% unlist %>% unique %>% len
             
             cat(paste0('S100a10 pyramdials now have ', allS100, ' genes\n\n'),file=log,append=TRUE)
+            
+            cat('Granule Exception\n--------------------\n',file=log,append = TRUE)
+            genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/','PyramidalDeep'))
+            allDentate = genes %>% lapply(function(x){
+                x['DentateGranule']
+            }) %>% unlist %>% unique %>% len
+            cat(paste0('Granule cells used to have ', allDentate, ' genes\n'),file=log,append=TRUE)
+            
+            allowGenes(paste0('analysis//01.SelectGenes/',names[i]),
+                       allowedGenes = granuleAllowedGenes,
+                       regex = 'DentateGranule',
+                       cores = 8)
+            
+            genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',names[i],'/','PyramidalDeep'))
+            allDentate = genes %>% lapply(function(x){
+                x['DentateGranule']
+            }) %>% unlist %>% unique %>% len
+            cat(paste0('Granule cells now have ', allDentate, ' genes\n'),file=log,append=TRUE)
+            
         }
         
         bannedGenes = c('Lpl')

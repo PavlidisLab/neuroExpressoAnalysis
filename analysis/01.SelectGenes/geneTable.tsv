@@ -20,12 +20,12 @@ BasalForebrain
 Forebrain Cholinergic	6	90	Doyle et al., 2008 (GSE13379)
 Striatum
 Forebrain Cholinergic	6	45	Doyle et al., 2008 (GSE13379)
-Spiny	39	75	Doyle et al., 2008 (GSE13379), Heiman et al 2014 (GSE55096), Maze et al 2014 (GSE54656), Tan et al 2013 (GSE48813)
+Spiny	39	74	Doyle et al., 2008 (GSE13379), Heiman et al 2014 (GSE55096), Maze et al 2014 (GSE54656), Tan et al 2013 (GSE48813)
 Amygdala
 Glutamatergic	3	10	Sugino et al., 2006 (GSE2882)
 Pyramidal Thy1 Amyg	3	21	Sugino et al., 2006 (GSE2882)
 Hippocampus
-DentateGranule	3	30	Perrone-Bizzozero NI et al. 2011 (GSE11147)
+DentateGranule	3	17	Perrone-Bizzozero NI et al. 2011 (GSE11147)
 GabaSSTReln	3	54	Sugino et al., 2006 (GSE2882)
 Pyramidal Thy1 Hipp	3	17	Sugino et al., 2006 (GSE2882)
 Subependymal
