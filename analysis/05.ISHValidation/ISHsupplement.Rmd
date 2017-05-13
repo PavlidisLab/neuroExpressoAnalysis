@@ -181,6 +181,15 @@ frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
 
 ```
 
+\begin{figure}
+\begin{center}
+  \captionsetup{labelformat=empty}
+  \caption{\textbf{Figure S3:} Expression of Pter in human tissue samples. Yellow shows brain samples. Plot is acquried from \href{https://www.gtexportal.org/home/}{https://www.gtexportal.org/home/}}
+  \includegraphics[height = 5in]{Pter.PNG}
+  \label{fig:allenAllPurkinje}
+\end{center}
+\end{figure}
+
 
 \begin{figure}
 
