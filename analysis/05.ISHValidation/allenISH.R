@@ -4,6 +4,7 @@ library(assertthat)
 library(magick)
 devtools::load_all()
 
+redownload = FALSE
 genes = mouseMarkerGenes$Hippocampus
 
 granuleMarkers = genes$DentateGranule
@@ -56,67 +57,68 @@ geneOverrides = list(Bcl11a =
                      
                      
 # get raw image
-for(i in 1:len(markers)){
-    dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i],'_full'),recursive=TRUE,showWarnings=FALSE)
-    dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i]),recursive=TRUE,showWarnings=FALSE)
-    
-    for (j in 1:len(markers[[i]])){
-        tryCatch({
-            filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
-            filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
-            filenameFullExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
-            filenameExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
-
-
-            datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
-            if(markers[[i]][j] =='Ogn'){
-                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'coronal',probeOrientation = 'antisense')[1]
-            }
-
-            
-            if(markers[[i]][j] %in% names(geneOverrides)){
-                rm(list = names(geneOverrides[[markers[[i]][[j]]]]))
-                attach(geneOverrides[[markers[[i]][j]]])
-            }
-            
-            imageID = structureToImage(datasetID = datasetID, regionID = ids[i])
-            
-            if(markers[[i]][j] %in% names(geneOverrides)){
-                detach(geneOverrides[[markers[[i]][j]]])
-                rm(list = names(geneOverrides[[markers[[i]][[j]]]]))
-                attach(geneOverrides[[markers[[i]][j]]])
-            }
-             
-            if(len(imageID) ==0){
-                next
-            }
-            dowloadImage(imageID$section.image.id, view = 'projection',
-                         outputFile = filenameFull)
-            centerImage(image = filenameFull, x = imageID$x,
-                        y= imageID$y,
-                        xProportion = xProportions[[i]],
-                        yProportion = yProportions[[i]],
-                        outputFile = filename)
-            
-            
-            dowloadImage(imageID$section.image.id, view = 'expression',
-                         outputFile = filenameFullExp)
-            centerImage(image = filenameFullExp, x = imageID$x,
-                        y= imageID$y,
-                        xProportion = xProportions[[i]],
-                        yProportion = yProportions[[i]],
-                        outputFile = filenameExp)
-            
-            if(markers[[i]][j] %in% names(geneOverrides)){
-                detach(geneOverrides[[markers[[i]][j]]])
-            }
-            
-        },  error=function(cond){
-            print('meh')  
-        })
+if(redownload){
+    for(i in 1:len(markers)){
+        dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i],'_full'),recursive=TRUE,showWarnings=FALSE)
+        dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i]),recursive=TRUE,showWarnings=FALSE)
+        
+        for (j in 1:len(markers[[i]])){
+            tryCatch({
+                filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
+                filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
+                filenameFullExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
+                filenameExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
+                
+                
+                datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
+                if(markers[[i]][j] =='Ogn'){
+                    datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'coronal',probeOrientation = 'antisense')[1]
+                }
+                
+                
+                if(markers[[i]][j] %in% names(geneOverrides)){
+                    rm(list = names(geneOverrides[[markers[[i]][[j]]]]))
+                    attach(geneOverrides[[markers[[i]][j]]])
+                }
+                
+                imageID = structureToImage(datasetID = datasetID, regionID = ids[i])
+                
+                if(markers[[i]][j] %in% names(geneOverrides)){
+                    detach(geneOverrides[[markers[[i]][j]]])
+                    rm(list = names(geneOverrides[[markers[[i]][[j]]]]))
+                    attach(geneOverrides[[markers[[i]][j]]])
+                }
+                
+                if(len(imageID) ==0){
+                    next
+                }
+                dowloadImage(imageID$section.image.id, view = 'projection',
+                             outputFile = filenameFull)
+                centerImage(image = filenameFull, x = imageID$x,
+                            y= imageID$y,
+                            xProportion = xProportions[[i]],
+                            yProportion = yProportions[[i]],
+                            outputFile = filename)
+                
+                
+                dowloadImage(imageID$section.image.id, view = 'expression',
+                             outputFile = filenameFullExp)
+                centerImage(image = filenameFullExp, x = imageID$x,
+                            y= imageID$y,
+                            xProportion = xProportions[[i]],
+                            yProportion = yProportions[[i]],
+                            outputFile = filenameExp)
+                
+                if(markers[[i]][j] %in% names(geneOverrides)){
+                    detach(geneOverrides[[markers[[i]][j]]])
+                }
+                
+            },  error=function(cond){
+                print('meh')  
+            })
+        }
     }
 }
-
 # resize all images to 700x500 px and label the projection images
 lapply(names(markers), function(x){
     dir.create(paste0('analysis/05.ISHValidation/',x,'_resize'))
@@ -134,7 +136,7 @@ lapply(names(markers), function(x){
             if(grepl(pattern = 'Prox1',y)){
                 system(paste0("convert ",
                               'analysis/05.ISHValidation/',x,'_resize/',basename(y),
-                              ' -fill black -undercolor white -gravity NorthWest -pointsize 25 -annotate +480+266 \'',
+                              ' -fill black -undercolor white -gravity NorthWest -pointsize 27 -annotate +360+240 \'',
                               'Granule cell layer',
                               '\'',
                               ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
@@ -142,7 +144,7 @@ lapply(names(markers), function(x){
             if(grepl(pattern = 'Pcp2',y)){
                 system(paste0("convert ",
                               'analysis/05.ISHValidation/',x,'_resize/',basename(y),
-                              ' -fill black -undercolor white -gravity NorthWest -pointsize 25 -annotate +330+70 \'',
+                              ' -fill black -undercolor white -gravity NorthWest -pointsize 27 -annotate +330+70 \'',
                               'Purkinje cell layer',
                               '\'',
                               ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
