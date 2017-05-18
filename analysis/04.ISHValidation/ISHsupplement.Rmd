@@ -1,0 +1,207 @@
+---
+output:
+    pdf_document:
+        keep_tex: true
+        includes:
+            in_header: import.sty
+---
+\setcounter{page}{43}
+
+\begin{figure}
+\begin{center}
+  \captionsetup{labelformat=empty}
+  \caption{\textbf{Figure S1:} Expression of dentate granule cell markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Prox1, a known marker of dentate granule cells. The intensity is color-coded to range from blue (low expression intensity), through green (medium intensity) to red (high intensity). All images except Ogn is taken from the sagittal view. Ogn is taken from the coronal view.}
+  \includegraphics[height = 9in]{DentateGranule_singlePages/01.png}
+  \label{fig:allenAllDentate}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{DentateGranule_singlePages/05.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{DentateGranule_singlePages/09.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{DentateGranule_singlePages/13.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 2.25in]{DentateGranule_singlePages/17.png}
+\end{center}
+\end{figure}
+
+\newpage
+
+
+
+\begin{figure}
+\begin{center}
+  \captionsetup{labelformat=empty}
+  \caption{\textbf{Figure S2:} Expression of Purkinje markers discovered in the study in Allen Brain Atlas mouse brain in situ hybridization database. The first gene is Pcp2, a known marker of Purkinje cells. The intensity is color-coded to range from blue (low expression intensity), through green (medium intensity) to red (high intensity).} All images are taken from the sagittal view
+  \includegraphics[height = 9in]{Purkinje_singlePages/01.png}
+  \label{fig:allenAllPurkinje}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/05.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/09.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/13.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/17.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/21.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/25.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/29.png}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/33.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 9in]{Purkinje_singlePages/37.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[height = 5in]{Purkinje_singlePages/41.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+
+\textbf{Table S1:} Validation status of dentate granule cell markers.
+\newline
+\begin{center}
+```{r,echo=FALSE}
+suppressMessages(library(dplyr))
+suppressMessages(library(ogbox))
+
+
+
+
+granule = ogbox::read.design('DentateGranule.tsv')
+knitr::kable(granule,format= 'latex') %>% (ogbox::prettifyLatexKable)
+```
+\end{center}
+
+\end{figure}
+
+
+\begin{figure}
+
+\textbf{Table S2:} Validation status of Purkinje cell markers.
+\newline
+\begin{center}
+```{r,echo=FALSE}
+library(dplyr)
+purkinjeTable = ogbox::read.design('Purkinje.tsv')
+knitr::kable(purkinjeTable,format= 'latex')%>%  (ogbox::prettifyLatexKable)
+```
+\end{center}
+
+\end{figure}
+
+
+```{r,include=FALSE}
+library(magrittr)
+library(ogbox)
+library(ggplot2)
+library(cowplot)
+Pter = ogbox::read.design('Pter hipposeq.tsv')
+St8sia4 = ogbox::read.design('St8sia4 hipposeq.tsv')
+
+frame = rbind(Pter,St8sia4) %>% 
+    dplyr::mutate(CellType = replaceElement(sample_name,c('ca1_d' = 'CA1 Dorsal',
+                                                          'ca1_v' ='CA1 Ventral',
+                                                          'ca2' = 'CA2',
+                                                          'ca3_d' = 'CA3 Dorsal',
+                                                          'ca3_v' = 'CA3 Ventral',
+                                                          'mc' = 'Mossy cell',
+                                                          'dg_d' = 'Dentate Granule Dorsal',
+                                                          'dg_v' = 'Dentate Granule Ventral'))$newVector)
+
+frame$CellType =  factor(frame$CellType,levels = c('Dentate Granule Dorsal',
+                                                     'Dentate Granule Ventral',
+                                                     trimElement(unique(frame$CellType),
+                                                     c('Dentate Granule Dorsal',
+                                                     'Dentate Granule Ventral'))))
+
+(frame %>% ggplot(aes(x = CellType,y = fpkm, ymin = conf_lo, ymax = conf_hi)) + geom_errorbar() + geom_point() +  facet_wrap(~gene_short_name,scales = 'free') + xlab('') +theme(axis.text.x  =element_text(angle=90))) %>% 
+    ggsave(filename = 'hippposeqSup.png',device = 'png',height = 4,width = 4)
+
+```
+
+
+
+\begin{figure}
+
+
+\textbf{Table S3:} Intersection of Purkinje markers from NeuroExpresso markers and Rong et al. 2004 study. Rong et al. genes are taken from Table 2 of the paper. Probe to gene annotations are repeated using annotations from Gemma. Fold change column shows the difference of expession between wild type and pcd\textsuperscript{3J} mouse which lacks Purkinje cells according to Rong et al.
+\newline
+\begin{center}
+
+```{r,echo=FALSE}
+load('../../data/mouseMarkerGenes.rda')
+purkinjeTable = data.table::fread('Rong et al table 2.csv',data.table = FALSE)
+annotGenes = purkinjeTable$`Probe set name` %>% gemmaGeneMatch('../../data-raw/GemmaAnnots/GPL1261')
+purkinjeTable %<>% mutate(NewGenes = annotGenes)
+purkinjeTable = purkinjeTable[c('NewGenes','Probe set name','%a')]
+purkinjeTable %<>% filter(NewGenes %in% mouseMarkerGenes$Cerebellum$Purkinje[mouseMarkerGenes$Cerebellum$Purkinje %in% annotGenes])
+names(purkinjeTable) = c('Gene Symbol','Probeset','Fold change')
+write.design(purkinjeTable,file = 'purkinjeTable.tsv')
+knitr::kable(purkinjeTable,format= 'latex') %>%  (ogbox::prettifyLatexKable)
+```
+\end{center}
+
+\end{figure}
