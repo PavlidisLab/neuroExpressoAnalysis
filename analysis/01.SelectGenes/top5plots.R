@@ -173,7 +173,8 @@ for (i in 1:len(regionSamples)){
              fontsize=30,
              #fontsize = 11,
              #gaps_col = sum(!is.na(regionSamples[[i]])),
-             gaps_col = relExp2 %>% nrow,
+             gaps_col = 
+                 {if(names(regionSamples)[i] == 'Cortex'){relExp2 %>% nrow}},
              gaps_row= anotRow$`Specific Genes` %>% duplicated %>% not %>% which %>% {.-1},
              show_rownames=TRUE ,
              show_colnames=FALSE,
