@@ -123,7 +123,7 @@ readDesignMergeCel = function (desFile = 'data-raw/Mouse_Cell_Type_Data/cellType
 #'@export
 meltDesign = function(desFile, gsm = 'samples', 
                       normalize, celRegex, exprFile, outFile){
-    expr = read.csv(exprFile , header = T)
+    expr = read.exp(exprFile , header = T)
     list[gene,expres] = sepExpr(expr)
     header =  colnames(expres)
     
@@ -137,11 +137,11 @@ meltDesign = function(desFile, gsm = 'samples',
     
     indexes = vector()
     for (i in 1:length(header)){
-        indexes = c(indexes, findInList(header[i], lapply(gsms,make.names)))
+        indexes = c(indexes, findInList(header[i], gsms))
     }
+
     
-    
-    if (len(header[!header %in% make.names(unlist(gsms))])>0){
+    if (len(header[!header %in% unlist(gsms)])>0){
         print("what the fuck man! I can't find some GSMs in your design file")
         print(header[!header %in% make.names(unlist(gsms))])
     }
