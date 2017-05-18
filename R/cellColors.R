@@ -7,9 +7,8 @@ cellColors = function(){
     
     coloring = c(Oligo = 'darkgreen',
                  Oligodendrocyte = 'darkgreen',
-                 "Oligodendrocyte precursors" = 'green',
-                 "Oligodendrocyte prec." = 'green',
-                 
+                 "Oligodendrocyte precursors" = '#009E73',
+                 "Oligodendrocyte prec." = '#009E73',
                  Endothelial = 'gold4',
                  Bergmann = 'palegreen',
                  MotorCholin = 'darkorange4',
