@@ -15,6 +15,8 @@ The package itself depends on several personal libraries. Install them by
 devtools::install_github(oganm/ogbox)
 devtools::install_github(oganm/homologene)
 devtools::install_github(oganm/geneSynonym)
+devtools::install_github(oganm/allenISH)
+devtools::install_github(oganm/markerGeneProfile)
 ```
 
 There are also bioconductor packages in the dependency list that can be acquired by
