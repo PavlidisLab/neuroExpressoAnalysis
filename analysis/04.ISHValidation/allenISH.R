@@ -59,15 +59,15 @@ geneOverrides = list(Bcl11a =
 # get raw image
 if(redownload){
     for(i in 1:len(markers)){
-        dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i],'_full'),recursive=TRUE,showWarnings=FALSE)
-        dir.create(paste0('analysis//05.ISHValidation/',names(markers)[i]),recursive=TRUE,showWarnings=FALSE)
+        dir.create(paste0('analysis//04.ISHValidation/',names(markers)[i],'_full'),recursive=TRUE,showWarnings=FALSE)
+        dir.create(paste0('analysis//04.ISHValidation/',names(markers)[i]),recursive=TRUE,showWarnings=FALSE)
         
         for (j in 1:len(markers[[i]])){
             tryCatch({
-                filenameFull = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
-                filename = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
-                filenameFullExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
-                filenameExp = paste0('analysis/05.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
+                filenameFull = paste0('analysis/04.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_projection.jpg')
+                filename = paste0('analysis/04.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_projection.jpg')
+                filenameFullExp = paste0('analysis/04.ISHValidation/',names(markers)[i],'_full','/',markers[[i]][j],'_expression.jpg')
+                filenameExp = paste0('analysis/04.ISHValidation/',names(markers)[i],'/',markers[[i]][j],'_expression.jpg')
                 
                 
                 datasetID = getGeneDatasets(gene = markers[[i]][j],planeOfSection = 'sagittal',probeOrientation = 'antisense')[1]
@@ -121,52 +121,52 @@ if(redownload){
 }
 # resize all images to 700x500 px and label the projection images
 lapply(names(markers), function(x){
-    dir.create(paste0('analysis/05.ISHValidation/',x,'_resize'))
-    files = list.files(paste0('analysis/05.ISHValidation/',x), full.names=TRUE)
+    dir.create(paste0('analysis/04.ISHValidation/',x,'_resize'))
+    files = list.files(paste0('analysis/04.ISHValidation/',x), full.names=TRUE)
     files %>% lapply(function(y){
-        system(paste0('convert ', y,' -resize 700x500\\> -background black -gravity center -extent 700x500 analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+        system(paste0('convert ', y,' -resize 700x500\\> -background black -gravity center -extent 700x500 analysis/04.ISHValidation/',x,'_resize/',basename(y)))
         if(grepl(pattern='projection',y)){
             system(paste0("convert ",
-                          'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                          'analysis/04.ISHValidation/',x,'_resize/',basename(y),
                           ' -fill black -undercolor white -gravity NorthWest -pointsize 29 -annotate +5+5 \'',
                           basename(y) %>% str_extract(".*(?=_)"),
                           '\'',
-                          ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+                          ' analysis/04.ISHValidation/',x,'_resize/',basename(y)))
             
             if(grepl(pattern = 'Prox1',y)){
                 system(paste0("convert ",
-                              'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                              'analysis/04.ISHValidation/',x,'_resize/',basename(y),
                               ' -fill black -undercolor white -gravity NorthWest -pointsize 27 -annotate +360+240 \'',
                               'Granule cell layer',
                               '\'',
-                              ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+                              ' analysis/04.ISHValidation/',x,'_resize/',basename(y)))
             }
             if(grepl(pattern = 'Pcp2',y)){
                 system(paste0("convert ",
-                              'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                              'analysis/04.ISHValidation/',x,'_resize/',basename(y),
                               ' -fill black -undercolor white -gravity NorthWest -pointsize 27 -annotate +330+70 \'',
                               'Purkinje cell layer',
                               '\'',
-                              ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+                              ' analysis/04.ISHValidation/',x,'_resize/',basename(y)))
             }
         }
         # add borders
         system(paste0('convert ',
-                      'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                      'analysis/04.ISHValidation/',x,'_resize/',basename(y),
                       ' -background black -gravity Center -extent 700x510 ',
-                      ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+                      ' analysis/04.ISHValidation/',x,'_resize/',basename(y)))
         
         if(grepl(pattern = 'projection', y)){
             system(paste0('convert ',
-                          'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                          'analysis/04.ISHValidation/',x,'_resize/',basename(y),
                           ' -background black -gravity East -extent 705x510 ',
-                          ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+                          ' analysis/04.ISHValidation/',x,'_resize/',basename(y)))
             
         } else if(grepl(pattern = 'expression', y)){
             system(paste0('convert ',
-                          'analysis/05.ISHValidation/',x,'_resize/',basename(y),
+                          'analysis/04.ISHValidation/',x,'_resize/',basename(y),
                           ' -background black -gravity West -extent 705x510 ',
-                          ' analysis/05.ISHValidation/',x,'_resize/',basename(y)))
+                          ' analysis/04.ISHValidation/',x,'_resize/',basename(y)))
         }
         
     })
@@ -174,19 +174,19 @@ lapply(names(markers), function(x){
 
 # convert to png so compression will not cause problems later on
 # lapply(names(markers), function(x){
-#     dir.create(paste0('analysis//05.ISHValidation/',x,'_resize_png'))
-#     files = list.files(paste0('analysis//05.ISHValidation/',x,'_resize'), full.names=TRUE)
+#     dir.create(paste0('analysis//04.ISHValidation/',x,'_resize_png'))
+#     files = list.files(paste0('analysis//04.ISHValidation/',x,'_resize'), full.names=TRUE)
 #     files %>% lapply(function(y){
 #         system(paste0('convert ', y,' ',
-#                       'analysis/05.ISHValidation/',x,'_resize_png/',basename(y) %>% str_extract('.*?(?=[.])'),
+#                       'analysis/04.ISHValidation/',x,'_resize_png/',basename(y) %>% str_extract('.*?(?=[.])'),
 #                       '.png'))
 #     })
 # })
 
 
 lapply(names(markers), function(x){
-    dir.create(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'))
-    files = list.files(paste0('analysis//05.ISHValidation/',x,'_resize'), full.names=TRUE)
+    dir.create(paste0('analysis//04.ISHValidation/',x,'_doubleMerged'))
+    files = list.files(paste0('analysis//04.ISHValidation/',x,'_resize'), full.names=TRUE)
     projection = files[grepl('projection',files)]
     expression = files[grepl('expression',files)]
     
@@ -200,25 +200,27 @@ lapply(names(markers), function(x){
         
         system(paste0('convert ',
                       projection[i], ' ', expression[i], ' -quality 100 +append ',
-                      'analysis//05.ISHValidation/',x,'_doubleMerged/', basename(projection[i])
+                      'analysis//04.ISHValidation/',x,'_doubleMerged/', basename(projection[i])
         ))
     }
     
 })
 
 lapply(names(markers), function(x){
-    dir.create(paste0('analysis//05.ISHValidation/',x,'_singlePages'))
-    files = list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'), full.names=TRUE)
+    dir.create(paste0('analysis//04.ISHValidation/',x,'_singlePages'))
+    files = list.files(paste0('analysis//04.ISHValidation/',x,'_doubleMerged'), full.names=TRUE)
     known = grep('(Prox1)|(Pcp2)',files)
     knownFile = files[known]
-    files = c(knownFile,files[-known])
+    if(length(knownFile)>0){
+        files = c(knownFile,files[-known])
+    }
     iterate = seq(from=1,to=len(files),by=4)
     for(i in iterate){
         theseFiles = files[i:(i+3)] %>% trimNAs()
         system(paste0('convert ',
                       paste(theseFiles,collapse = ' '),
                       ' -quality 100 -append ',
-                      'analysis//05.ISHValidation/',x,'_singlePages/', formatC(i,width=2, flag="0"),'.png'))
+                      'analysis//04.ISHValidation/',x,'_singlePages/', formatC(i,width=2, flag="0"),'.png'))
     }
     
 })
@@ -226,7 +228,7 @@ lapply(names(markers), function(x){
 # lapply(names(markers),function(x){
 #     df = data.frame(Gene = markers[[x]])
 #     df$Status = df$Gene %>% sapply(function(y){
-#         grepl(y,list.files(paste0('analysis//05.ISHValidation/',x,'_doubleMerged'))) %>% any
+#         grepl(y,list.files(paste0('analysis//04.ISHValidation/',x,'_doubleMerged'))) %>% any
 #     }) %>% replaceElement(labels = c(TRUE,FALSE),dictionary = c('','not in ABA')) %$% newVector
-#     write.design(df,file = paste0('analysis//05.ISHValidation/',x,'.tsv'))
+#     write.design(df,file = paste0('analysis//04.ISHValidation/',x,'.tsv'))
 # })
