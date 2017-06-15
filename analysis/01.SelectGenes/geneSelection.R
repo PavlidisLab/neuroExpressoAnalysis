@@ -14,6 +14,7 @@ library(markerGeneProfile)
 library(jsonlite)
 library(stringi)
 library(bitops)
+library(XLConnect)
 #library(markerGenesManuscript)
 
 assertthat::are_equal('Vsir' %in% rn(TasicPrimaryMeanLog),TRUE)
@@ -582,6 +583,8 @@ if(end == 500){
         mouseMarkerGenes %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenes.json')
         mouseMarkerGenesPyramidalDeep %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenesPyraDeep.json')
         
+        system('rm analysis/01.SelectGenes/markerGenes.xls')
+        
         sheet = loadWorkbook('analysis/01.SelectGenes/markerGenes.xls', create = TRUE)
         
         dir.create('analysis/01.SelectGenes/markerGeneTSVs')
@@ -593,6 +596,8 @@ if(end == 500){
             writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
         })
         saveWorkbook(sheet)
+        
+        system('rm analysis/01.SelectGenes/markerGenesPyraDeep.xls')
         
         sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
         dir.create('analysis/01.SelectGenes/markerGeneTSVsPyraDeep')
@@ -618,11 +623,11 @@ if(end == 500){
         saveWorkbook(sheet)
         
         # create archive
-        file.remove('analysis/01.SelectGenes/markerGenes.rar')
-        file.remove('analysis/01.SelectGenes/markerGenesPyraDeep.rar')
-        
-        system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
-        system('rar -ep1 a analysis/01.SelectGenes/markerGenesPyraDeep.rar analysis/01.SelectGenes/Markers_Final/PyramidalDeep/*')
-        
+        # file.remove('analysis/01.SelectGenes/markerGenes.rar')
+        # file.remove('analysis/01.SelectGenes/markerGenesPyraDeep.rar')
+        # 
+        # system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
+        # system('rar -ep1 a analysis/01.SelectGenes/markerGenesPyraDeep.rar analysis/01.SelectGenes/Markers_Final/PyramidalDeep/*')
+        # 
     }
 }
