@@ -52,13 +52,35 @@ estimations = lapply(1:len(expDats),function(i){
                                removeMinority = T,
                                PC = 1)
     
-    pVals = estimations$estimates %>% sapply(function(x){
+    wilcoxResults = estimations$estimates %>% sapply(function(x){
+        x %<>% scale01
         grp = unique(groups[[i]])
-        p = wilcox.test(x[groups[[i]] %in% grp[1]],x[groups[[i]] %in% grp[2]])$p.value
-    })
-    return(list(estimations = estimations,pVals = pVals))
+        test = wilcox.test(x[groups[[i]] %in% grp[1]],x[groups[[i]] %in% grp[2]])
+        p = test$p.value
+        w = unname(test$statistic)
+        
+        controlMean = x[groups[[i]] %in% 'control'] %>% mean
+        controlSD = x[groups[[i]] %in% 'control'] %>% sd
+        nControl = sum(groups[[i]] %in% 'control')
+        groupMean =  x[groups[[i]] %in% grp[!grp %in% 'control']] %>% mean
+        groupSD =  x[groups[[i]] %in% grp[!grp %in% 'control']] %>% sd
+        nGroup = sum(groups[[i]] %in% grp[!grp %in% 'control'])
+        
+        return(c(p = p, w=w , controlMean = controlMean, controlSD = controlSD,nControl=nControl,groupMean = groupMean,nGroup= nGroup, groupSD = groupSD))
+        # p = wilcox.test(x[groups[[i]] %in% grp[1]],x[groups[[i]] %in% grp[2]])$p.value
+    }) %>% t
+    
+    pVals = wilcoxResults[,'p']
+    return(list(estimations = estimations,pVals = pVals,wilcoxResults = wilcoxResults))
 })
 names(estimations) = names(expDats)
+
+statsTable = estimations %>% sapply(function(x){
+    x$wilcoxResults['Dopaminergic',]
+}) %>% t %>% round(digits = 3)
+
+write.table(statsTable, file =  'analysis//03.MarkerGeneProfiles/tables/parkinson.tsv',quote =FALSE,sep = '\t')
+
 # dopaminergic gene counts
 plotNames = sapply(1:len(estimations), function(i){
     geneCount = estimations[[i]]$estimations$rotations$Dopaminergic %>% nrow
@@ -105,7 +127,7 @@ pEstimate = masterFrame %>%  ggplot(aes( y = estimate, x = parkinsons)) +
     ylab('Dopaminergic MGP estimation')
 
 ggsave(plot=pEstimate,
-       filename='analysis//04.MarkerGeneProfiles/publishPlot/dopaminergicEstimation.png',width=7,height=4.5,units='in')
+       filename='analysis//03.MarkerGeneProfiles/publishPlot/dopaminergicEstimation.png',width=7,height=4.5,units='in')
 
 
 # paper gene correlations -------------------
@@ -140,7 +162,7 @@ corPlotFrames = lapply(1:len(expDats),function(i){
                              geneColName='Gene.Symbol',
                              outlierSampleRemove=F,
                              groups=groups[[i]],
-                             removeMinority = F,
+                             removeMinority = T,
                              PC = 1)$estimates$Dopaminergic %>% scale01
     
     list[,paperGeneExp] = expDats[[i]][expDats[[i]]$Gene.Symbol %in% paperGenes,] %>% sepExpr
@@ -201,7 +223,7 @@ genePCestimationPlot = masterCorPlot %>% ggplot(aes(x =estimation , y = paperGen
               hjust= 1,
               size = 5)
 
-ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/genePCestimation.png',
+ggsave(filename = 'analysis//03.MarkerGeneProfiles/publishPlot/genePCestimation.png',
        plot= genePCestimationPlot,
        width=8.5,height=4.3,units='in')
 
@@ -243,7 +265,7 @@ geneAllestimation = allGeneCors %>% ggplot(aes(x = gene, y = Correlation, color 
     ylab('Dopaminergic MGP-\nGene expression correlation') + 
     theme(axis.text.x  = element_text(angle= 90,vjust = 0.5, size = 13))
 
-ggsave(filename = 'analysis//04.MarkerGeneProfiles/publishPlot/geneAllestimation.png',
+ggsave(filename = 'analysis//03.MarkerGeneProfiles/publishPlot/geneAllestimation.png',
        plot= geneAllestimation,
        width=13,height=4.3,units='in')
 

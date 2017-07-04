@@ -26,13 +26,31 @@ meanFrame = frame %>% group_by(groups) %>% summarise(mean(oligoEstim)) %>%
     mutate(x1 = as.numeric(groups)-0.3, x2 = as.numeric(groups) +0.3)
 
 
-pValues = sapply(c('Schizophrenia',
+wilcoxResults = sapply(c('Schizophrenia',
                    'Bipolar',
                    'Depression'), function(x){
                        a1 = frame$oligoEstim[frame$groups %in% 'Control']
                        a2 = frame$oligoEstim[frame$groups %in% x]
-                       wilcox.test(a1,a2)$p.value
-                   })
+                       test = wilcox.test(a1,a2)
+                       pValue = test$p.value
+                       
+                       W = unname(test$statistic)
+                       
+                       meanControl = mean(a1)
+                       meanGroup = mean(a2)
+                       
+                       sdControl = sd(a1)
+                       sdGroup = sd(a2)
+                       return(c(pValue = pValue,W = W ,meanControl = meanControl, meanGroup = meanGroup,sdControl = sdControl, sdGroup = sdGroup ))
+                   }) %>% t
+
+
+pValues = wilcoxResults[,'pValue']
+
+wilcoxResults %<>% round(digits = 3)
+
+dir.create('analysis//03.MarkerGeneProfiles/tables', showWarnings=FALSE)
+write.table(wilcoxResults, file =  'analysis//03.MarkerGeneProfiles/tables/stanleyCCounts.tsv',quote =FALSE,sep = '\t')
 
 marks = pValues %>% signifMarker
 
@@ -56,9 +74,9 @@ p = frame %>% ggplot(aes(x = groups, y = oligoEstim, shape = groups)) +theme_cow
     scale_shape_manual(values = c(18, 2, 1, 0)) + 
     coord_cartesian(ylim = c(-0.03, 1.10))  + xlab('') + ylab('MGP estimation')
 
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.png',p,width=4.5,height=5,units='in')
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.svg',p,width=4.5,height=5,units='in')
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyC.pdf',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/stanleyC.png',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/stanleyC.svg',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/stanleyC.pdf',p,width=4.5,height=5,units='in')
 
 data = read.csv('data-raw/PlotExtract/plot.csv',header = F)
 data %<>% filter(!V1<0.5) %>%
@@ -69,6 +87,26 @@ groupDictionary =  c('Control','Schizophrenia','Bipolar','Depression')
 names(groupDictionary) = data$groups %>% unique
 
 data %<>% mutate(groups = replaceElement(groups,groupDictionary)$newVect %>% factor(levels =  c('Control','Schizophrenia','Bipolar','Depression')))
+
+# wilcoxResults = sapply(c('Schizophrenia',
+#                          'Bipolar',
+#                          'Depression'), function(x){
+#                              a1 = data$V2[frame$groups %in% 'Control']
+#                              a2 = data$V2[frame$groups %in% x]
+#                              test = t.test(a1,a2)
+#                              pValue = test$p.value
+#                              
+#                              W = unname(test$statistic)
+#                              
+#                              meanControl = mean(a1)
+#                              meanGroup = mean(a2)
+#                              
+#                              sdControl = sd(a1)
+#                              sdGroup = sd(a2)
+#                              return(c(pValue = pValue,W = W ,meanControl = meanControl, meanGroup = meanGroup,sdControl = sdControl, sdGroup = sdGroup ))
+#                          }) %>% t
+# write.table(wilcoxResults, file =  'analysis//03.MarkerGeneProfiles/tables/stanleyCCounts.tsv',quote =FALSE,sep = '\t')
+
 meanFrame = 
     data  %>% group_by(groups) %>% summarise(mean(V2)) %>% 
     mutate(x1 = as.numeric(groups)-0.3, x2 = as.numeric(groups) +0.3)
@@ -93,7 +131,7 @@ p = data %>% ggplot(aes(x = groups, y = V2, shape = groups)) +theme_cowplot(17) 
     scale_shape_manual(values = c(18, 2, 1, 0)) + 
     #coord_cartesian(ylim = c(-0.03, 1.10))  + 
     xlab('') + ylab(bquote('No of Oligodendroglial cells / 0.001 mm'^3))
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.png',p,width=4.5,height=5,units='in')
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.svg',p,width=4.5,height=5,units='in')
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/stanleyCCounts.pdf',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/stanleyCCounts.png',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/stanleyCCounts.svg',p,width=4.5,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/stanleyCCounts.pdf',p,width=4.5,height=5,units='in')
 

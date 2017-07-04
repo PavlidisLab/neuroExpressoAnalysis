@@ -46,7 +46,7 @@ cortex_whiteEstimate$rotations = cortex_whiteEstimate$rotations[(cortex_whiteEst
 # as long as outlier samples are not removed all cortex_whiteEstimate$groups will be the same
 frame = data.frame(melt(cortex_whiteEstimate$estimates %>% lapply(scale01)), cortex_whiteEstimate$groups[[1]]) 
 names(frame) = c('estimation','cellType','brainRegions')
-
+frame$GSM = cortex_whiteEstimate$estimates[[1]] %>% names
 frame$cellType  %<>% replaceElement(c('Oligodendrocyte precursors' = 'Olig. precursors' )) %$% newVector
 
 # get gene counts used in the estimation. rotations list hass rotations of the genes in the PCs. Use it to see
@@ -76,11 +76,39 @@ frame %<>% mutate(cellType = cellType %>%
 
 frame = frame %>% group_by(cellType)
 maxY = frame %>% summarise(max(estimation))
-ps= by(frame, frame$cellType, function(x){
+wilcoxResults = by(frame, frame$cellType, function(x){
     a1 = x %>% filter(brainRegions == 'frontal cortex') %>% ungroup %>% select(estimation) %>% unlist
     a2 = x %>% filter(brainRegions == 'white matter') %>% ungroup %>%  select(estimation) %>% unlist
-    wilcox.test(a1,a2)$p.value
+    test = wilcox.test(a1,a2)
+    
+    meanFrontal = mean(a1)
+    meanWhite = mean(a2)
+    
+    sdFrontal = sd(a1)
+    sdWhite = sd(a2)
+    
+    p = test$p.value
+    W = unname(test$statistic)
+    return(c(p=p,W=W,meanFrontal = meanFrontal,meanWhite = meanWhite, sdFrontal = sdFrontal, sdWhite = sdWhite))
 })
+
+ps = wilcoxResults %>% purrr::map_dbl('p')
+Ws = wilcoxResults %>% purrr::map_dbl('W')
+
+statTable = data.frame('group' = names(wilcoxResults) %>% str_replace('\n.*',''),
+                       'Frontal Cortex Mean' = wilcoxResults %>% purrr::map_dbl('meanFrontal'),
+                       'Frontal Cortex SD' = wilcoxResults %>% purrr::map_dbl('sdFrontal'),
+                       'White Matter Mean' = wilcoxResults %>% purrr::map_dbl('meanWhite'),
+                       'White Matter SD' = wilcoxResults %>% purrr::map_dbl('sdWhite'),
+                       'W' =  wilcoxResults %>% purrr::map_dbl('W'),
+                       'p value' = wilcoxResults %>% purrr::map_dbl('p'),
+                       'adjusted p value'= wilcoxResults %>% purrr::map_dbl('p') %>% p.adjust(method= 'fdr'))
+
+statTable[-1] %<>% round(digits = 3)
+
+dir.create('analysis//03.MarkerGeneProfiles/tables', showWarnings=FALSE)
+
+write.design(statTable,file = 'analysis//03.MarkerGeneProfiles/tables/cortex_WhiteMatterEstimations.tsv')
 
 ps = p.adjust(ps,method='fdr')
 markers = ogbox::signifMarker(ps)
@@ -104,9 +132,9 @@ p  = frame %>%
     geom_text(data=signifFrame , aes(x = x, y=y, label = markers),size=10) + 
     coord_cartesian(ylim = c(-0.03, 1.10))  + xlab('') + ylab('MGP estimation')
 
-dir.create('analysis//04.MarkerGeneProfiles/publishPlot', showWarnings=FALSE)
+dir.create('analysis//03.MarkerGeneProfiles/publishPlot', showWarnings=FALSE)
 
-ggsave(filename='analysis//04.MarkerGeneProfiles/publishPlot/cortex_WhiteMatterEstimations.png',p,width=11.31,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/cortex_WhiteMatterEstimations.png',p,width=11.31,height=5,units='in')
 
 
 
