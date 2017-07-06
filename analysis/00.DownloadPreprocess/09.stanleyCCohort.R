@@ -3,6 +3,7 @@ library(ogbox)
 library(affy)
 library(dplyr)
 library(magrittr)
+library(XLConnect)
 # download stanley C cohort data
 
 downloadData = FALSE
@@ -63,3 +64,36 @@ devtools::use_data(StanleyCMeta,overwrite=TRUE)
 
 
 #StanleyCExp['KDM5D',] %>% unlist %>% plot(col= StanleyCMeta$Sex %>% toColor %$% cols)
+
+# Uranova analysis data-------------------
+download.file('http://sncid.stanleyresearch.org/RawData/1999_03%20URANOVA.zip',destfile = 'data-raw/StanleyC/UranovaRawData.zip')
+unzip('data-raw/StanleyC/UranovaRawData.zip',exdir = 'data-raw/StanleyC/')
+rawUranova = loadWorkbook('data-raw/StanleyC/1999_03 URANOVA.xls')
+rawUranova = readWorksheet(rawUranova, sheet = 'data', header = FALSE)
+rawUranova = rawUranova[-(1:5),]
+
+rawUranova %<>% filter(Col1 %in% c("Code", "Area 9", "Layer VI"))
+rawUranova$Col1 <- as.character(rawUranova$Col1)
+rawUranova$Col1[seq(4, 40, 4)] <- "WM"
+rawUranova$Col1[seq(3, 39, 4)] <- "GMse"
+rawUranova$Col1[seq(2, 38, 4)] <- "GM"
+
+rawUranova <- data.frame(StanleyID = rawUranova %>% filter(Col1 == "Code") %>% 
+                             select(-Col1, -Col2) %>% as.list() %>%
+                             unlist %>% 
+                             as.character(),
+                      GM = rawUranova %>% filter(Col1 == "GM") %>%
+                          select(-Col1, -Col2) %>% 
+                          as.list() %>% 
+                          unlist %>% 
+                          as.character %>%
+                          as.numeric(),
+                      GMse = rawUranova %>% filter(Col1 == "GMse") %>% 
+                          select(-Col1, -Col2) %>%
+                          as.list() %>%
+                          unlist %>%
+                          as.character %>% 
+                          as.numeric(),
+                      WM = rawUranova %>% filter(Col1 == "WM") %>% select(-Col1, -Col2) %>% as.list() %>% unlist %>% as.character %>% as.numeric())
+
+use_data(rawUranova,overwrite = TRUE)
