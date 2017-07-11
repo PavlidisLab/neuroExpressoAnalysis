@@ -29,7 +29,8 @@ write.csv(annotated, paste0('data-raw/wholeBloodDatasets/','lymphoma.csv'), row.
 devtools::use_data(LYMPHexpr, overwrite=TRUE)
 
 # pbmc dataset ---------------
-PBMCs = read.table(textConnection(getURL('http://cibersort.stanford.edu/inc/inc.download.page.handler.php?file=PBMCs-Fig3a-HumanHT-12-V4.txt')),sep='\t',header=T)
+data = httr::GET('https://cibersort.stanford.edu/inc/inc.download.page.handler.php?file=PBMCs-Fig3a-HumanHT-12-V4.txt') %>% httr::content('text')
+PBMCs = read.table(textConnection(data),sep='\t',header=T)
 write.table(PBMCs, 'data-raw/wholeBloodDatasets/PBMCs.csv', sep=',', quote=FALSE, row.names=F)
 PBMCexpr = PBMCs
 devtools::use_data(PBMCexpr, overwrite=TRUE)

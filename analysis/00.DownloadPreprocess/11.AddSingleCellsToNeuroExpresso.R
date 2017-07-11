@@ -145,9 +145,11 @@ n_expressoSamplesWithRNAseq2 = rbind(n_expressoSamples2, meltedSingleCells)
 write.design(n_expressoSamplesWithRNAseq2,'data-raw/Mouse_Cell_Type_Data/n_expressoSamplesWithRNAseq2.tsv')
 
 
-n_expressoExprWithRNAseq2 = cbind(n_expressoExpr2[n_expressoExpr2$Gene.Symbol %in% rn(TasicPrimaryMeanComparable),],
-                                 TasicPrimaryMeanComparable[match(n_expressoExpr2$Gene.Symbol[n_expressoExpr2$Gene.Symbol %in% rn(TasicPrimaryMeanComparable)],
-                                                                  rn(TasicPrimaryMeanComparable)),])
+# n_expressoExprWithRNAseq2 = cbind(n_expressoExpr2[n_expressoExpr2$Gene.Symbol %in% rn(TasicPrimaryMeanComparable),],
+#                                  TasicPrimaryMeanComparable[match(n_expressoExpr2$Gene.Symbol[n_expressoExpr2$Gene.Symbol %in% rn(TasicPrimaryMeanComparable)],
+#                                                                   rn(TasicPrimaryMeanComparable)),])
+n_expressoExprWithRNAseq2 = cbind(n_expressoExpr2, TasicPrimaryMeanComparable[match(n_expressoExpr2$Gene.Symbol,
+                                                                                  rn(TasicPrimaryMeanComparable)),])
 write.csv(n_expressoExprWithRNAseq2,file = 'data-raw/Mouse_Cell_Type_Data/n_expressoExprWithRNAseq2.csv',row.names=FALSE )
 
 
