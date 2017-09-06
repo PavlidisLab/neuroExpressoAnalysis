@@ -17,8 +17,6 @@ library(bitops)
 library(XLConnect)
 #library(markerGenesManuscript)
 
-assertthat::are_equal('Vsir' %in% rn(TasicPrimaryMeanLog),TRUE)
-
 print('it starts')
 if(length(commandArgs(trailingOnly=TRUE))==0){
     start = 1
@@ -45,18 +43,6 @@ if (start == 1){
     # output of this will not be robust to outliers. These genes are not used in the study
     # and are not readily available in the package
     if(singleCell){
-        # markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
-        #                  expression = cbind(gene,exp[cortexSamples]),
-        #                  outLoc = 'analysis//01.SelectGenes/QuickSingleCell',
-        #                  groupNames = c('PyramidalDeep',
-        #                                 'PyramidalDeepNoNewPyramidal',
-        #                                 'PyramidalDeepNoSingleCellUnlessYouHaveTo',
-        #                                 'PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals'),
-        #                  #groupNames = 'DopaSelect',
-        #                  #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
-        #                  regionNames = NULL,
-        #                  cores=16,
-        #                  regionHierarchy= NULL)
         ptm <- proc.time()
         
         markerCandidates(design = meltedSingleCells,foldChangeThresh = 10,minimumExpression = 2.5, background = 0.1,
@@ -116,8 +102,6 @@ if(firstChip){
                          expression = n_expressoExpr,
                          outLoc = paste0('analysis//01.SelectGenes/Rotation/',i),
                          groupNames = c('PyramidalDeep','CellTypes'),
-                         #groupNames = 'DopaSelect',
-                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          rotate=0.33,
                          regionHierarchy = regionHierarchy,
@@ -135,26 +119,11 @@ if(singleCell){
         file.create('analysis//01.SelectGenes/RotationJustSingleCell/progress')
     }
     for(i in start:end){
-        # markerCandidates(design = n_expressoSamplesWithRNAseq[n_expressoSamplesWithRNAseq$sampleName %in% cortexSamples,],
-        #                  expression = cbind(gene,exp[cortexSamples]),
-        #                  outLoc = paste0('analysis//01.SelectGenes/RotationSingleCell/',i),
-        #                  groupNames = c('PyramidalDeep',
-        #                                 'PyramidalDeepNoNewPyramidal',
-        #                                 'PyramidalDeepNoSingleCellUnlessYouHaveTo',
-        #                                 'PyramidalDeepNoSingleCellUnlessYouHaveToAndNoNewPyramidals'),
-        #                  #groupNames = 'DopaSelect',
-        #                  #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
-        #                  regionNames = NULL,
-        #                  cores=16,
-        #                  rotate=0.33,
-        #                  regionHierarchy= NULL)
         ptm <- proc.time()
         markerCandidates(design = meltedSingleCells,foldChangeThresh = 10, minimumExpression = 2.5, background = 0.1,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
                          outLoc = paste0('analysis//01.SelectGenes/RotationJustSingleCell/',i),
                          groupNames = c('PyramidalDeep','CellTypes'),
-                         #groupNames = 'DopaSelect',
-                         #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = NULL,
                          cores=15,
                          rotate = 0.33,
@@ -244,7 +213,7 @@ if(end == 500){
                      cores = 15, foldChange = 1)
     }
     
-    # final folder creation -------------------------------
+    # rotsel folder creation -------------------------------
     
     if(firstChip){
         allGenes = list(genes1 = pickMarkersAll('analysis/01.SelectGenes/RotSel/'))
