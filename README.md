@@ -25,6 +25,8 @@ source("https://bioconductor.org/biocLite.R")
 biocLite("affy")
 biocLite("preprocessCore")
 biocLite("limma")
+biocLite("oligo")
+biocLite("sva")
 ```
 
 The easiest way to repeat the analysis is to clone the library and running the analysis scripts from the root directory. From the root directory `devtools::load_all()` will make the functions and data available but is relatively slow. `devtools::install()` followed by `library(neuroExpressoAnalysis)` will allow faster access to the functions and data.
