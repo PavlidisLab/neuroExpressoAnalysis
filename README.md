@@ -5,22 +5,22 @@ B. Ogan Mancarci, Lilah Toker, Shreejoy Tripathy, Brenna Li, Brad Rocco, Etienne
 
 This repository includes the code used for the NeuroExpresso paper. Installation and use requires devtools which can be acquired by doing
 
-```
-install.packages(devtools)
+```r
+install.packages('devtools')
 
 ```
 
 The package itself depends on several personal libraries. Install them by
-```
-devtools::install_github(oganm/ogbox)
-devtools::install_github(oganm/homologene)
-devtools::install_github(oganm/geneSynonym)
-devtools::install_github(oganm/allenISH)
-devtools::install_github(oganm/markerGeneProfile)
+```r
+devtools::install_github('oganm/ogbox')
+devtools::install_github('oganm/homologene')
+devtools::install_github('oganm/geneSynonym')
+devtools::install_github('oganm/allenBrain')
+devtools::install_github('oganm/markerGeneProfile')
 ```
 
 There are also bioconductor packages in the dependency list that can be acquired by
-```
+```r
 source("https://bioconductor.org/biocLite.R")
 biocLite("affy")
 biocLite("preprocessCore")
