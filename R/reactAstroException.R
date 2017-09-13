@@ -7,7 +7,8 @@ reactAstroException = function(restDir=NULL, genelist = NULL, cores = 1){
             print(paste('set core no to',cores))
         }
     }
-    registerDoMC(cores)
+    cl<-parallel::makeCluster(cores)
+    doSNOW::registerDoSNOW(cl)
     
     reactAstro = ischemiaGenes
     if (!is.null(restDir)){

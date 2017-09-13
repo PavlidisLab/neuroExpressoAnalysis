@@ -7,7 +7,8 @@ microglialException = function(restDir=NULL, genelist = NULL, cores = 1){
             print(paste('set core no to',cores))
         }
     }
-    registerDoMC(cores)
+    cl<-parallel::makeCluster(cores)
+    doSNOW::registerDoSNOW(cl)
     # genes effected by old age and LPS stimulation
     
     effectedGenes = read.table('data-raw/GOAD/LPS-STIMULATED MICROGLIA (4HR) vs. CONTROL MICROGLIA.tsv',

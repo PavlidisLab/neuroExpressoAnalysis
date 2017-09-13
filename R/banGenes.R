@@ -7,7 +7,8 @@ banGenes = function(restDir=NULL, genelist = NULL, bannedGenes, regex = NULL,  c
             print(paste('set core no to',cores))
         }
     }
-    registerDoMC(cores)
+    cl<-parallel::makeCluster(cores)
+    doSNOW::registerDoSNOW(cl)
         
     if (!is.null(restDir)){
         fileNames = list.files(restDir, recursive =T )

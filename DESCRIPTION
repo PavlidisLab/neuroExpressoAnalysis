@@ -2,10 +2,11 @@ Package: neuroExpressoAnalysis
 Type: Package
 Title: Marker genes of brain cell types and their use in analysis of whole
     tissue data
-Version: 1.0
+Version: 1.1
 Depends:
     R (>= 3.1.2),
     ogbox (>= 1.0),
+    allenBrain,
     homologene (>= 1.0),
     geneSynonym (>= 1.0),
     markerGeneProfile,
@@ -15,7 +16,6 @@ Depends:
     ggplot2 (>= 2.1.0),
     devtools (>= 1.11.0),
     foreach (>= 1.4.3),
-    doMC (>= 1.3.4),
     parallel (>= 3.1.2),
     cluster (>= 2.0.4),
     magrittr (>= 1.5),
@@ -37,7 +37,13 @@ Depends:
     stringi (>= 1.1.2),
     oligo (>= 1.38.0),
     sva (>= 3.22.0),
-    glue
+    XLConnect,
+    glue,
+    pheatmap (>= 1.0.9),
+    VennDiagram,
+    forcats,
+    magick,
+    doSNOW
 Imports:
     ogbox (>= 1.0)
 Suggests:
@@ -51,5 +57,5 @@ Maintainer: Ogan Mancarci <ogan.mancarci@gmail.com>
 Description: Bah
 License: GPL-2
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
