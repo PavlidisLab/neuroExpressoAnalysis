@@ -17,6 +17,7 @@ devtools::install_github('oganm/homologene')
 devtools::install_github('oganm/geneSynonym')
 devtools::install_github('oganm/allenBrain')
 devtools::install_github('oganm/markerGeneProfile')
+devtools::install_github('raivokolde/pheatmap')
 ```
 
 There are also bioconductor packages in the dependency list that can be acquired by
