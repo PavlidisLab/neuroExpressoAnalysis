@@ -34,4 +34,3 @@ type 'double'}
 Calculates rotations based on each group
 Calculates rotations based on each group
 }
-

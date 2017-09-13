@@ -20,4 +20,3 @@ into an \link[Biobase]{ExpressionSet} object. It subsets the probes with the sam
 identifiers and discards any probes that are not shared between the two chips.
 Intended use is merging data from chips and their later versions.
 }
-

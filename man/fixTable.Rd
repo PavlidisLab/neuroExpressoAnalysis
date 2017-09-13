@@ -9,4 +9,3 @@ fixTable(x)
 \description{
 Quick fix for ugly data tables
 }
-

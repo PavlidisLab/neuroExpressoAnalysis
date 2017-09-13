@@ -13,4 +13,3 @@ same cell type can be referred to multiple times under different names.
 \description{
 Return default colors for the cell types
 }
-

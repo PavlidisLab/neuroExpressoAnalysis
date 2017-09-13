@@ -2,9 +2,10 @@
 % Please edit documentation in R/list.R
 \docType{import}
 \name{reexports}
-\alias{list}
 \alias{reexports}
+\alias{list}
 \title{Objects exported from other packages}
+\keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
@@ -12,5 +13,4 @@ below to see their documentation.
 \describe{
   \item{ogbox}{\code{\link[ogbox]{list}}}
 }}
-\keyword{internal}
 

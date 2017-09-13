@@ -36,4 +36,3 @@ included in the package and cel files pointed in the file to create the RMA norm
  expression matrix. The products of this function are already loaded with the package. 
 Use only for replication or upon editing cellTypeStudies.tsv for personal use.
 }
-
