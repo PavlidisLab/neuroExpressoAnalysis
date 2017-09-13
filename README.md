@@ -17,6 +17,11 @@ devtools::install_github('oganm/homologene')
 devtools::install_github('oganm/geneSynonym')
 devtools::install_github('oganm/allenBrain')
 devtools::install_github('oganm/markerGeneProfile')
+```
+
+You also need the development version of `pheatmap`
+
+```r
 devtools::install_github('raivokolde/pheatmap')
 ```
 
