@@ -25,11 +25,35 @@ StanleyCMeta = readHTMLTable('data-raw/StanleyC/metadata.html')[[2]]
 
 system('wget --user OganM --password rMa3JbF4 https://www.stanleygenomics.org/stanley/standard/studyQC.jsp?study_id=2 -O data-raw/StanleyC/qc.html')
 StanleyCQC = readHTMLTable('data-raw/StanleyC/qc.html')[[1]]
+StanleyCQC %<>% filter(Outlier != 1)
+StanleyCMeta = StanleyCMeta[StanleyCMeta$Filename %in% StanleyCQC$Filename,]
 
 cels= celFiles('data-raw/StanleyC/cels/',full.names=TRUE)
+
+cels = cels[grepl(regexMerge(StanleyCMeta$Filename),cels)]
+cels = cels[match(StanleyCMeta$Filename, basename(gsub('\\s.*$','',cels)))]
+batches = cels%>% sapply(celfileDate) 
+
+cels = cels[!batches %in% names(which(table(batches)==1))]
+StanleyCMeta = StanleyCMeta[!batches %in% names(which(table(batches)==1)),]
+batches = batches[!batches %in% names(which(table(batches)==1))]
+
 affy = ReadAffy(filenames = cels)
 affy = affy::rma(affy)
 affy = gemmaAnnot(affy, 'data-raw/GemmaAnnots/GPL96')
+
+# remove samples of wrong sex
+genders = bioGender(affy)
+cels = cels[genders == StanleyCMeta$Sex]
+batches = batches[genders== StanleyCMeta$Sex]
+StanleyCMeta = StanleyCMeta[genders == StanleyCMeta$Sex,]
+
+# batch correction is not possible due to covariate=batch confound
+# list[gene,exp] = affy %>% sepExpr()
+data.frame(batches,StanleyCMeta$Profile) %>% table
+# exp = ComBat(exp,batch =batches,mod = model.matrix(~Profile,StanleyCMeta))
+# affy = cbind(gene,exp)
+
 
 list[gene,exp] = sepExpr(affy)
 
@@ -49,13 +73,7 @@ StanleyCExp = StanleyCExp[match(StanleyCMeta$Filename, cn(StanleyCExp))]
 patients = StanleyCMeta$`Stanley ID` %>% unique
 
 
-StanleyCExp = StanleyCExp[,cn(StanleyCExp) %in% StanleyCQC$Filename]
-StanleyCMeta %<>% filter(Filename %in% StanleyCQC$Filename)
 
-
-
-StanleyCExp = StanleyCExp[!cn(StanleyCExp) %in%  (StanleyCQC %>% filter(Outlier == 1) %$% Filename)]
-StanleyCMeta = StanleyCMeta[!StanleyCMeta$Filename %in% (StanleyCQC %>% filter(Outlier == 1) %$% Filename),]  
 
 devtools::use_data(StanleyCExp,overwrite=TRUE)
 devtools::use_data(StanleyCMeta,overwrite=TRUE)
@@ -82,18 +100,18 @@ rawUranova <- data.frame(StanleyID = rawUranova %>% filter(Col1 == "Code") %>%
                              select(-Col1, -Col2) %>% as.list() %>%
                              unlist %>% 
                              as.character(),
-                      GM = rawUranova %>% filter(Col1 == "GM") %>%
-                          select(-Col1, -Col2) %>% 
-                          as.list() %>% 
-                          unlist %>% 
-                          as.character %>%
-                          as.numeric(),
-                      GMse = rawUranova %>% filter(Col1 == "GMse") %>% 
-                          select(-Col1, -Col2) %>%
-                          as.list() %>%
-                          unlist %>%
-                          as.character %>% 
-                          as.numeric(),
-                      WM = rawUranova %>% filter(Col1 == "WM") %>% select(-Col1, -Col2) %>% as.list() %>% unlist %>% as.character %>% as.numeric())
+                         GM = rawUranova %>% filter(Col1 == "GM") %>%
+                             select(-Col1, -Col2) %>% 
+                             as.list() %>% 
+                             unlist %>% 
+                             as.character %>%
+                             as.numeric(),
+                         GMse = rawUranova %>% filter(Col1 == "GMse") %>% 
+                             select(-Col1, -Col2) %>%
+                             as.list() %>%
+                             unlist %>%
+                             as.character %>% 
+                             as.numeric(),
+                         WM = rawUranova %>% filter(Col1 == "WM") %>% select(-Col1, -Col2) %>% as.list() %>% unlist %>% as.character %>% as.numeric())
 
 use_data(rawUranova,overwrite = TRUE)

@@ -38,13 +38,20 @@ softData %<>% mutate(parkinson = grepl('PD',title)) %>%
 
 
 write.design(softData,'data-raw/LesnickParkinsons/GSE7621_parkinsonsMeta.tsv')
-
+softData = read.design('data-raw/LesnickParkinsons/GSE7621_parkinsonsMeta.tsv')
 cels = paste0('data-raw/cel/GPL570/', softData$GSM, '.cel')
 
 affy = ReadAffy(filenames = cels)
 
 norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL570')
+# save(annotated,file = 'data/lesnickPreLowExpression.rda')
+
+# gender fix. nothing to fix here but leaving the code here just in case
+bioGen = bioGender(annotated) %>% replaceElement(c('M' = FALSE,'F' = TRUE)) %$% newVector
+annotated = annotated[,!cn(annotated) %in% (names(which(bioGen != softData$female))) ]
+softData = softData[bioGen == softData$female,]
+
 medExp = annotated %>% sepExpr %>% {.[[2]]} %>% unlist %>% median
 annotated = mostVariable(annotated,threshold = medExp, threshFun= median)
 write.csv(annotated, 'data-raw/LesnickParkinsons/GSE7621_parkinsonsExp.csv', row.names = F)
@@ -121,6 +128,13 @@ names(bExp) = bName
 bExp = bExp[, match(aName,bName)]
 allGenes = rbind(aGene,bGene)
 allExp = rbind(aExp,bExp)
+
+# nothing to fix here too
+bioGen = bioGender(cbind(allGenes,allExp))
+allExp = allExp[,!cn(allExp) %in% (names(which(bioGen != softData$Sex))) ]
+softData = softData[bioGen == softData$Sex,]
+
+
 medExp = allExp %>% unlist %>% median
 expTable = cbind(allGenes,allExp) %>% mostVariable(threshold=medExp,
                                                    threshFun=median)
@@ -144,8 +158,8 @@ if(downloadData){
     gseDown('GSE20295',outDir='data-raw/cel/GPL96/')
     softDown('GSE20295',file='data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
     system('gunzip data-raw/ZhangParkinsons/GSE20295_family.soft.gz')
-    
 }
+
 if(downloadGemma){
     ogbox::getGemmaAnnot('GPL570','data-raw/GemmaAnnots/GPL96',annotType='noParents', overwrite=TRUE)
 }
@@ -166,9 +180,9 @@ names(softData) = c('Age',
                     'title')
 
 softData$patient = str_extract(softData$title, '^(T|[0-9]).*?(?= )')
-softData$scanDate = sapply(softData$GSM, function(x){
-    celfileDate(paste0('data-raw/cel/GPL96/',x, '.cel')) %>% as.Date()
-})
+softData$scanDate = lapply(softData$GSM, function(x){
+    celfileDate(paste0('data-raw/cel/GPL96/',x, '.cel')) %>% as.Date(format = '%Y-%m-%d')
+}) %>% unlist
 cels = paste0('data-raw/cel/GPL96/', softData$GSM, '.cel')
 
 
@@ -179,6 +193,12 @@ annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL96')
 bioGender = bioGender(annotated)
 
 softData$bioGender = bioGender %>% replaceElement(c("M" ='male','F' = 'female')) %$% newVector
+
+annotated = annotated[cn(annotated) %>% str_extract('^.*?(?=\\.)') %>% 
+                          {!. %in% softData$GSM[softData$bioGender != softData$gender]}]
+
+softData = softData[softData$bioGender == softData$gender,]
+
 write.design(softData,'data-raw/ZhangParkinsons/GSE20295_parkinsonsMeta.tsv')
 
 
@@ -196,7 +216,6 @@ annotated =
     annotated[rowMedians > medExp,] %>%
     mostVariable(threshold=0)
 
-annotated = mostVariable(annotated,threshold = 0)
 write.csv(annotated, 'data-raw/ZhangParkinsons/GSE20295_parkinsonsExp.csv', row.names = F)
 
 
