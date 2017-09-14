@@ -14,7 +14,7 @@ cortex_white  = data.frame(Gene.Symbol = rownames(cortex_white), cortex_white)
 cortex_white =
     cortex_white[cortex_white %>% sepExpr %>% {.[[2]]} %>% apply(1,median) %>% {.>TrabzuniMedExp},]
 
-genes = neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenes$Cortex))]
+genes = neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex))]
 
 genes = genes[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(genes),perl = TRUE)]
 
