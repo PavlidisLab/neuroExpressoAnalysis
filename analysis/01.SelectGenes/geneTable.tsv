@@ -24,10 +24,12 @@ Spiny	39	74	Doyle et al., 2008 (GSE13379), Heiman et al 2014 (GSE55096), Maze et
 Amygdala
 Glutamatergic	3	10	Sugino et al., 2006 (GSE2882)
 Pyramidal Thy1 Amyg	3	21	Sugino et al., 2006 (GSE2882)
+Pyramidal	0	21	 ()
 Hippocampus
 DentateGranule	3	17	Perrone-Bizzozero NI et al. 2011 (GSE11147)
 GabaSSTReln	3	54	Sugino et al., 2006 (GSE2882)
 Pyramidal Thy1 Hipp	3	17	Sugino et al., 2006 (GSE2882)
+Pyramidal	0	17	 ()
 Subependymal
 Ependymal	2	50	Beckervordersandforth et al 2010 (GSE18765)
 Thalamus

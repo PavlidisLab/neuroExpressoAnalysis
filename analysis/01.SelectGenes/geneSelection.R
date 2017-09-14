@@ -383,12 +383,14 @@ if(end == 500){
     newGenes = len(trimMicroarray[[1]]) + len(trimRNASeq[[1]])
     cat(glue::glue('\nMicrglia together would have had {oldGenes} genes.\nMicroglia together has {oldGenes-newGenes} genes' ),file=log,append=TRUE)
     
-    typeSets = list.files('analysis/01.SelectGenes/Markers_Microarray/')
-
-    system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_Final')
-    #system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
     
     # merge single cell genes for cortex -----------
+    typeSets = list.files('analysis/01.SelectGenes/Markers_Microarray/')
+
+    dir.create('analysis/01.SelectGenes/Markers_Final')
+    system('cp -r analysis/01.SelectGenes/Markers_Microarray/* analysis/01.SelectGenes/Markers_Final')
+    #system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
+    
     if(firstChip & singleCell){
 
         for (x in typeSets){
@@ -477,6 +479,14 @@ if(end == 500){
         genes = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/PyramidalDeep/')
         genes2 = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/CellTypes//')
         
+        assertthat::are_equal(names(genes),names(genes2))
+       
+         mouseMarkerGenesCombined = lapply(1:length(genes),function(i){
+             out = c(genes[[i]],genes2[[i]]['Pyramidal'])
+             out = out[!(out %>% sapply(is.null))]
+         })
+        names(mouseMarkerGenesCombined) = names(genes)
+        
         # assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
         
         mouseMarkerGenes = genes2
@@ -485,17 +495,29 @@ if(end == 500){
         
         devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
         devtools::use_data(mouseMarkerGenesPyramidalDeep, overwrite=TRUE)
+        devtools::use_data(mouseMarkerGenesCombined, overwrite=TRUE)
         
-        toPlotGenes = mouseMarkerGenesPyramidalDeep %>% lapply(function(x){
+        # dir.create('analysis/01.SelectGenes/Markers_Final')
+        for(i in 1:length(mouseMarkerGenesCombined)){
+            dir.create(paste0('analysis/01.SelectGenes/Markers_Final/Combined/',names(mouseMarkerGenesCombined)[i]),showWarnings = FALSE,recursive = TRUE)
+            for(j in 1:length(mouseMarkerGenes[[i]])){
+                write.table(mouseMarkerGenes[[i]][[j]],
+                            paste0('analysis/01.SelectGenes/Markers_Final/Combined/',
+                                   names(mouseMarkerGenes)[i],'/',
+                                   names(mouseMarkerGenes[[i]][j])),
+                            row.names=F,
+                            quote=F,
+                            col.names=F)
+            }
+        }
+        
+        toPlotGenes = mouseMarkerGenesCombined %>% lapply(function(x){
             x = x[!grepl('Microglia_',names(x))]
             x %<>% lapply(function(y){
                 y[!grepl('[|]', y)]
             })
         })
         
-        toPlotGenes$Cortex$Pyramidal = mouseMarkerGenes$Cortex$Pyramidal %>% {
-            .[!grepl('[|]', .)]
-        }
             
         toPlotGenes %<>% lapply(function(x){
             x %<>%sapply(len)
@@ -549,54 +571,34 @@ if(end == 500){
         })
         
         # gene list in single files -------
-        mouseMarkerGenes %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenes.json')
-        mouseMarkerGenesPyramidalDeep %>% toJSON(pretty=TRUE) %>% writeLines('analysis/01.SelectGenes/markerGenesPyraDeep.json')
+        markerFiles = function(genes,outName){
+            genes %>% toJSON(pretty=TRUE) %>% writeLines(paste0('analysis/01.SelectGenes/markerGenes',outName,'.json'))
+            
+            system(paste0('rm analysis/01.SelectGenes/markerGenes',outName,'.xls'))
+            sheet = loadWorkbook(paste0('analysis/01.SelectGenes/markerGenes',outName,'.xls'), create = TRUE)
+            dir.create(paste0('analysis/01.SelectGenes/markerGeneTSVs',outName), showWarnings = FALSE)
+            1:len(genes) %>% sapply(function(i){
+                out = stri_list2matrix(genes[[i]]) %>% as.data.frame
+                names(out) = names(genes[[i]])
+                write.table(out,file = paste0('analysis/01.SelectGenes/markerGeneTSVs',outName,'/',names(genes[i])),na= '', sep = "\t", quote = F, row.names = F)
+                createSheet(sheet, name = names(genes[i]))
+                writeWorksheet(sheet, out, sheet =  names(genes[i]), startRow = 1, startCol = 1)
+            })
+            saveWorkbook(sheet)
+            
+        }
         
-        system('rm analysis/01.SelectGenes/markerGenes.xls')
-        
-        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenes.xls', create = TRUE)
-        
-        dir.create('analysis/01.SelectGenes/markerGeneTSVs')
-        1:len(mouseMarkerGenes) %>% sapply(function(i){
-            out = stri_list2matrix(mouseMarkerGenes[[i]]) %>% as.data.frame
-            names(out) = names(mouseMarkerGenes[[i]])
-            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVs',names(mouseMarkerGenes[i])),na= '', sep = "\t", quote = F, row.names = F)
-            createSheet(sheet, name = names(mouseMarkerGenes[i]))
-            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
-        })
-        saveWorkbook(sheet)
-        
-        system('rm analysis/01.SelectGenes/markerGenesPyraDeep.xls')
-        
-        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
-        dir.create('analysis/01.SelectGenes/markerGeneTSVsPyraDeep')
-        1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
-            out = stri_list2matrix(mouseMarkerGenesPyramidalDeep[[i]]) %>% as.data.frame
-            names(out) = names(mouseMarkerGenesPyramidalDeep[[i]])
-            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVsPyraDeep',names(mouseMarkerGenesPyramidalDeep[i])),na= '', sep = "\t", quote = F, row.names = F)
-            createSheet(sheet, name = names(mouseMarkerGenesPyramidalDeep[i]))
-            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenesPyramidalDeep[i]), startRow = 1, startCol = 1)
-        })
-        saveWorkbook(sheet)
-        
-        sheet = loadWorkbook('analysis/01.SelectGenes/markerGenesPyraDeep.xls', create = TRUE)
-        
-        dir.create('analysis/01.SelectGenes/markerGeneTSVPyraDeep')
-        1:len(mouseMarkerGenesPyramidalDeep) %>% sapply(function(i){
-            out = stri_list2matrix(mouseMarkerGenes[[i]]) %>% as.data.frame
-            names(out) = names(mouseMarkerGenes[[i]])
-            write.table(out,file = file.path('analysis/01.SelectGenes/markerGeneTSVs',names(mouseMarkerGenes[i])),na= '', sep = "\t", quote = F, row.names = F)
-            createSheet(sheet, name = names(mouseMarkerGenes[i]))
-            writeWorksheet(sheet, out, sheet =  names(mouseMarkerGenes[i]), startRow = 1, startCol = 1)
-        })
-        saveWorkbook(sheet)
+        markerFiles(mouseMarkerGenes,'')
+        markerFiles(mouseMarkerGenesPyramidalDeep,'PyraDeep')
+        markerFiles(mouseMarkerGenesCombined,'Combined')
         
         # create archive
-        # file.remove('analysis/01.SelectGenes/markerGenes.rar')
-        # file.remove('analysis/01.SelectGenes/markerGenesPyraDeep.rar')
-        # 
-        # system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes/*')
-        # system('rar -ep1 a analysis/01.SelectGenes/markerGenesPyraDeep.rar analysis/01.SelectGenes/Markers_Final/PyramidalDeep/*')
-        # 
+        file.remove('analysis/01.SelectGenes/markerGenes.rar')
+        file.remove('analysis/01.SelectGenes/markerGenesPyraDeep.rar')
+        file.remove('analysis/01.SelectGenes/markerGenesCombined.rar')
+        
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenes.rar analysis/01.SelectGenes/Markers_Final/CellTypes')
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenesPyraDeep.rar analysis/01.SelectGenes/Markers_Final/PyramidalDeep/*')
+        system('rar -ep1 a analysis/01.SelectGenes/markerGenesCombined.rar analysis/01.SelectGenes/Markers_Final/Combined/*')
     }
 }
