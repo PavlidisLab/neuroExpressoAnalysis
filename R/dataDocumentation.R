@@ -31,3 +31,7 @@
 
 'n_expressoSamples'
 
+#' Region hierarchy
+#' 
+#' This list holds region tree used in the study and neuroexpresso.org
+'regionHierarchy'

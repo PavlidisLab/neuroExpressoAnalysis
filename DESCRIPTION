@@ -43,7 +43,8 @@ Depends:
     VennDiagram,
     forcats,
     magick,
-    doSNOW
+    doSNOW,
+    jsonlite
 Imports:
     ogbox (>= 1.0)
 Suggests:
