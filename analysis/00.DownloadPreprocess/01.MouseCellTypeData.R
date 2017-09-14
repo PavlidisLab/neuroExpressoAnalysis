@@ -125,3 +125,19 @@ n_expressoSamples =  ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_express
 devtools::use_data(n_expressoExpr,overwrite=TRUE)
 devtools::use_data(n_expressoSamples,overwrite=TRUE)
 
+regionHierarchy = list(All = list(Cerebrum = 
+                                      list(Cortex = '',
+                                           BasalForebrain ='',
+                                           Striatum = '',
+                                           Amygdala ='',
+                                           Hippocampus = ''),
+                                  Subependymal = '',
+                                  Thalamus = '',
+                                  Brainstem = 
+                                      list(Midbrain = list(SubstantiaNigra = ''),
+                                           LocusCoeruleus=''),
+                                  Cerebellum = '',
+                                  SpinalCord ='')
+)
+devtools::use_data(regionHierarchy)
+
