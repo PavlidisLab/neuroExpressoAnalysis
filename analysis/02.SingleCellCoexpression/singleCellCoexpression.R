@@ -2,8 +2,13 @@ devtools::load_all()
 library(homologene)
 library(data.table)
 
-markerGenes = mouseMarkerGenes$Cortex
+markerGenes = mouseMarkerGenesCombined$Cortex
 markerGenes= markerGenes[!grepl(pattern='Microglia_',names(markerGenes))]
+
+markerGenes %<>%  lapply(function(x){
+    x = x[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(x),perl = TRUE)]
+    return(x)
+})
 
 rnaCoexist(TasicMouseExp,
            tresholds= NULL,
@@ -47,9 +52,9 @@ names(frame) = c('p value','Gene Count', 'p value','Gene Count','p value','Gene 
 frame %<>% fixTable
 
 
-frame = data.frame('Cell type' =zeiselSinglePs[1] ,frame,check.names=F)
-frame = frame[ogbox::trimNAs(match(cellOrder,frame$V1)),]
-frame$V1 = publishableNameDictionary$ShinyNames[match(frame$V1,
+frame = data.frame('Cell type' =rownames(frame) ,frame,check.names=F)
+frame = frame[ogbox::trimNAs(match(cellOrder,frame$`Cell type`)),]
+frame$`Cell type` = publishableNameDictionary$ShinyNames[match(frame$`Cell type`,
                                                       publishableNameDictionary$PyramidalDeep)]
 
 frame %>% write.design('analysis//02.SingleCellCoexpression/singleCellTable.tsv')
