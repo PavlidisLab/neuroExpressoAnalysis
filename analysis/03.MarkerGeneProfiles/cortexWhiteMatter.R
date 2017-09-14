@@ -8,12 +8,22 @@ groups = trabzuniRegionsMeta$brainRegion[trabzuniRegionsMeta$brainRegion %in% c(
 
 cortex_white  = data.frame(Gene.Symbol = rownames(cortex_white), cortex_white)
 
-genes = neuroExpressoAnalysis::mouseMarkerGenes$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenes$Cortex))]
+# filter for low expression. this is repeated
+# here due to the way initial filtering of trabzuni data is performed
+# TrabzuniMedExp is 
+cortex_white =
+    cortex_white[cortex_white %>% sepExpr %>% {.[[2]]} %>% apply(1,median) %>% {.>TrabzuniMedExp},]
 
-genes = genes[(genes %>% sapply(function(x){sum((x %>% mouse2human %$% humanGene) %in% cortex_white$Gene.Symbol)}))>0]
+genes = neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenes$Cortex))]
+
+genes = genes[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(genes),perl = TRUE)]
+
+
+genes = genes[(genes %>% sapply(function(x){sum((x %>% mouse2human %$% humanGene) %in% cortex_white$Gene.Symbol)}))>2]
 
 
 names(genes) = translatePublishable(names(genes))
+
 # 
 # fullEstimate(cortex_white,
 #              genes=mouseMarkerGenes$Cortex,

@@ -5,9 +5,12 @@ library(markerGeneProfile)
 devtools::load_all()
 set.seed(1)
 
+StanleyC = data.frame(Gene.Symbol = rn(StanleyCExp),Probe= paste('p',1:nrow(StanleyCExp)), StanleyCExp)
 StanleyC = data.frame(Gene.Symbol = rn(StanleyCExp), StanleyCExp)
 
-genes = neuroExpressoAnalysis::mouseMarkerGenes$Cortex['Oligo']
+
+genes = neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex['Oligo']
+
 groups = StanleyCMeta$Profile
 StanleyCEstimate = mgpEstimate(StanleyC,
                                     genes= genes,
@@ -17,10 +20,19 @@ StanleyCEstimate = mgpEstimate(StanleyC,
                                     removeMinority=TRUE,
                                     seekConsensus = FALSE)
 
-frame = data.frame(oligoEstim = StanleyCEstimate$estimates$Oligo %>% scale01, groups = StanleyCEstimate$groups$Oligo %>% factor(levels=c('Control', 
-                                                                                                                  'Schizophrenia',
-                                                                                                                  'Bipolar',
-                                                                                                                  'Depression')))
+# rawUranova = rawUranova[match(StanleyCMeta$`Stanley ID`,rawUranova$StanleyID),]
+
+frame = data.frame(oligoEstim = StanleyCEstimate$estimates$Oligo %>% scale01, 
+                   groups = StanleyCEstimate$groups$Oligo %>% factor(levels=c('Control', 
+                                                                              'Schizophrenia',
+                                                                              'Bipolar',
+                                                                              'Depression'))# ,
+                   # UranovaCounts = rawUranova$GM
+)
+
+frame$ids = StanleyCMeta$`Stanley ID`
+plot(frame$oligoEstim,frame$UranovaCounts)
+# cor(frame$oligoEstim, frame$UranovaCounts,method='spearman')
 
 meanFrame = frame %>% group_by(groups) %>% summarise(mean(oligoEstim)) %>% 
     mutate(x1 = as.numeric(groups)-0.3, x2 = as.numeric(groups) +0.3)
