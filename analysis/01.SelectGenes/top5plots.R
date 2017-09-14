@@ -12,7 +12,12 @@ library(pheatmap) # dev version is used
 # expression of top 5 heatmap --------
 order = cellOrder %>% translatePublishable()
 
-genes = mouseMarkerGenes
+genes = mouseMarkerGenesCombined
+
+genes %<>% lapply(function(x){
+    x = x[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(x),perl = TRUE)]
+    return(x)
+})
 #genes$Cortex %<>% c(list('Pyramidal' = mouseMarkerGenes$Cortex$Pyramidal))
 
 genes %<>% lapply(function(x){x[!grepl(pattern='Microglia_',names(x))]})
@@ -64,6 +69,7 @@ rn(exp) =geneDat$Gene.Symbol
 design = n_expressoSamples
 
 dpylrFriendly = cbind(design, t(exp))
+
 
 dpylrFriendly %<>%
     mutate(ShinyNames = CellTypes %>% translatePublishable %>% factor(levels = order[order %in% (CellTypes %>% translatePublishable)])) %>% 
