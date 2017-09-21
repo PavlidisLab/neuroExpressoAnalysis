@@ -254,7 +254,7 @@ if(end == 500){
             
             
             for (j in 1:len(genes[[i]])){
-                write.table(genes[[i]][[j]],
+                write.table(genes[[i]][[j]]  %>%{.[!grepl('\\|',x = .)]} ,
                             paste0('analysis//01.SelectGenes/',names[n],'/',
                                    pieces[2],'/',pieces[1],'/', 
                                    names(genes[[i]])[j]),
