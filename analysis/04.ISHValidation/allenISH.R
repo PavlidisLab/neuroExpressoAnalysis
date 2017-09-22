@@ -23,8 +23,8 @@ markers = list(DentateGranule = c(granuleMarkers,'Prox1'),
 #                Purkinje = c('Pcp2'))
 
 IDs = getStructureIDs()
-granuleID = IDs[grepl('dentate gyrus, granule cell layer',IDs$name),]$id
-purkinjeID = IDs[grepl('^cerebellum$', IDs$name),]$id
+granuleID = IDs[grepl('dentate gyrus, granule cell layer',tolower(IDs$name)),]$id
+purkinjeID = IDs[grepl('^cerebellum$', tolower(IDs$name)),]$id
 
 
 
@@ -92,7 +92,7 @@ if(redownload){
                 if(len(imageID) ==0){
                     next
                 }
-                dowloadImage(imageID$section.image.id, view = 'projection',
+                downloadImage(imageID$section.image.id, view = 'projection',
                              outputFile = filenameFull)
                 centerImage(image = filenameFull, x = imageID$x,
                             y= imageID$y,
@@ -101,7 +101,7 @@ if(redownload){
                             outputFile = filename)
                 
                 
-                dowloadImage(imageID$section.image.id, view = 'expression',
+                downloadImage(imageID$section.image.id, view = 'expression',
                              outputFile = filenameFullExp)
                 centerImage(image = filenameFullExp, x = imageID$x,
                             y= imageID$y,

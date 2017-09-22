@@ -284,29 +284,20 @@ Serhl					Trpv2
 Slc15a2					Vsir					
 Slc1a2					Vwa5a					
 Slc1a3					Zfhx3					
-Slc1a4					Bcl2a1a|Bcl2a1b|Bcl2a1d					
-Slc38a3					Ceacam2|Ceacam1					
-Slc41a1					Chil3					
-Slc4a4					Chil3|Chil4					
-Slco1c1					Clec4a2|Clec4b1					
-Smpd2					D17H6S56E-5					
-Smpdl3a					H2-D1|H2-L					
-Sorcs2					H2-K1|H2-D1					
-Sox9					H2-K1|H2-Q9|H2-Q7					
-Spag1					H2-L|H2-D1					
-Tfcp2l1					H2-Q7|H2-Q9					
-Tlcd1					Hba-a1|Hba-a2					
-Tmem47					Hba-a2|Hba-a1					
-Tril					Hbb-b1|Hbb-b2|Hbb-bs|Hbb-bt					
-Trps1					Lilr4b|Lilrb4a					
-Vav3					Lyz2|Lyz1					
-Vcam1					Mir692-3|Mir692-2|Ftl1					
-Selenbp1|Selenbp2					Pald1					
-					Tgfb1					
-					Trim30d|Trim30e-ps1|Trim30a					
-					Ugt1a1|Ugt1a10|Ugt1a5|Ugt1a6b|Ugt1a2|Ugt1a9|Ugt1a7c|Ugt1a6a					
-					Ugt1a2|Ugt1a7c|Ugt1a6b|Ugt1a6a|Ugt1a9|Ugt1a1|Ugt1a10|Ugt1a5					
-					Ugt1a2|Ugt1a9|Ugt1a10|Ugt1a1|Ugt1a6b|Ugt1a5|Ugt1a7c|Ugt1a6a					
-					Xlr4b|Xlr4a|Xlr4c					
-					Zfa-ps|Zfx					
-					Zfx|Zfa-ps					
+Slc1a4					Chil3					
+Slc38a3					D17H6S56E-5					
+Slc41a1					Pald1					
+Slc4a4					Tgfb1					
+Slco1c1										
+Smpd2										
+Smpdl3a										
+Sorcs2										
+Sox9										
+Spag1										
+Tfcp2l1										
+Tlcd1										
+Tmem47										
+Tril										
+Trps1										
+Vav3										
+Vcam1										
