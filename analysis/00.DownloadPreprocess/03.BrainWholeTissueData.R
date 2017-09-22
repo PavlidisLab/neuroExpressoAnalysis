@@ -97,6 +97,7 @@ softFile = read.design('data-raw/TrabzuniRegions/GSE60862_meta.tsv')
 softFile %<>% filter(GSM %in% colnames(expr))
 
 badSexSamples = which(softFile$sex != bioGen) %>% names %>% str_extract('^.*?(?=[.])')
+
 expr = expr[,!cn(expr) %in% badSexSamples]
 softFile = softFile %>% filter(!GSM %in% badSexSamples)
 
@@ -122,6 +123,15 @@ softFile = softFile[match(colnames(exprData) ,softFile$GSM),]
 
 # remove outliers detected in the previous step
 outliers = unlist(read.table('data-raw/TrabzuniRegions/outliers'))
+
+# just counting cells
+softFile %>% 
+    filter(GSM %in% outliers & brainRegion %in% c('frontal cortex','white matter')) %>%
+    nrow
+softFile %>% 
+    filter( brainRegion %in% c('frontal cortex','white matter')) %>%
+    nrow
+
 softFile = softFile[!softFile$GSM %in% outliers,]
 exprData = exprData[,!colnames(exprData) %in% outliers,]
 
@@ -278,7 +288,7 @@ devtools::use_data(trabzuniRegionsExp,
 #                   overwrite=TRUE)
 
 # dataset lists ------
-brainWholeTissueDatasets = c('trabzuniRegionsExp','chenExpr','stanleyStud1','stanleyStud3','stanleyStud5','stanleyStud7')
-brainWholeTissueMetadata = c('trabzuniRegionsMeta','chenMeta', 'stanleyMeta1', 'stanleyMeta3', 'stanleyMeta5','stanleyMeta7')
-devtools::use_data(brainWholeTissueDatasets,
-                   brainWholeTissueMetadata, overwrite=TRUE)
+# brainWholeTissueDatasets = c('trabzuniRegionsExp','chenExpr','stanleyStud1','stanleyStud3','stanleyStud5','stanleyStud7')
+# brainWholeTissueMetadata = c('trabzuniRegionsMeta','chenMeta', 'stanleyMeta1', 'stanleyMeta3', 'stanleyMeta5','stanleyMeta7')
+# devtools::use_data(brainWholeTissueDatasets,
+#                    brainWholeTissueMetadata, overwrite=TRUE)
