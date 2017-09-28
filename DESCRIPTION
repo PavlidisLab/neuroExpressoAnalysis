@@ -51,6 +51,18 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
+Remotes:
+    oganm/ogbox,
+    oganm/allenBrain,
+    oganm/geneSynonym,
+    oganm/markerGeneProfile,
+    oganm/geneSynonym,
+    raivokolde/pheatmap,
+    bioc::3.5/affy,
+    bioc::3.5/preprocessCore,
+    bioc::3.5/limma,
+    bioc::3.5/oligo,
+    bioc::3.5/sva
 Enhances: 
 Date: 2016-08-08
 Author: Ogan Mancarci
