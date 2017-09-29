@@ -46,7 +46,7 @@ ZeiselMouseMeta = rnaMeta
 
 
 devtools::use_data(ZeiselMouseExp,overwrite=TRUE)
-metadata is not needed in this study
+# metadata is not needed in this study
 devtools::use_data(ZeiselMouseMeta,overwrite=TRUE)
 
 # tasic et al. allen institute single cell data download -------------
