@@ -59,11 +59,6 @@ download.file('ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE71nnn/GSE71585/suppl/GSE
               'data-raw/TasicMouse/GSE71585_Clustering_Results.csv.gz')
 system('gunzip data-raw/TasicMouse/GSE71585_Clustering_Results.csv.gz')
 
-allenBrain = read.exp('data-raw/TasicMouse/GSE71585_RefSeq_RPKM.csv')
-genes = allenBrain$gene
-allenBrain = allenBrain[,-1]
-rownames(allenBrain) = genes
-allenBrain %<>% as.matrix
 
 allenBrain = read.exp('data-raw/TasicMouse/GSE71585_RefSeq_RPKM.csv')
 genes = allenBrain$gene
