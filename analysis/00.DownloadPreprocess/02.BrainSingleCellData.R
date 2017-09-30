@@ -77,6 +77,10 @@ allenBrain = allenBrain[maxExp>0,]
 
 TasicMouseExp = allenBrain
 TasicMouseMeta = allenMeta
+
+write.design(TasicMouseMeta,'data-raw/TasicMouse//TasicMouseMeta.tsv')
+write.csv(TasicMouseExp, 'data-raw/TasicMouse/TasicMouseExp.csv',quote = FALSE)
+
 devtools::use_data(TasicMouseExp,overwrite=TRUE)
 devtools::use_data(TasicMouseMeta,overwrite=TRUE)
 
