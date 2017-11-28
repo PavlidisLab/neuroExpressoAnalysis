@@ -196,6 +196,29 @@ for (i in 1:len(regionSamples)){
              na_col = 'grey',
              border_color = NA)
     dev.off()
+    
+    svg(paste0('analysis/01.SelectGenes/GenePlotsTop/',names(regionSamples)[i],'.svg'),height=19*1.3,width=20*1.3)
+    pheatmap(t(relExp),
+             fontsize=30,
+             #fontsize = 11,
+             #gaps_col = sum(!is.na(regionSamples[[i]])),
+             gaps_col = 
+             {if(names(regionSamples)[i] == 'Cortex'){relExp2 %>% nrow}},
+             gaps_row= anotRow$`Specific Genes` %>% duplicated %>% not %>% which %>% {.-1},
+             show_rownames=TRUE ,
+             show_colnames=FALSE,
+             annotation_col=anotCol,
+             annotation_row = anotRow,
+             annotation_colors=list(Samples = heatCols$palette[match(anotCol$Samples %>% unique,names(heatCols$palette))],
+                                    'Specific Genes' = geneCols$palette[match(anotRow$`Specific Genes` %>% unique,names(heatCols$palette))]),
+             annotation_legend= T,
+             cluster_rows=F,
+             cluster_cols=F,
+             main=paste(names(regionSamples[i]), 'marker gene expression'),
+             color=viridis(20),
+             na_col = 'grey',
+             border_color = NA)
+    dev.off()
 }
 
 # single cell plot
