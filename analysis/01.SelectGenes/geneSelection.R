@@ -1,6 +1,6 @@
 # here we select marker genes provided in the object "mouseBrainMarkers" This script can run as a whole
 # or can be run from the command line to divide up the rotation process.
-# usage: Rscript geneSelection.R [start] [end] [secondChip]
+# usage: Rscript geneSelection.R [start] [end] [secondChip] [RNAseq]
 # start and end are intigers that provide the interval of permutations
 # 500 permutations are performed for this study
 # if start = 1, quick selection will be performed by the script
@@ -9,6 +9,8 @@
 # second chip controls whether or not genes should be selected exclusively for GPL1261
 # the default output location is data-raw. Other directories will be created if not already
 # existing
+# command line use
+# Rscript analysis/01.SelectGenes/geneSelection.R 1 125 FALSE TRUE
 devtools::load_all()
 library(markerGeneProfile)
 library(jsonlite)
@@ -361,7 +363,7 @@ if(end == 500){
     newMicroglia[['RNAseq']] = pickMarkersAll("analysis//01.SelectGenes/Markers_SingleCell/CellTypes")$All$Microglia
     
     # calculate how many genes microglia would have had
-
+    
     microRNAseq = list(new = newMicroglia$RNAseq,
                        old = oldMicroglia$RNAseq)
     microMicroarray = list(new = newMicroglia$Microarray,
@@ -386,17 +388,17 @@ if(end == 500){
     
     # merge single cell genes for cortex -----------
     typeSets = list.files('analysis/01.SelectGenes/Markers_Microarray/')
-
+    
     dir.create('analysis/01.SelectGenes/Markers_Final')
     system('cp -r analysis/01.SelectGenes/Markers_Microarray/* analysis/01.SelectGenes/Markers_Final')
     #system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
     
     if(firstChip & singleCell){
-
+        
         for (x in typeSets){
             original = pickMarkers(file.path('analysis/01.SelectGenes/Markers_Microarray',x,'/Cortex/'))
             singleCells = pickMarkers(paste0("analysis/01.SelectGenes/Markers_SingleCell/",x,"/All/"))
-
+            
             frame = names(singleCells) %>% sapply(function(y){
                 c(nx = {
                     if(is.null(original[[y]])){
@@ -429,7 +431,7 @@ if(end == 500){
             })
             names(trimSingle) = names(singleCells)
             
-
+            
             frameTrim = names(singleCells) %>% sapply(function(y){
                 c(nx = {
                     if(is.null(trimOrig[[y]])){
@@ -458,17 +460,17 @@ if(end == 500){
             cn(framePresent) = cn(frameTrim)
             rn(framePresent) = rn(frameTrim)
             framePresent %<>% cbind(frameAll)
-
+            
             write.table(framePresent,file = paste0('analysis/01.SelectGenes/cortexTable_',x,'.tsv'),sep = "\t", quote = F, row.names = T)
             
             
             for(i in 1:length(allMarkers)){
                 write.table(allMarkers[i],
-                        paste0('analysis/01.SelectGenes/Markers_Final/',
-                               x,'/Cortex/',names(allMarkers)[i]),
-                        row.names=F,
-                        quote=F,
-                        col.names=F)
+                            paste0('analysis/01.SelectGenes/Markers_Final/',
+                                   x,'/Cortex/',names(allMarkers)[i]),
+                            row.names=F,
+                            quote=F,
+                            col.names=F)
             }
         }
     }
@@ -480,11 +482,11 @@ if(end == 500){
         genes2 = pickMarkersAll('analysis//01.SelectGenes/Markers_Final/CellTypes//')
         
         assertthat::are_equal(names(genes),names(genes2))
-       
-         mouseMarkerGenesCombined = lapply(1:length(genes),function(i){
-             out = c(genes[[i]],genes2[[i]]['Pyramidal'])
-             out = out[!(out %>% sapply(is.null))]
-         })
+        
+        mouseMarkerGenesCombined = lapply(1:length(genes),function(i){
+            out = c(genes[[i]],genes2[[i]]['Pyramidal'])
+            out = out[!(out %>% sapply(is.null))]
+        })
         names(mouseMarkerGenesCombined) = names(genes)
         
         # assertthat::validate_that(all(!bannedGenes %in% unlist(genes)))
@@ -511,6 +513,68 @@ if(end == 500){
             }
         }
         
+        for(i in 1:length(mouseMarkerGenesCombined)){
+            dir.create(paste0('analysis/01.SelectGenes/Markers_Final/Combined/',names(mouseMarkerGenesCombined)[i]),showWarnings = FALSE,recursive = TRUE)
+            for(j in 1:length(mouseMarkerGenes[[i]])){
+                write.table(mouseMarkerGenes[[i]][[j]],
+                            paste0('analysis/01.SelectGenes/Markers_Final/Combined/',
+                                   names(mouseMarkerGenes)[i],'/',
+                                   names(mouseMarkerGenes[[i]][j])),
+                            row.names=F,
+                            quote=F,
+                            col.names=F)
+            }
+        }
+        
+        # get NCBI ids
+        geneLists = list(CellTypes = mouseMarkerGenes,
+                         PyramidalDeep =  mouseMarkerGenesPyramidalDeep,
+                         Combined = mouseMarkerGenesCombined)
+        gemmaAnnot = read.design('data-raw/GemmaAnnots/GPL1261')
+        
+        
+        dir.create('analysis/01.SelectGenes/Markers_Final_NCBIids')
+        ncbiIDs = geneLists %>% lapply(function(x){
+            x %>% lapply(function(y){
+                y %>% lapply(function(z){ 
+                    ids = gemmaAnnot %>% filter(GeneSymbols %in% z) %>% select(NCBIids) %>% unlist %>% unique
+                    assertthat::are_equal(length(ids),length(z))
+                    return(ids)
+                })
+            })
+        })
+        
+        names(ncbiIDs) = paste0(names(ncbiIDs),'_NCBIids')
+        
+        for (t in 1:length(ncbiIDs)){
+            for(i in 1:length(ncbiIDs[[t]])){
+                dir.create(paste0('analysis/01.SelectGenes/Markers_Final/',
+                                  names(ncbiIDs[t]),'/',
+                                  names(ncbiIDs[[t]][i])),
+                           showWarnings = FALSE,
+                           recursive = TRUE)
+                for(j in 1:length(ncbiIDs[[t]][[i]])){
+                    write.table(ncbiIDs[[t]][[i]][[j]],
+                                paste0('analysis/01.SelectGenes/Markers_Final/',
+                                       names(ncbiIDs[t]),'/',
+                                       names(ncbiIDs[[t]][i]),'/',
+                                       names(ncbiIDs[[t]][[i]][j])),
+                                row.names=F,
+                                quote=F,
+                                col.names=F)
+                }
+            }
+        }
+        names(ncbiIDs) = c('mouseMarkerGenesNCBI',
+                           'mouseMarkerGenesPyramidalDeepNCBI',
+                           'mouseMarkerGenesCombinedNCBI')
+        attach(ncbiIDs)
+        
+        names(ncbiIDs) %>% sapply(function(x){
+            ogbox::teval(paste0("devtools::use_data(",x,", overwrite=TRUE)"))
+        })    
+        
+        # tables
         toPlotGenes = mouseMarkerGenesCombined %>% lapply(function(x){
             x = x[!grepl('Microglia_',names(x))]
             x %<>% lapply(function(y){
@@ -518,7 +582,7 @@ if(end == 500){
             })
         })
         
-            
+        
         toPlotGenes %<>% lapply(function(x){
             x %<>%sapply(len)
             x[cellOrder] %>% trimNAs
@@ -591,6 +655,10 @@ if(end == 500){
         markerFiles(mouseMarkerGenes,'')
         markerFiles(mouseMarkerGenesPyramidalDeep,'PyraDeep')
         markerFiles(mouseMarkerGenesCombined,'Combined')
+        
+        markerFiles(mouseMarkerGenesNCBI,'NCBI')
+        markerFiles(mouseMarkerGenesPyramidalDeepNCBI,'PyraDeepNCBI')
+        markerFiles(mouseMarkerGenesCombinedNCBI,'CombinedNCBI')
         
         # create archive
         file.remove('analysis/01.SelectGenes/markerGenes.rar')
