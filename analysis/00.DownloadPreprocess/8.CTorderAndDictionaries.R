@@ -1,3 +1,7 @@
+
+firstChip = TRUE
+singleCell = TRUE
+typeSets = c('PyramidalDeep','CellTypes')
 # now load the data and place it in the package
 n_expressoSamples =  ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_expressoSamples.tsv')
 
