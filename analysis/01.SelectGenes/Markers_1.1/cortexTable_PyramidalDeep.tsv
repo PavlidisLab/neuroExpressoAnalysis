@@ -1,0 +1,18 @@
+nx	singleCells	total
+Astrocyte	165 (129)	224 (205)	280
+Endothelial	NA (NA)	177 (177)	177
+GabaPV	7 (7)	13 (12)	18
+GabaRelnCalb	4 (3)	14 (13)	15
+GabaVIPReln	12 (9)	42 (28)	33
+Layer.2.3.Pyra	NA (NA)	4 (4)	4
+Layer.4.Pyra	NA (NA)	5 (5)	5
+Layer.6a.Pyra	NA (NA)	6 (6)	6
+Layer.6b.Pyra	NA (NA)	9 (9)	9
+Microglia	164 (136)	232 (219)	284
+Microglia_activation	112 (84)	82 (78)	118
+Microglia_deactivation	146 (127)	148 (137)	199
+Oligo	43 (33)	156 (135)	152
+OligoPrecursors	NA (NA)	185 (185)	185
+Pyramidal_Glt_25d2	6 (1)	2 (2)	3
+Pyramidal_S100a10	9 (2)	0 (0)	2
+PyramidalCorticoThalam	9 (2)	0 (0)	2
