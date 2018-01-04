@@ -1,5 +1,5 @@
 library(ogbox)
-# load_all()
+devtools::load_all()
 
 singleCells = ogbox::read.design('data-raw/Mouse_Cell_Type_Data/singleCellMatchings.tsv')
 tasicUnassigned =  (TasicMouseMeta$primary_type %>% unique)[! (TasicMouseMeta$primary_type %>% unique) %in% (singleCells$Tasic %>% str_split(', ') %>% unlist %>% trimElement(''))]
@@ -86,12 +86,10 @@ meltedSingleCells %<>%
                CellTypes =  .$CellTypes %>% replaceElement(NA,'') %$%newVector,
                PyramidalDeep = .$PyramidalDeep %>% replaceElement(NA,'') %$%newVector,
                BroadTypes = NA,
-               DopaSelect = NA,
                Description = NA,
                Age = NA,
                Region = .$Region,
                Platform = 'RNAseq',
-               Method = 'RNA-seq',
                Reference = 'Tasic et al.',
                PMID = 26727548,
                RegionToChildren = TRUE,

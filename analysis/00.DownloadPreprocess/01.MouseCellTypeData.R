@@ -9,7 +9,7 @@ library(devtools)
 devtools::load_all()
 # skip norm is for when cellTypeStudies.tsv is modified without addition or removal of any new 
 # samples
-skipNorm=T
+skipNorm=F
 download = F
 
 # library(cellTypeManuscript)
@@ -139,5 +139,5 @@ regionHierarchy = list(All = list(Cerebrum =
                                   Cerebellum = '',
                                   SpinalCord ='')
 )
-devtools::use_data(regionHierarchy)
+devtools::use_data(regionHierarchy,overwrite = TRUE)
 
