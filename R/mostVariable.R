@@ -17,6 +17,12 @@ mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design){
     
     list[,exprData]= sepExpr(allDataPre)
     
+    assertthat::assert_that(all(make.names(colnames(exprData)) %in% make.names(design$sampleName)))
+    assertthat::assert_that(all(make.names(design$sampleName) %in% make.names(colnames(exprData))))
+    
+    exprData = exprData[match(make.names(design$sampleName),make.names(colnames(exprData)))]
+    
+    
     cellTypes = trimNAs(unique(design[,cellTypeColumn]))
     
     cellTypeExpr = lapply(cellTypes,function(x){
