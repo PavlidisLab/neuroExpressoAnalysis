@@ -568,7 +568,6 @@ if(end == 500){
         gemmaAnnot = read.design('data-raw/GemmaAnnots/GPL1261')
         
         
-        dir.create(glue('analysis/01.SelectGenes/{markerVersion}/Markers_Final_NCBIids'))
         ncbiIDs = geneLists %>% lapply(function(x){
             x %>% lapply(function(y){
                 y %>% lapply(function(z){ 
@@ -581,12 +580,14 @@ if(end == 500){
         
         names(ncbiIDs) = paste0(names(ncbiIDs),'_NCBIids')
         
+      
+        
         for (t in 1:length(ncbiIDs)){
             for(i in 1:length(ncbiIDs[[t]])){
                 dir.create(paste0('analysis/01.SelectGenes/',markerVersion,'/Markers_Final/',
                                   names(ncbiIDs[t]),'/',
                                   names(ncbiIDs[[t]][i])),
-                           showWarnings = FALSE,
+                           showWarnings = TRUE,
                            recursive = TRUE)
                 for(j in 1:length(ncbiIDs[[t]][[i]])){
                     write.table(ncbiIDs[[t]][[i]][[j]],
@@ -607,6 +608,7 @@ if(end == 500){
         
         names(ncbiIDs) %>% sapply(function(x){
             ogbox::teval(paste0("devtools::use_data(",x,", overwrite=TRUE)"))
+            saveRDS(mouseMarkerGenes,glue('analysis/01.SelectGenes/{markerVersion}/{x}.rds'))
         })    
         
         # tables
@@ -696,12 +698,63 @@ if(end == 500){
         markerFiles(mouseMarkerGenesCombinedNCBI,'CombinedNCBI')
         
         # create archive
-        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenes.rar'))
-        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.rar'))
-        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.rar'))
+        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenes.zip'))
+        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.zip'))
+        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.zip'))
+        
+        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesNCBI.zip'))
+        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeepNCBI.zip'))
+        file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesCombinedNCBI.zip'))
         
         system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenes.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/CellTypes'))
         system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/PyramidalDeep/*'))
         system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/Combined/*'))
+        
+        system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesNCBI.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/CellTypes_NCBIids'))
+        system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeepNCBI.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/PyramidalDeep_NCBIids'))
+        system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesCombinedNCBI.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/Combined_NCBIids'))
     }
+    
+    geneListReadme = glue::glue('analysis/01.SelectGenes/{markerVersion}/README.md')
+    file.create(geneListReadme,showWarnings = FALSE)
+    cat('## ',markerVersion,'\n\n',file = geneListReadme,sep = '',append=TRUE)
+    cat('* **Gene Symbols**','\n',file = geneListReadme,sep = '',append=TRUE)
+    cat('    - **mouseMarkerGenes:** Genes selected by combining pyramidal sub-types into a single group (',file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[JSON](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenes.json), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[TSV](markerGeneTSVs), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[RDS](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenes.rds), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Excel](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenes.xls), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Zip](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenes.zip)). \n\n'),file = geneListReadme,sep = '',append=TRUE)
+    cat('    - **pyramidalDeep:**  Genes selected by considering pyramidal sub-types as distinct cell types (',file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[JSON](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.json), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[TSV](markerGeneTSVsPyraDeep), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[RDS](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenesPyramidalDeep.rds), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Excel](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.xls), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Zip](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.zip)). \n\n'),file = geneListReadme,sep = '',append=TRUE)
+    cat('    - **Combined:**  pyramidalDeep with pan-pyramidal gene list from mouseMarkerGenes included. This list is used in downstream analysis in the paper (',file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[JSON](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.json), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[TSV](markerGeneTSVsCombined), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[RDS](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenesCombined.rds), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Excel](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.xls), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Zip](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.zip)). \n\n'),file = geneListReadme,sep = '',append=TRUE)
+    
+    cat('* **NCBI ids**','\n',file = geneListReadme,sep = '',append=TRUE)
+    cat('    - **mouseMarkerGenes:** (',file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[JSON](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesNCBI.json), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[TSV](markerGeneTSVsNCBI), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[RDS](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenesNCBI.rds), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Excel](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesNCBI.xls), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Zip](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesNCBI.zip)). \n\n'),file = geneListReadme,sep = '',append=TRUE)
+    cat('    - **pyramidalDeep:** (',file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[JSON](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeepNCBI.json), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[TSV](markerGeneTSVsPyraDeepNCBI), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[RDS](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenesPyramidalDeepNCBI.rds), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Excel](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeepNCBI.xls), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Zip](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeepNCBI.zip)). \n\n'),file = geneListReadme,sep = '',append=TRUE)
+    cat('    - **Combined:** (',file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[JSON](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesCombinedNCBI.json), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[TSV](markerGeneTSVsCombinedNCBI), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[RDS](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenesCombinedNCBI.rds), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Excel](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesCombinedNCBI.xls), '),file = geneListReadme,sep = '',append=TRUE)
+    cat(glue::glue('[Zip](https://raw.githubusercontent.com/oganm/neuroExpressoAnalysis/master/analysis/01.SelectGenes/{markerVersion}/markerGenesCombinedNCBI.zip)). \n\n'),file = geneListReadme,sep = '',append=TRUE)
 }
