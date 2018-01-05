@@ -17,7 +17,7 @@ oldList = pickMarkersAll(glue('analysis/01.SelectGenes/{versionOld}/Markers_Fina
 newList = pickMarkersAll(glue('analysis/01.SelectGenes/{versionNew}/Markers_Final/{referenceGroup}'))
 assertthat::assert_that(all(names(oldList) == names(newList)))
 
-logFile = glue('analysis/01.SelectGenes/comparison_{referenceGroup}-{versionOld}-{versionNew}.md')
+logFile = glue('analysis/01.SelectGenes/{versionNew}/comparison_{referenceGroup}-{versionOld}-{versionNew}.md')
 file.create(logFile,showWarnings = FALSE)
 lapply(names(oldList),function(x){
     print(x)
@@ -56,3 +56,25 @@ lapply(names(oldList),function(x){
 
 names(changeList) = names(oldList)
 
+# a shorter repor that gives the number of genes changes
+
+simplerChangeList = changeList %>% unlist(recursive = FALSE) 
+simplerNewList= newList %>% unlist(recursive = FALSE)
+
+allCellTypes = names(simplerChangeList) %>% stringr::str_extract('(?<=\\.).*') %>% unique
+
+shortLog = glue('analysis/01.SelectGenes/{versionNew}/comparison_{referenceGroup}-{versionOld}-{versionNew}_short.md')
+file.create(shortLog,showWarnings = FALSE)
+
+allCellTypes %>% sapply(function(x){
+    cellTypeChange = simplerChangeList[grepl(pattern=x , x= names(simplerChangeList))]
+    added = cellTypeChange %>% purrr::map('added') %>% unlist %>% unique
+    removed =  cellTypeChange %>% purrr::map('removed') %>% unlist %>% unique
+    
+    cellTypeGenes = simplerNewList[grepl(pattern=x , x= names(simplerNewList))] %>% unlist %>% unique
+    
+    # cat('* **',x,'**\n',file = logFile,sep = '',append = TRUE)
+    # cat('  - added:',x,'**\n',file = logFile,sep = '',append = TRUE)
+    
+    return(c('added' = length(added), 'removed' = length(removed),'Total genes in final list' = length(cellTypeGenes)))
+}) %>% t %>% knitr::kable(format = 'markdown') %>% cat(file = shortLog,sep='\n')
