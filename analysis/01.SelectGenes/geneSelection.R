@@ -700,8 +700,8 @@ if(end == 500){
         file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.rar'))
         file.remove(glue('analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.rar'))
         
-        system(glue('rar -ep1 a analysis/01.SelectGenes/{markerVersion}/markerGenes.rar analysis/01.SelectGenes/{markerVersion}/Markers_Final/CellTypes'))
-        system(glue('rar -ep1 a analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.rar analysis/01.SelectGenes/{markerVersion}/Markers_Final/PyramidalDeep/*'))
-        system(glue('rar -ep1 a analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.rar analysis/01.SelectGenes/{markerVersion}/Markers_Final/Combined/*'))
+        system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenes.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/CellTypes'))
+        system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesPyraDeep.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/PyramidalDeep/*'))
+        system(glue('zip -r analysis/01.SelectGenes/{markerVersion}/markerGenesCombined.zip analysis/01.SelectGenes/{markerVersion}/Markers_Final/Combined/*'))
     }
 }
