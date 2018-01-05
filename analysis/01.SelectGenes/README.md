@@ -20,7 +20,7 @@ represent a gene during normalization. Probes selected for a 116 genes was effec
 due to this change. 16 new genes were included in the analysis due to the newly selected probe
 being above out selection threshold.
 
-For a complete list of genes added or removed from the "Combined" gene list see [this file]('Markers_1.1/comparison_CellTypes-Markers_1.0-Markers_1.1.md').
+For a complete list of genes added or removed from the "Combined" gene list see [this file](Markers_1.1/comparison_CellTypes-Markers_1.0-Markers_1.1.md).
 
 Below is the number of genes added or removed from all cell types across brain regions
 
