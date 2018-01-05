@@ -417,7 +417,7 @@ if(end == 500){
     # merge single cell genes for cortex -----------
     typeSets = list.files(glue('analysis/01.SelectGenes/{markerVersion}/Markers_Microarray/'))
     
-    dir.create(glue('analysis/01.SelectGenes/{markerVersion}/Markers_Final'))
+    dir.create(glue('analysis/01.SelectGenes/{markerVersion}/Markers_Final'), showWarnings = FALSE)
     system(glue('cp -r analysis/01.SelectGenes/{markerVersion}/Markers_Microarray/* analysis/01.SelectGenes/{markerVersion}/Markers_Final'))
     #system('cp -r analysis/01.SelectGenes/Markers_Microarray analysis/01.SelectGenes/Markers_FinalRelax')
     
