@@ -1,31 +1,31 @@
-sampleName	originalIndex	GSE	samples	MajorType	Neurotransmitter	ShinyNames	CellTypes	PyramidalDeep	BroadTypes	DopaSelect	Description	Age	Region	Platform	Method	Reference	PMID	RegionToChildren	RegionToParent	Normalize	Normalize2	Notes
-Astro Gja1	GNZuCt	GSE71585	Astro Gja1	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Micro Ctss	wed3CA	GSE71585	Micro Ctss	Glia	Microglia	Microglia	Microglia	Microglia	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Oligo Opalin	gNlUiz	GSE71585	Oligo Opalin	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Pvalb Gpx3	NmvDe7	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Pvalb Rspo2	GN0NrL	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Pvalb Wt1	TbUBpf	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Pvalb Obox3	n6iPoe	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Pvalb Cpne5	mYWm1T	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Sst Cbln4	jgTrRF	GSE71585	Sst Cbln4	Neuron	Gabaergic	Martinotti (GIN)	GabaRelnCalb	GabaRelnCalb	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Vip Sncg	46JWfP	GSE71585	Vip Sncg	Neuron	Gabaergic	VIPReln (G30)	GabaVIPReln	GabaVIPReln	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L5b Tph2	uISKeF	GSE71585	L5b Tph2, L5b Cdh13	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal	Pyramidal_Glt_25d2	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L5b Cdh13	Tl5sLq	GSE71585	L5b Tph2, L5b Cdh13	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal	Pyramidal_Glt_25d2	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L5a Hsd11b1	LKTtrO	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L5a Batf3	mxQiOK	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L5a Tcerg1l	kCi7F8	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L5a Pde1c	E3dsmn	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L6a Car12	SPobeL	GSE71585	L6a Car12, L6a Syt17	Neuron	Pyramidal	Pyramidal CrtThalamic	Pyramidal	PyramidalCorticoThalam	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L6a Syt17	GzdD8T	GSE71585	L6a Car12, L6a Syt17	Neuron	Pyramidal	Pyramidal CrtThalamic	Pyramidal	PyramidalCorticoThalam	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Endo Myl9	vbyjMQ	GSE71585	Endo Myl9, Endo Tbc1d4	Ephitelium	Endothelial	Endothelial	Endothelial	Endothelial	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-Endo Tbc1d4	90i6Rd	GSE71585	Endo Myl9, Endo Tbc1d4	Ephitelium	Endothelial	Endothelial	Endothelial	Endothelial	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-OPC Pdgfra	zUUAkS	GSE71585	OPC Pdgfra	Glia	Oligodendrocyte	Oligodendrocyte precursors	OligoPrecursors	OligoPrecursors	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L4 Ctxn3	VCEaZ4	GSE71585	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Neuron	Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L4 Scnn1a	2dvbYW	GSE71585	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Neuron	Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L4 Arf5	zVgbEG	GSE71585	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Neuron	Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L2 Ngb	jSAk6r	GSE71585	L2 Ngb, L2/3 Ptgs2	Neuron	Pyramidal	Layer 2 3 Pyra	Pyramidal	Layer 2 3 Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L2/3 Ptgs2	cYKSVB	GSE71585	L2 Ngb, L2/3 Ptgs2	Neuron	Pyramidal	Layer 2 3 Pyra	Pyramidal	Layer 2 3 Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L6a Mgp	W4HDHt	GSE71585	L6a Mgp, L6a Sla	Neuron	Pyramidal	Layer 6a Pyra	Pyramidal	Layer 6a Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L6a Sla	RmsP3K	GSE71585	L6a Mgp, L6a Sla	Neuron	Pyramidal	Layer 6a Pyra	Pyramidal	Layer 6a Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L6b Serpinb11	iKdqrO	GSE71585	L6b Serpinb11, L6b Rgs12	Neuron	Pyramidal	Layer 6b Pyra	Pyramidal	Layer 6b Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
-L6b Rgs12	Ntdjbt	GSE71585	L6b Serpinb11, L6b Rgs12	Neuron	Pyramidal	Layer 6b Pyra	Pyramidal	Layer 6b Pyra	NA	NA	NA	NA	Cortex	RNAseq	RNA-seq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+sampleName	originalIndex	GSE	samples	MajorType	Neurotransmitter	ShinyNames	CellTypes	PyramidalDeep	BroadTypes	Description	Age	Region	Platform	Reference	PMID	RegionToChildren	RegionToParent	Normalize	Normalize2	Notes
+Astro Gja1	GNZuCt	GSE71585	Astro Gja1	Glia	Astrocyte	Astrocyte	Astrocyte	Astrocyte	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Micro Ctss	wed3CA	GSE71585	Micro Ctss	Glia	Microglia	Microglia	Microglia	Microglia	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Oligo Opalin	gNlUiz	GSE71585	Oligo Opalin	Glia	Oligodendrocyte	Oligodendrocyte	Oligo	Oligo	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Pvalb Gpx3	NmvDe7	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Pvalb Rspo2	GN0NrL	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Pvalb Wt1	TbUBpf	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Pvalb Obox3	n6iPoe	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Pvalb Cpne5	mYWm1T	GSE71585	Pvalb Gpx3, Pvalb Rspo2, Pvalb Wt1, Pvalb Obox3, Pvalb Cpne5	Neuron	Gabaergic	FS Basket (G42)	GabaPV	GabaPV	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Sst Cbln4	jgTrRF	GSE71585	Sst Cbln4	Neuron	Gabaergic	Martinotti (GIN)	GabaRelnCalb	GabaRelnCalb	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Vip Sncg	46JWfP	GSE71585	Vip Sncg	Neuron	Gabaergic	VIPReln (G30)	GabaVIPReln	GabaVIPReln	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L5b Tph2	uISKeF	GSE71585	L5b Tph2, L5b Cdh13	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal	Pyramidal_Glt_25d2	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L5b Cdh13	Tl5sLq	GSE71585	L5b Tph2, L5b Cdh13	Neuron	Pyramidal	Pyramidal Glt25d2	Pyramidal	Pyramidal_Glt_25d2	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L5a Hsd11b1	LKTtrO	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L5a Batf3	mxQiOK	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L5a Tcerg1l	kCi7F8	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L5a Pde1c	E3dsmn	GSE71585	L5a Hsd11b1, L5a Batf3, L5a Tcerg1l, L5a Pde1c	Neuron	Pyramidal	Pyramidal S100a10	Pyramidal	Pyramidal_S100a10	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L6a Car12	SPobeL	GSE71585	L6a Car12, L6a Syt17	Neuron	Pyramidal	Pyramidal CrtThalamic	Pyramidal	PyramidalCorticoThalam	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L6a Syt17	GzdD8T	GSE71585	L6a Car12, L6a Syt17	Neuron	Pyramidal	Pyramidal CrtThalamic	Pyramidal	PyramidalCorticoThalam	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Endo Myl9	vbyjMQ	GSE71585	Endo Myl9, Endo Tbc1d4	Ephitelium	Endothelial	Endothelial	Endothelial	Endothelial	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+Endo Tbc1d4	90i6Rd	GSE71585	Endo Myl9, Endo Tbc1d4	Ephitelium	Endothelial	Endothelial	Endothelial	Endothelial	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+OPC Pdgfra	zUUAkS	GSE71585	OPC Pdgfra	Glia	Oligodendrocyte	Oligodendrocyte precursors	OligoPrecursors	OligoPrecursors	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L4 Ctxn3	VCEaZ4	GSE71585	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Neuron	Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L4 Scnn1a	2dvbYW	GSE71585	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Neuron	Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L4 Arf5	zVgbEG	GSE71585	L4 Ctxn3, L4 Scnn1a, L4 Arf5	Neuron	Pyramidal	Layer 4 Pyra	Pyramidal	Layer 4 Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L2 Ngb	jSAk6r	GSE71585	L2 Ngb, L2/3 Ptgs2	Neuron	Pyramidal	Layer 2 3 Pyra	Pyramidal	Layer 2 3 Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L2/3 Ptgs2	cYKSVB	GSE71585	L2 Ngb, L2/3 Ptgs2	Neuron	Pyramidal	Layer 2 3 Pyra	Pyramidal	Layer 2 3 Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L6a Mgp	W4HDHt	GSE71585	L6a Mgp, L6a Sla	Neuron	Pyramidal	Layer 6a Pyra	Pyramidal	Layer 6a Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L6a Sla	RmsP3K	GSE71585	L6a Mgp, L6a Sla	Neuron	Pyramidal	Layer 6a Pyra	Pyramidal	Layer 6a Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L6b Serpinb11	iKdqrO	GSE71585	L6b Serpinb11, L6b Rgs12	Neuron	Pyramidal	Layer 6b Pyra	Pyramidal	Layer 6b Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
+L6b Rgs12	Ntdjbt	GSE71585	L6b Serpinb11, L6b Rgs12	Neuron	Pyramidal	Layer 6b Pyra	Pyramidal	Layer 6b Pyra	NA	NA	NA	Cortex	RNAseq	Tasic et al.	26727548	TRUE	TRUE	TRUE	TRUE	
