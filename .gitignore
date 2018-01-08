@@ -36,7 +36,8 @@ data-raw/DarmanisHuman
 data-raw/LesnickParkinsons
 data-raw/MoranParkinsons
 data-raw/StanleyData
-data-raw/TasicMouse
+data-raw/TasicMouse/GSE*
+data-raw/TasicMouse/rsem*
 data-raw/TrabzuniRegions
 data-raw/ZeiselMouse
 data-raw/Mouse_Cell_Type_Data/qnormExp.csv
@@ -52,8 +53,9 @@ data-raw/StanleyC
 
 
 # analysis exceptions
-analysis/01.SelectGenes/Rotation
-analysis/01.SelectGenes/RotSel
+*Rotation*
+*RotSel*
+
 analysis/04.MarkerGeneProfiles/cortex_white
 analysis/02.SingleCellCoexpression/Darmanis
 analysis/02.SingleCellCoexpression/Tasic
@@ -63,6 +65,7 @@ analysis/06.BloodGeneProfiles/HumanMarkers/Rotation
 analysis/06.BloodGeneProfiles/HumanMarkers/RotSel
 analysis/06.BloodGeneProfiles/MouseMarkers/Rotation
 analysis/06.BloodGeneProfiles/MouseMarkers/RotSel
+
 
 
 *progress
