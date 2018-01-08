@@ -1,0 +1,9 @@
+group	Frontal.Cortex.Mean	Frontal.Cortex.SD	White.Matter.Mean	White.Matter.SD	W	p.value	adjusted.p.value
+Endothelial	0.265	0.117	0.64	0.112	42	0	0
+Astrocyte	0.401	0.135	0.757	0.101	136	0	0
+Microglia	0.179	0.092	0.708	0.135	4	0	0
+Oligodendrocyte	0.226	0.107	0.815	0.087	2	0	0
+Olig. precursors	0.215	0.123	0.817	0.078	0	0	0
+FS Basket (G42)	0.865	0.081	0.27	0.115	7744	0	0
+VIPReln (G30)	0.792	0.102	0.288	0.142	7718	0	0
+Pyramidal	0.877	0.062	0.212	0.112	7744	0	0

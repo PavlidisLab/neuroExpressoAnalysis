@@ -1,0 +1,4 @@
+pValue	W	meanControl	meanGroup	sdControl	sdGroup
+Schizophrenia	0.013	75	0.78	0.598	0.146	0.129
+Bipolar	0	102	0.78	0.334	0.146	0.242
+Depression	0	89	0.78	0.386	0.146	0.13

@@ -10,7 +10,7 @@ library(purrr)
 # library(markerGeneProfile)
 devtools::load_all()
 
-genes = neuroExpressoAnalysis::mouseMarkerGenesCombined$Midbrain[
+genes = mouseMarkerGenesCombined$Midbrain[
     !grepl('Microglia_',names(mouseMarkerGenesCombined$Midbrain))]
 MoranDes = MoranParkinsonsMeta
 # MoranDes %<>% mutate(patient = paste0(Disease, str_extract(Title,pattern='[0-9]+')))

@@ -1,0 +1,5 @@
+p	w	controlMean	controlSD	nControl	groupMean	nGroup	groupSD
+Lesnick	0.007	119	0.578	0.263	9	0.26	16	0.179
+Moran Lateral	0.001	60	0.665	0.246	7	0.174	9	0.135
+Moran Medial	0	115	0.799	0.191	8	0.305	15	0.191
+Zhang	0.004	148	0.489	0.287	18	0.201	10	0.101

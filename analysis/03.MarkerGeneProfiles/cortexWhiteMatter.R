@@ -14,7 +14,7 @@ cortex_white  = data.frame(Gene.Symbol = rownames(cortex_white), cortex_white)
 cortex_white =
     cortex_white[cortex_white %>% sepExpr %>% {.[[2]]} %>% apply(1,median) %>% {.>TrabzuniMedExp},]
 
-genes = neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex))]
+genes = mouseMarkerGenesCombined$Cortex[!grepl('Microglia_',names(neuroExpressoAnalysis::mouseMarkerGenesCombined$Cortex))]
 
 genes = genes[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(genes),perl = TRUE)]
 
@@ -145,6 +145,7 @@ p  = frame %>%
 dir.create('analysis//03.MarkerGeneProfiles/publishPlot', showWarnings=FALSE)
 
 ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/cortex_WhiteMatterEstimations.png',p,width=11.31,height=5,units='in')
+ggsave(filename='analysis//03.MarkerGeneProfiles/publishPlot/cortex_WhiteMatterEstimations.svg',p,width=11.31,height=5,units='in')
 
 
 
