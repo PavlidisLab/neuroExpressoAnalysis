@@ -1,7 +1,7 @@
 # this version merges cell types into a single sample then looks for a variable.
 # specific to our cell type data. not ideal but oh well...
 #' @export
-mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design){
+mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design,threshold = 6,threshFun =max){
     if (is.character(whichFile)){
         allDataPre = ogbox::read.exp(whichFile)
     } else{
@@ -30,8 +30,8 @@ mostVariableCT = function(whichFile,outFile=NULL,cellTypeColumn, design){
     })
     exprData = as.data.frame(cellTypeExpr)
     # remove the ones with highest expression below 6
-    rowmax = apply(exprData, 1, max)
-    discludeGenes = (rowmax<6)
+    rowmax = apply(exprData, 1, threshFun)
+    discludeGenes = (rowmax<threshold)
     allDataPre = allDataPre[!discludeGenes,]
     exprData = exprData[!discludeGenes,]
     
