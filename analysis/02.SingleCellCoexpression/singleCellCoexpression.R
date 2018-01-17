@@ -5,10 +5,8 @@ library(data.table)
 markerGenes = mouseMarkerGenesCombined$Cortex
 markerGenes= markerGenes[!grepl(pattern='Microglia_',names(markerGenes))]
 
-markerGenes %<>%  lapply(function(x){
-    x = x[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(x),perl = TRUE)]
-    return(x)
-})
+markerGenes = markerGenes[!grepl(pattern = '(?!^Pyramidal$)Pyra',x = names(markerGenes),perl = TRUE)]
+
 
 rnaCoexist(TasicMouseExp,
            tresholds= NULL,
