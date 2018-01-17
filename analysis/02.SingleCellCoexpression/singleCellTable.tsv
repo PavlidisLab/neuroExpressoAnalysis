@@ -3,15 +3,8 @@ Endothelial	p<0.001	167	p<0.001	171	p<0.001	144
 Astrocyte	p<0.001	261	p<0.001	271	p<0.001	225
 Microglia	p<0.001	240	p<0.001	264	p<0.001	194
 Oligodendrocyte	p<0.001	146	p<0.001	145	p<0.001	122
-Oligodendrocyte precursors	0.995	168	p<0.001	179	1	151
-FS Basket (G42)	p<0.001	18	p<0.001	18	0.002	18
-Martinotti (GIN)	p<0.001	14	p<0.001	15	0.002	13
+Oligodendrocyte precursors	0.999	168	p<0.001	179	1	151
+FS Basket (G42)	p<0.001	18	p<0.001	18	p<0.001	18
+Martinotti (GIN)	p<0.001	14	p<0.001	15	0.001	13
 VIPReln (G30)	p<0.001	30	p<0.001	32	p<0.001	26
 Pyramidal	p<0.001	34	p<0.001	34	p<0.001	27
-Layer 2 3 Pyra	0.003	3	0.002	3	0.857	2
-Layer 4 Pyra	0.164	5	p<0.001	5	0.568	4
-Layer 6a Pyra	p<0.001	6	p<0.001	4	0.117	2
-Layer 6b Pyra	p<0.001	9	p<0.001	9	0.213	6
-Pyramidal Glt25d2	0.287	2	0.046	2	0.421	3
-Pyramidal S100a10	0.73	2	0.089	2	0.213	2
-Pyramidal CrtThalamic	0.066	2	0.046	2	0.398	2
