@@ -20,6 +20,9 @@ StanleyCEstimate = mgpEstimate(StanleyC,
                                     removeMinority=TRUE,
                                     seekConsensus = FALSE)
 
+dir.create('analysis/03.MarkerGeneProfiles/estimates',showWarnings = FALSE,recursive = TRUE)
+saveRDS(StanleyCEstimate,file = 'analysis/03.MarkerGeneProfiles/estimates/StanleyCEstimate.rds')
+
 # rawUranova = rawUranova[match(StanleyCMeta$`Stanley ID`,rawUranova$StanleyID),]
 
 frame = data.frame(oligoEstim = StanleyCEstimate$estimates$Oligo %>% scale01, 

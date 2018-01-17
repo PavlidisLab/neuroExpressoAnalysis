@@ -75,6 +75,9 @@ estimations = lapply(1:len(expDats),function(i){
 })
 names(estimations) = names(expDats)
 
+dir.create('analysis/03.MarkerGeneProfiles/estimates',showWarnings = FALSE,recursive = TRUE)
+saveRDS(estimations,file = 'analysis/03.MarkerGeneProfiles/estimates/parkinsonsEstimate.rds')
+
 statsTable = estimations %>% sapply(function(x){
     x$wilcoxResults['Dopaminergic',]
 }) %>% t %>% round(digits = 3)

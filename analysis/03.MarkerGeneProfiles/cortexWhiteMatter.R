@@ -52,6 +52,9 @@ cortex_whiteEstimate$estimates = cortex_whiteEstimate$estimates[(cortex_whiteEst
 cortex_whiteEstimate$groups = cortex_whiteEstimate$groups[(cortex_whiteEstimate$rotations %>% sapply(nrow))>1]
 cortex_whiteEstimate$rotations = cortex_whiteEstimate$rotations[(cortex_whiteEstimate$rotations %>% sapply(nrow))>1]
 
+dir.create('analysis/03.MarkerGeneProfiles/estimates',showWarnings = FALSE,recursive = TRUE)
+saveRDS(cortex_whiteEstimate,file = 'analysis/03.MarkerGeneProfiles/estimates/cortex_whiteEstimate.rds')
+
 # white matter gray matter plot -------
 # as long as outlier samples are not removed all cortex_whiteEstimate$groups will be the same
 frame = data.frame(melt(cortex_whiteEstimate$estimates %>% lapply(scale01)), cortex_whiteEstimate$groups[[1]]) 
