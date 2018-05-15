@@ -36,7 +36,7 @@ RotSel = paste0('analysis/01.SelectGenes/',markerVersion,'/RotSel')
 RotSel2 = paste0('analysis/01.SelectGenes/',markerVersion,'/RotSel2')
 RotSelJustSingleCell = paste0('analysis/01.SelectGenes/',markerVersion,'/RotSelJustSingleCell')
 
-
+# process command line arguments or set defaults ------
 print('it starts')
 if(length(commandArgs(trailingOnly=TRUE))==0){
     start = 1
@@ -182,8 +182,9 @@ if(secondChip){
     
 }
 
-# RotSel: if this is the last rotation, calculate the selection percentages of genes. ----------------
 if(end == 500){
+    # RotSel: if this is the last rotation, calculate the selection percentages of genes. ----------------
+    
     # wait for all other branches to complete operation
     if(firstChip){
         repeat{
@@ -571,7 +572,8 @@ if(end == 500){
         ncbiIDs = geneLists %>% lapply(function(x){
             x %>% lapply(function(y){
                 y %>% lapply(function(z){ 
-                    ids = gemmaAnnot %>% filter(GeneSymbols %in% z) %>% select(NCBIids) %>% unlist %>% unique
+                    ids = gemmaAnnot %>% {.[match(z,.$GeneSymbols),]} %$% NCBIids
+                    # ids = gemmaAnnot %>% filter(GeneSymbols %in% z) %>% select(NCBIids) %>% unlist %>% unique
                     assertthat::are_equal(length(ids),length(z))
                     return(ids)
                 })
@@ -587,7 +589,7 @@ if(end == 500){
                 dir.create(paste0('analysis/01.SelectGenes/',markerVersion,'/Markers_Final/',
                                   names(ncbiIDs[t]),'/',
                                   names(ncbiIDs[[t]][i])),
-                           showWarnings = TRUE,
+                           showWarnings = FALSE,
                            recursive = TRUE)
                 for(j in 1:length(ncbiIDs[[t]][[i]])){
                     write.table(ncbiIDs[[t]][[i]][[j]],
