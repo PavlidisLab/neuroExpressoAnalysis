@@ -8,6 +8,11 @@ Marker gene changelog
 
 ### Markers_1.1
 
+**Edit:** In May 2018, we have decided that the genes should be ordered the same
+way in both symbol files and NCBI id files. The NCBI id lists have been changed
+accordingly. Version number is not changed since the genes that are included are 
+the same.
+
 This update introduces minor fixes to the gene list due to the following factors
 
 * A bug in the function that places samples into brain region. This resulted in oligodendrocytes
