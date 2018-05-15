@@ -567,14 +567,31 @@ if(end == 500){
                          PyramidalDeep =  mouseMarkerGenesPyramidalDeep,
                          Combined = mouseMarkerGenesCombined)
         gemmaAnnot = read.design('data-raw/GemmaAnnots/GPL1261')
-        
-        
+
         ncbiIDs = geneLists %>% lapply(function(x){
             x %>% lapply(function(y){
                 y %>% lapply(function(z){ 
                     ids = gemmaAnnot %>% {.[match(z,.$GeneSymbols),]} %$% NCBIids
+                    
+                    if(any(is.na(ids))){
+                        manualSearch = z[is.na(ids)] %>% lapply(mouseSyno)
+                        # make sure there's no ambiguity
+                        assertthat::assert_that(manualSearch %>% lapply(length) %>% {.==1} %>% all)
+                        missingNos = manualSearch %>% purrr::map(function(x){x[[1]] %>% names})%>% 
+                        {lapply(.,function(t){
+                                if(is.null(t)){
+                                    NA
+                                }else{
+                                    t
+                                }
+                            })} %>% unlist
+                        ids[is.na(ids)] = missingNos
+                        
+                        genericMouse %>% {.[match(z[is.na(ids)],.$GeneSymbols),]} %$% NCBIids
+                    }
+                    
                     # ids = gemmaAnnot %>% filter(GeneSymbols %in% z) %>% select(NCBIids) %>% unlist %>% unique
-                    assertthat::are_equal(length(ids),length(z))
+                    assertthat::assert_that(assertthat::are_equal(length(ids),length(z)))
                     return(ids)
                 })
             })
