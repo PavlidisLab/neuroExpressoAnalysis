@@ -18,14 +18,26 @@ design = ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_expressoStudies.tsv
 
 # this design file is available in the package as cellTypeStudies
 n_expressoStudies = design
-devtools::use_data(n_expressoStudies, overwrite=TRUE)
+usethis::use_data(n_expressoStudies, overwrite=TRUE)
 
 # download the cell type data for the study -----------------------------------------
 # design$sampleName includes all sample names included in neuroexpresso database. 
 # non-GEO samples should be acquired through personal communication.
 # to download samples from GEO we need to extract their GSM identifiers.
 # for ease of organization we place the samples from different platforms to their own folders
+# here there is some code for me to generate the files acquired through personal
+# communication. If asked, I can share this file.
+personalCommunicationSamples = 
+    design %>% apply(1,function(x){
+        samples = stringr::str_split(x['samples'],',')[[1]]
+        samples = samples[!grepl('GSM[0-9]*',samples)]
+        file.path(x['Platform'],glue::glue('{samples}.CEL'))
+    }) %>% unlist
 
+tar('data-raw/personalCommunicationSamples.tar.gz',
+    files = file.path('data-raw/cel',personalCommunicationSamples)
+    ,compression = 'gzip',
+    tar = 'tar -h')
 
 if (download){
     GPL339 = design %>% filter(Platform == 'GPL339')
@@ -49,8 +61,17 @@ if (download){
     
     # before normalization, download probe to gene annotations from gemma
     dir.create('data-raw/GemmaAnnots', showWarnings=FALSE)
+    gemmaAPI::getAnnotation('GPL339',annotType = 'noParents',file = 'data-raw/GemmaAnnots/GPL339',overwrite = TRUE)
+    gemmaAPI::getAnnotation('GPL1261',annotType = 'noParents',file = 'data-raw/GemmaAnnots/GPL1261',overwrite = TRUE)
+    gemmaAPI::getAnnotation('GPL1261',annotType = 'noParents',file = 'data-raw/GemmaAnnots/GPL1261',overwrite = TRUE)
+    
     ogbox::getGemmaAnnot('GPL339','data-raw/GemmaAnnots/GPL339',annotType='noParents',overwrite = TRUE)
     ogbox::getGemmaAnnot('GPL1261','data-raw/GemmaAnnots/GPL1261',annotType='noParents',overwrite = TRUE)
+    # also get the all mouse annotations. we will use this later to with RNA-seq data. It is important
+    # that these files are acquired at the same time
+    ogbox::getGemmaAnnot('Generic_mouse','data-raw/GemmaAnnots/Generic_mouse',annotType='noParents',overwrite = TRUE)
+    
+    
 }
 
 # normalization of the data ----------------
@@ -122,8 +143,8 @@ n_expressoExpr = ogbox::read.exp('data-raw//Mouse_Cell_Type_Data//n_expressoExpr
 n_expressoSamples =  ogbox::read.design('data-raw/Mouse_Cell_Type_Data/n_expressoSamples.tsv')
 
 
-devtools::use_data(n_expressoExpr,overwrite=TRUE)
-devtools::use_data(n_expressoSamples,overwrite=TRUE)
+usethis::use_data(n_expressoExpr,overwrite=TRUE)
+usethis::use_data(n_expressoSamples,overwrite=TRUE)
 
 regionHierarchy = list(All = list(Cerebrum = 
                                       list(Cortex = '',
