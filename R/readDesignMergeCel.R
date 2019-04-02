@@ -142,7 +142,7 @@ meltDesign = function(desFile, gsm = 'samples',
 
     
     if (len(header[!header %in% unlist(gsms)])>0){
-        print("what the fuck man! I can't find some GSMs in your design file")
+        print("I can't find some GSMs in your design file")
         print(header[!header %in% make.names(unlist(gsms))])
     }
     
