@@ -70,6 +70,7 @@ if (download){
     # also get the all mouse annotations. we will use this later to with RNA-seq data. It is important
     # that these files are acquired at the same time
     ogbox::getGemmaAnnot('Generic_mouse','data-raw/GemmaAnnots/Generic_mouse',annotType='noParents',overwrite = TRUE)
+    ogbox::getGemmaAnnot('Generic_mouse_ensemblIds','data-raw/GemmaAnnots/Generic_mouse_ensembl',annotType='noParents',overwrite = TRUE)
     
     
 }
