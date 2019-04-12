@@ -20,7 +20,7 @@ library(XLConnect)
 library(glue)
 #library(markerGenesManuscript)
 
-markerVersion = 'Markers_1.1'
+markerVersion = 'Markers_1.2'
 
 # output addresses -----
 # quick selections
@@ -44,6 +44,7 @@ if(length(commandArgs(trailingOnly=TRUE))==0){
     firstChip = TRUE
     secondChip = FALSE
     singleCell = TRUE
+    cores = 15
 } else{
     args <- commandArgs(trailingOnly = TRUE)
     start = as.numeric(args[1])
@@ -54,6 +55,7 @@ if(length(commandArgs(trailingOnly=TRUE))==0){
     }
     secondChip = as.logical(args[3])
     singleCell = as.logical(args[4])
+    cores = as.numeric(args[6])
 }
 
 
@@ -66,13 +68,13 @@ if (start == 1){
         ptm <- proc.time()
         
         markerCandidates(design = meltedSingleCells,foldChangeThresh = 10,minimumExpression = 2.5, background = 0.1,
-                         expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
+                         expression = TasicPrimaryMeanLog,
                          outLoc = QuickJustSingleCell,
                          groupNames = c('PyramidalDeep','CellTypes'),
                          #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = NULL,
-                         cores=15,
+                         cores=cores,
                          regionHierarchy= NULL)
         singleCellTime = proc.time() - ptm
         
@@ -87,7 +89,7 @@ if (start == 1){
                          #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
-                         cores=15,
+                         cores=cores,
                          regionHierarchy = regionHierarchy)
         neuroExpTime = proc.time() - ptm
         
@@ -104,7 +106,7 @@ if (start == 1){
                          #groupNames = 'DopaSelect',
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
-                         cores=15,
+                         cores=cores,
                          regionHierarchy = regionHierarchy)
     }
 }
@@ -126,7 +128,7 @@ if(firstChip){
                          regionNames = 'Region',
                          rotate=0.33,
                          regionHierarchy = regionHierarchy,
-                         cores=15,
+                         cores=cores,
                          seed = i)
         firstChipRotationTime = proc.time() - ptm
     }
@@ -142,12 +144,13 @@ if(singleCell){
     }
     for(i in start:end){
         ptm <- proc.time()
+        print(i)
         markerCandidates(design = meltedSingleCells,foldChangeThresh = 10, minimumExpression = 2.5, background = 0.1,
                          expression = data.frame(Gene.Symbol = rn(TasicPrimaryMeanLog),TasicPrimaryMeanLog,check.names = FALSE),
                          outLoc = glue('{RotationJustSingleCell}/{i}'),
                          groupNames = c('PyramidalDeep','CellTypes'),
                          regionNames = NULL,
-                         cores=15,
+                         cores=cores,
                          rotate = 0.33,
                          regionHierarchy= NULL)
         singleRotationTime = proc.time() - ptm
@@ -174,7 +177,7 @@ if(secondChip){
                          #groupNames = c('AstroInactiveAlone','AstroReactiveAlone'),
                          regionNames = 'Region',
                          rotate=0.33,
-                         cores=15,
+                         cores=cores,
                          regionHierarchy = regionHierarchy,
                          seed = i)
     }
@@ -183,8 +186,8 @@ if(secondChip){
 }
 
 if(end == 500){
+# if(FALSE){
     # RotSel: if this is the last rotation, calculate the selection percentages of genes. ----------------
-    
     # wait for all other branches to complete operation
     if(firstChip){
         repeat{
@@ -200,7 +203,7 @@ if(end == 500){
         print('waiting complete')
         rotateSelect(rotationOut=Rotation,
                      rotSelOut=RotSel,
-                     cores = 15,foldChange = 1)
+                     cores = cores,foldChange = 1)
     }
     # rotsel second chip
     if(secondChip){
@@ -215,7 +218,7 @@ if(end == 500){
         }
         rotateSelect(rotationOut=Rotation2,
                      rotSelOut=RotSel2,
-                     cores = 15, foldChange = 1)
+                     cores = cores, foldChange = 1)
     }
     # rotsel single cells
     if(singleCell){
@@ -234,7 +237,7 @@ if(end == 500){
         
         rotateSelect(rotationOut=RotationJustSingleCell,
                      rotSelOut=RotSelJustSingleCell,
-                     cores = 15, foldChange = 1)
+                     cores = cores, foldChange = 1)
     }
     
     # rotsel folder creation -------------------------------
@@ -315,7 +318,7 @@ if(end == 500){
         }) %>% unlist %>% unique %>% len
         cat(paste0('Microglia used to have ', allMicroglia, ' genes\n'), file = log,append = TRUE)
         
-        microglialException(paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i]),cores=8)
+        microglialException(paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i]),cores=cores)
         
         genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i],'/',referenceGroup))
         allMicroglia = genes %>% lapply(function(x){
@@ -339,7 +342,7 @@ if(end == 500){
             allowGenes(paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i]),
                        allowedGenes = allowedProbesS100a10,
                        regex = 'S100a10',
-                       cores = 15)
+                       cores = cores)
             
             # s100a10exception(paste0('analysis//01.SelectGenes/',names[i]),cores=8)
             
@@ -361,7 +364,7 @@ if(end == 500){
             allowGenes(paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i]),
                        allowedGenes = granuleAllowedGenes,
                        regex = 'DentateGranule',
-                       cores = 15)
+                       cores = cores)
             
             genes = pickMarkersAll(paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i],'/','PyramidalDeep'))
             allDentate = genes %>% lapply(function(x){
@@ -374,13 +377,13 @@ if(end == 500){
         bannedGenes = c('Lpl')
         banGenes(restDir = paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i],'/'),
                  bannedGenes= bannedGenes,
-                 cores=15)
+                 cores=cores)
         
         bannedGenes = 'S100a10'
         banGenes(restDir = paste0('analysis//01.SelectGenes/',markerVersion,'/',names[i],'/'),
                  bannedGenes= bannedGenes,
                  regex= 'S100a10',
-                 cores=15)        
+                 cores=cores)        
     }
     
     # counting microglia genes again. not necesarry for analysis -------------------
