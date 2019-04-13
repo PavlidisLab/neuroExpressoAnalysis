@@ -3,8 +3,8 @@ devtools::load_all()
 library(purrr)
 library(magrittr)
 
-versionOld = 'Markers_1.0'
-versionNew = 'Markers_1.1'
+versionOld = 'Markers_1.1'
+versionNew = 'Markers_1.2'
 referenceGroup = 'CellTypes'
 
 

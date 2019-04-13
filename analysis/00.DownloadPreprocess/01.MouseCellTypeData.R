@@ -161,5 +161,5 @@ regionHierarchy = list(All = list(Cerebrum =
                                   Cerebellum = '',
                                   SpinalCord ='')
 )
-devtools::use_data(regionHierarchy,overwrite = TRUE)
+usethis::use_data(regionHierarchy,overwrite = TRUE)
 

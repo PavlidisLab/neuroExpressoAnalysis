@@ -171,7 +171,7 @@ write.design(softFile, file = 'data-raw/TrabzuniRegions/GSE60862_meta_postProces
 
 trabzuniRegionsExp = exprData
 trabzuniRegionsMeta = softFile
-devtools::use_data(trabzuniRegionsExp,
+usethis::use_data(trabzuniRegionsExp,
                    trabzuniRegionsMeta, overwrite=TRUE)
 
 # stanley data is taken from Lilah -----------------

@@ -2,6 +2,7 @@ library(XLConnect)
 library(magrittr)
 library(ogbox)
 library(dplyr)
+library(RCurl)
 
 # mouse rna seq data download Zeisel et al. download------
 dir.create('data-raw/ZeiselMouse', showWarnings=FALSE)
@@ -45,9 +46,9 @@ ZeiselMouseExp = rnaExp
 ZeiselMouseMeta = rnaMeta
 
 
-devtools::use_data(ZeiselMouseExp,overwrite=TRUE)
+usethis::use_data(ZeiselMouseExp,overwrite=TRUE)
 # metadata is not needed in this study
-devtools::use_data(ZeiselMouseMeta,overwrite=TRUE)
+usethis::use_data(ZeiselMouseMeta,overwrite=TRUE)
 
 # tasic et al. allen institute single cell data download -------------
 dir.create('data-raw/TasicMouse', showWarnings=FALSE)
@@ -81,18 +82,18 @@ TasicMouseMeta = allenMeta
 write.design(TasicMouseMeta,'data-raw/TasicMouse//TasicMouseMeta.tsv')
 write.csv(TasicMouseExp, 'data-raw/TasicMouse/TasicMouseExp.csv',quote = FALSE)
 
-devtools::use_data(TasicMouseExp,overwrite=TRUE)
-devtools::use_data(TasicMouseMeta,overwrite=TRUE)
+usethis::use_data(TasicMouseExp,overwrite=TRUE)
+usethis::use_data(TasicMouseMeta,overwrite=TRUE)
 
 
 
 # human rna seq data download from darmanis download -----
 gsms = gsmFind('GSE67835')
-dir.create('data-raw/DarmanisHuman/raw',recursive=TRUE showWarnings=FALSE)
+dir.create('data-raw/DarmanisHuman/raw',recursive=TRUE, showWarnings=FALSE)
 
 sapply(gsms, function(gsm){
     print(gsm)
-    page = getURL(paste0('http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=',gsm))
+    page = getURL(paste0('https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=',gsm))
     fileURL = URLdecode(str_extract(page,'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM.*?csv%2Egz'))
     if (len(fileURL) == 0){
         if (warnings){
@@ -142,9 +143,9 @@ rnaMeta = read.design('data-raw/DarmanisHuman/humanRNASeq_metadat.tsv')
 
 DarmanisHumanExp = rnaExp
 DarmanisHumanMeta = rnaMeta
-devtools::use_data(DarmanisHumanExp,overwrite=TRUE)
-devtools::use_data(DarmanisHumanMeta,overwrite=TRUE)
+usethis::use_data(DarmanisHumanExp,overwrite=TRUE)
+usethis::use_data(DarmanisHumanMeta,overwrite=TRUE)
 
 
 singleCellRNASeqDatasets = c('ZeiselMouseExp', 'TasicMouseExp', 'DarmanisHumanExp')
-devtools::use_data(singleCellRNASeqDatasets,overwrite=TRUE)
+usethis::use_data(singleCellRNASeqDatasets,overwrite=TRUE)

@@ -527,9 +527,9 @@ if(end == 500){
         mouseMarkerGenesPyramidalDeep = genes
         
         
-        devtools::use_data(mouseMarkerGenes, overwrite=TRUE)
-        devtools::use_data(mouseMarkerGenesPyramidalDeep, overwrite=TRUE)
-        devtools::use_data(mouseMarkerGenesCombined, overwrite=TRUE)
+        usethis::use_data(mouseMarkerGenes, overwrite=TRUE)
+        usethis::use_data(mouseMarkerGenesPyramidalDeep, overwrite=TRUE)
+        usethis::use_data(mouseMarkerGenesCombined, overwrite=TRUE)
         
         saveRDS(mouseMarkerGenes,glue('analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenes.rds'))
         saveRDS(mouseMarkerGenesPyramidalDeep,glue('analysis/01.SelectGenes/{markerVersion}/mouseMarkerGenesPyramidalDeep.rds'))
@@ -552,25 +552,16 @@ if(end == 500){
             }
         }
         
-        for(i in 1:length(mouseMarkerGenesCombined)){
-            dir.create(paste0('analysis/01.SelectGenes/',markerVersion,'/Markers_Final/Combined/',names(mouseMarkerGenesCombined)[i]),showWarnings = FALSE,recursive = TRUE)
-            for(j in 1:length(mouseMarkerGenes[[i]])){
-                write.table(mouseMarkerGenes[[i]][[j]],
-                            paste0('analysis/01.SelectGenes/',markerVersion,'/Markers_Final/Combined/',
-                                   names(mouseMarkerGenes)[i],'/',
-                                   names(mouseMarkerGenes[[i]][j])),
-                            row.names=F,
-                            quote=F,
-                            col.names=F)
-            }
-        }
-        
         # get NCBI ids
         geneLists = list(CellTypes = mouseMarkerGenes,
                          PyramidalDeep =  mouseMarkerGenesPyramidalDeep,
                          Combined = mouseMarkerGenesCombined)
-        gemmaAnnot = read.design('data-raw/GemmaAnnots/GPL1261')
-
+        GPL1261 = read.design('data-raw/GemmaAnnots/GPL1261') %>% select(GeneSymbols,NCBIids)
+        tasic = TasicPrimaryMean %>% select(Gene.Symbol,NCBIids)
+        names(tasic) = c('GeneSymbols','NCBIids')
+        
+        gemmaAnnot = rbind(GPL1261,tasic) %>% unique
+        
         ncbiIDs = geneLists %>% lapply(function(x){
             x %>% lapply(function(y){
                 y %>% lapply(function(z){ 
@@ -629,7 +620,7 @@ if(end == 500){
         attach(ncbiIDs)
         
         names(ncbiIDs) %>% sapply(function(x){
-            ogbox::teval(paste0("devtools::use_data(",x,", overwrite=TRUE)"))
+            ogbox::teval(paste0("usethis::use_data(",x,", overwrite=TRUE)"))
             saveRDS(mouseMarkerGenes,glue('analysis/01.SelectGenes/{markerVersion}/{x}.rds'))
         })    
         

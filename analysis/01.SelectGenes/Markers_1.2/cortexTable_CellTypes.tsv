@@ -1,0 +1,12 @@
+nx	singleCells	total
+Astrocyte	167 (133)	246 (224)	304
+Endothelial	NA (NA)	191 (191)	191
+GabaPV	12 (10)	18 (18)	27
+GabaRelnCalb	5 (4)	20 (19)	23
+GabaVIPReln	11 (10)	53 (42)	48
+Microglia	165 (138)	243 (227)	294
+Microglia_activation	117 (84)	88 (82)	120
+Microglia_deactivation	144 (125)	163 (149)	206
+Oligo	52 (37)	167 (146)	165
+OligoPrecursors	NA (NA)	211 (211)	211
+Pyramidal	9 (5)	41 (38)	39
