@@ -3,8 +3,15 @@ Marker gene changelog
 
 ### Marker Genes
 
+* [Markers_1.2](Markers_1.2/README.md)
 * [Markers_1.1](Markers_1.1/README.md)
 * [Markers_1.0](Markers_1.0/README.md)
+
+
+### Markers_1.2
+
+This update fixes an issue with missing NCBI ids in the previous versions. It is
+also created using the latest gene annotations from Gemma, causing other minor changes.
 
 ### Markers_1.1
 
