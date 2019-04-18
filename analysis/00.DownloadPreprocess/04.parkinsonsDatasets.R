@@ -45,7 +45,8 @@ affy = ReadAffy(filenames = cels)
 
 norm = affy::rma(affy)
 annotated = gemmaAnnot(norm, 'data-raw/GemmaAnnots/GPL570')
-# save(annotated,file = 'data/lesnickPreLowExpression.rda')
+# this is for use as example data in markerGeneProfile package
+save(annotated,file = 'data/lesnickPreLowExpression.rda')
 
 # gender fix. nothing to fix here but leaving the code here just in case
 bioGen = bioGender(annotated) %>% replaceElement(c('M' = FALSE,'F' = TRUE)) %$% newVector
