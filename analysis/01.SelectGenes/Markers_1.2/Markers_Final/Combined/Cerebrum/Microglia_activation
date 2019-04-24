@@ -10,7 +10,6 @@ Ccl12
 Ccl2
 Ccl4
 Ccl9
-Ccnl1
 Ccr5
 Cd14
 Cd164
@@ -25,7 +24,6 @@ Ctla2b
 Cxcl10
 Cxcl16
 Cxcl2
-Egr2
 Eif4ebp1
 Fcer1g
 Fcgr2b
@@ -33,7 +31,6 @@ Fcgr3
 Frrs1
 Gas5
 Gbp7
-Glipr1
 Gpr84
 Hck
 Hfe
@@ -65,7 +62,6 @@ Myd88
 Ncf1
 Ncf2
 Ncf4
-Nfkbia
 Nfkbie
 Nfkbiz
 Npl
@@ -87,20 +83,20 @@ Relb
 Rhoh
 Ripk1
 Rnasel
+Rnf19b
 Rrad
 Runx1
+Sall3
 Samsn1
 Serpine1
 Sertad1
 Sh2b2
-Sla
 Slc15a3
 Slc39a8
 Smagp
 Snx18
 Socs3
 Spint1
-Srgn
 Syk
 Tap1
 Tgm2
@@ -108,10 +104,8 @@ Tlr2
 Tlr6
 Tlr7
 Tmem173
-Tnf
 Tnfaip2
 Tpp2
-Traf5
 Trim30a
 Tsc22d3
 Tspo

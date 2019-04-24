@@ -4,7 +4,6 @@ Adrb2
 Afp
 Aif1
 Ang
-Anxa1
 Arap3
 Arhgap17
 Arhgap4
@@ -26,6 +25,7 @@ Cebpa
 Clcf1
 Clec4a2
 Clec7a
+Cln5
 Cmtm6
 Cmtm7
 Csf3r
@@ -84,6 +84,7 @@ Mpeg1
 Mylip
 Myo1g
 Naalad2
+Naglu
 Nfam1
 Ngp
 Olfml3
@@ -96,7 +97,6 @@ Plxdc1
 Plxnb2
 Ppfia4
 Prkcd
-Psmb8
 Psmb9
 Ptpn18
 Ptpn6
@@ -116,8 +116,6 @@ Slamf9
 Slc15a4
 Slc16a6
 Slc25a37
-Slc29a3
-Slc2a5
 Slc37a2
 Slc40a1
 Slc46a1
@@ -141,5 +139,4 @@ Trem2
 Trim47
 Uba7
 Unc93b1
-Vamp8
 Vrk2

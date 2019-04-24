@@ -541,11 +541,11 @@ if(end == 500){
                               '/Markers_Final/Combined/',
                               names(mouseMarkerGenesCombined)[i]),
                        showWarnings = FALSE,recursive = TRUE)
-            for(j in 1:length(mouseMarkerGenes[[i]])){
-                write.table(mouseMarkerGenes[[i]][[j]],
+            for(j in 1:length(mouseMarkerGenesCombined[[i]])){
+                write.table(mouseMarkerGenesCombined[[i]][[j]],
                             paste0('analysis/01.SelectGenes/',markerVersion,'/Markers_Final/Combined/',
-                                   names(mouseMarkerGenes)[i],'/',
-                                   names(mouseMarkerGenes[[i]][j])),
+                                   names(mouseMarkerGenesCombined)[i],'/',
+                                   names(mouseMarkerGenesCombined[[i]][j])),
                             row.names=F,
                             quote=F,
                             col.names=F)
