@@ -45,7 +45,8 @@ Depends:
     magick,
     doSNOW,
     jsonlite,
-    usethis
+    usethis,
+    gemmaAPI
 Imports:
     ogbox (>= 1.0)
 Suggests:
@@ -58,6 +59,7 @@ Remotes:
     oganm/geneSynonym,
     oganm/markerGeneProfile,
     oganm/geneSynonym,
+    oganm/gemmaAPI.R
     raivokolde/pheatmap,
     bioc::3.5/affy,
     bioc::3.5/preprocessCore,
